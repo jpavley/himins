@@ -1,4 +1,4 @@
-himins
+Himins
 ======
 
 Text-based interactive fiction MMORPG using Node.js/MongoDB on the backend and terminal emulation as the client.
@@ -33,11 +33,11 @@ Hope began to dawn on humanity that night.
 The Game
 ========
 
-Elysium is a text-based, multiplayer adventure game with a web browser client. Players log in with their Facebook accounts and participate in exploring the world of Elysium, completing for territory and riches, and fighting monstrous Selenites and each other.
+Himins is a text-based, multiplayer adventure game with a web browser client. Players log in with their Facebook accounts and participate in exploring the world of Himins, completing for territory and riches, and fighting monstrous Selenites and each other.
 
-Elysium takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Elysium closest to the surface are safer and great for learning the game. The areas deep within Elysium are dangerous and require an advanced player. The core of the Moon is the most dangerous of all and the a player who reaches the core becomes the master of Elysium. The core is one giant game of "King of the Hill."
+Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Himins closest to the surface are safer and great for learning the game. The areas deep within Himins are dangerous and require an advanced player. The core of the Moon is the most dangerous of all and the a player who reaches the core becomes the master of Himins. The core is one giant game of "King of the Hill."
 
-Game play is realtime with turn-based fighting. All interaction with Elysium is accomplished through text commands. The commands are not fully documented and need to be discovered.
+Game play is realtime with turn-based fighting. All interaction with Himins is accomplished through text commands. The commands are not fully documented and need to be discovered.
 
 Movement Commands
 -----------------
