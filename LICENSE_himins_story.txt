@@ -10,8 +10,15 @@ Creative Commons License
 
 http://purl.org/dc/terms/
 
-Himins by John Franklin Pavley is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License Creative Commons License.
+Himins by John Franklin Pavley is licensed under 
+a Creative Commons Attribution-ShareAlike 3.0 
+Unported License Creative Commons License.
 
-    Creative Commons License: http://i.creativecommons.org/l/by-sa/3.0/88x31.png
-    Creative Commons License: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
-        John Franklin Pavley: https://github.com/jpavley/himins
+Creative Commons License:
+http://i.creativecommons.org/l/by-sa/3.0/88x31.png
+
+Creative Commons License:
+http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+
+John Franklin Pavley:
+https://github.com/jpavley/himins
