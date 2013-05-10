@@ -13,3 +13,29 @@
  * Himin User Service
  * 
  */
+
+// Private Properties
+
+var userId = undefined;
+var characters = {};
+var currentCharacter = undefined;
+
+// Constructor
+
+function User() {
+    
+};
+
+// accessors
+
+User.prototype.getId = function() {
+    
+};
+
+User.prototype.setId = function (newId) {
+    
+};
+
+User.prototype.getCharacters = function () {
+    
+};
