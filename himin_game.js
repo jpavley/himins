@@ -13,3 +13,73 @@
  * Himin Game Service
  * 
  */
+
+// Private Properties
+
+var guid = 0,
+    gameName = "",
+    userList = [],
+    isStarted = false;
+
+// Constructor
+
+function Game(newGuid, newName) {
+    guid = newGuid;
+    gameName = newName;
+    userList = util.getUserListFromStorage(guid);
+    if (userList) {
+        isStarted = true;
+        User.GameStart();       
+    } else {
+        isStarted = false;
+        console.log("Game failed to load");
+    }
+};
+
+// Public Methods
+
+Game.prototype.AddUser = function () {
+    
+};
+
+Game.prototype.RemoveUser = function () {
+    
+};
+
+Game.prototype.GameStart = function () {
+    
+};
+
+
+Game.prototype.GameLoop = function () {
+    
+};
+
+Game.prototype.GameEnd = function () {
+    
+};
+
+// Accessors
+
+Game.prototype.GetIsStarted = function () {
+    return isStarted;
+};
+
+Game.prototype.GetGameName = function () {
+    return gameName;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

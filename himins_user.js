@@ -16,26 +16,73 @@
 
 // Private Properties
 
-var userId = undefined;
-var characters = {};
-var currentCharacter = undefined;
+var guid = 0,
+    userCharacter = {},
+    userName = "",
+    userPassword = "",
+    isOnline = false;
 
 // Constructor
 
 function User() {
-    
+    //guid = util.getNewGuid();
 };
 
-// accessors
+// Public Methods
 
-User.prototype.getId = function() {
-    
+// Accessors
+
+User.prototype.GetGuid = function() {
+    return guid;
 };
 
-User.prototype.setId = function (newId) {
-    
+User.prototype.SetGuid = function (newGuid) {
+    giud = newGuid;
 };
 
-User.prototype.getCharacters = function () {
-    
+User.prototype.GetCharacter = function () {
+    return userCharacter;
 };
+
+User.prototype.SetCharacter = function (newCharacter) {
+    character = newCharacter
+};
+
+User.prototype.GetUserName = function () {
+    return userName;
+};
+
+User.prototype.SetUserName = function (newUserName) {
+    userName = newUserName;
+};
+
+User.prototype.GetPassword = function () {
+    return password;
+};
+
+User.prototype.SetPassword = function (newPassword) {
+    password = newPassword;
+};
+
+User.prototype.GetIsOnline = function () {
+    return isOnline;
+};
+
+User.prototype.SetIsOnline = function (flag) {
+    isOnline = flag;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
