@@ -20,6 +20,10 @@ var hat = require('hat');
 
 exports.User = (function () {
     
+    // Private Static Properties
+    
+    var version = "1.0";
+    
     // Private Properties
     
     this.guid = 0;
@@ -35,7 +39,12 @@ exports.User = (function () {
     };
     
     konstructor.prototype = {
-        version: "1.0",
+        
+        // Public Methods
+        
+        getVersion: function () {
+            return version;
+        },
         
         getGuid: function () {
             return this.guid;

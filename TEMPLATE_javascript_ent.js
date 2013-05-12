@@ -20,30 +20,39 @@ var hat = require('hat');
 
 exports.User = (function () {
     
+    // Private Static Properties
+    
+    var version = "1.0";
+    
     // Private Properties
 
-    var guid = 0,
-        someOtherProp = {};
+    this.guid = 0;
+    this.someOtherProp = {};
 
     // Public API
     
     konstructor = function () {
-        guid = hat();
+        this.guid = hat();
     };
     
     konstructor.prototype = {
-        version: "1.0",
+                
+        // Public Methods
+        
+        getVersion: function () {
+            return version;
+        },
         
         getGuid: function () {
-            return guid;
+            return this.guid;
         },
         
         getSomeOtherProp: function () {
-            return someOtherProp;
+            return this.someOtherProp;
         },
         
         setSomeOtherProp: function (obj) {
-            someOtherProp = obj;
+            this.someOtherProp = obj;
         }       
     };
     

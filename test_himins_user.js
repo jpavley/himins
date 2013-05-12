@@ -2,6 +2,7 @@ var userService = require('./himins_user.js');
 
 var testUser = new userService.User();
 
+console.log('testUser version: ' + testUser.getVersion());
 console.log('testUser guid: ' + testUser.getGuid());
 testUser.setUserName('Jacob Krane');
 console.log('testUser userName: ' + testUser.getUserName());
@@ -12,6 +13,7 @@ console.log('testUser isOnline: ' + testUser.getIsOnline());
 
 var testUser2 = new userService.User();
 
+console.log('testUser2 version: ' + testUser2.getVersion());
 console.log('testUser2 guid: ' + testUser2.getGuid());
 console.log('testUser2 userName: ' + testUser2.getUserName());
 console.log('testUser2 password: ' + testUser2.getPassword());
