@@ -14,65 +14,69 @@
  * 
  */
 
-// Private Properties
-
-var guid = 0,
-    userCharacter = {},
-    userName = "",
-    userPassword = "",
-    isOnline = false;
+var hat = require('hat');
 
 // Constructor
 
-function User() {
-    //guid = util.getNewGuid();
-};
+exports.User = (function () {
+    
+    // Private Properties
 
-// Public Methods
+    var guid = 0,
+        userCharacter = {},
+        userName = "",
+        userPassword = "",
+        isOnline = false;
 
-// Accessors
-
-User.prototype.GetGuid = function() {
-    return guid;
-};
-
-User.prototype.SetGuid = function (newGuid) {
-    giud = newGuid;
-};
-
-User.prototype.GetCharacter = function () {
-    return userCharacter;
-};
-
-User.prototype.SetCharacter = function (newCharacter) {
-    character = newCharacter
-};
-
-User.prototype.GetUserName = function () {
-    return userName;
-};
-
-User.prototype.SetUserName = function (newUserName) {
-    userName = newUserName;
-};
-
-User.prototype.GetPassword = function () {
-    return password;
-};
-
-User.prototype.SetPassword = function (newPassword) {
-    password = newPassword;
-};
-
-User.prototype.GetIsOnline = function () {
-    return isOnline;
-};
-
-User.prototype.SetIsOnline = function (flag) {
-    isOnline = flag;
-};
-
-
+    // Public API
+    
+    konstructor = function () {
+        guid = hat();
+    };
+    
+    konstructor.prototype = {
+        version: "1.0",
+        
+        getGuid: function () {
+            return guid;
+        },
+        
+        getCharacter: function () {
+            return userCharacter;
+        },
+        
+        setCharacter: function (obj) {
+            userCharacter = obj;
+        },
+        
+        getUserName: function () {
+            return userName;
+        },
+        
+        setUserName: function (str) {
+            userName = str;
+        },
+        
+        getPassword: function () {
+            return password;
+        },
+        
+        setPassword: function (str) {
+            password = str;
+        },
+        
+        getIsOnline: function () {
+            return isOnline;
+        },
+        
+        setIsOnline: function (flg) {
+            isOnline = flg;
+        }
+    };
+    
+    return konstructor;
+    
+})();
 
 
 
