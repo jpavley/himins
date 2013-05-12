@@ -20,6 +20,10 @@ var hat = require('hat');
 
 exports.User = (function () {
     
+    // Private Static Properties
+    
+    var version = "1.0";
+    
     // Private Properties
 
     this.guid = 0; // globaly unique ID -- everthing has one of these
@@ -57,23 +61,28 @@ exports.User = (function () {
     // Public API
     
     konstructor = function () {
-        guid = hat();
+        this.guid = hat();
     };
     
     konstructor.prototype = {
         version: "1.0",
         
+        getVersion: function () {
+            return version;
+        },
+        
         getGuid: function () {
-            return guid;
+            return this.guid;
         },
         
-        getSomeOtherProp: function () {
-            return someOtherProp;
+        getOwnerGuid: function () {
+            return this.ownerGuid;
         },
-        
-        setSomeOtherProp: function (obj) {
-            someOtherProp = obj;
-        }       
+
+        setOwnerGuid: function (n) {
+            this.ownerGuid = n;
+        }   
+       
     };
     
     return konstructor;
