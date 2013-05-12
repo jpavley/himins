@@ -21,56 +21,56 @@ var hat = require('hat');
 exports.User = (function () {
     
     // Private Properties
-
-    var guid = 0,
-        userCharacter = {},
-        userName = "",
-        userPassword = "",
-        isOnline = false;
+    
+    this.guid = 0;
+    this.characterGuid = 0;
+    this.userName = '';
+    this.userPassword = '';
+    this.isOnline = false;
 
     // Public API
     
     konstructor = function () {
-        guid = hat();
+        this.guid = hat();
     };
     
     konstructor.prototype = {
         version: "1.0",
         
         getGuid: function () {
-            return guid;
+            return this.guid;
         },
         
-        getCharacter: function () {
-            return userCharacter;
+        getCharacterGuid: function () {
+            return this.characterGuid;
         },
         
-        setCharacter: function (obj) {
-            userCharacter = obj;
+        setCharacterGuid: function (n) {
+            this.characterGuid = n;
         },
         
         getUserName: function () {
-            return userName;
+            return this.userName;
         },
         
         setUserName: function (str) {
-            userName = str;
+            this.userName = str;
         },
         
         getPassword: function () {
-            return password;
+            return this.password;
         },
         
         setPassword: function (str) {
-            password = str;
+            this.password = str;
         },
         
         getIsOnline: function () {
-            return isOnline;
+            return this.isOnline;
         },
         
         setIsOnline: function (flg) {
-            isOnline = flg;
+            this.isOnline = flg;
         }
     };
     
