@@ -22,33 +22,37 @@ exports.User = (function () {
     
     // Private Properties
 
-    var guid = 0,
-        userGuid = 0,
-        charName = undefined,
-        history = [],
-        experiencePoints = 0,
-        health = 0,
-        energy = 0,
-        luck = 0,
-        hitPoints = 0,
-        armorPoints = 0,
-        locationX = 0,
-        locationY = 0,
-        locationZ = 0,
-        isDead = true,
-        isSleeping = false,
-        slotHat = undefined,
-        slotGoogles = undefined,
-        slotCoat = undefined,
-        slotGloves = undefined,
-        slotPants = undefined,
-        slotBoots = undefined,
-        slotPack = undefined,
-        slotMelee = undefined,
-        slotRanged = undefined,
-        buffs = [];
-        
-        
+    this.guid = 0; // globaly unique ID -- everthing has one of these
+    this.ownerGuid = 0; // the guid of the user who owns this character
+    this.charName = undefined; // the name of this character
+    this.history = []; // list of important things this character has done:born, died, won, lost
+    
+    this.experiencePoints = 0; // earned by doing important things, improves stats
+    this.health = 0; // 0 = death, buffs can help or hurt health
+    this.luck = 0; // based on slotted gloves, improves chances for winning fights, finding items
+    this.hitPoints = 0; // based on slotted weapons, ammo, buffs
+    this.armorPoints = 0; // based on slotted clothing, condition of clothing
+    this.visionPoints = 0; // based on slotted googles, improves visual acquity
+    this.reactionPoints = 0; // based on slotted boots, improves response time in fights
+    
+    this.locationX = 0; // Himins is a 3D labyrith
+    this.locationY = 0; 
+    this.locationZ = 0;
+    
+    this.isDead = true; // heath = 0
+    this.isSleeping = false; // stunned or healing state
+    
+    this.slotHat = undefined; // armor, improves armor points
+    this.slotGoogles = undefined; // armor, improves vision points
+    this.slotCoat = undefined; // armor, improves armor points
+    this.slotGloves = undefined; // armor, improves luck
+    this.slotPants = undefined; // armor, improves armor points
+    this.slotBoots = undefined; // armor, improves reaction points
+    this.slotPack = undefined; // container for inventory of items
+    this.slotMelee = undefined; // weapon, improves hit points
+    this.slotRanged = undefined; // weapon, improves hit points
+    
+    this.buffs = []; // list of active buffs: powerups, diseases, etc...
 
     // Public API
     
