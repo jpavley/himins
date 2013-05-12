@@ -4,6 +4,8 @@ var testUser = new userService.User();
 
 console.log('testUser version: ' + testUser.getVersion());
 console.log('testUser guid: ' + testUser.getGuid());
+testUser.setCharacterGuid(1234567890);
+console.log('testUser characterGuid: '+ testUser.getCharacterGuid());
 testUser.setUserName('Jacob Krane');
 console.log('testUser userName: ' + testUser.getUserName());
 testUser.setPassword('ch@ng3m3');
@@ -15,6 +17,7 @@ var testUser2 = new userService.User();
 
 console.log('testUser2 version: ' + testUser2.getVersion());
 console.log('testUser2 guid: ' + testUser2.getGuid());
+console.log('testUser2 characterGuid: '+ testUser2.getCharacterGuid());
 console.log('testUser2 userName: ' + testUser2.getUserName());
 console.log('testUser2 password: ' + testUser2.getPassword());
 console.log('testUser2 isOnline: ' + testUser2.getIsOnline());
