@@ -26,14 +26,14 @@ exports.User = (function () {
     
     // Private Properties
 
-    this.guid = 0; // globaly unique ID -- everthing has one of these
-    this.ownerGuid = 0; // the guid of the user who owns this character
+    this.guid = ''; // globaly unique ID -- everthing has one of these
+    this.ownerGuid = ''; // the guid of the user who owns this character
     this.charName = undefined; // the name of this character
     this.history = []; // list of important things this character has done:born, died, won, lost
     
     this.experiencePoints = 0; // earned by doing important things, improves stats
-    this.health = 0; // 0 = death, buffs can help or hurt health
-    this.luck = 0; // based on slotted gloves, improves chances for winning fights, finding items
+    this.healthPoints = 0; // 0 = death, buffs can help or hurt health
+    this.luckPoints = 0; // based on slotted gloves, improves chances for winning fights, finding items
     this.hitPoints = 0; // based on slotted weapons, ammo, buffs
     this.armorPoints = 0; // based on slotted clothing, condition of clothing
     this.visionPoints = 0; // based on slotted googles, improves visual acquity
@@ -81,8 +81,32 @@ exports.User = (function () {
 
         setOwnerGuid: function (n) {
             this.ownerGuid = n;
-        }   
+        },   
        
+        getCharName: function () {
+            return this.ownerGuid;
+        },
+
+        setCharName: function (s) {
+            this.charname = s;
+        },
+         
+        getHistory: function () {
+            return this.history;
+        },
+
+        addEventToHistory: function (o) {
+            this.history.push(o);
+        },
+         
+        getExperiencePoints: function () {
+            return this.experiencePoints;
+        },
+
+        setExperiencePoints: function (n) {
+            this.experiencePoints = n;
+        },
+         
     };
     
     return konstructor;
