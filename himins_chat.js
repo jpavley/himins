@@ -16,6 +16,7 @@
  */
 
 var net = require('net');
+var game = require('./himins_game.js');
 
 var chatServer = net.createServer(),
     clientList = [],
