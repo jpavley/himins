@@ -10,7 +10,7 @@
 // all copies or substantial portions of the Software.
 
 /*
- * TEMPLATE Javascript Entity
+ * Himin Storage Service
  * 
  */
 
@@ -20,20 +20,29 @@ var hat = require('hat');
 require('jsclass');
 JS.require('JS.Class');
 
+var userService = require('./himins_user.js');
+
 // class
 
-var SomeThing = new JS.Class({
+var Storage = new JS.Class({
     initialize: function () {
         this.guid = hat();
+        var userGM = new userService.User();
+        userGM.setNameUser('GM');
+        var userAdmin = new userService.User();
+        userAdmin.setNameUser('Admin');
+        this.users = [];
+        this.users.push(userGM);
+        this.users.push(userAdmin);
     }
 });
 
 // mutators
 
-$synthesize(SomeThing, 'guid', 'read');
-$synthesize(SomeThing, 'someProp', 'read-write');
+$synthesize(Storage, 'guid', 'read');
+$synthesize(Storage, 'users', 'read-write');
 
-exports.User = SomeThing;
+exports.Storage = Storage;
 
 
 

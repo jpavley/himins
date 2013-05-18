@@ -10,7 +10,7 @@
 // all copies or substantial portions of the Software.
 
 /*
- * TEMPLATE Javascript Entity
+ * Himin Game Service
  * 
  */
 
@@ -20,20 +20,61 @@ var hat = require('hat');
 require('jsclass');
 JS.require('JS.Class');
 
+var storageService = require('./himins_stor.js');
+
 // class
 
-var SomeThing = new JS.Class({
+var Game = new JS.Class({
+    
     initialize: function () {
         this.guid = hat();
+        var storage = new storageService.Storage();
+        this.listUsers = storage.getUsers();
+        this.isStarted = false;
+        if (this.listUsers) {
+            this.isStarted = true;
+            this.gameStart();
+        } else {
+            this.isStarted = false;
+            this.gameFail();
+        }
+    },
+    
+    addUser: function () {
+        
+    },
+    
+    removeUser: function () {
+        
+    },
+    
+    gameStart: function () {
+        
+    },
+    
+    gameLoop: function () {
+        
+    },
+    
+    gameStop: function () {
+        
+    },
+    
+    gameFail: function () {
+        
     }
+    
 });
 
 // mutators
 
-$synthesize(SomeThing, 'guid', 'read');
-$synthesize(SomeThing, 'someProp', 'read-write');
+$synthesize(Game, 'guid', 'read');
+$synthesize(Game, 'listUsers', 'read-write');
+$synthesize(Game, 'isStarted', 'read-write');
 
-exports.User = SomeThing;
+exports.Game = Game;
+
+
 
 
 

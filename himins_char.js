@@ -14,104 +14,61 @@
  * 
  */
 
+var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
 
-// Constructor
+require('jsclass');
+JS.require('JS.Class');
 
-exports.User = (function () {
-    
-    // Private Static Properties
-    
-    var version = "1.0";
-    
-    // Private Properties
+// class
 
-    this.guid = ''; // globaly unique ID -- everthing has one of these
-    this.ownerGuid = ''; // the guid of the user who owns this character
-    this.charName = undefined; // the name of this character
-    this.history = []; // list of important things this character has done:born, died, won, lost
-    
-    this.experiencePoints = 0; // earned by doing important things, improves stats
-    this.healthPoints = 0; // 0 = death, buffs can help or hurt health
-    this.luckPoints = 0; // based on slotted gloves, improves chances for winning fights, finding items
-    this.hitPoints = 0; // based on slotted weapons, ammo, buffs
-    this.armorPoints = 0; // based on slotted clothing, condition of clothing
-    this.visionPoints = 0; // based on slotted googles, improves visual acquity
-    this.reactionPoints = 0; // based on slotted boots, improves response time in fights
-    
-    this.locationX = 0; // Himins is a 3D labyrith
-    this.locationY = 0; 
-    this.locationZ = 0;
-    
-    this.isDead = true; // heath = 0
-    this.isSleeping = false; // stunned or healing state
-    
-    this.slotHat = undefined; // armor, improves armor points
-    this.slotGoogles = undefined; // armor, improves vision points
-    this.slotCoat = undefined; // armor, improves armor points
-    this.slotGloves = undefined; // armor, improves luck
-    this.slotPants = undefined; // armor, improves armor points
-    this.slotBoots = undefined; // armor, improves reaction points
-    this.slotPack = undefined; // container for inventory of items
-    this.slotMelee = undefined; // weapon, improves hit points
-    this.slotRanged = undefined; // weapon, improves hit points
-    
-    this.buffs = []; // list of active buffs: powerups, diseases, etc...
-
-    // Public API
-    
-    konstructor = function () {
+var Character = new JS.Class({
+    initialize: function () {
         this.guid = hat();
-    };
+    },
     
-    konstructor.prototype = {
-        version: "1.0",
-        
-        getVersion: function () {
-            return version;
-        },
-        
-        getGuid: function () {
-            return this.guid;
-        },
-        
-        getOwnerGuid: function () {
-            return this.ownerGuid;
-        },
+    recordEvent: function (event) {
+        if(!this.history) {
+            this.history = [];
+        }
+        this.history.push(event);
+    }
+});
 
-        setOwnerGuid: function (n) {
-            this.ownerGuid = n;
-        },   
-       
-        getCharName: function () {
-            return this.ownerGuid;
-        },
+// mutators
 
-        setCharName: function (s) {
-            this.charname = s;
-        },
-         
-        getHistory: function () {
-            return this.history;
-        },
+$synthesize(Character, 'guid', 'read'); // globaly unique ID -- everthing has one of thes
+$synthesize(Character, 'guidOwner', 'read-write'); // the guid of the user who owns this character
 
-        addEventToHistory: function (o) {
-            this.history.push(o);
-        },
-         
-        getExperiencePoints: function () {
-            return this.experiencePoints;
-        },
+$synthesize(Character, 'nameChar', 'read-write'); // the name of this character
+$synthesize(Character, 'history', 'read-write'); // list of important things this character has done:born, died, won, lost
 
-        setExperiencePoints: function (n) {
-            this.experiencePoints = n;
-        },
-         
-    };
-    
-    return konstructor;
-    
-})();
+$synthesize(Character, 'pointsExperience', 'read-write'); // earned by doing important things, improves stats
+$synthesize(Character, 'pointsHealth', 'read-write'); // 0 = death, buffs can help or hurt health
+$synthesize(Character, 'pointsLuck', 'read-write'); // based on slotted gloves, improves chances for winning fights, finding items
+$synthesize(Character, 'pointsHit', 'read-write'); // based on slotted weapons, ammo, buffs
+$synthesize(Character, 'pointsArmor', 'read-write'); // based on slotted clothing, condition of clothing
+$synthesize(Character, 'pointsVision', 'read-write'); // based on slotted googles, improves visual acquity
+$synthesize(Character, 'pointsReaction', 'read-write'); // based on slotted boots, improves response time in fights
+
+$synthesize(Character, 'locationX', 'read-write'); // Himins is a 3D labyrith
+$synthesize(Character, 'locationY', 'read-write');
+$synthesize(Character, 'locationZ', 'read-write');
+
+$synthesize(Character, 'isDead', 'read-write'); // heath = 0
+$synthesize(Character, 'isSleeping', 'read-write'); // stunned or healing state
+
+$synthesize(Character, 'slotHat', 'read-write'); // armor, improves armor points
+$synthesize(Character, 'slotGoogles', 'read-write'); // armor, improves vision points
+$synthesize(Character, 'slotCoat', 'read-write'); // armor, improves armor points
+$synthesize(Character, 'slotGloves', 'read-write'); // armor, improves luck
+$synthesize(Character, 'slotPants', 'read-write'); // armor, improves armor points
+$synthesize(Character, 'slotBoots', 'read-write'); // armor, improves reaction points
+$synthesize(Character, 'slotPack', 'read-write'); // container for inventory of items
+$synthesize(Character, 'slotMelee', 'read-write'); // weapon, improves hit points
+$synthesize(Character, 'slotRanged', 'read-write'); // weapon, improves hit point
+
+exports.Character = Character;
 
 
 

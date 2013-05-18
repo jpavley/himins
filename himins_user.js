@@ -14,79 +14,31 @@
  * 
  */
 
+var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
 
-// Constructor
+require('jsclass');
+JS.require('JS.Class');
 
-exports.User = (function () {
-    
-    // Private Static Properties
-    
-    var version = "1.0";
-    
-    // Private Properties
-    
-    this.guid = 0;
-    this.characterGuid = 0;
-    this.userName = '';
-    this.userPassword = '';
-    this.isOnline = false;
+// class
 
-    // Public API
-    
-    konstructor = function () {
+var User = new JS.Class({
+    initialize: function () {
         this.guid = hat();
-    };
-    
-    konstructor.prototype = {
-        
-        // Public Methods
-        
-        getVersion: function () {
-            return version;
-        },
-        
-        getGuid: function () {
-            return this.guid;
-        },
-        
-        getCharacterGuid: function () {
-            return this.characterGuid;
-        },
-        
-        setCharacterGuid: function (n) {
-            this.characterGuid = n;
-        },
-        
-        getUserName: function () {
-            return this.userName;
-        },
-        
-        setUserName: function (str) {
-            this.userName = str;
-        },
-        
-        getPassword: function () {
-            return this.password;
-        },
-        
-        setPassword: function (str) {
-            this.password = str;
-        },
-        
-        getIsOnline: function () {
-            return this.isOnline;
-        },
-        
-        setIsOnline: function (flg) {
-            this.isOnline = flg;
-        }
-    };
-    
-    return konstructor;
-    
-})();
+        this.isOnline = false;
+    }
+});
 
+// mutators
+
+$synthesize(User, 'guid', 'read');
+$synthesize(User, 'guidCharacter', 'read-write');
+
+$synthesize(User, 'nameUser', 'read-write');
+$synthesize(User, 'passwordUser', 'read-write');
+$synthesize(User, 'isOnline', 'read-write');
+
+exports.User = User;
 
 
 
