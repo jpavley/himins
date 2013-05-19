@@ -16,7 +16,8 @@
  */
 
 var net = require('net');
-var game = require('./himins_game.js');
+var gameService = require('./himins_game.js');
+var screenService = require('./himins_scrn.js');
 
 var chatServer = net.createServer(),
     clientList = [],
@@ -24,13 +25,10 @@ var chatServer = net.createServer(),
     userMode = 'loggedout';
 
 chatServer.on('connection', function(client) {
-    // display the game titles
-    client.write(',--.  ,--.,--.,--.   ,--.,--.,--.  ,--. ,---.  \n');
-    client.write('|  \'--\'  ||  ||   `.\'   ||  ||  ,\'.|  |\'   .-\' \n');
-    client.write('|  .--.  ||  ||  |\'.\'|  ||  ||  |\' \'  |`.  `-. \n');
-    client.write('|  |  |  ||  ||  |   |  ||  ||  | `   |.-\'    |\n');
-    client.write('`--\'  `--\'`--\'`--\'   `--\'`--\'`--\'  `--\'`-----\' \n');
-    client.write('            WATCH WHAT YOUR PRAY FOR           \n');
+    
+    var screen = new screenService.Screen();
+    var titleScreen = screen.screenWithKey('title');    
+    client.write(titleScreen);
     
     // give the client a name and add it to the client list
     client.name = client.remoteAddress + ':' + client.remotePort;
@@ -76,9 +74,9 @@ chatServer.on('connection', function(client) {
     };
     
     function greetUser(client) {
-        client.write('Greetings ' + client.name + '!\n');
+        client.write('Greetings player ' + client.name + '!' + 'Type \"start\" when ready\n');
         // let other clients know this client has joined
-        broadcast(client.name + ' joined\n', client, 'system');
+        broadcast('player ' +client.name + ' joined\n', client, 'system');
         // log it
         console.log(client.name + ' joined');
     };

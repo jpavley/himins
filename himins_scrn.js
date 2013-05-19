@@ -20,6 +20,8 @@ var hat = require('hat');
 require('jsclass');
 JS.require('JS.Class');
 
+var fs = require('fs');
+
 // class
 
 var Screen = new JS.Class({
@@ -32,13 +34,15 @@ var Screen = new JS.Class({
         var screenFile = this.listScreens[key];
         var result = [];
         if(screenFile) {
-            // open the file
-            // load in into an array
-            // escape the file to get it ready display
+            var filePath = './screens/' + screenFile;
+            var fileOptions = ['String','r'];
+            var buffer = fs.readFileSync(filePath, fileOptions);
+            result = buffer.toString('utf8');
         } else {
             // throw something!
            console.log('no file found for key: ' + key);
         }
+        return result;
     }
 });
 
