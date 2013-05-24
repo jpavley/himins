@@ -13,3 +13,43 @@
  * Himin Scrn Service
  * 
  */
+
+var $synthesize = require('synthesis').synthesize;
+var hat = require('hat');
+
+require('jsclass');
+JS.require('JS.Class');
+
+var fs = require('fs');
+
+// class
+
+var Screen = new JS.Class({
+    initialize: function () {
+        this.guid = hat();
+        this.listScreens = {'title': 'screen_title.txt'};
+    },
+    
+    screenWithKey: function (key) {
+        var screenFile = this.listScreens[key];
+        var result = [];
+        if(screenFile) {
+            var filePath = './screens/' + screenFile;
+            var fileOptions = ['String','r'];
+            var buffer = fs.readFileSync(filePath, fileOptions);
+            result = buffer.toString('utf8');
+        } else {
+            // throw something!
+           console.log('no file found for key: ' + key);
+        }
+        return result;
+    }
+});
+
+// mutators
+
+$synthesize(Screen, 'guid', 'read');
+$synthesize(Screen, 'listScreens', 'read-write');
+
+exports.Screen = Screen;
+
