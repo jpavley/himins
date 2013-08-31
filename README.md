@@ -10,6 +10,13 @@ Himins
 
 Text-based interactive fiction MMORPG using Node.js/MongoDB on the backend and terminal emulation as the client.
 
+Technical Details
+-----------------
+* Multi-user Node.js TCP server app with MongoDB for data services
+* To start the app enter the following in a terminal window: node himins_chat
+* To test the app enter the the following in terminal window: telnet 127.0.0.1 9000
+* Himins is divided up into a set of services and data templates
+
 Backstory
 ----------
 
