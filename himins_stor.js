@@ -17,31 +17,60 @@
 var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
 var Class = require('jsclass/src/core').Class;
+var mongoose = require('mongoose');
 
 var userService = require('./himins_user.js');
 
 // class
 
 var Storage = new Class({
-    initialize: function () {
+    initialize: function (userModel) {
+              
+        // setup the storage system
+
         this.guid = hat();
-        this.users = [];
-        this.users.push(this.createUser('gm', 'password'));
-        this.users.push(this.createUser('admin', 'password'));
+        this.userModel = userModel;
+        
+        // create two default users if needed
+        
+        this.createUser('gm', 'password');
+        this.createUser('admin', 'password');
     },
     
-    createUser: function (name, password) {
-        var resultUser =  new userService.User();
-        resultUser.setNameUser(name);
-        resultUser.setPasswordUser(password);
-        return resultUser;
+    createUser: function (nameStr, passwordStr) {
+      
+        // create the user
+        var userObject =  new userService.User();
+        userObject.setNameUser(nameStr);
+        userObject.setPasswordUser(passwordStr);
+        userObject.isOnline = false;
+        
+        // add user to database if not there already
+        var userJavascriptObject = {
+            name : nameStr,
+            password : passwordStr,
+            guid : userObject.guid,
+            isOnline : userObject.isOnline
+        };
+        console.log(userJavascriptObject);
+
+        var userJson = JSON.stringify(userJavascriptObject);
+        console.log(userJson);
+        
+        var userDocument = new this.userModel(userJavascriptObject);
+        userDocument.save(function (err) {
+          if (!err) {
+            throw err;
+          } else {
+            console.log("new user added to user stoarge");;
+          }
+        });
     }
 });
 
 // mutators
 
 $synthesize(Storage, 'guid', 'read');
-$synthesize(Storage, 'users', 'read-write');
 
 exports.Storage = Storage;
 

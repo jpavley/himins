@@ -19,6 +19,28 @@ var net = require('net');
 var gameService = require('./himins_game.js');
 var screenService = require('./himins_scrn.js');
 var storageService = require('./himins_stor.js');
+var mongoose = require('mongoose');
+
+var mongoServer = 'mongodb://localhost/',
+    mongoDatabase = 'himins_development';
+
+mongoose.connect(mongoServer + mongoDatabase);
+var Schema = mongoose.Schema;
+var ObjectID = Schema.ObjectID;
+
+// setup the database for users
+
+var userModel = new Schema ({
+  name : { type: String, required: true },
+  password : { type: String, required: true },
+  guid : { type: String, required: true },
+  isOnline : { type: String, required: true },
+});
+
+var userModel = mongoose.model('userModel', userModel);
+var userStore =  new storageService.Storage(userModel);
+
+// set up the chat server
 
 var chatServer = net.createServer(),
     clientList = [],
