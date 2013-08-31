@@ -18,6 +18,7 @@
 var net = require('net');
 var gameService = require('./himins_game.js');
 var screenService = require('./himins_scrn.js');
+var storageService = require('./himins_stor.js');
 
 var chatServer = net.createServer(),
     clientList = [],

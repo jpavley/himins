@@ -16,16 +16,14 @@
 
 var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
-
-require('jsclass');
-JS.require('JS.Class');
+var Class = require('jsclass/src/core').Class;
 
 var storageService = require('./himins_stor.js');
 var userService = require('./himins_user.js');
 
 // class
 
-var Game = new JS.Class({
+var Game = new Class({
     
     initialize: function () {
         this.guid = hat();

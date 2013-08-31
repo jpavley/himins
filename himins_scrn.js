@@ -16,15 +16,13 @@
 
 var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
-
-require('jsclass');
-JS.require('JS.Class');
+var Class = require('jsclass/src/core').Class;
 
 var fs = require('fs');
 
 // class
 
-var Screen = new JS.Class({
+var Screen = new Class({
     initialize: function () {
         this.guid = hat();
         this.listScreens = {'title': 'screen_title.txt'};

@@ -16,13 +16,11 @@
 
 var $synthesize = require('synthesis').synthesize;
 var hat = require('hat');
-
-require('jsclass');
-JS.require('JS.Class');
+var Class = require('jsclass/src/core').Class;
 
 // class
 
-var User = new JS.Class({
+var User = new Class({
     initialize: function () {
         this.guid = hat();
         this.isOnline = false;
