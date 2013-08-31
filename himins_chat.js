@@ -21,7 +21,6 @@ var screenService = require('./himins_scrn.js');
 
 var chatServer = net.createServer(),
     clientList = [],
-    userName,
     userMode = 'loggedout';
 
 chatServer.on('connection', function(client) {
@@ -76,7 +75,7 @@ chatServer.on('connection', function(client) {
     function greetUser(client) {
         client.write('Greetings player ' + client.name + '!' + 'Type \"start\" when ready\n');
         // let other clients know this client has joined
-        broadcast('player ' +client.name + ' joined\n', client, 'system');
+        broadcast('player ' + client.name + ' joined\n', client, 'system');
         // log it
         console.log(client.name + ' joined');
     };

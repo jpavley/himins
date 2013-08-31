@@ -38,6 +38,8 @@ $synthesize(User, 'nameUser', 'read-write');
 $synthesize(User, 'passwordUser', 'read-write');
 $synthesize(User, 'isOnline', 'read-write');
 
+$synthesize(User, 'client', 'read-write');
+
 exports.User = User;
 
 

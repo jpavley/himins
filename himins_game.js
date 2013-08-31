@@ -21,6 +21,7 @@ require('jsclass');
 JS.require('JS.Class');
 
 var storageService = require('./himins_stor.js');
+var userService = require('./himins_user.js');
 
 // class
 

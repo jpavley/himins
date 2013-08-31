@@ -27,13 +27,16 @@ var userService = require('./himins_user.js');
 var Storage = new JS.Class({
     initialize: function () {
         this.guid = hat();
-        var userGM = new userService.User();
-        userGM.setNameUser('GM');
-        var userAdmin = new userService.User();
-        userAdmin.setNameUser('Admin');
         this.users = [];
-        this.users.push(userGM);
-        this.users.push(userAdmin);
+        this.users.push(this.createUser('gm', 'password'));
+        this.users.push(this.createUser('admin', 'password'));
+    },
+    
+    createUser: function (name, password) {
+        var resultUser =  new userService.User();
+        resultUser.setNameUser(name);
+        resultUser.setPasswordUser(password);
+        return resultUser;
     }
 });
 
