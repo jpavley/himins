@@ -6,3 +6,5 @@ profile
 .DS_Store
 
 .DS_Store
+
+node_modules/hat/README.markdown
