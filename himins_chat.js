@@ -21,10 +21,12 @@ var screenService = require('./himins_scrn.js');
 
 var chatServer = net.createServer(),
     clientList = [],
-    userMode = 'loggedout';
+    userMode = 'loggedout',
+    testServiceIPAddress = "127.0.0.1",
+    testServicePortNumber = 9000;
 
 chatServer.on('connection', function(client) {
-    
+      
     var screen = new screenService.Screen();
     var titleScreen = screen.screenWithKey('title');    
     client.write(titleScreen);
@@ -113,4 +115,8 @@ chatServer.on('connection', function(client) {
     
 });
 
-chatServer.listen(9000);
+// noob instructions :)
+console.log("To test enter the following line in a terminal window:");
+console.log("telnet "+ testServiceIPAddress + " " + testServicePortNumber);
+
+chatServer.listen(testServicePortNumber);
