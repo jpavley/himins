@@ -6,9 +6,9 @@
     "start": "node himins_chat.js"
   },
   "dependencies": {
-    "mongoose":">= 2.3.1"
-    "synthesis": ">= 1.0.2"
-    "hat": ">= 0.0.3"
+    "mongoose":">= 2.3.1",
+    "synthesis": ">= 1.0.2",
+    "hat": ">= 0.0.3",
     "jsclass": ">= 4.0.2"
   }
 }
