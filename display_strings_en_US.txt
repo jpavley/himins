@@ -1,0 +1,2 @@
+Welcome to Himins {{boldRedOn}} {{client.name}} {{formatOff}} May we be of service?
+Himins responds to the following commands: {{boldGreenOn}} help {{formatOff}}

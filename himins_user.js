@@ -1,53 +1,45 @@
-// Copyright (c) 2013 John Franklin Pavley
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to 
-// deal in the Software without restriction, including without limitation the 
-// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
-// sell copies of the Software, and to permit persons to whom the Software is 
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in 
-// all copies or substantial portions of the Software.
+// himins_user.js
+// Manages users based on client connections
 
-/*
- * Himin User Service
- * 
- */
+var REMOTE_ADDRESS = 0,
+    REMOTE_PORT = 1,
+    USER_ID = 2,
+    USER_LINGO = 3;
 
-var $synthesize = require('synthesis').synthesize;
-var hat = require('hat');
-var Class = require('jsclass/src/core').Class;
+var userIndex = 0,
+    userList = [];
 
-// class
+var createUser = function(remoteAddress, remotePort, remoteLingo) {
+  userIndex++;
+  userID = "Bruce" + userIndex;
+  userList[userIndex] = [remoteAddress, remotePort, userID, remoteLingo];
+  console.log(userList);
+  return userID;
+}
 
-var User = new Class({
-    initialize: function () {
-        this.guid = hat();
-        this.isOnline = false;
+var getUserByID = function (userID) {
+  var result = "";
+  var err = true;
+  for (var i = 0; i < userList.length; i++) {
+    var userRecord = userList[i];
+    if (userRecord[USER_ID] === userID) {
+      result = userRecord;
+      err = false;
+      break;
     }
-});
+  }
+  if (err) {
+    console.log("failed to find userID " + userID + " in userList " + userList);
+  }
+  return result;
+}
 
-// mutators
+var getUserLingo = function (userID) {
+  var userRecord = getUserByID(userID);
+  var result = userRecord[USER_LINGO];
+  return result; 
+}
 
-$synthesize(User, 'guid', 'read');
-$synthesize(User, 'guidCharacter', 'read-write');
-
-$synthesize(User, 'nameUser', 'read-write');
-$synthesize(User, 'passwordUser', 'read-write');
-$synthesize(User, 'isOnline', 'read-write');
-
-$synthesize(User, 'client', 'read-write');
-
-exports.User = User;
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.createUser = createUser;
+module.exports.getUserByID = getUserByID;
+module.exports.getUserLingo = getUserLingo;
