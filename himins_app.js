@@ -28,11 +28,11 @@ himinsServer.on('connection', function (client) {
   client.write('Welcome to Himins ' + display.boldRedOn + client.name + display.formatOff + '. May we be of service? \n');
   
   // handle incoming client data
-  client.on('data', function (data, lingo) {
+  client.on('data', function (data) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     // send data to the parser
-    var result = parser.processClientData(data);
+    var result = parser.processClientData(data, lingo);
     // write the response to the client
     client.write(display.cursorUp);
     client.write(result + '\n');

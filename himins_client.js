@@ -4,8 +4,6 @@
 // Use the variables below with the client.write() function to format text,
 // move the cursor, and control the screen
 
-user = require('./himins_user');
-
 var boldRedOn = "\033[1;31m",
     boldGreenOn = "\033[1;32m",
     formatOff = "\033[0m",
@@ -17,17 +15,3 @@ module.exports.boldGreenOn = boldGreenOn;
 module.exports.formatOff = formatOff;
 module.exports.eraseScreen = eraseScreen;
 module.exports.cursorUp = cursorUp;
-
-var processMessageForDisplay = function (userID, messageID, lingo) {
-  var result = "";
-  if (lingo === "en_US") {
-    // 1. get the string from the file for the selected language
-    // 2. parse it to replace {{ }} with data
-    // 3. set the parsed message to the result
-  } else {
-    console.log("language unsupported in himins_client.js processMessageForDisplay() " + lingo); 
-  }
-  return result;
-}
-
-module.exports.processMessageForDisplay = processMessageForDisplay;
