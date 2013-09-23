@@ -1,17 +1,28 @@
-// himins_app.js
+// himins_parser.js
 // Interprets input from a client and returns a response
 
 var display = require('./himins_client'),
     fs = require('fs');
 
-var displayStrings = [],
-    commandStrings = [];
+var localizedStrings = [];
+    
+var ENGLISH_US = 0,
+    FRENCH_FR = 1,
+    SPANISH_SP = 2,
+    GERMAN_DE = 3;
     
 
 var loadClientStrings = function (lingo) {
-  // todo: make sure this is multi-user!
-  loadStrings(displayStrings, "display_strings_", lingo);
-  loadStrings(commandStrings, "command_strings_", lingo);
+  if (lingo === "en_US" && !localizedStrings[ENGLISH_US]) {
+    var enDisplayStrings = [], enCommandStrings = [];
+    loadStrings(enDisplayStrings, "display_strings_", lingo);
+    loadStrings(enCommandStrings, "command_strings_", lingo);
+    localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings];
+  }
+  
+  if (lingo === "fr_FR" || lingo === "sp_SP" || lingo === "de_DE") {
+    console.log("Unsupported language in himins_parser.js loadClientStrings() " + lingo);
+  }
 }
 
 var loadStrings = function (array, filePrefix, fileLingo) {
@@ -28,11 +39,7 @@ var loadStrings = function (array, filePrefix, fileLingo) {
   });
 }
 
-var loadCommandStrings = function () {
-  // to do
-}
-
-var processClientData = function(data) {
+var processClientData = function(data, lingo) {
   var input = String(data),
       response = "";
   

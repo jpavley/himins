@@ -16,7 +16,7 @@ himinsServer.on('connection', function (client) {
   
   // do initialization tasks
   var lingo = "en_US"; // todo: get the lingo from the client
-  parser.loadClientStrings(lingo); // todo: make sure this is multi-user!
+  parser.loadClientStrings(lingo);
   
   // give the client a name and add the client to the list of clients
   client.name = user.createUser(client.remoteAddress, client.remotePort, lingo);
@@ -28,7 +28,7 @@ himinsServer.on('connection', function (client) {
   client.write('Welcome to Himins ' + display.boldRedOn + client.name + display.formatOff + '. May we be of service? \n');
   
   // handle incoming client data
-  client.on('data', function (data) {
+  client.on('data', function (data, lingo) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     // send data to the parser

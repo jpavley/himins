@@ -18,15 +18,14 @@ module.exports.formatOff = formatOff;
 module.exports.eraseScreen = eraseScreen;
 module.exports.cursorUp = cursorUp;
 
-var processMessageForDisplay = function (userID, messageID) {
-  userLanguageID = user.getUserLingo(userID);
+var processMessageForDisplay = function (userID, messageID, lingo) {
   var result = "";
-  if (userLanguageID != "enUS") {
+  if (lingo === "en_US") {
     // 1. get the string from the file for the selected language
     // 2. parse it to replace {{ }} with data
     // 3. set the parsed message to the result
   } else {
-    console.log("language unsupported in himins_client.js processMessageForDisplay()"); 
+    console.log("language unsupported in himins_client.js processMessageForDisplay() " + lingo); 
   }
   return result;
 }
