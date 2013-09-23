@@ -54,9 +54,8 @@ var renderMessageForDisplay = function (messageID, lingo) {
   var result = "";
   if (lingo === "en_US") {
     // 1. get the string from the file for the selected language
-    console.log(enDisplayStrings);
     var message = enDisplayStrings[messageID];
-    // 2. parse it to replace {{ }} with data
+    // 2. parse it to replace {{ }} with data and make sure it breaks on white space at 80 cols
     // 3. set the parsed message to the result
     result = message;
   } else {
