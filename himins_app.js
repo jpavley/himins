@@ -25,14 +25,14 @@ himinsServer.on('connection', function (client) {
   
   // weclome the user
   client.write(display.eraseScreen);
-  client.write('Welcome to Himins ' + display.boldRedOn + client.name + display.formatOff + '. May we be of service? \n');
+  client.write(parser.renderMessageForDisplay(client, 0, lingo) + '\n');
   
   // handle incoming client data
   client.on('data', function (data) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     // send data to the parser
-    var result = parser.processClientData(data, lingo);
+    var result = parser.processClientData(client, data, lingo);
     // write the response to the client
     client.write(display.cursorUp);
     client.write(result + '\n');

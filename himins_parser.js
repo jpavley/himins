@@ -13,6 +13,9 @@ var ENGLISH_US = 0,
     SPANISH_SP = 2,
     GERMAN_DE = 3;
     
+var DISPLAY_STRINGS = 0,
+    COMMAND_STRINGS = 1;
+    
 
 var loadClientStrings = function (lingo) {
   if (lingo === "en_US" && !localizedStrings[ENGLISH_US]) {
@@ -22,6 +25,10 @@ var loadClientStrings = function (lingo) {
     
     var commandStringsFileName = "command_strings_" + lingo + ".txt";
     enCommandStrings = fs.readFileSync(commandStringsFileName).toString().split("\n");
+    
+    localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings];
+    
+    console.log(localizedStrings);
    
   }
   
@@ -30,7 +37,7 @@ var loadClientStrings = function (lingo) {
   }
 }
 
-var processClientData = function(data, lingo) {
+var processClientData = function(client, data, lingo) {
   var input = String(data),
       response = "";
   
@@ -39,10 +46,11 @@ var processClientData = function(data, lingo) {
   
   // split the input on spaces get a list of words
   var wordsInput = cleanInput.split(" ");
-  if (wordsInput[0] == "help") {
-    // return list of available commands
-    // response = "Himins responds to the following commands: " + display.boldGreenOn + "help" + display.formatOff;
-    response = renderMessageForDisplay(1, lingo);
+  
+  if (wordsInput[0] === "quit") {
+    // tell server to disconnect client
+  } else if (wordsInput[0] === "help") {
+    response = renderMessageForDisplay(client, 1, lingo);
   } else {
     // just do something dumb like reverse the input data
     response = cleanInput.split("").reverse().join("");
@@ -50,19 +58,30 @@ var processClientData = function(data, lingo) {
   return response;
 }
 
-var renderMessageForDisplay = function (messageID, lingo) {
+var renderMessageForDisplay = function (client, messageID, lingo) {
   var result = "";
   if (lingo === "en_US") {
-    // 1. get the string from the file for the selected language
-    var message = enDisplayStrings[messageID];
-    // 2. parse it to replace {{ }} with data and make sure it breaks on white space at 80 cols
-    // 3. set the parsed message to the result
-    result = message;
+    var message = enDisplayStrings[messageID]; // todo: undo hard coding to english
+    var parsedMessage = parseWithTemplates(client, message);
+    result = parsedMessage;
   } else {
     console.log("language unsupported in himins_client.js processMessageForDisplay() " + lingo); 
   }
   return result;
 }
 
+var parseWithTemplates = function (client, message) {
+  var result = message;
+  // string expansion
+  result = result.replace("{{client-name}}", client.name);
+  result = result.replace("{{command-list}}", enCommandStrings.toString());  // todo: undo hard coding to english
+  // display formatting
+  result = result.replace("{{boldRedOn}}", display.boldRedOn);
+  result = result.replace("{{boldGreenOn}}", display.boldGreenOn);
+  result = result.replace("{{formatOff}}", display.formatOff);
+  return result;
+}
+
 module.exports.processClientData = processClientData;
 module.exports.loadClientStrings = loadClientStrings;
+module.exports.renderMessageForDisplay = renderMessageForDisplay;

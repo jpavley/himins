@@ -1,2 +1,2 @@
-Welcome to Himins {{boldRedOn}} {{client.name}} {{formatOff}} May we be of service?
-Himins responds several commands including help, north, look, map, eat, list, and inventory
+Welcome to Himins {{boldRedOn}}{{client-name}}{{formatOff}} May we be of service?
+Himins responds several commands including {{boldGreenOn}}{{command-list}}{{formatOff}}
