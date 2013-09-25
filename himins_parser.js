@@ -62,7 +62,7 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
   var result = "";
   if (lingo === "en_US") {
     var message = enDisplayStrings[messageID]; // todo: undo hard coding to english
-    var parsedMessage = parseWithTemplates(client, message);
+    var parsedMessage = parseWithTemplates(client, message, lingo);
     result = parsedMessage;
   } else {
     console.log("language unsupported in himins_client.js processMessageForDisplay() " + lingo); 
@@ -70,17 +70,64 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
   return result;
 }
 
-var parseWithTemplates = function (client, message) {
+var parseWithTemplates = function (client, message, lingo) {
   var result = message;
   // string expansion
   result = result.replace("{{client-name}}", client.name);
-  result = result.replace("{{command-list}}", enCommandStrings.toString());  // todo: undo hard coding to english
+  result = result.replace("{{command-list}}", commandsListAsString);
+  result = wordWrap(result, 80);
   // display formatting
   result = result.replace("{{boldRedOn}}", display.boldRedOn);
   result = result.replace("{{boldGreenOn}}", display.boldGreenOn);
   result = result.replace("{{formatOff}}", display.formatOff);
   return result;
 }
+
+var commandsListAsString = function (lingo) {
+  // todo: undo hard coding to english
+  var result = enCommandStrings.toString();
+  result = result.replace(/,/g, ", ");
+  return result;
+}
+
+var wordWrap = function (message, columnWidth) {
+  var wrappedString = "",
+      unwrappedString = message,
+      result = "";
+  
+  while (unwrappedString.length > columnWidth) {
+    
+    // create a string columnWidth characters in length
+    var fittedString = unwrappedString.substring(0, columnWidth);
+    
+    // get the index of the last space char in the fitted string
+    var lastSpaceIndex = fittedString.lastIndexOf(' ');
+    
+    // get the index of the last newline char in the fitted string 
+    var lastNewLineIndex = fittedString.lastIndexOf('\n');
+    
+    // If there is a newline char in the fitted string    
+    if (lastNewLineIndex != -1) {
+      // cut the fitted line off at the last newline char
+      lastSpaceIndex = lastNewLineIndex;
+    }
+    
+    // If there is no space char in the fitted string
+    if (lastSpaceIndex === -1) {
+      // cut the fitted line off at the columnWidth
+      lastSpaceIndex = columnWidth;
+    }
+    
+    // add the fitted line to the wrappedString with a newline character at the end
+    wrappedString += fittedString.substring(0, lastSpaceIndex) + '\n';
+    
+    // cut the fitted line out of the unwrapped string
+    unwrappedString = unwrappedString.substring(lastSpaceIndex + 1);
+  }
+  result = wrappedString + unwrappedString;
+  return result;
+}
+
 
 module.exports.processClientData = processClientData;
 module.exports.loadClientStrings = loadClientStrings;
