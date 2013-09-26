@@ -28,7 +28,7 @@ var loadClientStrings = function (lingo) {
     
     localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings];
     
-    console.log(localizedStrings);
+    //console.log(localizedStrings);
    
   }
   
@@ -44,17 +44,40 @@ var processClientData = function(client, data, lingo) {
   // remove linefeeds and whitespace from the end of the input
   var cleanInput = input.trim();
   
+  // normalize capitalization
+  var cleanInput = cleanInput.toLowerCase();
+  
   // split the input on spaces get a list of words
   var wordsInput = cleanInput.split(" ");
   
-  if (wordsInput[0] === "quit") {
-    // tell server to disconnect client
+  // todo: split this into a a seperate function
+  if (wordsInput[0] === "welcome") {
+  response = renderMessageForDisplay(client, 0, lingo);   
   } else if (wordsInput[0] === "help") {
-    response = renderMessageForDisplay(client, 1, lingo);
+  response = renderMessageForDisplay(client, 1, lingo);
+  } else if (wordsInput[0] === "about") {
+    response = renderMessageForDisplay(client, 2, lingo);
+  } else if (wordsInput[0] === "language") {
+    response = renderMessageForDisplay(client, 3, lingo);
+  } else if (wordsInput[0] === "news") {
+    response = renderMessageForDisplay(client, 12, lingo);
+  } else if (wordsInput[0] === "quit") {
+    response = renderMessageForDisplay(client, 7, lingo);
+  } else if (wordsInput[0] === "rename") {
+    response = renderMessageForDisplay(client, 8, lingo);
+  } else if (wordsInput[0] === "start") {
+    response = renderMessageForDisplay(client, 11, lingo);
+  } else if (wordsInput[0] === "time") {
+    response = renderMessageForDisplay(client, 13, lingo);
+  } else if (wordsInput[0] === "english") {
+    response = renderMessageForDisplay(client, 5, lingo);
+  } else if (wordsInput[0] === "spanish") {
+    response = renderMessageForDisplay(client, 6, lingo);
   } else {
     // just do something dumb like reverse the input data
     response = cleanInput.split("").reverse().join("");
   }
+  
   return response;
 }
 
@@ -73,13 +96,15 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
 var parseWithTemplates = function (client, message, lingo) {
   var result = message;
   // string expansion
-  result = result.replace("{{client-name}}", client.name);
-  result = result.replace("{{command-list}}", commandsListAsString);
-  result = wordWrap(result, 80);
+  result = result.replace(/{{client-name}}/g, client.name);
+  result = result.replace(/{{command-list}}/g, commandsListAsString);
+  
   // display formatting
-  result = result.replace("{{boldRedOn}}", display.boldRedOn);
-  result = result.replace("{{boldGreenOn}}", display.boldGreenOn);
-  result = result.replace("{{formatOff}}", display.formatOff);
+  result = result.replace(/{{boldRedOn}}/g, display.boldRedOn);
+  result = result.replace(/{{boldGreenOn}}/g, display.boldGreenOn);
+  result = result.replace(/{{formatOff}}/g, display.formatOff);
+  
+  result = wordWrap(result, 80);
   return result;
 }
 
@@ -127,6 +152,21 @@ var wordWrap = function (message, columnWidth) {
   result = wrappedString + unwrappedString;
   return result;
 }
+
+var indicesOf = function(searchStr, mainStr, caseSensitive) {
+    var startIndex = 0, searchStrLen = searchStr.length;
+    var index, indices = [];
+    if (!caseSensitive) {
+        mainStr = mainStr.toLowerCase();
+        searchStr = searchStr.toLowerCase();
+    }
+    while ((index = mainStr.indexOf(searchStr, startIndex)) > -1) {
+        indices.push(index);
+        startIndex = index + searchStrLen;
+    }
+    return indices;
+}
+
 
 
 module.exports.processClientData = processClientData;

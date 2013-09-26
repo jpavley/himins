@@ -1,2 +1,16 @@
-Welcome to Himins {{boldRedOn}}{{client-name}}{{formatOff}} May we be of service?
-Himins responds several commands including {{boldGreenOn}}{{command-list}}{{formatOff}}
+Welcome to Himins {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{command-list}}{{formatOff}}
+Himins is sorry to report that {{boldRedOn}}help{{formatOff}} is not availble at this time.
+Himins is a mulit-user dungeon located on the Earth's Moon where the departed can amuse themselves for eternity in our relaxing activities. Mortals can join Himins for a short time through an Internet connection and a telnet client.
+Please request a language. Himins speaks {{boldGreenOn}}English{{formatOff}} and {{boldGreenOn}}Spanish{{formatOff}}.
+{{boldRedOn}}{{client-name}}{{formatOff}} your request for {{boldRedOn}}English{{formatOff}} was accepted.
+Himins is happy to report that your request for {{boldRedOn}}English{{formatOff}} has been accepted.
+Himins is sorry to report that {{boldRedOn}}Spanish{{formatOff}} is not availble at this time.
+Himins will now release you. Your progress has not been saved.
+{{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name:
+Mortal, during this sesison we will refer to you as {{boldRedOn}}{{client-name}}{{formatOff}}
+Himins is sorry to report that your name choice is not availble at this time.
+{{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Please standby for further instructions.
+Himins is sorry to report that {{boldRedOn}}news{{formatOff}} is not availble at this time.
+Himins is sorry to report that {{boldRedOn}}time{{formatOff}} is not availble at this time.
+
+

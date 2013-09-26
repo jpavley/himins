@@ -11,7 +11,7 @@ var userIndex = 0,
 
 var createUser = function(remoteAddress, remotePort, remoteLingo) {
   userIndex++;
-  userID = "Bruce" + userIndex;
+  userID = "Mortal" + userIndex;
   userList[userIndex] = [remoteAddress, remotePort, userID, remoteLingo];
   console.log(userList);
   return userID;

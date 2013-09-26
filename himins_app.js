@@ -26,6 +26,7 @@ himinsServer.on('connection', function (client) {
   // weclome the user
   client.write(display.eraseScreen);
   client.write(parser.renderMessageForDisplay(client, 0, lingo) + '\n');
+  client.write(display.prompt);
   
   // handle incoming client data
   client.on('data', function (data) {
@@ -34,8 +35,9 @@ himinsServer.on('connection', function (client) {
     // send data to the parser
     var result = parser.processClientData(client, data, lingo);
     // write the response to the client
-    client.write(display.cursorUp);
+    //client.write(display.cursorUp);
     client.write(result + '\n');
+    client.write(display.prompt);
   });
   
   // handle client disconnection
