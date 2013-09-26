@@ -34,9 +34,12 @@ himinsServer.on('connection', function (client) {
     console.log(client.name + ' incoming data: ' + data);
     // send data to the parser
     var result = parser.processClientData(client, data, lingo);
+    
     // write the response to the client
     //client.write(display.cursorUp);
     client.write(result + '\n');
+    
+    // todo: dont just display the prompt, instead execute a "post action", like prompt, disconnect, ask, answer
     client.write(display.prompt);
   });
   
@@ -45,16 +48,16 @@ himinsServer.on('connection', function (client) {
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // log it
-    console.log(client.name + 'disconnected');
+    console.log(client.name + 'disconnected by end');
   });
   
   // handle client error (OMG!)
-  client.on('error', function () {
-    // log it
+  client.on('error', function (e) {
     console.log(e);
   });
 });
 
+// give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
 // start up the server

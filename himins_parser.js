@@ -27,9 +27,7 @@ var loadClientStrings = function (lingo) {
     enCommandStrings = fs.readFileSync(commandStringsFileName).toString().split("\n");
     
     localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings];
-    
     //console.log(localizedStrings);
-   
   }
   
   if (lingo === "fr_FR" || lingo === "sp_SP" || lingo === "de_DE") {
@@ -63,12 +61,14 @@ var processClientData = function(client, data, lingo) {
     response = renderMessageForDisplay(client, 12, lingo);
   } else if (wordsInput[0] === "quit") {
     response = renderMessageForDisplay(client, 7, lingo);
+    client.end();
   } else if (wordsInput[0] === "rename") {
     response = renderMessageForDisplay(client, 8, lingo);
   } else if (wordsInput[0] === "start") {
     response = renderMessageForDisplay(client, 11, lingo);
   } else if (wordsInput[0] === "time") {
-    response = renderMessageForDisplay(client, 13, lingo);
+    response = new Date().toLocaleString();
+    //response = renderMessageForDisplay(client, 13, lingo);
   } else if (wordsInput[0] === "english") {
     response = renderMessageForDisplay(client, 5, lingo);
   } else if (wordsInput[0] === "spanish") {
