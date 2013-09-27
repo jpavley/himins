@@ -1,7 +1,9 @@
 // himins_parser.js
 // Interprets input from a client and returns a response
 
-var display = require('./himins_client'),
+var display = require('./himins_client')
+    game = require('./himins_game'),
+    user = require('./himins_user'),
     fs = require('fs');
 
 var localizedStrings = []
@@ -48,37 +50,70 @@ var processClientData = function(client, data, lingo) {
   // split the input on spaces get a list of words
   var wordsInput = cleanInput.split(" ");
   
+  // postaction: what to do after printing the message to the player
+  var postaction = "prompt";
+  
   // todo: split this into a a seperate function
   if (wordsInput[0] === "welcome") {
-  response = renderMessageForDisplay(client, 0, lingo);   
+    response = renderMessageForDisplay(client, 0, lingo); 
+    postaction = "prompt";
+    
   } else if (wordsInput[0] === "help") {
-  response = renderMessageForDisplay(client, 1, lingo);
+    response = renderMessageForDisplay(client, 1, lingo);
+    postaction = "prompt";    
+    
   } else if (wordsInput[0] === "about") {
     response = renderMessageForDisplay(client, 2, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "language") {
     response = renderMessageForDisplay(client, 3, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "news") {
     response = renderMessageForDisplay(client, 12, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "quit") {
     response = renderMessageForDisplay(client, 7, lingo);
-    client.end();
+    postaction = "end";
+
   } else if (wordsInput[0] === "rename") {
     response = renderMessageForDisplay(client, 8, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "start") {
     response = renderMessageForDisplay(client, 11, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "time") {
-    response = new Date().toLocaleString();
-    //response = renderMessageForDisplay(client, 13, lingo);
+    response = renderMessageForDisplay(client, 12, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "english") {
     response = renderMessageForDisplay(client, 5, lingo);
+    postaction = "prompt";
+
   } else if (wordsInput[0] === "spanish") {
     response = renderMessageForDisplay(client, 6, lingo);
+    postaction = "prompt";
+
   } else {
     // just do something dumb like reverse the input data
     response = cleanInput.split("").reverse().join("");
+    postaction = "prompt";
+
   }
   
-  return response;
+  // action: write the response to the client
+  client.write(response + '\n');
+  
+  // postaction: do the needful!
+  if (postaction === "prompt") {
+    client.write(display.prompt);
+  } else if (postaction === "end") {
+    client.end();
+  }
 }
 
 var renderMessageForDisplay = function (client, messageID, lingo) {
@@ -97,7 +132,10 @@ var parseWithTemplates = function (client, message, lingo) {
   var result = message;
   // string expansion
   result = result.replace(/{{client-name}}/g, client.name);
-  result = result.replace(/{{command-list}}/g, commandsListAsString);
+  result = result.replace(/{{command-list}}/g, commandsListAsString(lingo));
+  if (result.indexOf("{{time-remaining}}") != -1) {
+    result = result.replace(/{{time-remaining}}/g, calcClientTimeRemaining(client))    
+  }
   
   // display formatting
   result = result.replace(/{{boldRedOn}}/g, display.boldRedOn);
@@ -112,6 +150,14 @@ var commandsListAsString = function (lingo) {
   // todo: undo hard coding to english
   var result = enCommandStrings.toString();
   result = result.replace(/,/g, ", ");
+  return result;
+}
+
+var calcClientTimeRemaining = function(client) {
+  var clientStartTime = user.getUserStartTime(client.name);
+  var currentTime = new Date().getTime();
+  var playedTime = currentTime - clientStartTime;
+  var result = game.MAX_PLAY_TIME_MS - playedTime;
   return result;
 }
 

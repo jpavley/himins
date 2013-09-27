@@ -4,16 +4,18 @@
 var REMOTE_ADDRESS = 0,
     REMOTE_PORT = 1,
     USER_ID = 2,
-    USER_LINGO = 3;
+    USER_LINGO = 3,
+    USER_START_TIME = 4;
 
-var userIndex = 0,
-    userList = [];
+var userList = [],
+    userIndex = 0;
 
 var createUser = function(remoteAddress, remotePort, remoteLingo) {
   userIndex++;
-  userID = "Mortal" + userIndex;
-  userList[userIndex] = [remoteAddress, remotePort, userID, remoteLingo];
-  console.log(userList);
+  var userID = "Mortal" + userIndex;
+  var userStartTime = new Date().getTime();
+  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime];
+  userList.push(newUser);
   return userID;
 }
 
@@ -40,6 +42,13 @@ var getUserLingo = function (userID) {
   return result; 
 }
 
+var getUserStartTime = function (userID) {
+  var userRecord = getUserByID(userID);
+  var result = userRecord[USER_START_TIME];
+  return result; 
+}
+
 module.exports.createUser = createUser;
 module.exports.getUserByID = getUserByID;
 module.exports.getUserLingo = getUserLingo;
+module.exports.getUserStartTime = getUserStartTime;

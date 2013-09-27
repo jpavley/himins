@@ -5,7 +5,8 @@
 var net = require('net'),
     parser = require('./himins_parser'),
     user = require('./himins_user'),
-    display = require('./himins_client');
+    display = require('./himins_client'),
+    game = require('./himins_game');
 
 var himinsServer = net.createServer(),
     clientList = [],
@@ -35,12 +36,6 @@ himinsServer.on('connection', function (client) {
     // send data to the parser
     var result = parser.processClientData(client, data, lingo);
     
-    // write the response to the client
-    //client.write(display.cursorUp);
-    client.write(result + '\n');
-    
-    // todo: dont just display the prompt, instead execute a "post action", like prompt, disconnect, ask, answer
-    client.write(display.prompt);
   });
   
   // handle client disconnection
@@ -57,8 +52,15 @@ himinsServer.on('connection', function (client) {
   });
 });
 
+var stopUpdates = function () {
+  clearInterval(game.intervalId);
+}
+
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
+
+// start up the game loop
+game.intervalId = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
 
 // start up the server
 himinsServer.listen(portNumber);
