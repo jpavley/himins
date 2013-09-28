@@ -14,7 +14,7 @@ var himinsServer = net.createServer(),
     portNumber = 9000;
 
 himinsServer.on('connection', function (client) {
-  
+    
   // do initialization tasks
   var lingo = "en_US"; // todo: get the lingo from the client
   parser.loadClientStrings(lingo);
@@ -22,6 +22,11 @@ himinsServer.on('connection', function (client) {
   // give the client a name and add the client to the list of clients
   client.name = user.createUser(client.remoteAddress, client.remotePort, lingo);
   clientList.push(client);
+  
+  // start up the game loop
+  var clientIntervalID = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
+  user.setIntervalID(client.name, clientIntervalID);
+
   
   // weclome the user
   client.write(display.eraseScreen);
@@ -42,6 +47,7 @@ himinsServer.on('connection', function (client) {
   
   // handle client disconnection
   client.on('end', function () {
+    stopUpdates(client);
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // log it
@@ -75,7 +81,8 @@ function broadcast(message, client, kind) {
                 clientList[i].write(payload);
                 clientList[i].write(display.prompt);
             } else {
-                // client is on writable, kill it
+                // client is not writable, kill it
+                stopUpdates(client);
                 cleanup.push(clientList[i]);
                 clientList[i].destory();
             }
@@ -88,23 +95,20 @@ function broadcast(message, client, kind) {
     }
 };
 
-
-var stopUpdates = function () {
-  clearInterval(game.intervalId);
-}
-
 var clientCount = function () {
   return clientList.length;
 }
 
+var stopUpdates = function (client) {
+  clearInterval(user.getIntervalID(client.name));
+}
+
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
-
-// start up the game loop
-game.intervalId = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
 
 // start up the server
 himinsServer.listen(portNumber);
 
 module.exports.broadcast = broadcast;
 module.exports.clientCount = clientCount;
+module.exports.stopUpdates = stopUpdates;

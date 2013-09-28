@@ -5,7 +5,8 @@ var REMOTE_ADDRESS = 0,
     REMOTE_PORT = 1,
     USER_ID = 2,
     USER_LINGO = 3,
-    USER_START_TIME = 4;
+    USER_START_TIME = 4,
+    USER_INTERVAL_ID = 5;
 
 var userList = [],
     userIndex = 0;
@@ -14,7 +15,8 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   userIndex++;
   var userID = "Mortal" + userIndex;
   var userStartTime = new Date().getTime();
-  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime];
+  var userIntervalID = 0;
+  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID];
   userList.push(newUser);
   return userID;
 }
@@ -37,18 +39,31 @@ var getUserByID = function (userID) {
 }
 
 var getUserLingo = function (userID) {
-  var userRecord = getUserByID(userID);
-  var result = userRecord[USER_LINGO];
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_LINGO];
   return result; 
 }
 
 var getUserStartTime = function (userID) {
-  var userRecord = getUserByID(userID);
-  var result = userRecord[USER_START_TIME];
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_START_TIME];
   return result; 
+}
+
+var getIntervalID = function (userID) {
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_INTERVAL_ID];
+  return result;
+}
+
+var setIntervalID = function (userID, intervalID) {
+  var userRecord = getUserByID(userID);
+  userRecord[USER_INTERVAL_ID] = intervalID;
 }
 
 module.exports.createUser = createUser;
 module.exports.getUserByID = getUserByID;
 module.exports.getUserLingo = getUserLingo;
 module.exports.getUserStartTime = getUserStartTime;
+module.exports.getIntervalID = getIntervalID;
+module.exports.setIntervalID = setIntervalID;
