@@ -29,6 +29,10 @@ himinsServer.on('connection', function (client) {
   client.write(parser.renderMessageForDisplay(client, 0, lingo) + '\n');
   client.write(display.prompt);
   
+  // tell everyone the user is here
+  // todo: localise "player" and "ascended"
+  broadcast('player ' + display.boldRedOn + client.name + display.formatOff + ' ascended to himins.\n', client, 'system');
+  
   // handle incoming client data
   client.on('data', function (data) {
     // log it
@@ -52,6 +56,40 @@ himinsServer.on('connection', function (client) {
   });
 });
 
+// broadcast messages to every client but this one
+function broadcast(message, client, kind) {
+    var cleanup = [];
+    
+    for (var i = 0, l = clientList.length; i < l; i += 1) {
+        if (client !== clientList[i]) {
+            // client is in the client list
+            if (clientList[i].writable) {
+                // compose the message
+                var payload;
+                if (kind === 'user') {
+                    // todo: localize "say"
+                    payload = display.boldRedOn + client.name + display.formatOff + ' says ' + message;
+                } else {
+                    payload = message;
+                }
+                // write the message
+                clientList[i].write(payload);
+                clientList[i].write(display.prompt);
+            } else {
+                // client is on writable, kill it
+                cleanup.push(clientList[i]);
+                clientList[i].destory();
+            }
+        }
+    }
+    
+    // remove dead clients from client list
+    for (var i = 0, l = cleanup.length; i < l; i += 1 ) {
+        clientList.splice(clientList.indexOf(cleanup[i]), 1);
+    }
+};
+
+
 var stopUpdates = function () {
   clearInterval(game.intervalId);
 }
@@ -64,3 +102,5 @@ game.intervalId = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
 
 // start up the server
 himinsServer.listen(portNumber);
+
+module.exports.broadcast = broadcast;

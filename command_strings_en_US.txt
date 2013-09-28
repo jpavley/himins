@@ -9,3 +9,5 @@ Start
 Time
 English
 Spanish
+Say
+Tell

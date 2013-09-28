@@ -3,7 +3,8 @@
 
 var display = require('./himins_client')
     game = require('./himins_game'),
-    user = require('./himins_user'),
+    user = require('./himins_user')
+    app = require('./himins_app'),
     fs = require('fs');
 
 var localizedStrings = []
@@ -98,6 +99,15 @@ var processClientData = function(client, data, lingo) {
     response = renderMessageForDisplay(client, 6, lingo);
     postaction = "prompt";
 
+  } else if (wordsInput[0] === "say" || wordsInput[0] === "/s") {
+    var message = wordsInput.splice(0,1);
+    message = wordsInput.toString();
+    message = message.replace(/,/g, " ");
+    message = '"' + message + '"' + "\n";
+    response = "";
+    app.broadcast(message, client, "user");
+    postaction = "prompt";
+
   } else {
     // just do something dumb like reverse the input data
     response = cleanInput.split("").reverse().join("");
@@ -106,7 +116,9 @@ var processClientData = function(client, data, lingo) {
   }
   
   // action: write the response to the client
-  client.write(response + '\n');
+  if (response != "") {
+    client.write(response + '\n');    
+  }
   
   // postaction: do the needful!
   if (postaction === "prompt") {
