@@ -174,6 +174,7 @@ var calcClientTimeRemaining = function(client) {
   var currentTime = new Date().getTime();
   var playedTime = currentTime - clientStartTime;
   var result = game.MAX_PLAY_TIME_MS - playedTime;
+  var result = Math.floor((result/60)/1000);
   return result;
 }
 
