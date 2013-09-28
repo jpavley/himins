@@ -72,7 +72,7 @@ var processClientData = function(client, data, lingo) {
     postaction = "prompt";
 
   } else if (wordsInput[0] === "news") {
-    response = renderMessageForDisplay(client, 12, lingo);
+    response = renderMessageForDisplay(client, 17, lingo);
     postaction = "prompt";
 
   } else if (wordsInput[0] === "quit") {
@@ -147,6 +147,7 @@ var parseWithTemplates = function (client, message, lingo) {
   var result = message;
   // string expansion
   result = result.replace(/{{client-name}}/g, client.name);
+  result = result.replace(/{{client-count}}/g, app.clientCount());
   result = result.replace(/{{command-list}}/g, commandsListAsString(lingo));
   if (result.indexOf("{{time-remaining}}") != -1) {
     result = result.replace(/{{time-remaining}}/g, calcClientTimeRemaining(client))    

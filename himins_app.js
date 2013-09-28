@@ -71,6 +71,7 @@ function broadcast(message, client, kind) {
                     payload = message;
                 }
                 // write the message
+                clientList[i].write(display.cursorLeftThreeSpaces);
                 clientList[i].write(payload);
                 clientList[i].write(display.prompt);
             } else {
@@ -92,6 +93,10 @@ var stopUpdates = function () {
   clearInterval(game.intervalId);
 }
 
+var clientCount = function () {
+  return clientList.length;
+}
+
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
@@ -102,3 +107,4 @@ game.intervalId = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
 himinsServer.listen(portNumber);
 
 module.exports.broadcast = broadcast;
+module.exports.clientCount = clientCount;

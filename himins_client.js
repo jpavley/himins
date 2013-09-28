@@ -8,7 +8,8 @@ var boldRedOn = "\033[1;31m",
     boldGreenOn = "\033[1;32m",
     formatOff = "\033[0m",
     eraseScreen = "\033[2J",
-    cursorUp = "\33[1A";
+    cursorUp = "\33[1A",
+    cursorLeftThreeSpaces = "\33[3D";
 
 var prompt = ">> ";
     
@@ -17,4 +18,5 @@ module.exports.boldGreenOn = boldGreenOn;
 module.exports.formatOff = formatOff;
 module.exports.eraseScreen = eraseScreen;
 module.exports.cursorUp = cursorUp;
+module.exports.cursorLeftThreeSpaces = cursorLeftThreeSpaces;
 module.exports.prompt = prompt;
