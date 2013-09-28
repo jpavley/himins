@@ -12,5 +12,9 @@ Himins is sorry to report that your name choice is not availble at this time.
 {{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Please standby for further instructions.
 Himins reports that you have {{boldRedOn}}{{time-remaining}}{{formatOff}} seconds remaining to play.
 Himins is sorry to report that {{boldRedOn}}time{{formatOff}} is not availble at this time.
+player {{boldRedOn}}{{client-name}}{{formatOff}} has decended to Earth.
+player {{boldRedOn}}{{client-name}}{{formatOff}} has ascended to Himins.
+
+
 
 

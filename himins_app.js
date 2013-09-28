@@ -21,7 +21,6 @@ himinsServer.on('connection', function (client) {
   
   // give the client a name and add the client to the list of clients
   client.name = user.createUser(client.remoteAddress, client.remotePort, lingo);
-  //client.name = client.remoteAddress + ':' + client.remotePort;
   clientList.push(client);
   
   // weclome the user
@@ -30,8 +29,7 @@ himinsServer.on('connection', function (client) {
   client.write(display.prompt);
   
   // tell everyone the user is here
-  // todo: localise "player" and "ascended"
-  broadcast('player ' + display.boldRedOn + client.name + display.formatOff + ' ascended to himins.\n', client, 'system');
+  broadcast(parser.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
   
   // handle incoming client data
   client.on('data', function (data) {
@@ -47,7 +45,7 @@ himinsServer.on('connection', function (client) {
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // log it
-    console.log(client.name + 'disconnected by end');
+    console.log(client.name + ' disconnected by end');
   });
   
   // handle client error (OMG!)

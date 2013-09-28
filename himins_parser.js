@@ -124,6 +124,9 @@ var processClientData = function(client, data, lingo) {
   if (postaction === "prompt") {
     client.write(display.prompt);
   } else if (postaction === "end") {
+    var message = renderMessageForDisplay(client, 14, lingo);
+    message = message + '\n';
+    app.broadcast(message, client, "system");
     client.end();
   }
 }
