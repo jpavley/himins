@@ -1,0 +1,11 @@
+{
+  "name": "himins",
+  "subdomain": "jpavley-himins",
+  "scripts": {
+    "start": "himins_app.js"
+  },
+  "version": "0.0.0-1",
+  "engines": {
+    "node": "0.10.x"
+  }
+}
