@@ -174,7 +174,7 @@ var calcClientTimeRemaining = function(client) {
   var currentTime = new Date().getTime();
   var playedTime = currentTime - clientStartTime;
   var result = game.MAX_PLAY_TIME_MS - playedTime;
-  var result = Math.floor((result/60)/1000);
+  var result = Math.ceil((result/60)/1000);
   return result;
 }
 
@@ -235,3 +235,4 @@ var indicesOf = function(searchStr, mainStr, caseSensitive) {
 module.exports.processClientData = processClientData;
 module.exports.loadClientStrings = loadClientStrings;
 module.exports.renderMessageForDisplay = renderMessageForDisplay;
+module.exports.calcClientTimeRemaining = calcClientTimeRemaining;

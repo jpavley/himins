@@ -6,8 +6,9 @@ var REMOTE_ADDRESS = 0,
     USER_ID = 2,
     USER_LINGO = 3,
     USER_START_TIME = 4,
-    USER_INTERVAL_ID = 5;
-
+    USER_INTERVAL_ID = 5,
+    USER_TIME_CHECK_COUNT = 6;
+    
 var userList = [],
     userIndex = 0;
 
@@ -16,7 +17,8 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   var userID = "Mortal" + userIndex;
   var userStartTime = new Date().getTime();
   var userIntervalID = 0;
-  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID];
+  var userTimeCheckCount = 0
+  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount];
   userList.push(newUser);
   return userID;
 }
@@ -61,9 +63,23 @@ var setIntervalID = function (userID, intervalID) {
   userRecord[USER_INTERVAL_ID] = intervalID;
 }
 
+var getTimeCheckCount = function (userID) {
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_TIME_CHECK_COUNT];
+  return result;
+}
+
+var incrementTimeCheckCount = function (userID) {
+  var userRecord = getUserByID(userID);
+  userRecord[USER_TIME_CHECK_COUNT] += 1;
+}
+
+
 module.exports.createUser = createUser;
 module.exports.getUserByID = getUserByID;
 module.exports.getUserLingo = getUserLingo;
 module.exports.getUserStartTime = getUserStartTime;
 module.exports.getIntervalID = getIntervalID;
 module.exports.setIntervalID = setIntervalID;
+module.exports.getTimeCheckCount = getTimeCheckCount;
+module.exports.incrementTimeCheckCount = incrementTimeCheckCount;

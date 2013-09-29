@@ -41,7 +41,7 @@ himinsServer.on('connection', function (client) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     // send data to the parser
-    var result = parser.processClientData(client, data, lingo);
+    parser.processClientData(client, data, lingo);
     
   });
   
@@ -103,12 +103,20 @@ var stopUpdates = function (client) {
   clearInterval(user.getIntervalID(client.name));
 }
 
+var getClientList = function () {
+  return clientList;
+}
+
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
 // start up the server
 himinsServer.listen(portNumber);
 
+// initialize the game
+game.init();
+
 module.exports.broadcast = broadcast;
 module.exports.clientCount = clientCount;
 module.exports.stopUpdates = stopUpdates;
+module.exports.getClientList = getClientList;
