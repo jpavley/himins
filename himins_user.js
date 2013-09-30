@@ -63,6 +63,10 @@ var setIntervalID = function (userID, intervalID) {
   userRecord[USER_INTERVAL_ID] = intervalID;
 }
 
+var stopUpdates = function (userID) {
+  clearInterval(getIntervalID(userID));
+}
+
 var getTimeCheckCount = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_TIME_CHECK_COUNT];
@@ -81,5 +85,6 @@ module.exports.getUserLingo = getUserLingo;
 module.exports.getUserStartTime = getUserStartTime;
 module.exports.getIntervalID = getIntervalID;
 module.exports.setIntervalID = setIntervalID;
+module.exports.stopUpdates = stopUpdates;
 module.exports.getTimeCheckCount = getTimeCheckCount;
 module.exports.incrementTimeCheckCount = incrementTimeCheckCount;

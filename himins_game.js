@@ -10,7 +10,8 @@ var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
 
 var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
-    timeCheckValuesInMinutes = [];
+    timeCheckValuesInMinutes = [],
+    intervalID = 0;
     
 // # run();
 var run = function() {
@@ -21,6 +22,9 @@ var run = function() {
 
 // # Init()
 var init = function () {
+  // start up the game loop
+  intervalID = setInterval(run, 1000 / UPDATES_PER_SECOND);
+
   // Precalc time check values (performance optimization)
   for (var i = 0; i < timeCheckPercentages.length; i++) {
     var timeCheckValue = Math.ceil(MAX_PLAY_TIME_MS * timeCheckPercentages[i]);
@@ -76,8 +80,19 @@ var getTimeCheckCount = function () {
   return timeCheckValuesInMinutes.length;
 }
 
+var getIntervalID = function () {
+  return intervalID;
+}
+
+var setIntervalID = function (id) {
+  intervalID = id;
+}
+
+
 module.exports.MAX_PLAY_TIME_MS = MAX_PLAY_TIME_MS;
 module.exports.UPDATES_PER_SECOND = UPDATES_PER_SECOND;
 module.exports.run = run;
 module.exports.init = init;
+module.exports.getIntervalID = getIntervalID;
+
 

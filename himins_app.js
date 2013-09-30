@@ -23,11 +23,6 @@ himinsServer.on('connection', function (client) {
   client.name = user.createUser(client.remoteAddress, client.remotePort, lingo);
   clientList.push(client);
   
-  // start up the game loop
-  var clientIntervalID = setInterval(game.run, 1000 / game.UPDATES_PER_SECOND);
-  user.setIntervalID(client.name, clientIntervalID);
-
-  
   // weclome the user
   client.write(display.eraseScreen);
   client.write(parser.renderMessageForDisplay(client, 0, lingo) + '\n');
@@ -47,7 +42,8 @@ himinsServer.on('connection', function (client) {
   
   // handle client disconnection
   client.on('end', function () {
-    stopUpdates(client);
+    // stop updating the user loop associated with this client
+    user.stopUpdates(client.name);
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // log it
@@ -100,7 +96,7 @@ var clientCount = function () {
 }
 
 var stopUpdates = function (client) {
-  clearInterval(user.getIntervalID(client.name));
+  clearInterval(game.getIntervalID());
 }
 
 var getClientList = function () {
