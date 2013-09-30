@@ -6,7 +6,7 @@ var user = require('./himins_user'),
     parser = require('./himins_parser'),
     display = require('./himins_client');
 
-var MAX_PLAY_TIME_MS = 5 * (60 * 1000),
+var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
 
 var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
@@ -31,15 +31,12 @@ var init = function () {
     }
   }
   
-  console.log(timeCheckValuesInMinutes);
-  
   // For small values of MAX_PLAY_TIME_MS avoid duplicate time checks in array
   timeCheckValuesInMinutes = timeCheckValuesInMinutes.filter(function (valueOfElement, indexOfElement, thisArray) {
     // for each element in the array only return true if it's index matches the first index found in the array!
     return thisArray.indexOf(valueOfElement) === indexOfElement;
   });
 
-  console.log(timeCheckValuesInMinutes);
 };
 
  
