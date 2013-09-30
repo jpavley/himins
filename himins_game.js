@@ -52,21 +52,26 @@ var update = function() {
   var clientList = app.getClientList();
   
   for (var i = 0; i < clientList.length; i++) {
-    var timeRemaining = parser.calcClientTimeRemaining(clientList[i]);
+    
+    // todo: move this logic to himins_user upate()
+    
+    var client = clientList[i];
+    
+    var timeRemaining = user.calcTimeRemaining(client.name);
     
     if (timeRemaining <= 0) {
       // If a client is alive beyond *MAX_PLAY_TIME_MS* then disconnect it
-      parser.processClientData(clientList[i], "quit", user.getUserLingo(clientList[i].name));
+      parser.processClientData(client, "quit", user.getUserLingo(client.name));
     } else {
       // If a client is about to hit a *timeChecks[]* interval then notify it
       for (var j = 0; j < timeCheckValuesInMinutes.length; j++) {
         // if a client has not recieved this time check before and it's time to recieve one...
-        if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != user.getTimeCheckCount(clientList[i].name)) {
-          var message = parser.renderMessageForDisplay(clientList[i], 18, user.getUserLingo(clientList[i].name));
+        if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != user.getTimeCheckCount(client.name)) {
+          var message = parser.renderMessageForDisplay(clientList[i], 18, user.getUserLingo(client.name));
           message = display.boldRedOn + timeCheckValuesInMinutes[j] + display.formatOff + " " + message;
-          clientList[i].write(message + '\n');
-          clientList[i].write(display.prompt);
-          user.incrementTimeCheckCount(clientList[i].name);
+          client.write(message + '\n');
+          client.write(display.prompt);
+          user.incrementTimeCheckCount(client.name);
           // no need to check again during this update for this client    
           break;
         }

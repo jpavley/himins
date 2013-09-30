@@ -169,15 +169,6 @@ var commandsListAsString = function (lingo) {
   return result;
 }
 
-var calcClientTimeRemaining = function(client) {
-  var clientStartTime = user.getUserStartTime(client.name);
-  var currentTime = new Date().getTime();
-  var playedTime = currentTime - clientStartTime;
-  var result = game.MAX_PLAY_TIME_MS - playedTime;
-  var result = Math.ceil((result/60)/1000);
-  return result;
-}
-
 var wordWrap = function (message, columnWidth) {
   var wrappedString = "",
       unwrappedString = message,
@@ -235,4 +226,3 @@ var indicesOf = function(searchStr, mainStr, caseSensitive) {
 module.exports.processClientData = processClientData;
 module.exports.loadClientStrings = loadClientStrings;
 module.exports.renderMessageForDisplay = renderMessageForDisplay;
-module.exports.calcClientTimeRemaining = calcClientTimeRemaining;

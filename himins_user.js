@@ -1,6 +1,8 @@
 // himins_user.js
 // Manages users based on client connections
 
+var game = require('./himins_game');
+
 var REMOTE_ADDRESS = 0,
     REMOTE_PORT = 1,
     USER_ID = 2,
@@ -12,16 +14,47 @@ var REMOTE_ADDRESS = 0,
 var userList = [],
     userIndex = 0;
 
+// # createUser()
+// initializes all the fields associated with a user record and adds the user to the userList
 var createUser = function(remoteAddress, remotePort, remoteLingo) {
+  
+  // userIndex used just for giving each user a unique start name
   userIndex++;
+  
+  // init user fields
   var userID = "Mortal" + userIndex;
   var userStartTime = new Date().getTime();
   var userIntervalID = 0;
   var userTimeCheckCount = 0;
+  
+  // create user record and add to the list
   var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount];
   userList.push(newUser);
+  
+  // return unique user id
   return userID;
 }
+
+// # update()
+// update loop for a particular user
+var update = function (userID) {
+  
+}
+
+// # calcTimeRemainig
+// how much time does a user have left to play?
+var calcTimeRemaining = function(userID) {
+  
+  var startTime = getUserStartTime(userID),
+      currentTime = new Date().getTime(),
+      playedTime = currentTime - startTime,
+      result = game.MAX_PLAY_TIME_MS - playedTime;
+  
+  result = Math.ceil((result/60)/1000);
+  return result;
+}
+module.exports.calcTimeRemaining = calcTimeRemaining;
+
 
 var getUserByID = function (userID) {
   var result = "";
