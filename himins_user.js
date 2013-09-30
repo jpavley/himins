@@ -17,7 +17,7 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   var userID = "Mortal" + userIndex;
   var userStartTime = new Date().getTime();
   var userIntervalID = 0;
-  var userTimeCheckCount = 0
+  var userTimeCheckCount = 0;
   var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount];
   userList.push(newUser);
   return userID;
