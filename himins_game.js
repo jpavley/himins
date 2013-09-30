@@ -53,11 +53,8 @@ var update = function() {
   
   for (var i = 0; i < clientList.length; i++) {
     
-    // todo: move this logic to himins_user upate()
-    
-    var client = clientList[i];
-    
-    var timeRemaining = user.calcTimeRemaining(client.name);
+    var client = clientList[i],
+        timeRemaining = user.calcTimeRemaining(client.name);
     
     if (timeRemaining <= 0) {
       // If a client is alive beyond *MAX_PLAY_TIME_MS* then disconnect it
@@ -67,7 +64,7 @@ var update = function() {
       for (var j = 0; j < timeCheckValuesInMinutes.length; j++) {
         // if a client has not recieved this time check before and it's time to recieve one...
         if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != user.getTimeCheckCount(client.name)) {
-          var message = parser.renderMessageForDisplay(clientList[i], 18, user.getUserLingo(client.name));
+          var message = parser.renderMessageForDisplay(client, 18, user.getUserLingo(client.name));
           message = display.boldRedOn + timeCheckValuesInMinutes[j] + display.formatOff + " " + message;
           client.write(message + '\n');
           client.write(display.prompt);

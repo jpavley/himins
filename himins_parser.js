@@ -150,7 +150,7 @@ var parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{client-count}}/g, app.clientCount());
   result = result.replace(/{{command-list}}/g, commandsListAsString(lingo));
   if (result.indexOf("{{time-remaining}}") != -1) {
-    result = result.replace(/{{time-remaining}}/g, calcClientTimeRemaining(client))    
+    result = result.replace(/{{time-remaining}}/g, user.calcTimeRemaining(client.name))    
   }
   
   // display formatting
