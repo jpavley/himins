@@ -6,7 +6,7 @@ Please request a language. Himins speaks {{boldGreenOn}}English{{formatOff}} and
 Himins is happy to report that your request for {{boldRedOn}}English{{formatOff}} has been accepted.
 Himins is sorry to report that {{boldRedOn}}Spanish{{formatOff}} is not availble at this time.
 Himins will now release you. Your progress has not been saved.
-{{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name:
+{{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name (one word, not a command, not the name of another player):
 Mortal, during this sesison we will refer to you as {{boldRedOn}}{{client-name}}{{formatOff}}
 Himins is sorry to report that your name choice is not availble at this time.
 {{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Please standby for further instructions.

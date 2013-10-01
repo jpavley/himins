@@ -93,15 +93,26 @@ function broadcast(message, client, kind) {
 
 var clientCount = function () {
   return clientList.length;
-}
+};
 
 var stopUpdates = function (client) {
   clearInterval(game.getIntervalID());
-}
+};
 
 var getClientList = function () {
   return clientList;
-}
+};
+
+var setClientName = function (oldID, newID) {
+  for (var i = 0; i < clientList.length; i++) {
+    if (clientList[i].name === oldID) {
+      clientList[i].name = newID;
+      break;
+    }
+  }
+};
+module.exports.setClientName = setClientName;
+
 
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);

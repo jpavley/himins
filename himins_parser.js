@@ -81,7 +81,7 @@ var processClientData = function(client, data, lingo) {
 
   } else if (wordsInput[0] === "rename") {
     response = renderMessageForDisplay(client, 8, lingo);
-    postaction = "prompt";
+    postaction = "rename";
 
   } else if (wordsInput[0] === "start") {
     response = renderMessageForDisplay(client, 11, lingo);
@@ -109,9 +109,26 @@ var processClientData = function(client, data, lingo) {
     postaction = "prompt";
 
   } else {
-    // just do something dumb like reverse the input data
-    response = cleanInput.split("").reverse().join("");
-    postaction = "prompt";
+    
+    console.log("userMode: " + user.getUserMode(client.name));
+    
+    if (user.getUserMode(client.name) === user.RENAME_USER_MODE) {
+      
+      if (!isCommand(wordsInput[0]) && !user.isUserID(wordsInput[0])) {
+        user.setUserID(client.name, wordsInput[0]);
+        response = renderMessageForDisplay(client, 9, lingo);
+        postaction = "prompt";
+        user.setUserMode(client.name, user.NORMAL_USER_MODE);
+      } else {
+        response = renderMessageForDisplay(client, 10, lingo);
+        postaction = "prompt";        
+      }
+      
+    } else {
+      // just do something dumb like reverse the input data
+      response = cleanInput.split("").reverse().join("");
+      postaction = "prompt";      
+    }
 
   }
   
@@ -121,6 +138,7 @@ var processClientData = function(client, data, lingo) {
   }
   
   // postaction: do the needful!
+  console.log("postaction: " + postaction);
   if (postaction === "prompt") {
     client.write(display.prompt);
   } else if (postaction === "end") {
@@ -128,6 +146,9 @@ var processClientData = function(client, data, lingo) {
     message = message + '\n';
     app.broadcast(message, client, "system");
     client.end();
+  } else if (postaction === "rename") {
+    user.setUserMode(client.name, user.RENAME_USER_MODE);
+    client.write(display.askPrompt);
   }
 }
 
@@ -219,6 +240,13 @@ var indicesOf = function(searchStr, mainStr, caseSensitive) {
         startIndex = index + searchStrLen;
     }
     return indices;
+}
+
+var isCommand = function (word) {  
+  // todo: undo hard coding to english
+  var i = enCommandStrings.indexOf(word),
+      result = (i > -1);
+  return result;
 }
 
 

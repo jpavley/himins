@@ -1,7 +1,8 @@
 // himins_user.js
 // Manages users based on client connections
 
-var game = require('./himins_game');
+var game = require('./himins_game'),
+    app = require('./himins_app');
 
 var REMOTE_ADDRESS = 0,
     REMOTE_PORT = 1,
@@ -9,7 +10,14 @@ var REMOTE_ADDRESS = 0,
     USER_LINGO = 3,
     USER_START_TIME = 4,
     USER_INTERVAL_ID = 5,
-    USER_TIME_CHECK_COUNT = 6;
+    USER_TIME_CHECK_COUNT = 6,
+    USER_MODE_ID = 7;
+    
+var NORMAL_USER_MODE = 0,
+    RENAME_USER_MODE = 1;
+    
+module.exports.NORMAL_USER_MODE = NORMAL_USER_MODE;
+module.exports.RENAME_USER_MODE = RENAME_USER_MODE;
     
 var userList = [],
     userIndex = 0;
@@ -22,13 +30,14 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   userIndex++;
   
   // init user fields
-  var userID = "Mortal" + userIndex;
-  var userStartTime = new Date().getTime();
-  var userIntervalID = 0;
-  var userTimeCheckCount = 0;
+  var userID = "Mortal" + userIndex,
+      userStartTime = new Date().getTime(),
+      userIntervalID = 0,
+      userTimeCheckCount = 0,
+      userMode = NORMAL_USER_MODE;
   
   // create user record and add to the list
-  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount];
+  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount, userMode];
   userList.push(newUser);
   
   // return unique user id
@@ -55,10 +64,45 @@ var calcTimeRemaining = function(userID) {
 }
 module.exports.calcTimeRemaining = calcTimeRemaining;
 
+// # isUserID()
+// return true if the input is an existing user's name
+var isUserID = function (name) {
+  var result = false;
+  for (var i = 0; i < userList.length; i++) {
+    var userRecord = userList[i];
+    if (userRecord[USER_ID] === name) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
+module.exports.isUserID = isUserID;
 
+// # setUserID
+// change the ID (name) of a user
+var setUserID = function (oldID, newID) {
+  for (var i = 0; i < userList.length; i++) {
+    var userRecord = userList[i];
+    if (userRecord[USER_ID] === oldID) {
+      userRecord[USER_ID] = newID;
+      app.setClientName(oldID, newID);
+      break;
+    }
+  }  
+}
+module.exports.setUserID = setUserID;
+
+// # getUserByID
+// return the user based on their user name
 var getUserByID = function (userID) {
-  var result = "";
-  var err = true;
+  
+  // todo: STOP CALL THIS FUNCTION EVERY UPDATE!!!!!
+  console.log("getUserByID(" + userID + ")");
+
+  var result = "",
+      err = true;
+  
   for (var i = 0; i < userList.length; i++) {
     var userRecord = userList[i];
     if (userRecord[USER_ID] === userID) {
@@ -72,6 +116,8 @@ var getUserByID = function (userID) {
   }
   return result;
 }
+module.exports.getUserByID = getUserByID;
+
 
 var getUserLingo = function (userID) {
   var userRecord = getUserByID(userID),
@@ -111,9 +157,20 @@ var incrementTimeCheckCount = function (userID) {
   userRecord[USER_TIME_CHECK_COUNT] += 1;
 }
 
+var getUserMode = function (userID) {
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_MODE_ID];
+  return result;
+}
+module.exports.getUserMode = getUserMode;
+
+var setUserMode = function (userID, newMode) {
+  var userRecord = getUserByID(userID);
+  userRecord[USER_MODE_ID] = newMode;
+}
+module.exports.setUserMode = setUserMode;
 
 module.exports.createUser = createUser;
-module.exports.getUserByID = getUserByID;
 module.exports.getUserLingo = getUserLingo;
 module.exports.getUserStartTime = getUserStartTime;
 module.exports.getIntervalID = getIntervalID;
