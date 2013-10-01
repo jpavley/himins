@@ -47,6 +47,10 @@ var init = function () {
 // # Update()
 // - A client can only connect to himins for *MAX_PLAY_TIME_MS*
 // - Check on each client every *UPDATES_PER_SECOND* event
+
+// TODO: DON'T CHECK ON CLIENTS EVERY UPDATE FOR TIME CHECK EVENT!
+//       JUST SET UP INTERVALS
+
 var update = function() {
   //console.log("himins_game update()");
   var clientList = app.getClientList();

@@ -1,6 +1,12 @@
 // himins_parser.js
 // Interprets input from a client and returns a response
 
+// todo: BREAK THIS MODULE INTO SUBMODULES
+//       MAIN MODULE IS JUST MAANGER
+//       SUBMOD FOR PROCESSING DATA
+//       SUBMOD FOR TRIVAL ACTIONS
+//       A SUBMOD EACH FOR MAJOR ACTIONS (LIKE RENAME)
+
 var display = require('./himins_client')
     game = require('./himins_game'),
     user = require('./himins_user')
