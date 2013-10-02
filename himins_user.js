@@ -13,6 +13,11 @@ var REMOTE_ADDRESS = 0,
     USER_TIME_CHECK_COUNT = 6,
     USER_MODE_ID = 7;
     
+module.exports.USER_ID = USER_ID;
+module.exports.USER_LINGO = USER_LINGO;
+module.exports.USER_START_TIME = USER_START_TIME;
+module.exports.USER_TIME_CHECK_COUNT = USER_TIME_CHECK_COUNT;
+    
 var NORMAL_USER_MODE = 0,
     RENAME_USER_MODE = 1;
     
@@ -26,6 +31,8 @@ var userList = [],
 // initializes all the fields associated with a user record and adds the user to the userList
 var createUser = function(remoteAddress, remotePort, remoteLingo) {
   
+  console.log("createUser(" + remoteAddress + ", " + remotePort + ", " + remoteLingo + ")");
+  
   // userIndex used just for giving each user a unique start name
   userIndex++;
   
@@ -35,7 +42,7 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
       userIntervalID = 0,
       userTimeCheckCount = 0,
       userMode = NORMAL_USER_MODE;
-  
+
   // create user record and add to the list
   var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount, userMode];
   userList.push(newUser);
@@ -97,8 +104,8 @@ module.exports.setUserID = setUserID;
 // return the user based on their user name
 var getUserByID = function (userID) {
   
-  // todo: STOP CALL THIS FUNCTION EVERY UPDATE!!!!!
-  console.log("getUserByID(" + userID + ")");
+  //console.log("getUserByID(" + userID + ")");
+  //console.log("arguments.callee.caller.name: " + arguments.callee.caller.name.toString());
 
   var result = "",
       err = true;

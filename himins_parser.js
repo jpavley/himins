@@ -9,9 +9,11 @@
 
 var display = require('./himins_client')
     game = require('./himins_game'),
-    user = require('./himins_user')
+    user = require('./himins_user'),
     app = require('./himins_app'),
-    fs = require('fs');
+    fs = require('fs'),
+    actions = require("./himins_parser_actions"),
+    process = require("./himins_parser_process");
 
 var localizedStrings = []
     enDisplayStrings = [],

@@ -40,7 +40,6 @@ var init = function () {
     // for each element in the array only return true if it's index matches the first index found in the array!
     return thisArray.indexOf(valueOfElement) === indexOfElement;
   });
-
 };
 
  
@@ -48,31 +47,33 @@ var init = function () {
 // - A client can only connect to himins for *MAX_PLAY_TIME_MS*
 // - Check on each client every *UPDATES_PER_SECOND* event
 
-// TODO: DON'T CHECK ON CLIENTS EVERY UPDATE FOR TIME CHECK EVENT!
-//       JUST SET UP INTERVALS
-
 var update = function() {
-  //console.log("himins_game update()");
+  // console.log("===== himins_game update() =====");
   var clientList = app.getClientList();
   
   for (var i = 0; i < clientList.length; i++) {
     
     var client = clientList[i],
-        timeRemaining = user.calcTimeRemaining(client.name);
+        userRecord = user.getUserByID(client.name),
+        startTime = userRecord[user.USER_START_TIME],
+        currentTime = new Date().getTime(),
+        playedTime = currentTime - startTime,
+        msRemaining = MAX_PLAY_TIME_MS - playedTime,
+        timeRemaining = Math.ceil((msRemaining/60)/1000);
     
     if (timeRemaining <= 0) {
       // If a client is alive beyond *MAX_PLAY_TIME_MS* then disconnect it
-      parser.processClientData(client, "quit", user.getUserLingo(client.name));
+      parser.processClientData(client, "quit", userRecord[user.USER_LINGO]);
     } else {
       // If a client is about to hit a *timeChecks[]* interval then notify it
       for (var j = 0; j < timeCheckValuesInMinutes.length; j++) {
         // if a client has not recieved this time check before and it's time to recieve one...
-        if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != user.getTimeCheckCount(client.name)) {
-          var message = parser.renderMessageForDisplay(client, 18, user.getUserLingo(client.name));
+        if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != userRecord[user.USER_TIME_CHECK_COUNT]) {
+          var message = parser.renderMessageForDisplay(client, 18, userRecord[user.USER_LINGO]);
           message = display.boldRedOn + timeCheckValuesInMinutes[j] + display.formatOff + " " + message;
           client.write(message + '\n');
           client.write(display.prompt);
-          user.incrementTimeCheckCount(client.name);
+          userRecord[user.USER_TIME_CHECK_COUNT] += 1;
           // no need to check again during this update for this client    
           break;
         }

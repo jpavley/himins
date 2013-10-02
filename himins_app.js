@@ -120,7 +120,7 @@ console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNu
 // start up the server
 himinsServer.listen(portNumber);
 
-// initialize the game
+// initialize the game before any users are created
 game.init();
 
 module.exports.broadcast = broadcast;
