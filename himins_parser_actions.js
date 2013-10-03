@@ -5,7 +5,8 @@ var parserProcess = require("./himins_parser_process"),
     display = require("./himins_client");
 
 var WELCOME_MESSAGE = 0,
-    HELP_MESSAGE = 1;
+    HELP_MESSAGE = 1,
+    ABOUT_MESSAGE = 2;
     
 // # writeToClient(client, message)
 var writeToClient = function (client, message) {
@@ -31,9 +32,14 @@ var helpAction = function (client, lingo) {
 module.exports.helpAction = helpAction;
 
 
+// # aboutAction(client, lingo)
 var aboutAction = function (client, lingo) {
-  
+  // action
+  writeToClient(client, parserProcess.renderMessageForDisplay(client, ABOUT_MESSAGE, lingo));
+  // post action
+  writeToClient(client, display.prompt);  
 };
+module.exports.aboutAction = aboutAction;
 
 var langugeAction = function (client, lingo) {
   
