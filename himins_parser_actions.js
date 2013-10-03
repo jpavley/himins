@@ -4,19 +4,32 @@
 var parserProcess = require("./himins_parser_process"),
     display = require("./himins_client");
 
-var WELCOME_MESSAGE = 0;
+var WELCOME_MESSAGE = 0,
+    HELP_MESSAGE = 1;
+    
+// # writeToClient(client, message)
+var writeToClient = function (client, message) {
+  client.write(message + "\n");
+}
 
+// # welcomeAction(client, lingo)
 var welcomeAction = function (client, lingo) {
   // action
-  client.write(parserProcess.renderMessageForDisplay(client, WELCOME_MESSAGE, lingo) + "\n");
+  writeToClient(client, parserProcess.renderMessageForDisplay(client, WELCOME_MESSAGE, lingo));
   // post action
-  client.write(display.prompt + "\n");
+  writeToClient(client, display.prompt);
 };
 module.exports.welcomeAction = welcomeAction;
 
+// # helpAction(client, lingo)
 var helpAction = function (client, lingo) {
-  
+  // action
+  writeToClient(client, parserProcess.renderMessageForDisplay(client, HELP_MESSAGE, lingo));
+  // post action
+  writeToClient(client, display.prompt);  
 };
+module.exports.helpAction = helpAction;
+
 
 var aboutAction = function (client, lingo) {
   

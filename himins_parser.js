@@ -70,8 +70,7 @@ var processClientData = function(client, data, lingo) {
     actions.welcomeAction(client, lingo);
     
   } else if (wordsInput[0] === "help") {
-    response = renderMessageForDisplay(client, 1, lingo);
-    postaction = "prompt";    
+    actions.helpAction(client, lingo);
     
   } else if (wordsInput[0] === "about") {
     response = renderMessageForDisplay(client, 2, lingo);
