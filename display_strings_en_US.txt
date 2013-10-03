@@ -17,8 +17,3 @@ player {{boldRedOn}}{{client-name}}{{formatOff}} has ascended to Himins.
 Himins is sorry to report that {{boldRedOn}}news{{formatOff}} is not availble at this time.
 Himins is happy to report that {{boldRedOn}}{{client-count}}{{formatOff}} mortals are online.
 minutes left before disconnection. Himins regrets any inconvenience.
-
-
-
-
-

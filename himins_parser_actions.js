@@ -1,14 +1,18 @@
 // himins_parser_actions.js
 // execute actions based on user input
 
+var parserProcess = require("./himins_parser_process"),
+    display = require("./himins_client");
+
 var WELCOME_MESSAGE = 0;
 
 var welcomeAction = function (client, lingo) {
   // action
-  client.write(renderMessageForDisplay(client, WELCOME_MESSAGE, lingo));
+  client.write(parserProcess.renderMessageForDisplay(client, WELCOME_MESSAGE, lingo) + "\n");
   // post action
-  client.write(display.prompt);
+  client.write(display.prompt + "\n");
 };
+module.exports.welcomeAction = welcomeAction;
 
 var helpAction = function (client, lingo) {
   

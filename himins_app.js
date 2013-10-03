@@ -4,6 +4,7 @@
 
 var net = require('net'),
     parser = require('./himins_parser'),
+    parser_process = require("./himins_parser_process"),
     user = require('./himins_user'),
     display = require('./himins_client'),
     game = require('./himins_game');
@@ -14,7 +15,7 @@ var himinsServer = net.createServer(),
     portNumber = 9000;
 
 himinsServer.on('connection', function (client) {
-    
+  
   // do initialization tasks
   var lingo = "en_US"; // todo: get the lingo from the client
   parser.loadClientStrings(lingo);
@@ -25,11 +26,11 @@ himinsServer.on('connection', function (client) {
   
   // weclome the user
   client.write(display.eraseScreen);
-  client.write(parser.renderMessageForDisplay(client, 0, lingo) + '\n');
+  client.write(parser_process.renderMessageForDisplay(client, 0, lingo) + '\n');
   client.write(display.prompt);
   
   // tell everyone the user is here
-  broadcast(parser.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
+  broadcast(parser_process.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
   
   // handle incoming client data
   client.on('data', function (data) {
