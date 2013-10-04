@@ -11,7 +11,7 @@ Mortal, during this sesison we will refer to you as {{boldRedOn}}{{client-name}}
 Himins is sorry to report that your name choice is not availble at this time.
 {{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Please standby for further instructions.
 Himins reports that you have {{boldRedOn}}{{time-remaining}}{{formatOff}} minuets remaining to play.
-Himins is sorry to report that {{boldRedOn}}time{{formatOff}} is not availble at this time.
+Himins is sorry to report that {{boldRedOn}}tell{{formatOff}} is not availble at this time.
 player {{boldRedOn}}{{client-name}}{{formatOff}} has decended to Earth.
 player {{boldRedOn}}{{client-name}}{{formatOff}} has ascended to Himins.
 Himins is sorry to report that {{boldRedOn}}news{{formatOff}} is not availble at this time.

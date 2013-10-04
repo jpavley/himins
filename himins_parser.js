@@ -51,70 +51,58 @@ module.exports.loadClientStrings = loadClientStrings;
 // # processClientData(client, data, lingo)
 var processClientData = function(client, data, lingo) {
   var input = String(data),
-      response = "";
+      cleanInput = input.trim(),
+      cleanInput = cleanInput.toLowerCase(),
+      wordsInput = cleanInput.split(" "),
+      response = "",
+      postaction = "";
   
-  // remove linefeeds and whitespace from the end of the input
-  var cleanInput = input.trim();
-  
-  // normalize capitalization
-  var cleanInput = cleanInput.toLowerCase();
-  
-  // split the input on spaces get a list of words
-  var wordsInput = cleanInput.split(" ");
-  
-  // postaction: what to do after printing the message to the player
-  var postaction = "prompt";
-  
-  // todo: split this into a a seperate function
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
-    
+      
   } else if (wordsInput[0] === "help") {
     actions.helpAction(client, lingo);
-    
+     
   } else if (wordsInput[0] === "about") {
     actions.aboutAction(client, lingo);
-
+    
   } else if (wordsInput[0] === "language") {
-    response = renderMessageForDisplay(client, 3, lingo);
-    postaction = "prompt";
-
+    actions.languageAction(client, lingo);
+    
   } else if (wordsInput[0] === "news") {
-    response = renderMessageForDisplay(client, 17, lingo);
-    postaction = "prompt";
-
+    actions.newsAction(client, lingo);
+    
   } else if (wordsInput[0] === "quit") {
-    response = renderMessageForDisplay(client, 7, lingo);
-    postaction = "end";
-
+    actions.quitAction(client, lingo);
+    
   } else if (wordsInput[0] === "rename") {
-    response = renderMessageForDisplay(client, 8, lingo);
-    postaction = "rename";
-
+    actions.renameAction(client, lingo);
+    
   } else if (wordsInput[0] === "start") {
-    response = renderMessageForDisplay(client, 11, lingo);
-    postaction = "prompt";
+    actions.startAction(client, lingo);
 
   } else if (wordsInput[0] === "time") {
-    response = renderMessageForDisplay(client, 12, lingo);
-    postaction = "prompt";
+    actions.timeAction(client, lingo);
 
   } else if (wordsInput[0] === "english") {
-    response = renderMessageForDisplay(client, 5, lingo);
-    postaction = "prompt";
+    actions.englishAction(client, lingo);
 
   } else if (wordsInput[0] === "spanish") {
-    response = renderMessageForDisplay(client, 6, lingo);
-    postaction = "prompt";
+    actions.spanishAction(client, lingo);
+
+  } else if (wordsInput[0] === "TELL") {
+    actions.tellAction(client, lingo);
 
   } else if (wordsInput[0] === "say" || wordsInput[0] === "/s") {
+    // action: broadcast whatever the player said to all the other clients
     var message = wordsInput.splice(0,1);
     message = wordsInput.toString();
     message = message.replace(/,/g, " ");
     message = '"' + message + '"' + "\n";
-    response = "";
     app.broadcast(message, client, "user");
-    postaction = "prompt";
+    
+    // postaction
+    actions.sayAction(client, lingo);
 
   } else {
     
@@ -149,14 +137,6 @@ var processClientData = function(client, data, lingo) {
   console.log("postaction: " + postaction);
   if (postaction === "prompt") {
     client.write(display.prompt);
-  } else if (postaction === "end") {
-    var message = renderMessageForDisplay(client, 14, lingo);
-    message = message + '\n';
-    app.broadcast(message, client, "system");
-    client.end();
-  } else if (postaction === "rename") {
-    user.setUserMode(client.name, user.RENAME_USER_MODE);
-    client.write(display.askPrompt);
   }
 };
 module.exports.processClientData = processClientData;
