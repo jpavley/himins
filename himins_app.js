@@ -14,6 +14,8 @@ var himinsServer = net.createServer(),
     ipAddress = "127.0.0.1",
     portNumber = 9000;
 
+// # himinsServer('connection', function (client))
+// handle a client connection and other client events (data, end, error)
 himinsServer.on('connection', function (client) {
   
   // do initialization tasks
@@ -32,6 +34,7 @@ himinsServer.on('connection', function (client) {
   // tell everyone the user is here
   broadcast(parser_process.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
   
+  // ## client.on('data', function (data))
   // handle incoming client data
   client.on('data', function (data) {
     // log it
@@ -41,6 +44,7 @@ himinsServer.on('connection', function (client) {
     
   });
   
+  // ## client.on('end', function ())
   // handle client disconnection
   client.on('end', function () {
     // stop updating the user loop associated with this client
@@ -51,13 +55,16 @@ himinsServer.on('connection', function (client) {
     console.log(client.name + ' disconnected by end');
   });
   
+  // ## client.on('error', function (e))
   // handle client error (OMG!)
   client.on('error', function (e) {
     console.log(e);
   });
 });
 
+// # broadcast(message, client, kind)
 // broadcast messages to every client but this one
+// if a client is discovered to be unresponsive it is removed from the client list
 function broadcast(message, client, kind) {
     var cleanup = [];
     
@@ -91,19 +98,21 @@ function broadcast(message, client, kind) {
         clientList.splice(clientList.indexOf(cleanup[i]), 1);
     }
 };
+module.exports.broadcast = broadcast;
 
+// # clientCount()
 var clientCount = function () {
   return clientList.length;
 };
+module.exports.clientCount = clientCount;
 
-var stopUpdates = function (client) {
-  clearInterval(game.getIntervalID());
-};
-
+// # getClientList()
 var getClientList = function () {
   return clientList;
 };
+module.exports.getClientList = getClientList;
 
+// # setClientName(oldID, newID)
 var setClientName = function (oldID, newID) {
   for (var i = 0; i < clientList.length; i++) {
     if (clientList[i].name === oldID) {
@@ -114,6 +123,7 @@ var setClientName = function (oldID, newID) {
 };
 module.exports.setClientName = setClientName;
 
+// # main entry point of himins_app
 
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
@@ -123,8 +133,3 @@ himinsServer.listen(portNumber);
 
 // initialize the game before any users are created
 game.init();
-
-module.exports.broadcast = broadcast;
-module.exports.clientCount = clientCount;
-module.exports.stopUpdates = stopUpdates;
-module.exports.getClientList = getClientList;

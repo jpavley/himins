@@ -8,7 +8,7 @@ var display = require('./himins_client')
     fs = require('fs'),
     actions = require("./himins_parser_actions");
 
-var localizedStrings = []
+var localizedStrings = [],
     enDisplayStrings = [],
     enCommandStrings = [];
     

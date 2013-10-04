@@ -12,7 +12,7 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
   var result = "";
   if (lingo === "en_US") {
     var displayString = parser.getDisplayStringByID(lingo, messageID),
-        parsedMessage = parseWithTemplates(client, displayString, lingo);
+        parsedMessage = _parseWithTemplates(client, displayString, lingo);
     
     result = parsedMessage;
   } else {
@@ -23,7 +23,7 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
 module.exports.renderMessageForDisplay = renderMessageForDisplay;
 
 // # parseWithTemplates(client, message, lingo)
-var parseWithTemplates = function (client, message, lingo) {
+var _parseWithTemplates = function (client, message, lingo) {
   var result = message;
   // string expansion
   result = result.replace(/{{client-name}}/g, client.name);
@@ -38,12 +38,12 @@ var parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{boldGreenOn}}/g, display.boldGreenOn);
   result = result.replace(/{{formatOff}}/g, display.formatOff);
   
-  result = wordWrap(result, 80);
+  result = _wordWrap(result, 80);
   return result;
 };
 
 // # wordWrap(message, columnWidth)
-var wordWrap = function (message, columnWidth) {
+var _wordWrap = function (message, columnWidth) {
   var wrappedString = "",
       unwrappedString = message,
       result = "";

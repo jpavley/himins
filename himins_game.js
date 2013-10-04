@@ -8,6 +8,10 @@ var user = require('./himins_user'),
 
 var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
+    
+module.exports.MAX_PLAY_TIME_MS = MAX_PLAY_TIME_MS;
+module.exports.UPDATES_PER_SECOND = UPDATES_PER_SECOND;
+
 
 var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
     timeCheckValuesInMinutes = [],
@@ -15,10 +19,9 @@ var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
     
 // # run();
 var run = function() {
-  update();
-  //world.update();
-  //users.update();
+  _update();
 };
+module.exports.run = run;
 
 // # Init()
 var init = function () {
@@ -41,13 +44,12 @@ var init = function () {
     return thisArray.indexOf(valueOfElement) === indexOfElement;
   });
 };
-
+module.exports.init = init;
  
 // # Update()
 // - A client can only connect to himins for *MAX_PLAY_TIME_MS*
 // - Check on each client every *UPDATES_PER_SECOND* event
-
-var update = function() {
+var _update = function() {
   // console.log("===== himins_game update() =====");
   var clientList = app.getClientList();
   
@@ -82,24 +84,26 @@ var update = function() {
   }
 };
 
+// # getTimeCheckCount()
 var getTimeCheckCount = function () {
   // Note: call getTimeCheckCount() after init() or it will return 0
   return timeCheckValuesInMinutes.length;
 }
+module.exports.getTimeCheckCount = getTimeCheckCount;
 
+// # getIntervalID()
 var getIntervalID = function () {
   return intervalID;
 }
+module.exports.getIntervalID = getIntervalID;
 
+// # setIntervalID(id)
 var setIntervalID = function (id) {
   intervalID = id;
 }
+module.exports.setIntervalID = setIntervalID;
 
 
-module.exports.MAX_PLAY_TIME_MS = MAX_PLAY_TIME_MS;
-module.exports.UPDATES_PER_SECOND = UPDATES_PER_SECOND;
-module.exports.run = run;
-module.exports.init = init;
-module.exports.getIntervalID = getIntervalID;
+
 
 

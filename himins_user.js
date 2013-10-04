@@ -49,15 +49,10 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   
   // return unique user id
   return userID;
-}
+};
+module.exports.createUser = createUser;
 
-// # update()
-// update loop for a particular user
-var update = function (userID) {
-  
-}
-
-// # calcTimeRemainig
+// # calcTimeRemainig(userID)
 // how much time does a user have left to play?
 var calcTimeRemaining = function(userID) {
   
@@ -68,25 +63,25 @@ var calcTimeRemaining = function(userID) {
   
   result = Math.ceil((result/60)/1000);
   return result;
-}
+};
 module.exports.calcTimeRemaining = calcTimeRemaining;
 
-// # isUserID()
+// # isUserID(userID)
 // return true if the input is an existing user's name
-var isUserID = function (name) {
+var isUserID = function (userID) {
   var result = false;
   for (var i = 0; i < userList.length; i++) {
     var userRecord = userList[i];
-    if (userRecord[USER_ID] === name) {
+    if (userRecord[USER_ID] === userID) {
       result = true;
       break;
     }
   }
   return result;
-}
+};
 module.exports.isUserID = isUserID;
 
-// # setUserID
+// # setUserID(oldID, newID)
 // change the ID (name) of a user
 var setUserID = function (oldID, newID) {
   for (var i = 0; i < userList.length; i++) {
@@ -97,10 +92,10 @@ var setUserID = function (oldID, newID) {
       break;
     }
   }  
-}
+};
 module.exports.setUserID = setUserID;
 
-// # getUserByID
+// # getUserByID(userID)
 // return the user based on their user name
 var getUserByID = function (userID) {
   
@@ -122,66 +117,73 @@ var getUserByID = function (userID) {
     console.log("failed to find userID " + userID + " in userList " + userList);
   }
   return result;
-}
+};
 module.exports.getUserByID = getUserByID;
 
-
+// # getUserLingo(userID)
 var getUserLingo = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_LINGO];
   return result; 
-}
+};
+module.exports.getUserLingo = getUserLingo;
 
+// # getUserStartTime(userID)
 var getUserStartTime = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_START_TIME];
   return result; 
-}
+};
+module.exports.getUserStartTime = getUserStartTime;
 
+// # getIntervalID(userID)
 var getIntervalID = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_INTERVAL_ID];
   return result;
-}
+};
+module.exports.getIntervalID = getIntervalID;
 
+// # setIntervalID(userID)
 var setIntervalID = function (userID, intervalID) {
   var userRecord = getUserByID(userID);
   userRecord[USER_INTERVAL_ID] = intervalID;
-}
+};
+module.exports.setIntervalID = setIntervalID;
 
+// # stopUpdates(userID)
 var stopUpdates = function (userID) {
   clearInterval(getIntervalID(userID));
-}
+};
+module.exports.stopUpdates = stopUpdates;
 
+// # getTimeCheckCount(userID)
 var getTimeCheckCount = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_TIME_CHECK_COUNT];
   return result;
-}
+};
+module.exports.getTimeCheckCount = getTimeCheckCount;
 
+// # incrementTimeCheckCount(userID)
 var incrementTimeCheckCount = function (userID) {
   var userRecord = getUserByID(userID);
   userRecord[USER_TIME_CHECK_COUNT] += 1;
-}
+};
+module.exports.incrementTimeCheckCount = incrementTimeCheckCount;
 
+// # getUserMode(userID)
 var getUserMode = function (userID) {
   var userRecord = getUserByID(userID),
       result = userRecord[USER_MODE_ID];
   return result;
-}
+};
 module.exports.getUserMode = getUserMode;
 
+// # setUserMode(userID)
 var setUserMode = function (userID, newMode) {
   var userRecord = getUserByID(userID);
   userRecord[USER_MODE_ID] = newMode;
-}
+};
 module.exports.setUserMode = setUserMode;
 
-module.exports.createUser = createUser;
-module.exports.getUserLingo = getUserLingo;
-module.exports.getUserStartTime = getUserStartTime;
-module.exports.getIntervalID = getIntervalID;
-module.exports.setIntervalID = setIntervalID;
-module.exports.stopUpdates = stopUpdates;
-module.exports.getTimeCheckCount = getTimeCheckCount;
-module.exports.incrementTimeCheckCount = incrementTimeCheckCount;
