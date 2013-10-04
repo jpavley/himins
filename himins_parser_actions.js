@@ -17,11 +17,20 @@ var WELCOME_MESSAGE = 0,
     TIME_MESSAGE = 12,
     ENGLISH_MESSAGE = 5,
     SPANISH_MESSAGE = 6,
-    TELL_MESSAGE = 13;
+    TELL_MESSAGE = 13,
+    RENAME_SUCCESS_ANNOUCEMENT = 9.
+    RENAME_FAILURE_ANNOUCEMENT = 10;
     
 // # writeToClient(client, message)
+// adds newline at the end
 var _writeToClient = function (client, message) {
   client.write(message + "\n");
+};
+
+// # _writeToClientNoNL(client, message)
+// does not add newline at the end
+var _writeToClientNoNL = function (client, message) {
+  client.write(message);
 };
 
 // # simpleAction(client, messageID, lingo)
@@ -29,7 +38,7 @@ var _simpleAction = function (client, messageID, lingo) {
   // action
   _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
   // post action
-  _writeToClient(client, display.prompt);
+  _writeToClientNoNL(client, display.prompt);
 };
 
 // # welcomeAction(client, lingo)
@@ -80,7 +89,7 @@ var renameAction = function (client, lingo) {
   _writeToClient(client, process.renderMessageForDisplay(client, RENAME_MESSAGE, lingo));
   // post action
   user.setUserMode(client.name, user.RENAME_USER_MODE);
-  _writeToClient(client, display.askPrompt);
+  _writeToClientNoNL(client, display.askPrompt);
 };
 module.exports.renameAction = renameAction;
 
@@ -109,7 +118,8 @@ module.exports.spanishAction = spanishAction;
 
 // # sayAction(client, lingo)
 var sayAction = function (client, lingo) {
-  _writeToClient(client, display.prompt);  
+  // postaction only
+  _writeToClientNoNL(client, display.prompt);  
 };
 module.exports.sayAction = sayAction;
 
@@ -118,3 +128,27 @@ var tellAction = function (client, lingo) {
   _simpleAction(client, TELL_MESSAGE, lingo);  
 };
 module.exports.tellAction = tellAction;
+
+// # defaultAction(client, lingo)
+var defaultAction = function (client, message) {
+  // action
+  _writeToClient(client, message);
+  // post action
+  _writeToClientNoNL(client, display.prompt);
+};
+module.exports.defaultAction = defaultAction;
+
+var renameSuccessAction = function(client, lingo) {
+  _simpleAction(client, RENAME_SUCCESS_ANNOUCEMENT, lingo);  
+};
+module.exports.renameSuccessAction = renameSuccessAction;
+
+var renameFailureAction = function(client, lingo) {
+  _simpleAction(client, RENAME_FAILURE_ANNOUCEMENT, lingo);  
+};
+module.exports.renameSuccessAction = renameSuccessAction;
+
+
+
+
+

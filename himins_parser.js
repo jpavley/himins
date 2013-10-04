@@ -1,12 +1,6 @@
 // himins_parser.js
 // Interprets input from a client and returns a response
 
-// todo: BREAK THIS MODULE INTO SUBMODULES
-//       MAIN MODULE IS JUST MAANGER
-//       SUBMOD FOR PROCESSING DATA
-//       SUBMOD FOR TRIVAL ACTIONS
-//       A SUBMOD EACH FOR MAJOR ACTIONS (LIKE RENAME)
-
 var display = require('./himins_client')
     game = require('./himins_game'),
     user = require('./himins_user'),
@@ -32,7 +26,6 @@ var loadClientStrings = function (lingo) {
     
     var displayStringsFileName = "display_strings_" + lingo + ".txt";
     enDisplayStrings = fs.readFileSync(displayStringsFileName).toString().split("\n");
-    //console.log(enDisplayStrings);
 
     
     var commandStringsFileName = "command_strings_" + lingo + ".txt";
@@ -54,9 +47,20 @@ var processClientData = function(client, data, lingo) {
       cleanInput = input.trim(),
       cleanInput = cleanInput.toLowerCase(),
       wordsInput = cleanInput.split(" "),
-      response = "",
-      postaction = "";
-  
+      userMode = user.getUserMode(client.name);
+
+  if (userMode === user.NORMAL_USER_MODE) {
+    _handleNormalModeActions(wordsInput, client, lingo);
+  } else if (userMode === user.RENAME_USER_MODE) {
+    _handleRenameModeActions(wordsInput, client, lingo)
+  } else {
+    console.log("unexpected mode in himins_parser processClientData()");
+  }
+};
+module.exports.processClientData = processClientData;
+
+// # handleNormalModeActions
+var _handleNormalModeActions = function(wordsInput, client, lingo) {
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
       
@@ -90,7 +94,7 @@ var processClientData = function(client, data, lingo) {
   } else if (wordsInput[0] === "spanish") {
     actions.spanishAction(client, lingo);
 
-  } else if (wordsInput[0] === "TELL") {
+  } else if (wordsInput[0] === "tell") {
     actions.tellAction(client, lingo);
 
   } else if (wordsInput[0] === "say" || wordsInput[0] === "/s") {
@@ -105,41 +109,21 @@ var processClientData = function(client, data, lingo) {
     actions.sayAction(client, lingo);
 
   } else {
-    
-    console.log("userMode: " + user.getUserMode(client.name));
-    
-    if (user.getUserMode(client.name) === user.RENAME_USER_MODE) {
-      
-      if (!isCommand(wordsInput[0]) && !user.isUserID(wordsInput[0])) {
-        user.setUserID(client.name, wordsInput[0]);
-        response = renderMessageForDisplay(client, 9, lingo);
-        postaction = "prompt";
-        user.setUserMode(client.name, user.NORMAL_USER_MODE);
-      } else {
-        response = renderMessageForDisplay(client, 10, lingo);
-        postaction = "prompt";        
-      }
-      
-    } else {
       // just do something dumb like reverse the input data
-      response = cleanInput.split("").reverse().join("");
-      postaction = "prompt";      
-    }
-
-  }
-  
-  // action: write the response to the client
-  if (response != "") {
-    client.write(response + '\n');    
-  }
-  
-  // postaction: do the needful!
-  console.log("postaction: " + postaction);
-  if (postaction === "prompt") {
-    client.write(display.prompt);
+      var message = wordsInput.reverse().join("");
+      actions.defaultAction(client, message);         
   }
 };
-module.exports.processClientData = processClientData;
+
+var _handleRenameModeActions = function(wordsInput, client, lingo) {
+  if (!isCommand(wordsInput[0]) && !user.isUserID(wordsInput[0])) {
+    user.setUserID(client.name, wordsInput[0]);
+    actions.renameSuccessAction(client, lingo);
+    user.setUserMode(client.name, user.NORMAL_USER_MODE);
+  } else {
+    actions.renameFailureAction(client, lingo);
+  }
+};
 
 // # commandsListAsString(lingo)
 var commandsListAsString = function (lingo) {
