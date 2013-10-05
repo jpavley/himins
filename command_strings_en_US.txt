@@ -9,5 +9,9 @@ Start
 Time
 English
 Spanish
-Say
+Say (s)
 Tell
+Forward (w)
+Backwards (s)
+Left (a)
+Right (d)

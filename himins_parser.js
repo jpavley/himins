@@ -97,7 +97,7 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "tell") {
     actions.tellAction(client, lingo);
 
-  } else if (wordsInput[0] === "say" || wordsInput[0] === "/s") {
+  } else if (wordsInput[0] === "say" || wordsInput[0] === "s") {
     // action: broadcast whatever the player said to all the other clients
     var message = wordsInput.splice(0,1);
     message = wordsInput.toString();

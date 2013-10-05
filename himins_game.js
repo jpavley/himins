@@ -4,7 +4,8 @@
 var user = require('./himins_user'),
     app = require('./himins_app'),
     parser = require('./himins_parser'),
-    display = require('./himins_client');
+    display = require('./himins_client'),
+    level = require('./himins_level_map');
 
 var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
@@ -17,11 +18,6 @@ var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
     timeCheckValuesInMinutes = [],
     intervalID = 0;
 
-var currentLevelMap = [],
-    currentLevelCols = 43,
-    currentLevelRows = 29,
-    currentLevelMapName = "game_01_map_01_level_01.txt";
-    
 // # run();
 var run = function() {
   _update();
@@ -31,10 +27,7 @@ module.exports.run = run;
 // # Init()
 var init = function () {
   // load the level map
-  err = _loadCurrentLevelMap();
-  if (err) {
-    console.log("Unable to load level map " + currentLevelMapName + ". This will be a very boring game!")
-  };
+  level.loadLevelMap(1);
 
   // start up the game loop
   intervalID = setInterval(run, 1000 / UPDATES_PER_SECOND);
@@ -113,26 +106,6 @@ var setIntervalID = function (id) {
   intervalID = id;
 }
 module.exports.setIntervalID = setIntervalID;
-
-// # _loadCurrentLevelMap()
-var _loadCurrentLevelMap = function () {
-  var err = true;
-
-  currentLevelMap = fs.readFileSync(currentLevelMapName).toString().split("\n");
-
-  if (currentLevelMap.length > 0) {
-        err = false;
-  };
-  //console.log(currentLevelMap);
-  return err;
-}
-
-// # getCurrentLevelMapName()
-var getCurrentLevelMapName = function () {
-  return currentLevelMapName;
-}
-module.exports.getCurrentLevelMapName = getCurrentLevelMapName;
-
 
 
 

@@ -32,6 +32,9 @@ var _parseWithTemplates = function (client, message, lingo) {
   if (result.indexOf("{{time-remaining}}") != -1) {
     result = result.replace(/{{time-remaining}}/g, user.calcTimeRemaining(client.name))    
   }
+  result = result.replace(/{{user-row}}/g, user.getUserRow(client.name));
+  result = result.replace(/{{user-col}}/g, user.getUserCol(client.name));
+  result = result.replace(/{{user-level}}/g, user.getUserLevel(client.name));
   
   // display formatting
   result = result.replace(/{{boldRedOn}}/g, display.boldRedOn);

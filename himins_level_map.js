@@ -25,15 +25,15 @@ var levelMapFileName = "",
 var loadLevelMap = function (level) {
   currentLevel = level;
   if (level === 1) {
-    levelMapFile = "game_01_map_01_level_01.txt";
+    levelMapFileName = "game_01_map_01_level_01.txt";
     defaultSpawnRow = 15;
     defaultSpawnCol = 3;
     levelMapWidth = 43;
     levelMapHeight = 29;
     
-    currentLevelMap = fs.readFileSync(levelMapFile).toString().split("\n");
+    currentLevelMap = fs.readFileSync(levelMapFileName).toString().split("\n");
 
-    if (currentLevelMap.length > 0) {
+    if (currentLevelMap.length === 0) {
           console.log("Error loading level map: " + levelMapFile);
     }
     console.log(currentLevelMap);
