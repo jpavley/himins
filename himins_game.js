@@ -16,6 +16,11 @@ module.exports.UPDATES_PER_SECOND = UPDATES_PER_SECOND;
 var timeCheckPercentages = [0.5, 0.75, 0.8, 0.9, 0.95, 0.99],
     timeCheckValuesInMinutes = [],
     intervalID = 0;
+
+var currentLevelMap = [],
+    currentLevelCols = 43,
+    currentLevelRows = 29,
+    currentLevelMapName = "game_01_map_01_level_01.txt";
     
 // # run();
 var run = function() {
@@ -25,6 +30,12 @@ module.exports.run = run;
 
 // # Init()
 var init = function () {
+  // load the level map
+  err = loadCurrentLevelMap();
+  if (err) {
+    console.log("Unable to load level map " + currentLevelMapName + ". This will be a very boring game!")
+  };
+
   // start up the game loop
   intervalID = setInterval(run, 1000 / UPDATES_PER_SECOND);
 
@@ -102,6 +113,19 @@ var setIntervalID = function (id) {
   intervalID = id;
 }
 module.exports.setIntervalID = setIntervalID;
+
+// # loadCurrentLevelMap()
+var loadCurrentLevelMap = function () {
+  var err = true;
+
+  currentLevelMap = fs.readFileSync(currentLevelMapName).toString().split("\n");
+
+  if (currentLevelMap.length > 0) {
+        err = false;
+  };
+  //console.log(currentLevelMap);
+  return err;
+}
 
 
 

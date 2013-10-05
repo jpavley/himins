@@ -11,7 +11,10 @@ var REMOTE_ADDRESS = 0,
     USER_START_TIME = 4,
     USER_INTERVAL_ID = 5,
     USER_TIME_CHECK_COUNT = 6,
-    USER_MODE_ID = 7;
+    USER_MODE_ID = 7,
+    USER_LOC_X = 8,
+    USER_LOC_Y = 9,
+    USER_MAP_NAME = 10;
     
 module.exports.USER_ID = USER_ID;
 module.exports.USER_LINGO = USER_LINGO;
@@ -41,12 +44,28 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
       userStartTime = new Date().getTime(),
       userIntervalID = 0,
       userTimeCheckCount = 0,
-      userMode = NORMAL_USER_MODE;
+      userMode = NORMAL_USER_MODE,
+      userLocX = -1,
+      userLocY = -1,
+      userMapName = "";
 
   // create user record and add to the list
-  var newUser = [remoteAddress, remotePort, userID, remoteLingo, userStartTime, userIntervalID, userTimeCheckCount, userMode];
+  var newUser = [ remoteAddress, 
+                  remotePort, 
+                  userID, 
+                  remoteLingo, 
+                  userStartTime, 
+                  userIntervalID, 
+                  userTimeCheckCount, 
+                  userMode,
+                  userLocX,
+                  userLocY,
+                  userMapName
+                ];
   userList.push(newUser);
-  
+
+  console.log("new user created: " + newUser);
+
   // return unique user id
   return userID;
 };
