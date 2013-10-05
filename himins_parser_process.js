@@ -8,12 +8,14 @@ var parser = require("./himins_parser"),
 
 // # renderMessageForDisplay(client, messageID, lingo)
 var renderMessageForDisplay = function (client, messageID, lingo) {
-  console.log("renderMessageForDisplay(" + client + ", " + messageID + ", " + lingo + ")");
+  // console.log("renderMessageForDisplay(" + client + ", " + messageID + ", " + lingo + ")");
   var result = "";
   if (lingo === "en_US") {
     var displayString = parser.getDisplayStringByID(lingo, messageID),
+        invisibleCharsCount = _preParseWithTemplates(client, displayString, lingo),
         parsedMessage = _parseWithTemplates(client, displayString, lingo);
     
+    console.log("invisibleCharsCount: " + invisibleCharsCount);
     result = parsedMessage;
   } else {
     console.log("language unsupported in himins_parser_process.js processMessageForDisplay() " + lingo); 
@@ -21,6 +23,16 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
   return result;
 };
 module.exports.renderMessageForDisplay = renderMessageForDisplay;
+
+// # preParseWithTempates(client, message, lingo
+// Count the formatting codes found in a message and track the resulting characters for better word wrapping
+var _preParseWithTemplates = function (client, message, lingo) {
+  var count = 0;
+  count += _indicesOf("{{boldRedOn}}", message, false) * display.boldRedOn.length;
+  count += _indicesOf("{{boldGreenOn}}", message, false) * display.boldGreenOn.length;
+  count += _indicesOf("{{formatOff}}", message, false) * display.formatOff.length;
+  return count;
+};
 
 // # parseWithTemplates(client, message, lingo)
 var _parseWithTemplates = function (client, message, lingo) {
@@ -83,6 +95,23 @@ var _wordWrap = function (message, columnWidth) {
   result = wrappedString + unwrappedString;
   return result;
 };
+
+// # indicesOf(searchStr, mainStr, caseSensitive)
+// like String.indexOf() only returns an array of each index of searchStr in mainStr
+var _indicesOf = function(searchStr, mainStr, caseSensitive) {
+    var startIndex = 0, searchStrLen = searchStr.length;
+    var index, indices = [];
+    if (!caseSensitive) {
+        mainStr = mainStr.toLowerCase();
+        searchStr = searchStr.toLowerCase();
+    }
+    while ((index = mainStr.indexOf(searchStr, startIndex)) > -1) {
+        indices.push(index);
+        startIndex = index + searchStrLen;
+    }
+    return indices;
+};
+
 
 
 

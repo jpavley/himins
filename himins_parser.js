@@ -134,23 +134,6 @@ var commandsListAsString = function (lingo) {
 };
 module.exports.commandsListAsString = commandsListAsString;
 
-// # indicesOf(searchStr, mainStr, caseSensitive)
-// like String.indexOf() only returns an array of each index of searchStr in mainStr
-var indicesOf = function(searchStr, mainStr, caseSensitive) {
-    var startIndex = 0, searchStrLen = searchStr.length;
-    var index, indices = [];
-    if (!caseSensitive) {
-        mainStr = mainStr.toLowerCase();
-        searchStr = searchStr.toLowerCase();
-    }
-    while ((index = mainStr.indexOf(searchStr, startIndex)) > -1) {
-        indices.push(index);
-        startIndex = index + searchStrLen;
-    }
-    return indices;
-};
-module.exports.indicesOf = indicesOf;
-
 // # isCommand(word)
 var isCommand = function (word, lingo) {  
   // todo: undohard coding to english

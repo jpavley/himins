@@ -36,7 +36,7 @@ var loadLevelMap = function (level) {
     if (currentLevelMap.length === 0) {
           console.log("Error loading level map: " + levelMapFile);
     }
-    console.log(currentLevelMap);
+    //console.log(currentLevelMap);
   }
 };
 module.exports.loadLevelMap = loadLevelMap;
