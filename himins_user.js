@@ -47,7 +47,7 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
       userMode = NORMAL_USER_MODE,
       userLocX = -1,
       userLocY = -1,
-      userMapName = "";
+      userMapName = game.getCurrentLevelMapName();
 
   // create user record and add to the list
   var newUser = [ remoteAddress, 

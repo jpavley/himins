@@ -31,7 +31,7 @@ module.exports.run = run;
 // # Init()
 var init = function () {
   // load the level map
-  err = loadCurrentLevelMap();
+  err = _loadCurrentLevelMap();
   if (err) {
     console.log("Unable to load level map " + currentLevelMapName + ". This will be a very boring game!")
   };
@@ -114,8 +114,8 @@ var setIntervalID = function (id) {
 }
 module.exports.setIntervalID = setIntervalID;
 
-// # loadCurrentLevelMap()
-var loadCurrentLevelMap = function () {
+// # _loadCurrentLevelMap()
+var _loadCurrentLevelMap = function () {
   var err = true;
 
   currentLevelMap = fs.readFileSync(currentLevelMapName).toString().split("\n");
@@ -126,6 +126,12 @@ var loadCurrentLevelMap = function () {
   //console.log(currentLevelMap);
   return err;
 }
+
+// # getCurrentLevelMapName()
+var getCurrentLevelMapName = function () {
+  return currentLevelMapName;
+}
+module.exports.getCurrentLevelMapName = getCurrentLevelMapName;
 
 
 
