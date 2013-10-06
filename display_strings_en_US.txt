@@ -9,7 +9,7 @@ Himins will now release you. Your progress has not been saved.
 {{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name (one word, not a command, not the name of another player):
 Mortal, during this sesison we will refer to you as {{boldRedOn}}{{client-name}}{{formatOff}}
 Himins is sorry to report that your name choice is not availble at this time.
-{{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Please standby for further instructions.
+{{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Note: once you start the game some services become unavailable while new operational become operational. Please standby for further instructions.
 Himins reports that you have {{boldRedOn}}{{time-remaining}}{{formatOff}} minuets remaining to play.
 Himins is sorry to report that {{boldRedOn}}tell{{formatOff}} is not availble at this time.
 player {{boldRedOn}}{{client-name}}{{formatOff}} has decended to Earth.

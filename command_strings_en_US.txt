@@ -6,12 +6,7 @@ News
 Quit
 Rename
 Start
-Time
 English
 Spanish
 Say (s)
 Tell
-Forward (w)
-Back (s)
-Left (a)
-Right (d)

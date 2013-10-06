@@ -23,10 +23,12 @@ module.exports.USER_START_TIME = USER_START_TIME;
 module.exports.USER_TIME_CHECK_COUNT = USER_TIME_CHECK_COUNT;
     
 var NORMAL_USER_MODE = 0,
-    RENAME_USER_MODE = 1;
+    RENAME_USER_MODE = 1,
+    GAME_USER_MODE = 2;
     
 module.exports.NORMAL_USER_MODE = NORMAL_USER_MODE;
 module.exports.RENAME_USER_MODE = RENAME_USER_MODE;
+module.exports.GAME_USER_MODE = GAME_USER_MODE;
     
 var userList = [],
     userIndex = 0;

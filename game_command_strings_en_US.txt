@@ -1,0 +1,15 @@
+Welcome
+Help
+News
+Quit
+Stop
+Time
+Say (s)
+Tell
+Where
+Forward (w)
+Back (s)
+Left (a)
+Right (d)
+Look (l)
+Take (t)
