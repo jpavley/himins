@@ -12,10 +12,8 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
   var result = "";
   if (lingo === "en_US") {
     var displayString = parser.getDisplayStringByID(lingo, messageID),
-        invisibleCharsCount = _preParseWithTemplates(client, displayString, lingo),
         parsedMessage = _parseWithTemplates(client, displayString, lingo);
     
-    console.log("invisibleCharsCount: " + invisibleCharsCount);
     result = parsedMessage;
   } else {
     console.log("language unsupported in himins_parser_process.js processMessageForDisplay() " + lingo); 
@@ -24,13 +22,16 @@ var renderMessageForDisplay = function (client, messageID, lingo) {
 };
 module.exports.renderMessageForDisplay = renderMessageForDisplay;
 
-// # preParseWithTempates(client, message, lingo
+// # _countFormattingCharacters(message)
 // Count the formatting codes found in a message and track the resulting characters for better word wrapping
-var _preParseWithTemplates = function (client, message, lingo) {
+var _countFormattingCharacters = function (message) {
   var count = 0;
-  count += _indicesOf("{{boldRedOn}}", message, false) * display.boldRedOn.length;
-  count += _indicesOf("{{boldGreenOn}}", message, false) * display.boldGreenOn.length;
-  count += _indicesOf("{{formatOff}}", message, false) * display.formatOff.length;
+  count += _indicesOf("{{boldRedOn}}", message, false).length * (display.boldRedOn.length - 3);
+  //console.log("count boldRedOn: "+ count);
+  count += _indicesOf("{{boldGreenOn}}", message, false).length * (display.boldGreenOn.length - 3);
+  //console.log("count boldGreenOn: "+ count);
+  count += _indicesOf("{{formatOff}}", message, false).length * (display.formatOff.length - 3);
+  //console.log("count formatOff: "+ count);
   return count;
 };
 
@@ -63,7 +64,7 @@ var _wordWrap = function (message, columnWidth) {
       unwrappedString = message,
       result = "";
   
-  while (unwrappedString.length > columnWidth) {
+  while ((unwrappedString.length) > columnWidth) {
     
     // create a string columnWidth characters in length
     var fittedString = unwrappedString.substring(0, columnWidth);
