@@ -107,11 +107,23 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
     
     // postaction
     actions.sayAction(client, lingo);
-
+  
+  } else if (wordsInput[0] === "forward" || wordsInput[0] === "w") {
+    actions.forwardAction(client, lingo);
+    
+  } else if (wordsInput[0] === "back" || wordsInput[0] === "s") {
+    actions.backAction(client, lingo);
+    
+  } else if (wordsInput[0] === "left" || wordsInput[0] === "a") {
+    actions.leftAction(client, lingo);
+    
+  } else if (wordsInput[0] === "right" || wordsInput[0] === "d") {
+    actions.rightAction(client, lingo);
+      
   } else {
-      // just do something dumb like reverse the input data
-      var message = wordsInput.reverse().join("");
-      actions.defaultAction(client, message);         
+    // just do something dumb like reverse the input data
+    var message = wordsInput.reverse().join("");
+    actions.defaultAction(client, message);         
   }
 };
 

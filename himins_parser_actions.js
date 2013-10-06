@@ -19,7 +19,10 @@ var WELCOME_MESSAGE = 0,
     SPANISH_MESSAGE = 6,
     TELL_MESSAGE = 13,
     RENAME_SUCCESS_ANNOUCEMENT = 9,
-    RENAME_FAILURE_ANNOUCEMENT = 10;
+    RENAME_FAILURE_ANNOUCEMENT = 10,
+    WALL_ANNOUNCEMENT = 19,
+    DOOR_ANNOUCEMENT = 20,
+    LOCKED_DOOR_ANNOUCEMENT = 21;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -137,6 +140,39 @@ var defaultAction = function (client, message) {
   _writeToClientNoNL(client, display.prompt);
 };
 module.exports.defaultAction = defaultAction;
+
+// # forwardAction(client, lingo)
+var forwardAction = function (client, lingo) {
+  // action
+  // post action
+  _writeToClientNoNL(client, display.prompt);
+};
+module.exports.forwardAction = forwardAction;
+
+// # backAction(client, lingo)
+var backAction = function (client, lingo) {
+  // action 
+  // post action
+  _writeToClientNoNL(client, display.prompt);
+};
+module.exports.backAction = backAction;
+
+// # leftAction(client, lingo)
+var leftAction = function (client, lingo) {
+  // action
+  // post action
+  _writeToClientNoNL(client, display.prompt);
+};
+module.exports.leftAction = leftAction;
+
+// # rightAction(client, lingo)
+var rightAction = function (client, lingo) {
+  // action
+  // post action
+  _writeToClientNoNL(client, display.prompt);
+};
+module.exports.rightAction = rightAction;
+
 
 var renameSuccessAction = function(client, lingo) {
   _simpleAction(client, RENAME_SUCCESS_ANNOUCEMENT, lingo);  

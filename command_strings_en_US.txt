@@ -12,6 +12,6 @@ Spanish
 Say (s)
 Tell
 Forward (w)
-Backwards (s)
+Back (s)
 Left (a)
 Right (d)
