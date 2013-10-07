@@ -9,4 +9,4 @@ Start
 English
 Spanish
 Say (s)
-Tell
+Tell (t)

@@ -1,5 +1,10 @@
 // # himins_level_map.js
 // ## Map that represents a zone in the game world.
+// Players navigate the map from left to right: Just to be confusing!
+// Left == Forward, Right == back, and the player's orientation is fixed
+// Moving "Left" or "Right" is a sliding motion, not a turn!
+// In the Himins world moving is more like a modern side scroller than
+// a traditional MUD (where you move from room to room).
 
 var SYMBOL_VOID = "X",
     SYMBOL_WALL = "*",

@@ -68,11 +68,75 @@ var processClientData = function(client, data, lingo) {
 module.exports.processClientData = processClientData;
 
 // # _handleGameModeActions(wordsInput, client, lingo)
+// Welcome, Help, News, Quit, Stop, Time, Say (s) Tell (t), Where, Forward (w)
+// Back (s), Left (a), Right (d), Look (l), Take (t), Inventory (i)
 var _handleGameModeActions = function(wordsInput, client, lingo) {
-  // gameActions.welcomeAction(client, lingo);
+  if (wordsInput[0] === "welcome") {
+    actions.welcomeAction(client, lingo);
+      
+  } else if (wordsInput[0] === "help") {
+    actions.helpAction(client, lingo);
+     
+  } else if (wordsInput[0] === "news") {
+    actions.newsAction(client, lingo);
+    
+  } else if (wordsInput[0] === "quit") {
+    actions.quitAction(client, lingo);
+    
+  } else if (wordsInput[0] === "stop") {
+    actions.startAction(client, lingo);
+
+  } else if (wordsInput[0] === "time") {
+    actions.timeAction(client, lingo);
+
+  } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
+    actions.tellAction(client, lingo);
+
+  } else if (wordsInput[0] === "say" || wordsInput[0] === "s") {
+    // action: broadcast whatever the player said to all the other clients
+    var message = wordsInput.splice(0,1);
+    message = wordsInput.toString();
+    message = message.replace(/,/g, " ");
+    message = '"' + message + '"' + "\n";
+    app.broadcast(message, client, "user");
+    
+    // postaction
+    actions.sayAction(client, lingo);
+    
+  } else if (wordsInput[0] === "where") {
+    actions.whereAction(client, lingo);
+  
+  } else if (wordsInput[0] === "forward" || wordsInput[0] === "w") {
+    actions.forwardAction(client, lingo);
+    
+  } else if (wordsInput[0] === "back" || wordsInput[0] === "s") {
+    actions.backAction(client, lingo);
+    
+  } else if (wordsInput[0] === "left" || wordsInput[0] === "a") {
+    actions.leftAction(client, lingo);
+    
+  } else if (wordsInput[0] === "right" || wordsInput[0] === "d") {
+    actions.rightAction(client, lingo);
+      
+  } else if (wordsInput[0] === "look" || wordsInput[0] === "l") {
+    actions.lookAction(client, lingo);
+    
+  } else if (wordsInput[0] === "take" || wordsInput[0] === "t") {
+    actions.takeAction(client, lingo);
+        
+  } else if (wordsInput[0] === "inventory" || wordsInput[0] === "i") {
+    actions.inventoryAction(client, lingo);
+            
+  } else {
+    // just do something dumb like reverse the input data
+    var message = wordsInput.reverse().join("");
+    actions.defaultAction(client, message);         
+  }
 };
 
 // # handleNormalModeActions(wordsInput, client, lingo)
+// Normal mode commands handled: Welcome, Help, About, Language, News, Quit, Rename, 
+// Start, English, Spanish, Say (s), Tell (t)
 var _handleNormalModeActions = function(wordsInput, client, lingo) {
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
@@ -107,7 +171,7 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "spanish") {
     actions.spanishAction(client, lingo);
 
-  } else if (wordsInput[0] === "tell") {
+  } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
     actions.tellAction(client, lingo);
 
   } else if (wordsInput[0] === "say" || wordsInput[0] === "s") {
@@ -120,19 +184,7 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
     
     // postaction
     actions.sayAction(client, lingo);
-  
-  } else if (wordsInput[0] === "forward" || wordsInput[0] === "w") {
-    actions.forwardAction(client, lingo);
     
-  } else if (wordsInput[0] === "back" || wordsInput[0] === "s") {
-    actions.backAction(client, lingo);
-    
-  } else if (wordsInput[0] === "left" || wordsInput[0] === "a") {
-    actions.leftAction(client, lingo);
-    
-  } else if (wordsInput[0] === "right" || wordsInput[0] === "d") {
-    actions.rightAction(client, lingo);
-      
   } else {
     // just do something dumb like reverse the input data
     var message = wordsInput.reverse().join("");
