@@ -48,7 +48,8 @@ var _parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{user-row}}/g, user.getUserRow(client.name));
   result = result.replace(/{{user-col}}/g, user.getUserCol(client.name));
   result = result.replace(/{{user-level}}/g, user.getUserLevel(client.name));
-  
+  result = result.replace(/{{user-mode}}/g, user.getUserMode(client.name));
+
   // display formatting
   result = result.replace(/{{boldRedOn}}/g, display.boldRedOn);
   result = result.replace(/{{boldGreenOn}}/g, display.boldGreenOn);

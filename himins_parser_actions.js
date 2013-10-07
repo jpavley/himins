@@ -98,7 +98,11 @@ module.exports.renameAction = renameAction;
 
 // # startAction(client, lingo)
 var startAction = function (client, lingo) {
-  _simpleAction(client, START_MESSAGE, lingo);
+  // action
+  _writeToClient(client, process.renderMessageForDisplay(client, START_MESSAGE, lingo));
+  // post action
+  user.setUserMode(client.name, user.GAME_USER_MODE);
+  _writeToClientNoNL(client, display.prompt);  
 };
 module.exports.startAction = startAction;
 
@@ -182,7 +186,7 @@ module.exports.renameSuccessAction = renameSuccessAction;
 var renameFailureAction = function(client, lingo) {
   _simpleAction(client, RENAME_FAILURE_ANNOUCEMENT, lingo);  
 };
-module.exports.renameSuccessAction = renameSuccessAction;
+module.exports.renameFailureAction = renameFailureAction;
 
 
 

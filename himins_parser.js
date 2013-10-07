@@ -50,16 +50,29 @@ var processClientData = function(client, data, lingo) {
       userMode = user.getUserMode(client.name);
 
   if (userMode === user.NORMAL_USER_MODE) {
+
     _handleNormalModeActions(wordsInput, client, lingo);
+
   } else if (userMode === user.RENAME_USER_MODE) {
-    _handleRenameModeActions(wordsInput, client, lingo)
+
+    _handleRenameModeActions(wordsInput, client, lingo);
+
+  } else if (userMode === user.GAME_USER_MODE) {
+
+    _handleGameModeActions(wordsInput, client, lingo);
+
   } else {
     console.log("unexpected mode in himins_parser processClientData()");
   }
 };
 module.exports.processClientData = processClientData;
 
-// # handleNormalModeActions
+// # _handleGameModeActions(wordsInput, client, lingo)
+var _handleGameModeActions = function(wordsInput, client, lingo) {
+  // gameActions.welcomeAction(client, lingo);
+};
+
+// # handleNormalModeActions(wordsInput, client, lingo)
 var _handleNormalModeActions = function(wordsInput, client, lingo) {
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
@@ -128,12 +141,13 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
 };
 
 var _handleRenameModeActions = function(wordsInput, client, lingo) {
-  if (!isCommand(wordsInput[0]) && !user.isUserID(wordsInput[0])) {
+  if (!isCommand( wordsInput[0] ) || !user.isUserID( wordsInput[0] )) {
     user.setUserID(client.name, wordsInput[0]);
     actions.renameSuccessAction(client, lingo);
     user.setUserMode(client.name, user.NORMAL_USER_MODE);
   } else {
     actions.renameFailureAction(client, lingo);
+    user.setUserMode(client.name, user.NORMAL_USER_MODE);
   }
 };
 
@@ -150,7 +164,10 @@ module.exports.commandsListAsString = commandsListAsString;
 var isCommand = function (word, lingo) {  
   // todo: undohard coding to english
   var i = enCommandStrings.indexOf(word),
-      result = (i > -1);
+      result = true;
+  if (i != -1) {
+    result = false;
+  };
   return result;
 };
 module.exports.isCommand = isCommand;
