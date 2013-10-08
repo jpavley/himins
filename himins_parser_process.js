@@ -6,6 +6,9 @@ var parser = require("./himins_parser"),
     app = require("./himins_app"),
     display = require("./himins_client");
 
+var USER_MODE_CONFIG_STR = 24,
+    USER_MODE_GAME_STR = 23;
+
 // # renderMessageForDisplay(client, messageID, lingo)
 var renderMessageForDisplay = function (client, messageID, lingo) {
   // console.log("renderMessageForDisplay(" + client + ", " + messageID + ", " + lingo + ")");
@@ -48,7 +51,7 @@ var _parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{user-row}}/g, user.getUserRow(client.name));
   result = result.replace(/{{user-col}}/g, user.getUserCol(client.name));
   result = result.replace(/{{user-level}}/g, user.getUserLevel(client.name));
-  result = result.replace(/{{user-mode}}/g, user.getUserMode(client.name));
+  result = result.replace(/{{user-mode}}/g, _calcUserModeName(client.name));
 
   // display formatting
   result = result.replace(/{{boldRedOn}}/g, display.boldRedOn);
@@ -56,6 +59,20 @@ var _parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{formatOff}}/g, display.formatOff);
   
   result = _wordWrap(result, 80);
+  return result;
+};
+
+// # _calcUserModeName(client.name)
+var _calcUserModeName = function (userID, lingo) {
+  var modeID = user.getUserMode(userID),
+      result = "";
+  
+  //console.log("modeID: " + modeID);
+  if (modeID === user.NORMAL_USER_MODE) {
+    result = parser.getDisplayStringByID(lingo, USER_MODE_CONFIG_STR);
+  } else if (modeID === user.GAME_USER_MODE) {
+    result = parser.getDisplayStringByID(lingo, USER_MODE_GAME_STR);    
+  }
   return result;
 };
 

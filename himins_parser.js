@@ -84,7 +84,7 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
     actions.quitAction(client, lingo);
     
   } else if (wordsInput[0] === "stop") {
-    actions.startAction(client, lingo);
+    actions.stopAction(client, lingo);
 
   } else if (wordsInput[0] === "time") {
     actions.timeAction(client, lingo);
