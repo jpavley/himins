@@ -22,7 +22,8 @@ var WELCOME_MESSAGE = 0,
     RENAME_FAILURE_ANNOUCEMENT = 10,
     WALL_ANNOUNCEMENT = 19,
     DOOR_ANNOUCEMENT = 20,
-    LOCKED_DOOR_ANNOUCEMENT = 21;
+    LOCKED_DOOR_ANNOUCEMENT = 21,
+    GAME_NEWS_MESSAGE = 22;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -70,7 +71,11 @@ module.exports.languageAction = languageAction;
 
 // # newsAction(client, lingo)
 var newsAction = function (client, lingo) {
-  _simpleAction(client, NEWS_MESSAGE, lingo);
+  var messageID = NEWS_MESSAGE;
+  if (user.getUserMode() === user.GAME_USER_MODE) {
+    mesageID = GAME_NEWS_MESSAGE;
+  }
+  _simpleAction(client, messageID, lingo);
 };
 module.exports.newsAction = newsAction;
 
