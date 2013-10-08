@@ -115,6 +115,7 @@ var startAction = function (client, lingo) {
   _writeToClient(client, process.renderMessageForDisplay(client, START_MESSAGE, lingo));
   // post action
   user.setUserMode(client.name, user.GAME_USER_MODE);
+  _writeToClient(client, process.renderMessageForDisplay(client, GAME_WELCOME_MESSAGE, lingo));
   _writeToClientNoNL(client, display.prompt);  
 };
 module.exports.startAction = startAction;
@@ -125,6 +126,7 @@ var stopAction = function (client, lingo) {
   _writeToClient(client, process.renderMessageForDisplay(client, STOP_MESSAGE, lingo));
   // post action
   user.setUserMode(client.name, user.NORMAL_USER_MODE);
+  _writeToClient(client, process.renderMessageForDisplay(client, WELCOME_MESSAGE, lingo));
   _writeToClientNoNL(client, display.prompt);  
 };
 module.exports.stopAction = stopAction;

@@ -10,7 +10,8 @@ var display = require('./himins_client')
 
 var localizedStrings = [],
     enDisplayStrings = [],
-    enCommandStrings = [];
+    enCommandStrings = [],
+    enGameCommandStrings = [];
     
 var ENGLISH_US = 0,
     FRENCH_FR = 1,
@@ -18,7 +19,8 @@ var ENGLISH_US = 0,
     GERMAN_DE = 3;
     
 var DISPLAY_STRINGS = 0,
-    COMMAND_STRINGS = 1;
+    COMMAND_STRINGS = 1,
+    GAME_COMMAND_STRINGS = 2;
     
 // # loadClientStrings(lingo)
 var loadClientStrings = function (lingo) {
@@ -31,7 +33,10 @@ var loadClientStrings = function (lingo) {
     var commandStringsFileName = "command_strings_" + lingo + ".txt";
     enCommandStrings = fs.readFileSync(commandStringsFileName).toString().split("\n");
     
-    localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings];
+    var gameCommandStringsFileName = "game_command_strings_" + lingo + ".txt";
+    enGameCommandStrings = fs.readFileSync(gameCommandStringsFileName).toString().split("\n");
+    
+    localizedStrings[ENGLISH_US] = [enDisplayStrings, enCommandStrings, enGameCommandStrings];
     //console.log(localizedStrings);
   }
   
@@ -205,12 +210,21 @@ var _handleRenameModeActions = function(wordsInput, client, lingo) {
 
 // # commandsListAsString(lingo)
 var commandsListAsString = function (lingo) {
-  // todo: undo hard coding to english
+  // todo: undo hardcoding to english
   var result = enCommandStrings.toString();
   result = result.replace(/,/g, ", ");
   return result;
 };
 module.exports.commandsListAsString = commandsListAsString;
+
+// # gameCommandsListAsString(lingo)
+var gameCommandsListAsString = function (lingo) {
+  // todo: undo hardcoding to english
+  var result = enGameCommandStrings.toString();
+  result = result.replace(/,/g, ", ");
+  return result;
+};
+module.exports.gameCommandsListAsString = gameCommandsListAsString;
 
 // # isCommand(word)
 var isCommand = function (word, lingo) {  
