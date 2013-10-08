@@ -1,4 +1,4 @@
-Welcome to Himins {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{command-list}}{{formatOff}}
+Welcome to Himins Config {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{command-list}}{{formatOff}}
 Himins is sorry to report that {{boldRedOn}}help{{formatOff}} is not availble at this time.
 Himins is a mulit-user dungeon located on the Earth's Moon where the departed can amuse themselves for eternity in our relaxing activities. Mortals can join Himins for a short time through an Internet connection and a telnet client.
 Please request a language. Himins speaks {{boldGreenOn}}English{{formatOff}} and {{boldGreenOn}}Spanish{{formatOff}}.
@@ -23,3 +23,6 @@ You stand before a locked dooor.
 Himins is happy to report that {{boldRedOn}}{{client-count}}{{formatOff}} mortals are online. Your name is {{boldRedOn}}{{client-name}}{{formatOff}}. You are in {{boldRedOn}}{{user-mode}}{{formatOff}}. You are located at point {{boldRedOn}}{{user-col}}{{formatOff}}, {{boldRedOn}}{{user-row}}{{formatOff}} in level {{boldRedOn}}{{user-level}}{{formatOff}}. You have {{boldRedOn}}{{time-remaining}}{{formatOff}} minuets remaining.
 Game Mode
 Config Mode
+{{boldRedOn}}{{client-name}}{{formatOff}} we are sorry that you would like to reduce your experience with Himins. Note: once you stop the game some services become unavailable while new requests become operational. Please standby for further instructions.
+Welcome to Himins Game {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{game-command-list}}{{formatOff}}
+

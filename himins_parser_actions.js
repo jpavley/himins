@@ -23,7 +23,9 @@ var WELCOME_MESSAGE = 0,
     WALL_ANNOUNCEMENT = 19,
     DOOR_ANNOUCEMENT = 20,
     LOCKED_DOOR_ANNOUCEMENT = 21,
-    GAME_NEWS_MESSAGE = 22;
+    GAME_NEWS_MESSAGE = 22,
+    STOP_MESSAGE = 25,
+    GAME_WELCOME_MESSAGE = 26;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -47,7 +49,11 @@ var _simpleAction = function (client, messageID, lingo) {
 
 // # welcomeAction(client, lingo)
 var welcomeAction = function (client, lingo) {
-  _simpleAction(client, WELCOME_MESSAGE, lingo);
+  var messageID = WELCOME_MESSAGE;
+  if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
+    messageID = GAME_WELCOME_MESSAGE
+  }
+  _simpleAction(client, messageID, lingo);
 };
 module.exports.welcomeAction = welcomeAction;
 
@@ -72,8 +78,10 @@ module.exports.languageAction = languageAction;
 // # newsAction(client, lingo)
 var newsAction = function (client, lingo) {
   var messageID = NEWS_MESSAGE;
-  if (user.getUserMode() === user.GAME_USER_MODE) {
-    mesageID = GAME_NEWS_MESSAGE;
+  //console.log("user.getUserMode(client.name): " + user.getUserMode(client.name));
+  //console.log("user.GAME_USER_MODE: " + user.GAME_USER_MODE);
+  if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
+    messageID = GAME_NEWS_MESSAGE;
   }
   _simpleAction(client, messageID, lingo);
 };
@@ -110,6 +118,16 @@ var startAction = function (client, lingo) {
   _writeToClientNoNL(client, display.prompt);  
 };
 module.exports.startAction = startAction;
+
+// # stopAction(client, lingo)
+var stopAction = function (client, lingo) {
+  // action
+  _writeToClient(client, process.renderMessageForDisplay(client, STOP_MESSAGE, lingo));
+  // post action
+  user.setUserMode(client.name, user.NORMAL_USER_MODE);
+  _writeToClientNoNL(client, display.prompt);  
+};
+module.exports.stopAction = stopAction;
 
 var timeAction = function (client, lingo) {
   _simpleAction(client, TIME_MESSAGE, lingo);
