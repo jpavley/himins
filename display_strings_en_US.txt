@@ -25,4 +25,4 @@ Game Mode
 Config Mode
 {{boldRedOn}}{{client-name}}{{formatOff}} we are sorry that you would like to reduce your experience with Himins. Note: once you stop the game some services become unavailable while new requests become operational. Please standby...
 Welcome to Himins Game {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{game-command-list}}{{formatOff}}
-
+Sorry, Himins does not comprehend.

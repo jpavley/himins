@@ -133,9 +133,8 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
     actions.inventoryAction(client, lingo);
             
   } else {
-    // just do something dumb like reverse the input data
-    var message = wordsInput.reverse().join("");
-    actions.defaultAction(client, message);         
+    // complain to the user
+    actions.dontUnderstandAction(client, lingo);         
   }
 };
 

@@ -25,7 +25,8 @@ var WELCOME_MESSAGE = 0,
     LOCKED_DOOR_ANNOUCEMENT = 21,
     GAME_NEWS_MESSAGE = 22,
     STOP_MESSAGE = 25,
-    GAME_WELCOME_MESSAGE = 26;
+    GAME_WELCOME_MESSAGE = 26,
+    DONT_UNDERSTAND_MESSAGE = 27;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -59,6 +60,12 @@ var _simpleAction = function (client, messageID, lingo) {
     _writeToClientNoNL(client, display.prompt);    
   }
 };
+
+// # dontUnderstandAction(client, lingo)
+var dontUnderstandAction = function (client, lingo) {
+  _simpleAction(client, DONT_UNDERSTAND_MESSAGE, lingo);
+};
+module.exports.dontUnderstandAction = dontUnderstandAction;
 
 // # welcomeAction(client, lingo)
 var welcomeAction = function (client, lingo) {
@@ -179,7 +186,11 @@ var defaultAction = function (client, message) {
   // action
   _writeToClient(client, message);
   // post action
-  _writeToClientNoNL(client, display.prompt);
+  if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
+    _writeGamePrompt(client);
+  } else {
+    _writeToClientNoNL(client, display.prompt);    
+  }
 };
 module.exports.defaultAction = defaultAction;
 
