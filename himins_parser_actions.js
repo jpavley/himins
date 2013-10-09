@@ -39,12 +39,25 @@ var _writeToClientNoNL = function (client, message) {
   client.write(message);
 };
 
+// #_writeGamePrompt(client, message)
+// looks like this: col, row >>
+var _writeGamePrompt = function (client) {
+  var col = user.getUserCol(client.name),
+      row = user.getUserRow(client.name);
+      
+      client.write(col + ", " + row + " " + display.prompt);
+}
+
 // # simpleAction(client, messageID, lingo)
 var _simpleAction = function (client, messageID, lingo) {
   // action
   _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
   // post action
-  _writeToClientNoNL(client, display.prompt);
+  if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
+    _writeGamePrompt(client);
+  } else {
+    _writeToClientNoNL(client, display.prompt);    
+  }
 };
 
 // # welcomeAction(client, lingo)
@@ -116,7 +129,7 @@ var startAction = function (client, lingo) {
   // post action
   user.setUserMode(client.name, user.GAME_USER_MODE);
   _writeToClient(client, process.renderMessageForDisplay(client, GAME_WELCOME_MESSAGE, lingo));
-  _writeToClientNoNL(client, display.prompt);  
+  _writeGamePrompt(client);  
 };
 module.exports.startAction = startAction;
 
