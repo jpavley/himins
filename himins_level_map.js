@@ -31,8 +31,8 @@ var loadLevelMap = function (level) {
   currentLevel = level;
   if (level === 1) {
     levelMapFileName = "game_01_map_01_level_01.txt";
-    defaultSpawnRow = 15;
-    defaultSpawnCol = 3;
+    defaultSpawnRow = 14;
+    defaultSpawnCol = 2;
     levelMapWidth = 43;
     levelMapHeight = 29;
     
@@ -73,6 +73,8 @@ module.exports.getCurrentLevel = getCurrentLevel;
 // # getSymbolAtPoint(row, col)
 var getSymbolAtPoint = function (row, col) {
   result = currentLevelMap[row].charAt(col);
+  console.log("currentLevelMap[row]: " + currentLevelMap[row]);
+  console.log("result: " + result);
   return result;
 };
 module.exports.getSymbolAtPoint = getSymbolAtPoint;

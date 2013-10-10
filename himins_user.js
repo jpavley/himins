@@ -252,9 +252,12 @@ var goForward = function (userID) {
       newCol = col + 1,
       nextSymbol = level.getSymbolAtPoint(row, newCol);
       
+  console.log("nextSymbol" + nextSymbol);
+  console.log("row, col, newCol: " + row + ", " + col + ", " + newCol);
+      
   if (nextSymbol === level.SYMBOL_VOID || nextSymbol === level.SYMBOL_WALL) {
     result = MOVE_HIT_WALL;
-  } else if (nextSymbol === level.SYMBOL_DOOR) {
+  } else if (nextSymbol === level.SYMBOL_UNLOCKED_DOOR) {
     result = MOVE_HIT_DOOR;
   } else if (nextSymbol === level.SYMBOL_LOCKED_DOOR) {
     result = MOVE_HIT_LOCKED_DOOR;

@@ -46,11 +46,12 @@ var _writeToClientNoNL = function (client, message) {
 
 // #_writeGamePrompt(client, message)
 // looks like this: col, row >>
+// Coordinates are 0-based. Displayed to the player as 1-based.
 var _writeGamePrompt = function (client) {
-  var col = user.getUserCol(client.name),
-      row = user.getUserRow(client.name);
+  var col = user.getUserCol(client.name) + 1,
+      row = user.getUserRow(client.name) + 1;
       
-      client.write(col + ", " + row + " " + display.prompt);
+      client.write(row + ", " + col + " " + display.prompt);
 }
 
 // # simpleAction(client, messageID, lingo)
@@ -200,24 +201,24 @@ module.exports.defaultAction = defaultAction;
 
 // # _movementAction(client, lingo, result)
 var _movementAction = function (client, lingo, result) {
-  var message = "";
-  
+  var messageID;
+    
   // action
   if (result === user.MOVE_HIT_NOTHING) {
-    message = HIT_NOTHING_ANNOUCEMENT;
+    messageID = HIT_NOTHING_ANNOUCEMENT;
     
   } else if (result === user.MOVE_HIT_WALL) {
-    message = HIT_WALL_ANNOUCEMENT;
+    messageID = HIT_WALL_ANNOUCEMENT;
     
   } else if (result === user.MOVE_HIT_DOOR) {
-    message = HIT_DOOR_ANNOUCEMENT;
+    messageID = HIT_DOOR_ANNOUCEMENT;
     
   } else if (result === user.MOVE_HIT_LOCKED_DOOR) {
-    message = HIT_LOCKED_DOOR_ANNOUCEMENT;
+    messageID = HIT_LOCKED_DOOR_ANNOUCEMENT;
 
   }
-  
-  _writeToClient(client, message);
+    
+  _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
   
   // post action
   _writeGamePrompt(client);
