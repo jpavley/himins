@@ -26,7 +26,11 @@ var WELCOME_MESSAGE = 0,
     GAME_NEWS_MESSAGE = 22,
     STOP_MESSAGE = 25,
     GAME_WELCOME_MESSAGE = 26,
-    DONT_UNDERSTAND_MESSAGE = 27;
+    DONT_UNDERSTAND_MESSAGE = 27,
+    HIT_NOTHING_ANNOUCEMENT = 28,
+    HIT_WALL_ANNOUCEMENT = 19,
+    HIT_DOOR_ANNOUCEMENT = 20,
+    HIT_LOCKED_DOOR_ANNOUCEMENT =21;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -194,38 +198,58 @@ var defaultAction = function (client, message) {
 };
 module.exports.defaultAction = defaultAction;
 
+// # _movementAction(client, lingo, result)
+var _movementAction = function (client, lingo, result) {
+  var message = "";
+  
+  // action
+  if (result === user.MOVE_HIT_NOTHING) {
+    message = HIT_NOTHING_ANNOUCEMENT;
+    
+  } else if (result === user.MOVE_HIT_WALL) {
+    message = HIT_WALL_ANNOUCEMENT;
+    
+  } else if (result === user.MOVE_HIT_DOOR) {
+    message = HIT_DOOR_ANNOUCEMENT;
+    
+  } else if (result === user.MOVE_HIT_LOCKED_DOOR) {
+    message = HIT_LOCKED_DOOR_ANNOUCEMENT;
+
+  }
+  
+  _writeToClient(client, message);
+  
+  // post action
+  _writeGamePrompt(client);
+};
+
 // # forwardAction(client, lingo)
 var forwardAction = function (client, lingo) {
-  // action
-  // post action
-  _writeToClientNoNL(client, display.prompt);
+  var result = user.goForward(client.name);
+  _movementAction(client, lingo, result);     
 };
 module.exports.forwardAction = forwardAction;
 
 // # backAction(client, lingo)
 var backAction = function (client, lingo) {
-  // action 
-  // post action
-  _writeToClientNoNL(client, display.prompt);
+  var result = user.goBack(client.name);
+  _movementAction(client, lingo, result);     
 };
 module.exports.backAction = backAction;
 
 // # leftAction(client, lingo)
 var leftAction = function (client, lingo) {
-  // action
-  // post action
-  _writeToClientNoNL(client, display.prompt);
+  var result = user.goLeft(client.name);
+  _movementAction(client, lingo, result);     
 };
 module.exports.leftAction = leftAction;
 
 // # rightAction(client, lingo)
 var rightAction = function (client, lingo) {
-  // action
-  // post action
-  _writeToClientNoNL(client, display.prompt);
+  var result = user.goRight(client.name);
+  _movementAction(client, lingo, result);     
 };
 module.exports.rightAction = rightAction;
-
 
 var renameSuccessAction = function(client, lingo) {
   _simpleAction(client, RENAME_SUCCESS_ANNOUCEMENT, lingo);  

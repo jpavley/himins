@@ -29,6 +29,16 @@ var NORMAL_USER_MODE = 0,
 module.exports.NORMAL_USER_MODE = NORMAL_USER_MODE;
 module.exports.RENAME_USER_MODE = RENAME_USER_MODE;
 module.exports.GAME_USER_MODE = GAME_USER_MODE;
+
+var MOVE_HIT_NOTHING = 0,
+    MOVE_HIT_WALL = 1,
+    MOVE_HIT_DOOR = 2,
+    MOVE_HIT_LOCKED_DOOR = 3;
+
+module.exports.MOVE_HIT_NOTHING = MOVE_HIT_NOTHING;
+module.exports.MOVE_HIT_WALL = MOVE_HIT_WALL;
+module.exports.MOVE_HIT_DOOR = MOVE_HIT_DOOR;
+module.exports.MOVE_HIT_LOCKED_DOOR = MOVE_HIT_LOCKED_DOOR;
     
 var userList = [],
     userIndex = 0;
@@ -232,6 +242,30 @@ var getUserLevel = function (userID) {
   return result;
 };
 module.exports.getUserLevel = getUserLevel;
+
+// # goForward(userID)
+var goForward = function (userID) {
+  var result = MOVE_HIT_NOTHING,
+      userRec = getUserByID(userID),
+      col = userRec[USER_COL],
+      row = userRec[USER_ROW],
+      newCol = col + 1,
+      nextSymbol = level.getSymbolAtPoint(row, newCol);
+      
+  if (nextSymbol === level.SYMBOL_VOID || nextSymbol === level.SYMBOL_WALL) {
+    result = MOVE_HIT_WALL;
+  } else if (nextSymbol === level.SYMBOL_DOOR) {
+    result = MOVE_HIT_DOOR;
+  } else if (nextSymbol === level.SYMBOL_LOCKED_DOOR) {
+    result = MOVE_HIT_LOCKED_DOOR;
+  } else {
+    userRec[USER_COL] = newCol;
+  }
+  
+  return result;
+};
+module.exports.goForward = goForward;
+
 
 
 
