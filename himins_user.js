@@ -245,15 +245,56 @@ module.exports.getUserLevel = getUserLevel;
 
 // # goForward(userID)
 var goForward = function (userID) {
+  return _move(userID, "w")
+};
+module.exports.goForward = goForward;
+
+// # goBack(userID)
+var goBack = function (userID) {
+  return _move(userID, "s")
+};
+module.exports.goBack = goBack;
+
+// # goLeft(userID)
+var goLeft = function (userID) {
+  return _move(userID, "a")
+};
+module.exports.goLeft = goLeft;
+
+// # goRight(userID)
+var goRight = function (userID) {
+  return _move(userID, "d")
+};
+module.exports.goRight = goRight;
+
+
+var _move = function (userID, direction) {
   var result = MOVE_HIT_NOTHING,
       userRec = getUserByID(userID),
       col = userRec[USER_COL],
       row = userRec[USER_ROW],
-      newCol = col + 1,
-      nextSymbol = level.getSymbolAtPoint(row, newCol);
+      newCol,
+      newRow,
+      nextSymbol;
       
-  console.log("nextSymbol" + nextSymbol);
-  console.log("row, col, newCol: " + row + ", " + col + ", " + newCol);
+  if (direction = "w") {
+    newRow = row;
+    newCol = col + 1;
+  } else if (direction = "s") {
+    newRow = row;
+    newCol = col - 1;    
+  } else if (direction = "a") {
+    newRow = row - 1;
+    newCol = col;    
+  } else if (direction = "d") {
+    newRow = row + 1;
+    newCol = col;    
+  }
+  
+  nextSymbol = level.getSymbolAtPoint(newRow, newCol);
+      
+  //console.log("nextSymbol" + nextSymbol);
+  //console.log("row, col, newCol: " + row + ", " + col + ", " + newCol);
       
   if (nextSymbol === level.SYMBOL_VOID || nextSymbol === level.SYMBOL_WALL) {
     result = MOVE_HIT_WALL;
@@ -267,7 +308,7 @@ var goForward = function (userID) {
   
   return result;
 };
-module.exports.goForward = goForward;
+
 
 
 
