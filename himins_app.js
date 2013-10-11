@@ -4,7 +4,8 @@
 
 var net = require('net'),
     parser = require('./himins_parser'),
-    parser_process = require("./himins_parser_process"),
+    process = require("./himins_parser_process"),
+    actions = require("./himins_parser_actions"),
     user = require('./himins_user'),
     display = require('./himins_client'),
     game = require('./himins_game');
@@ -28,11 +29,11 @@ himinsServer.on('connection', function (client) {
   
   // weclome the user
   client.write(display.eraseScreen);
-  client.write(parser_process.renderMessageForDisplay(client, 0, lingo) + '\n');
+  client.write(process.renderMessageForDisplay(client, 0, lingo) + '\n');
   client.write(display.prompt);
   
   // tell everyone the user is here
-  broadcast(parser_process.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
+  broadcast(process.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');
   
   // ## client.on('data', function (data))
   // handle incoming client data
@@ -62,10 +63,10 @@ himinsServer.on('connection', function (client) {
   });
 });
 
-// # broadcast(message, client, kind)
+// # broadcast(message, client, kind, lingo)
 // broadcast messages to every client but this one
 // if a client is discovered to be unresponsive it is removed from the client list
-function broadcast(message, client, kind) {
+function broadcast(message, client, kind, lingo) {
     var cleanup = [];
     
     for (var i = 0, l = clientList.length; i < l; i += 1) {
@@ -83,7 +84,7 @@ function broadcast(message, client, kind) {
                 // write the message
                 clientList[i].write(display.cursorLeftThreeSpaces);
                 clientList[i].write(payload);
-                clientList[i].write(display.prompt);
+                actions.simplePostAction(clientList[i], lingo);
             } else {
                 // client is not writable, kill it
                 stopUpdates(client);

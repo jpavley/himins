@@ -8,5 +8,5 @@ Rename
 Start
 English
 Spanish
-Say (s)
+Yell (y)
 Tell (t)

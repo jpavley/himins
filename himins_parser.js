@@ -72,6 +72,20 @@ var processClientData = function(client, data, lingo) {
 };
 module.exports.processClientData = processClientData;
 
+var _yell = function (wordsInput, client, lingo) {
+  console.log("_yell(" + wordsInput + ", " + client + ", " + lingo + ")");
+  // action: broadcast whatever the player said to all the other clients
+  var message = wordsInput.splice(0,1);
+  message = wordsInput.toString();
+  message = message.replace(/,/g, " ");
+  message = message.toUpperCase();
+  message = '"' + message + '"' + "\n";
+  app.broadcast(message, client, "user", lingo);
+
+  // postaction
+  actions.sayAction(client, lingo);
+};
+
 // # _handleGameModeActions(wordsInput, client, lingo)
 // Welcome, Help, News, Quit, Stop, Time, Say (s) Tell (t), Where, Forward (w)
 // Back (s), Left (a), Right (d), Look (l), Take (t), Inventory (i)
@@ -97,17 +111,8 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
     actions.tellAction(client, lingo);
 
-  } else if (wordsInput[0] === "say" || wordsInput[0] === "s") {
-    // action: broadcast whatever the player said to all the other clients
-    var message = wordsInput.splice(0,1);
-    message = wordsInput.toString();
-    message = message.replace(/,/g, " ");
-    message = '"' + message + '"' + "\n";
-    app.broadcast(message, client, "user");
-    
-    // postaction
-    actions.sayAction(client, lingo);
-    
+  } else if (wordsInput[0] === "yell" || wordsInput[0] === "y") {
+    _yell(wordsInput, client, lingo); 
   } else if (wordsInput[0] === "where") {
     actions.whereAction(client, lingo);
   
@@ -178,16 +183,8 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
     actions.tellAction(client, lingo);
 
-  } else if (wordsInput[0] === "say" || wordsInput[0] === "s") {
-    // action: broadcast whatever the player said to all the other clients
-    var message = wordsInput.splice(0,1);
-    message = wordsInput.toString();
-    message = message.replace(/,/g, " ");
-    message = '"' + message + '"' + "\n";
-    app.broadcast(message, client, "user");
-    
-    // postaction
-    actions.sayAction(client, lingo);
+  } else if (wordsInput[0] === "yell" || wordsInput[0] === "y") {
+    _yell(wordsInput, client, lingo); 
     
   } else {
     // just do something dumb like reverse the input data

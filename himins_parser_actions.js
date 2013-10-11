@@ -59,12 +59,18 @@ var _simpleAction = function (client, messageID, lingo) {
   // action
   _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
   // post action
+  simplePostAction(client, lingo);
+};
+
+// #simplePostAction(client, lingo)
+var simplePostAction = function (client, lingo) {
   if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
     _writeGamePrompt(client);
   } else {
     _writeToClientNoNL(client, display.prompt);    
-  }
+  } 
 };
+module.exports.simplePostAction = simplePostAction;
 
 // # dontUnderstandAction(client, lingo)
 var dontUnderstandAction = function (client, lingo) {
@@ -119,7 +125,7 @@ var quitAction = function (client, lingo) {
   // post action
   var message = process.renderMessageForDisplay(client, QUIT_ANNOUCEMENT, lingo);
   message = message + '\n';
-  app.broadcast(message, client, "system");
+  app.broadcast(message, client, "system", lingo);
   client.end();
 };
 module.exports.quitAction = quitAction;
@@ -176,7 +182,7 @@ module.exports.spanishAction = spanishAction;
 // # sayAction(client, lingo)
 var sayAction = function (client, lingo) {
   // postaction only
-  _writeToClientNoNL(client, display.prompt);  
+  simplePostAction(client, lingo);
 };
 module.exports.sayAction = sayAction;
 
@@ -191,11 +197,7 @@ var defaultAction = function (client, message) {
   // action
   _writeToClient(client, message);
   // post action
-  if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
-    _writeGamePrompt(client);
-  } else {
-    _writeToClientNoNL(client, display.prompt);    
-  }
+  simplePostAction(client, lingo);
 };
 module.exports.defaultAction = defaultAction;
 

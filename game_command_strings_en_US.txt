@@ -4,7 +4,7 @@ News
 Quit
 Stop
 Time
-Say (s)
+Yell (y)
 Tell
 Where
 Forward (w)
