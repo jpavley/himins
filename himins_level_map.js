@@ -73,8 +73,8 @@ module.exports.getCurrentLevel = getCurrentLevel;
 // # getSymbolAtPoint(row, col)
 var getSymbolAtPoint = function (row, col) {
   result = currentLevelMap[row].charAt(col);
-  console.log("currentLevelMap[row]: " + currentLevelMap[row]);
-  console.log("result: " + result);
+  //console.log("currentLevelMap[row]: " + currentLevelMap[row]);
+  //console.log("result: " + result);
   return result;
 };
 module.exports.getSymbolAtPoint = getSymbolAtPoint;

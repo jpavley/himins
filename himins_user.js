@@ -277,25 +277,22 @@ var _move = function (userID, direction) {
       newRow,
       nextSymbol;
       
-  if (direction = "w") {
+  if (direction === "w") {
     newRow = row;
     newCol = col + 1;
-  } else if (direction = "s") {
+  } else if (direction === "s") {
     newRow = row;
     newCol = col - 1;    
-  } else if (direction = "a") {
+  } else if (direction === "a") {
     newRow = row - 1;
     newCol = col;    
-  } else if (direction = "d") {
+  } else if (direction === "d") {
     newRow = row + 1;
     newCol = col;    
   }
   
   nextSymbol = level.getSymbolAtPoint(newRow, newCol);
-      
-  //console.log("nextSymbol" + nextSymbol);
-  //console.log("row, col, newCol: " + row + ", " + col + ", " + newCol);
-      
+  
   if (nextSymbol === level.SYMBOL_VOID || nextSymbol === level.SYMBOL_WALL) {
     result = MOVE_HIT_WALL;
   } else if (nextSymbol === level.SYMBOL_UNLOCKED_DOOR) {
@@ -303,8 +300,13 @@ var _move = function (userID, direction) {
   } else if (nextSymbol === level.SYMBOL_LOCKED_DOOR) {
     result = MOVE_HIT_LOCKED_DOOR;
   } else {
-    userRec[USER_COL] = newCol;
+    userRec[USER_COL] = newCol,
+    userRec[USER_ROW] = newRow;
   }
+  
+  //console.log("nextSymbol: " + nextSymbol);
+  //console.log("row, col: " + row + ", " + col);
+  //console.log("newRow, newCol: " + newRow + ", " + newCol);
   
   return result;
 };
