@@ -29,6 +29,7 @@ himinsServer.on('connection', function (client) {
   
   // weclome the user
   client.write(display.eraseScreen);
+  client.write(display.lineWrapOn);
   client.write(process.renderMessageForDisplay(client, 0, lingo) + '\n');
   client.write(display.prompt);
   
