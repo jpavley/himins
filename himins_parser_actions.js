@@ -52,7 +52,19 @@ var _writeGamePrompt = function (client) {
       row = user.getUserRow(client.name) + 1;
       
       client.write(row + ", " + col + " " + display.prompt);
-}
+};
+
+// # writeMiniMapToClient(client)
+// writes the mini map to the client for this user (client) on 3 lines
+var writeMiniMapToClient = function (client) {
+  var miniMap = user.getUserMiniMap(client.name);
+
+  _writeToClient(client, miniMap[0]);
+  _writeToClient(client, miniMap[1]);
+  _writeToClient(client, miniMap[2]);
+
+};
+module.exports.writeMiniMapToClient = writeMiniMapToClient;
 
 // # simpleAction(client, messageID, lingo)
 var _simpleAction = function (client, messageID, lingo) {
@@ -83,8 +95,12 @@ var welcomeAction = function (client, lingo) {
   var messageID = WELCOME_MESSAGE;
   if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
     messageID = GAME_WELCOME_MESSAGE
+    _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
+    writeMiniMapToClient(client);
+    simplePostAction(client, lingo);
+} else {
+    _simpleAction(client, messageID, lingo);
   }
-  _simpleAction(client, messageID, lingo);
 };
 module.exports.welcomeAction = welcomeAction;
 
@@ -147,6 +163,7 @@ var startAction = function (client, lingo) {
   // post action
   user.setUserMode(client.name, user.GAME_USER_MODE);
   _writeToClient(client, process.renderMessageForDisplay(client, GAME_WELCOME_MESSAGE, lingo));
+  writeMiniMapToClient(client);
   _writeGamePrompt(client);  
 };
 module.exports.startAction = startAction;
@@ -219,8 +236,9 @@ var _movementAction = function (client, lingo, result) {
     messageID = HIT_LOCKED_DOOR_ANNOUCEMENT;
 
   }
-    
-  _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
+
+  writeMiniMapToClient(client);
+ _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
   
   // post action
   _writeGamePrompt(client);

@@ -6,7 +6,8 @@
 // In the Himins world moving is more like a modern side scroller than
 // a traditional MUD (where you move from room to room).
 
-var user = require = "./himins_user";
+var user = require('./himins_user'),
+    display = require('./himins_client');
 
 var SYMBOL_VOID = "X",
     SYMBOL_WALL = "*",
@@ -74,7 +75,7 @@ module.exports.getCurrentLevel = getCurrentLevel;
 
 // # getSymbolAtPoint(row, col)
 var getSymbolAtPoint = function (row, col) {
-  result = currentLevelMap[row].charAt(col);
+  var result = currentLevelMap[row].charAt(col);
   //console.log("currentLevelMap[row]: " + currentLevelMap[row]);
   //console.log("result: " + result);
   return result;
@@ -90,6 +91,25 @@ var setSymbolAtPoint = function (row, col, symbol) {
   currentLevelMap[row] = newRowStr;
 };
 module.exports.setSymbolAtPoint = setSymbolAtPoint;
+
+// # getMiniMapAtPoint(row, col)
+// returns a string that represents anine square block around the point (row, col)
+var getMiniMapAtPoint = function (row, col) {
+  var row1 = currentLevelMap[row - 1].substring(col - 1, col + 2),
+      row2part1 = currentLevelMap[row].charAt(col -1),
+      row2part2 = display.reverseVideo + currentLevelMap[row].charAt(col) + display.formatOff,
+      row2part3 = currentLevelMap[row].charAt(col + 1),
+      row2 = row2part1 + row2part2 + row2part3;
+      row3 = currentLevelMap[row + 1].substring(col - 1, col + 2),
+      result = [row1, row2, row3];
+
+
+  console.log(result);
+  return result;
+;
+
+}
+module.exports.getMiniMapAtPoint = getMiniMapAtPoint;
 
 
 

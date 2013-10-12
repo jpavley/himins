@@ -15,7 +15,8 @@ var REMOTE_ADDRESS = 0,
     USER_MODE_ID = 7,
     USER_ROW = 8,
     USER_COL = 9,
-    USER_LEVEL = 10;
+    USER_LEVEL = 10.
+    USER_MINI_MAP = 11;
     
 module.exports.USER_ID = USER_ID;
 module.exports.USER_LINGO = USER_LINGO;
@@ -72,6 +73,7 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
       userRow = level.getDefaultSpawnRow(),
       userCol = level.getDefaultSpawnCol(),
       userLevel = level.getCurrentLevel();
+      userMiniMap = [];
 
   // create user record and add to the list
   var newUser = [ remoteAddress, 
@@ -85,6 +87,7 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
                   userRow,
                   userCol,
                   userLevel,
+                  userMiniMap
                 ];
   userList.push(newUser);
 
@@ -225,8 +228,11 @@ module.exports.getUserMode = getUserMode;
 
 // # setUserMode(userID)
 var setUserMode = function (userID, newMode) {
-  var userRecord = getUserByID(userID);
-  userRecord[USER_MODE_ID] = newMode;
+  var userRec = getUserByID(userID);
+  userRec[USER_MODE_ID] = newMode;
+  if (newMode === GAME_USER_MODE) {
+    userRec[USER_MINI_MAP] = level.getMiniMapAtPoint(userRec[USER_ROW], userRec[USER_COL]);    
+  };
 };
 module.exports.setUserMode = setUserMode;
 
@@ -253,6 +259,15 @@ var getUserLevel = function (userID) {
   return result;
 };
 module.exports.getUserLevel = getUserLevel;
+
+// # getUserMiniMap(userID)
+var getUserMiniMap = function (userID) {
+  var userRecord = getUserByID(userID),
+      result = userRecord[USER_MINI_MAP];
+  return result;
+};
+module.exports.getUserMiniMap = getUserMiniMap;
+
 
 // # goForward(userID)
 var goForward = function (userID) {
@@ -313,8 +328,9 @@ var _move = function (userID, direction) {
   } else {
     userRec[USER_COL] = newCol,
     userRec[USER_ROW] = newRow;
+    userRec[USER_MINI_MAP] = level.getMiniMapAtPoint(newRow, newCol);
   }
-  
+
   //console.log("nextSymbol: " + nextSymbol);
   //console.log("row, col: " + row + ", " + col);
   //console.log("newRow, newCol: " + newRow + ", " + newCol);
