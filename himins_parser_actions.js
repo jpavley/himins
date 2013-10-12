@@ -246,28 +246,28 @@ var _movementAction = function (client, lingo, result) {
 
 // # forwardAction(client, lingo)
 var forwardAction = function (client, lingo) {
-  var result = user.goForward(client.name);
+  var result = user.goLeft(client.name);
   _movementAction(client, lingo, result);     
 };
 module.exports.forwardAction = forwardAction;
 
 // # backAction(client, lingo)
 var backAction = function (client, lingo) {
-  var result = user.goBack(client.name);
+  var result = user.goRight(client.name);
   _movementAction(client, lingo, result);     
 };
 module.exports.backAction = backAction;
 
 // # leftAction(client, lingo)
 var leftAction = function (client, lingo) {
-  var result = user.goLeft(client.name);
+  var result = user.goBack(client.name);
   _movementAction(client, lingo, result);     
 };
 module.exports.leftAction = leftAction;
 
 // # rightAction(client, lingo)
 var rightAction = function (client, lingo) {
-  var result = user.goRight(client.name);
+  var result = user.goForward(client.name);
   _movementAction(client, lingo, result);     
 };
 module.exports.rightAction = rightAction;

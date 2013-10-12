@@ -104,7 +104,7 @@ var getMiniMapAtPoint = function (row, col) {
       result = [row1, row2, row3];
 
 
-  console.log(result);
+  //console.log(result);
   return result;
 ;
 
