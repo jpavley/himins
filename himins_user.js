@@ -39,6 +39,17 @@ module.exports.MOVE_HIT_NOTHING = MOVE_HIT_NOTHING;
 module.exports.MOVE_HIT_WALL = MOVE_HIT_WALL;
 module.exports.MOVE_HIT_DOOR = MOVE_HIT_DOOR;
 module.exports.MOVE_HIT_LOCKED_DOOR = MOVE_HIT_LOCKED_DOOR;
+
+var FORWARD_DIRECTION = 0,
+    BACK_DIRECTION = 1,
+    LEFT_DIRECTION = 2,
+    RIGHT_DIRECTION = 3;
+
+module.exports.FORWARD_DIRECTION = FORWARD_DIRECTION;
+module.exports.BACK_DIRECTION = BACK_DIRECTION;
+module.exports.LEFT_DIRECTION = LEFT_DIRECTION;
+module.exports.RIGHT_DIRECTION = RIGHT_DIRECTION;
+
     
 var userList = [],
     userIndex = 0;
@@ -245,25 +256,25 @@ module.exports.getUserLevel = getUserLevel;
 
 // # goForward(userID)
 var goForward = function (userID) {
-  return _move(userID, "w")
+  return _move(userID, FORWARD_DIRECTION)
 };
 module.exports.goForward = goForward;
 
 // # goBack(userID)
 var goBack = function (userID) {
-  return _move(userID, "s")
+  return _move(userID, BACK_DIRECTION)
 };
 module.exports.goBack = goBack;
 
 // # goLeft(userID)
 var goLeft = function (userID) {
-  return _move(userID, "a")
+  return _move(userID, LEFT_DIRECTION)
 };
 module.exports.goLeft = goLeft;
 
 // # goRight(userID)
 var goRight = function (userID) {
-  return _move(userID, "d")
+  return _move(userID, RIGHT_DIRECTION)
 };
 module.exports.goRight = goRight;
 
@@ -277,16 +288,16 @@ var _move = function (userID, direction) {
       newRow,
       nextSymbol;
       
-  if (direction === "w") {
+  if (direction === FORWARD_DIRECTION) {
     newRow = row;
     newCol = col + 1;
-  } else if (direction === "s") {
+  } else if (direction === BACK_DIRECTION) {
     newRow = row;
     newCol = col - 1;    
-  } else if (direction === "a") {
+  } else if (direction === LEFT_DIRECTION) {
     newRow = row - 1;
     newCol = col;    
-  } else if (direction === "d") {
+  } else if (direction === RIGHT_DIRECTION) {
     newRow = row + 1;
     newCol = col;    
   }

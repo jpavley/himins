@@ -6,6 +6,8 @@
 // In the Himins world moving is more like a modern side scroller than
 // a traditional MUD (where you move from room to room).
 
+var user = require = "./himins_user";
+
 var SYMBOL_VOID = "X",
     SYMBOL_WALL = "*",
     SYMBOL_LOCKED_DOOR = "#",
