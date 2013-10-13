@@ -210,7 +210,7 @@ var tellAction = function (client, lingo) {
 module.exports.tellAction = tellAction;
 
 // # defaultAction(client, lingo)
-var defaultAction = function (client, message) {
+var defaultAction = function (client, message, lingo) {
   // action
   _writeToClient(client, message);
   // post action

@@ -189,7 +189,7 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
   } else {
     // just do something dumb like reverse the input data
     var message = wordsInput.reverse().join("");
-    actions.defaultAction(client, message);         
+    actions.defaultAction(client, message, lingo);         
   }
 };
 
