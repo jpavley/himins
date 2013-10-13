@@ -83,7 +83,11 @@ function broadcast(message, client, kind, lingo) {
                     payload = message;
                 }
                 // write the message
-                clientList[i].write(display.cursorLeftThreeSpaces);
+                if (user.getUserMode(clientList[i].name) === user.GAME_USER_MODE) {
+                  clientList[i].write(display.cursorLeftNineSpaces);                  
+                } else {
+                  clientList[i].write(display.cursorLeftThreeSpaces);                  
+                }
                 clientList[i].write(payload);
                 actions.simplePostAction(clientList[i], lingo);
             } else {
