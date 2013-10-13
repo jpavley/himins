@@ -96,7 +96,6 @@ var welcomeAction = function (client, lingo) {
   if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
     messageID = GAME_WELCOME_MESSAGE
     _writeToClient(client, process.renderMessageForDisplay(client, messageID, lingo));
-    writeMiniMapToClient(client);
     simplePostAction(client, lingo);
 } else {
     _simpleAction(client, messageID, lingo);
@@ -163,7 +162,6 @@ var startAction = function (client, lingo) {
   // post action
   user.setUserMode(client.name, user.GAME_USER_MODE);
   _writeToClient(client, process.renderMessageForDisplay(client, GAME_WELCOME_MESSAGE, lingo));
-  writeMiniMapToClient(client);
   _writeGamePrompt(client);  
 };
 module.exports.startAction = startAction;
@@ -272,15 +270,25 @@ var rightAction = function (client, lingo) {
 };
 module.exports.rightAction = rightAction;
 
+// # renameSuccessAction(client, lingo)
 var renameSuccessAction = function(client, lingo) {
   _simpleAction(client, RENAME_SUCCESS_ANNOUCEMENT, lingo);  
 };
 module.exports.renameSuccessAction = renameSuccessAction;
 
+// # renameFailureAction(client, lingo)
 var renameFailureAction = function(client, lingo) {
   _simpleAction(client, RENAME_FAILURE_ANNOUCEMENT, lingo);  
 };
 module.exports.renameFailureAction = renameFailureAction;
+
+// # whereAction(client, lingo)
+var whereAction = function (client, lingo) {
+  writeMiniMapToClient(client);
+  simplePostAction(client, lingo);
+};
+module.exports.whereAction = whereAction;
+
 
 
 
