@@ -11,7 +11,7 @@ var boldRedOn = "\033[1;31m",
     cursorUp = "\033[1A",
     cursorLeftThreeSpaces = "\033[3D",
     reverseVideo = "\033[7m",
-    lineWrapOn = "\033[?7hc";
+    lineWrapOn = "\033[?7h";
     
 module.exports.boldRedOn = boldRedOn;
 module.exports.boldGreenOn = boldGreenOn;
