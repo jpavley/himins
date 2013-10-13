@@ -77,7 +77,9 @@ var _update = function() {
         if (timeCheckValuesInMinutes[j] === timeRemaining && (j + 1) != userRecord[user.USER_TIME_CHECK_COUNT]) {
           var message = parser.renderMessageForDisplay(client, 18, userRecord[user.USER_LINGO]);
           message = display.boldRedOn + timeCheckValuesInMinutes[j] + display.formatOff + " " + message;
+          console.log(message);
           client.write(message + '\n');
+          // todo: need to check if game mode is true
           client.write(display.prompt);
           userRecord[user.USER_TIME_CHECK_COUNT] += 1;
           // no need to check again during this update for this client    
