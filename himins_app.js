@@ -31,7 +31,7 @@ himinsServer.on('connection', function (client) {
   client.write(display.eraseScreen);
   //client.write(display.lineWrapOn);
   client.write(process.renderMessageForDisplay(client, 0, lingo) + '\n');
-  client.write(display.prompt);
+  client.write(client.name + ": " + display.prompt);
   
   // tell everyone the user is here
   broadcast(process.renderMessageForDisplay(client, 15, lingo) + '\n', client, 'system');

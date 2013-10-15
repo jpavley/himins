@@ -52,7 +52,7 @@ var _writeGamePrompt = function (client) {
   var col = user.getUserCol(client.name) + 1,
       row = user.getUserRow(client.name) + 1;
       
-      client.write(row + ", " + col + " " + display.prompt);
+      client.write(client.name + ": " + row + ", " + col + " " + display.prompt);
 };
 
 // # writeMiniMapToClient(client)
@@ -80,7 +80,7 @@ var simplePostAction = function (client, lingo) {
   if (user.getUserMode(client.name) === user.GAME_USER_MODE) {
     _writeGamePrompt(client);
   } else {
-    _writeToClientNoNL(client, display.prompt);    
+    _writeToClientNoNL(client, client.name + ": " + display.prompt);    
   } 
 };
 module.exports.simplePostAction = simplePostAction;
@@ -180,7 +180,7 @@ var stopAction = function (client, lingo) {
   // post action
   user.setUserMode(client.name, user.NORMAL_USER_MODE);
   _writeToClient(client, process.renderMessageForDisplay(client, WELCOME_MESSAGE, lingo));
-  _writeToClientNoNL(client, display.prompt);  
+  _writeToClientNoNL(client, client.name + ": " + display.prompt);  
 };
 module.exports.stopAction = stopAction;
 
