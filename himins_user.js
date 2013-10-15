@@ -68,6 +68,19 @@ var getUserList = function () {
 };
 module.exports.getUserList = getUserList;
 
+// # deleteUser(userID)
+var deleteUser = function (userID) {
+  
+  for (var i = 0; i < userList.length; i++) {
+    var userRec = userList[i];
+    
+    if (userRec[USER_ID].toLowerCase() === userID.toLowerCase()) {
+      userList.splice(i, 1); // remove the user!
+      break;
+    }
+  }  
+};
+module.exports.deleteUser = deleteUser;
 
 // # createUser()
 // initializes all the fields associated with a user record and adds the user to the userList

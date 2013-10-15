@@ -52,6 +52,7 @@ himinsServer.on('connection', function (client) {
     // stop updating the user loop associated with this client
     user.stopUpdates(client.name);
     // remove client from the list of clients
+    user.deleteUser(client.name);
     clientList.splice(clientList.indexOf(client), 1);
     // log it
     console.log(client.name + ' disconnected by end');
@@ -92,15 +93,15 @@ function broadcast(message, client, kind, lingo) {
                 actions.simplePostAction(clientList[i], lingo);
             } else {
                 // client is not writable, kill it
-                stopUpdates(client);
                 cleanup.push(clientList[i]);
-                clientList[i].destory();
+                clientList[i].destroy();
             }
         }
     }
     
     // remove dead clients from client list
     for (var i = 0, l = cleanup.length; i < l; i += 1 ) {
+        user.deleteUser(clientup[i].name);
         clientList.splice(clientList.indexOf(cleanup[i]), 1);
     }
 };
