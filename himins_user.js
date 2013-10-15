@@ -54,6 +54,20 @@ module.exports.RIGHT_DIRECTION = RIGHT_DIRECTION;
     
 var userList = [],
     userIndex = 0;
+    
+// # getUserList()
+var getUserList = function () {
+  var result = [];
+  
+  for (var i = 0; i < userList.length; i++) {
+    var userRec = userList[i];
+    result.push(userRec[USER_ID]);
+  }
+
+  return result;
+};
+module.exports.getUserList = getUserList;
+
 
 // # createUser()
 // initializes all the fields associated with a user record and adds the user to the userList
@@ -275,7 +289,6 @@ var getUserMiniMap = function (userID) {
   return result;
 };
 module.exports.getUserMiniMap = getUserMiniMap;
-
 
 // # goForward(userID)
 var goForward = function (userID) {

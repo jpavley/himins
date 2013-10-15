@@ -45,6 +45,7 @@ var _parseWithTemplates = function (client, message, lingo) {
   result = result.replace(/{{client-name}}/g, client.name);
   result = result.replace(/{{client-count}}/g, app.clientCount());
   result = result.replace(/{{command-list}}/g, parser.commandsListAsString(lingo));
+  result = result.replace(/{{user-list}}/g, parser.userListAsString(lingo));
   result = result.replace(/{{game-command-list}}/g, parser.gameCommandsListAsString(lingo));
   if (result.indexOf("{{time-remaining}}") != -1) {
     result = result.replace(/{{time-remaining}}/g, user.calcTimeRemaining(client.name))    

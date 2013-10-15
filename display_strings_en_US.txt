@@ -6,14 +6,14 @@ Please request a language. Himins speaks {{boldGreenOn}}English{{formatOff}} and
 Himins is happy to report that your request for {{boldRedOn}}English{{formatOff}} has been accepted.
 Himins is sorry to report that {{boldRedOn}}Spanish{{formatOff}} is not availble at this time.
 Himins will now release you. Your progress has not been saved.
-{{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name (one word, not a command, not the name of another player):
+{{boldRedOn}}{{client-name}}{{formatOff}} please grace us with your name (one word, not a command, not the name of another soul):
 Mortal, during this sesison we will refer to you as {{boldRedOn}}{{client-name}}{{formatOff}}
 Himins is sorry to report that your name choice is not availble at this time.
 {{boldRedOn}}{{client-name}}{{formatOff}} we are happy that you would like to deepen your experience with Himins. Note: once you start the game some services become unavailable while new requests become operational. Please standby...
 Himins reports that you have {{boldRedOn}}{{time-remaining}}{{formatOff}} minuets remaining to play.
 Himins is sorry to report that {{boldRedOn}}tell{{formatOff}} is not availble at this time.
-player {{boldRedOn}}{{client-name}}{{formatOff}} has decended to Earth.
-player {{boldRedOn}}{{client-name}}{{formatOff}} has ascended to Himins.
+soul {{boldRedOn}}{{client-name}}{{formatOff}} has decended to Earth.
+soul {{boldRedOn}}{{client-name}}{{formatOff}} has ascended to Himins.
 Himins is sorry to report that {{boldRedOn}}news{{formatOff}} is not availble at this time.
 Himins is happy to report that {{boldRedOn}}{{client-count}}{{formatOff}} mortals are online. Your name is {{boldRedOn}}{{client-name}}{{formatOff}}. You have {{boldRedOn}}{{time-remaining}}{{formatOff}} minuets remaining. You are in {{boldRedOn}}{{user-mode}}{{formatOff}}.
 minutes left before disconnection. Himins regrets any inconvenience.
@@ -27,3 +27,4 @@ Config Mode
 Welcome to Himins Game {{boldRedOn}}{{client-name}}{{formatOff}}. Please grace us with a request: {{boldGreenOn}}{{game-command-list}}{{formatOff}}
 Sorry, Himins does not comprehend.
 You take a step.
+The following souls have ascended to Himins: {{boldRedOn}}{{user-list}}{{formatOff}}

@@ -30,7 +30,8 @@ var WELCOME_MESSAGE = 0,
     HIT_NOTHING_ANNOUCEMENT = 28,
     HIT_WALL_ANNOUCEMENT = 19,
     HIT_DOOR_ANNOUCEMENT = 20,
-    HIT_LOCKED_DOOR_ANNOUCEMENT =21;
+    HIT_LOCKED_DOOR_ANNOUCEMENT = 21,
+    WHO_MESSAGE = 29;
     
 // # writeToClient(client, message)
 // adds newline at the end
@@ -102,6 +103,12 @@ var welcomeAction = function (client, lingo) {
   }
 };
 module.exports.welcomeAction = welcomeAction;
+
+// # whoAction(client, lingo)
+var whoAction = function (client, lingo) {
+  _simpleAction(client, WHO_MESSAGE, lingo);
+};
+module.exports.whoAction = whoAction;
 
 // # helpAction(client, lingo)
 var helpAction = function (client, lingo) {

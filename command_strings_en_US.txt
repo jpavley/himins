@@ -3,6 +3,7 @@ Help
 About
 Language
 News
+Who
 Quit
 Rename
 Start

@@ -1,6 +1,7 @@
 Welcome
 Help
 News
+Who
 Quit
 Stop
 Time

@@ -111,6 +111,9 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "time") {
     actions.timeAction(client, lingo);
 
+  } else if (wordsInput[0] === "who") {
+    actions.whoAction(client, lingo);
+
   } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
     actions.tellAction(wordsInput, client, lingo);
 
@@ -180,6 +183,9 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
   } else if (wordsInput[0] === "time") {
     actions.timeAction(client, lingo);
 
+  } else if (wordsInput[0] === "who") {
+    actions.whoAction(client, lingo);
+
   } else if (wordsInput[0] === "english") {
     actions.englishAction(client, lingo);
 
@@ -227,6 +233,15 @@ var gameCommandsListAsString = function (lingo) {
   return result;
 };
 module.exports.gameCommandsListAsString = gameCommandsListAsString;
+
+// # userListAsString(lingo)
+var userListAsString = function (lingo) {
+  // todo: undo hardcoding to english
+  var result = user.getUserList().toString();
+  result = result.replace(/,/g, ", ");
+  return result;
+};
+module.exports.userListAsString = userListAsString;
 
 // # isCommand(word)
 var isCommand = function (word, lingo) {  
