@@ -75,8 +75,8 @@ module.exports.processClientData = processClientData;
 var _yell = function (wordsInput, client, lingo) {
   console.log("_yell(" + wordsInput + ", " + client + ", " + lingo + ")");
   // action: broadcast whatever the player said to all the other clients
-  var message = wordsInput.splice(0,1);
-  message = wordsInput.toString();
+  //var message = wordsInput.splice(0,1);
+  var message = wordsInput.toString();
   message = message.replace(/,/g, " ");
   message = message.toUpperCase();
   message = '"' + message + '"' + "\n";
@@ -90,6 +90,9 @@ var _yell = function (wordsInput, client, lingo) {
 // Welcome, Help, News, Quit, Stop, Time, Say (s) Tell (t), Where, Forward (w)
 // Back (s), Left (a), Right (d), Look (l), Take (t), Inventory (i)
 var _handleGameModeActions = function(wordsInput, client, lingo) {
+  
+  console.log("_handleGameModeActions(" + wordsInput + ", " + client + ", " + lingo + ")");
+
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
       
@@ -109,7 +112,7 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
     actions.timeAction(client, lingo);
 
   } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
-    actions.tellAction(client, lingo);
+    actions.tellAction(wordsInput, client, lingo);
 
   } else if (wordsInput[0] === "yell" || wordsInput[0] === "y") {
     _yell(wordsInput, client, lingo); 
@@ -147,6 +150,9 @@ var _handleGameModeActions = function(wordsInput, client, lingo) {
 // Normal mode commands handled: Welcome, Help, About, Language, News, Quit, Rename, 
 // Start, English, Spanish, Say (s), Tell (t)
 var _handleNormalModeActions = function(wordsInput, client, lingo) {
+  
+  console.log("_handleNormalModeActions(" + wordsInput + ", " + client + ", " + lingo + ")");
+  
   if (wordsInput[0] === "welcome") {
     actions.welcomeAction(client, lingo);
       
@@ -181,7 +187,7 @@ var _handleNormalModeActions = function(wordsInput, client, lingo) {
     actions.spanishAction(client, lingo);
 
   } else if (wordsInput[0] === "tell" || wordsInput[0] === "t") {
-    actions.tellAction(client, lingo);
+    actions.tellAction(wordsInput, client, lingo);
 
   } else if (wordsInput[0] === "yell" || wordsInput[0] === "y") {
     _yell(wordsInput, client, lingo); 

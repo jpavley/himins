@@ -65,7 +65,8 @@ var createUser = function(remoteAddress, remotePort, remoteLingo) {
   userIndex++;
   
   // init user fields
-  var userID = "Mortal" + userIndex,
+  // todo: fix hardcoded english
+  var userID = "mortal" + userIndex,
       userStartTime = new Date().getTime(),
       userIntervalID = 0,
       userTimeCheckCount = 0,
@@ -115,13 +116,17 @@ module.exports.calcTimeRemaining = calcTimeRemaining;
 // # isUserID(userID)
 // return true if the input is an existing user's name
 var isUserID = function (userID) {
+  //console.log("isUserID(" + userID + ")");
+    
   var result = false;
   for (var i = 0; i < userList.length; i++) {
-    var userRecord = userList[i];
-    if (userRecord[USER_ID] === userID) {
+    var userRec = userList[i];
+           
+    if (userRec[USER_ID].toLowerCase() === userID.toLowerCase()) {
       result = true;
       break;
     }
+    
   }
   return result;
 };
@@ -130,13 +135,16 @@ module.exports.isUserID = isUserID;
 // # setUserID(oldID, newID)
 // change the ID (name) of a user
 var setUserID = function (oldID, newID) {
+  
   for (var i = 0; i < userList.length; i++) {
     var userRecord = userList[i];
-    if (userRecord[USER_ID] === oldID) {
-      userRecord[USER_ID] = newID;
+    
+    if (userRecord[USER_ID].toLowerCase() === oldID.toLowerCase()) {
+      userRecord[USER_ID] = newID.toLowerCase();
       app.setClientName(oldID, newID);
       break;
     }
+    
   }  
 };
 module.exports.setUserID = setUserID;

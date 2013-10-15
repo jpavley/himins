@@ -78,7 +78,7 @@ function broadcast(message, client, kind, lingo) {
                 var payload;
                 if (kind === 'user') {
                     // todo: localize "say"
-                    payload = display.boldRedOn + client.name + display.formatOff + ' says ' + message;
+                    payload = display.boldRedOn + client.name + display.formatOff + ' yells to everyone ' + message;
                 } else {
                     payload = message;
                 }
@@ -121,13 +121,28 @@ module.exports.getClientList = getClientList;
 // # setClientName(oldID, newID)
 var setClientName = function (oldID, newID) {
   for (var i = 0; i < clientList.length; i++) {
-    if (clientList[i].name === oldID) {
-      clientList[i].name = newID;
+    if (clientList[i].name.toLowerCase() === oldID.toLowerCase()) {
+      clientList[i].name = newID.toLowerCase();
       break;
     }
   }
 };
 module.exports.setClientName = setClientName;
+
+// # getClientByID(clientID)
+var getClientByID = function(clientID) {
+
+  var result = "";
+  for (var i = 0; i < clientList.length; i++) {
+    if (clientList[i].name.toLowerCase() === clientID.toLowerCase()) {
+      result = clientList[i];
+      break;
+    }
+  } 
+  return result; 
+}
+module.exports.getClientByID = getClientByID;
+
 
 // # main entry point of himins_app
 

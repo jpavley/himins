@@ -201,9 +201,65 @@ var sayAction = function (client, lingo) {
 };
 module.exports.sayAction = sayAction;
 
-// # tellAction(client, lingo)
-var tellAction = function (client, lingo) {
-  _simpleAction(client, TELL_MESSAGE, lingo);  
+// # tellAction(wordsInput, client, lingo)
+var tellAction = function (wordsInput, client, lingo) {
+  
+  var recipientID = wordsInput[1],
+      message = "",
+      payload = "",
+      recipientClient;
+  
+  if (!recipientID) {
+    console.log("== invald recipientID");
+    dontUnderstandAction(client, lingo);
+    return;
+  }
+  
+  if (!user.isUserID(recipientID)) {
+    console.log("== recipientID is not a userID");
+    dontUnderstandAction(client, lingo);
+    return;
+  }
+  
+  if (wordsInput.length < 3) {
+    console.log("== no message");
+    dontUnderstandAction(client, lingo);
+    return;
+  }
+  
+  //console.log("*** wordsInput: " + wordsInput);
+
+  //message = wordsInput.splice(0,2);
+  
+  //console.log("*** message: " + message);
+  
+  message = wordsInput.toString();
+  
+  console.log("*** message: " + message);
+
+  message = message.replace(/,/g, " ");
+  
+  console.log("*** message: " + message);
+
+  message = '"' + message + '"' + "\n";
+  
+  console.log("*** message: " + message);
+
+   
+  // todo: remove hardcoded english
+  payload = display.boldRedOn + client.name + display.formatOff + ' says to you ' + message;
+  recipientClient = app.getClientByID(recipientID);
+  
+  if (user.getUserMode(recipientClient.name) === user.GAME_USER_MODE) {
+    recipientClient.write(display.cursorLeftNineSpaces);                  
+  } else {
+    recipientClient.write(display.cursorLeftThreeSpaces);                  
+  }
+  
+  recipientClient.write(payload);
+  actions.simplePostAction(recipientClient, lingo);
+  simplePostAction(client, lingo);
+  
 };
 module.exports.tellAction = tellAction;
 
