@@ -75,8 +75,8 @@ module.exports.processClientData = processClientData;
 var _yell = function (wordsInput, client, lingo) {
   console.log("_yell(" + wordsInput + ", " + client + ", " + lingo + ")");
   // action: broadcast whatever the player said to all the other clients
-  //var message = wordsInput.splice(0,1);
-  var message = wordsInput.toString();
+  var message = wordsInput.splice(0,1);
+  message = wordsInput.toString();
   message = message.replace(/,/g, " ");
   message = message.toUpperCase();
   message = '"' + message + '"' + "\n";

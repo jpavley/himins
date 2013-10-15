@@ -229,9 +229,9 @@ var tellAction = function (wordsInput, client, lingo) {
   
   //console.log("*** wordsInput: " + wordsInput);
 
-  //message = wordsInput.splice(0,2);
+  message = wordsInput.splice(0,2);
   
-  //console.log("*** message: " + message);
+  console.log("*** message: " + message);
   
   message = wordsInput.toString();
   
