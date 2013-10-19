@@ -5,7 +5,7 @@
 var user = require('./himins_user'),
     display = require('./himins_client');
     
-var discriptionsFileName = "",
+var roomFileName = "",
     discriptions = [],
     hotSpots = [],
     items = [],
