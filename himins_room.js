@@ -16,7 +16,8 @@ var roomFileName = "",
 // #init()
 var init = function (roomFileName) {
 	var data = fs.readFileSync(roomFileName);
+	console.log(data);
 	roomObject = JSON.parse(data);
-	consol.log(roomObject);
+	console.log(roomObject);
 };
 module.exports.init = init;

@@ -6,7 +6,7 @@ var user = require('./himins_user'),
     parser = require('./himins_parser'),
     display = require('./himins_client'),
     level = require('./himins_level_map'),
-    room = require('./himims_room');;
+    room = require('./himins_room');
 
 var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
