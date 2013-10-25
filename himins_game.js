@@ -5,7 +5,8 @@ var user = require('./himins_user'),
     app = require('./himins_app'),
     parser = require('./himins_parser'),
     display = require('./himins_client'),
-    level = require('./himins_level_map');
+    level = require('./himins_level_map'),
+    room = require('./himims_room');;
 
 var MAX_PLAY_TIME_MS = 60 * (60 * 1000),
     UPDATES_PER_SECOND = 1;
@@ -26,8 +27,9 @@ module.exports.run = run;
 
 // # Init()
 var init = function () {
-  // load the level map
+  // load the level map and room
   level.loadLevelMap(1);
+  room.init("himins_room_01.json");
 
   // start up the game loop
   intervalID = setInterval(run, 1000 / UPDATES_PER_SECOND);
