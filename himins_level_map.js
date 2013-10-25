@@ -62,7 +62,9 @@ var loadRoomsForLevel = function() {
 		//console.log(data.toString());
 		console.log("**** room object ****");
 		roomObjects[i] = JSON.parse(data);
-		console.log(roomObjects[i]);
+		var room1 = roomObjects[i];
+		console.log(room1.name);
+		console.log(room1.generalDescription);
 	}
 };
 
