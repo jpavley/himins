@@ -1,22 +1,15 @@
 {
 	"name": "Narthex",
-	"generalDescription": "You stand in a dusty, empty, square room, the size of a large 
-	walk-in wardrobe. The floor is ice-cold marble caked in inches of fine gray particles. 
-	The prints of hundreds or thousands of bare feet criss cross the room. Mysterious piles 
-	sit in shadow in each corner of the room. You hear a murmur of soft voices whispering 
-	from all directions and impossible to fathom. The walls are tessellated with dirty 
-	ceramic tiles. On each tile is inscribed with words. In the center of one of the walls 
-	is a freshly painted wooden door with a brass handle.",
+	"generalDescription": "You stand in a dusty, empty, square room, the size of a large walk-in wardrobe. The floor is ice-cold marble caked in inches of fine gray particles. The prints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in each corner of the room. You hear a murmur of soft voices whispering from all directions and impossible to fathom. The walls are tessellated with dirty ceramic tiles. On each tile is inscribed with words. In the center of one of the walls is a freshly painted wooden door with a brass handle.",
 	"hotSpots": {
 		"hotSpot": {
 			"row": "100",
 			"col": "100",
 			"type": "loot",
-			"description": "In this corner is a pile of rusty broadswords, daggers, and axes. 
-			But one {{boldRedOn}}small knife{{formatOff}} looks clean and sharp.",
+			"description": "In this corner is a pile of rusty broadswords, daggers, and axes. But one {{boldRedOn}}small knife{{formatOff}} looks clean and sharp.",
 			"item": {
 				"name": "small knife",
-               "command": "take",
+        "command": "take",
 				"description": "A small steel knife, sharp but not worthy of a name.",
 				"hitPoints": "10",
 				"slot": "sword"
@@ -26,11 +19,10 @@
 			"row": "100",
 			"col": "100",
 			"type": "loot",
-			"description": "In this corner is a pile of tarnished brass chain mail. But one 
-			coat of tightly {{boldRedOn}}ringed mail{{formatOff}} with leather straps looks new and ready to wear.",
+			"description": "In this corner is a pile of tarnished brass chain mail. But one coat of tightly {{boldRedOn}}ringed mail{{formatOff}} with leather straps looks new and ready to wear.",
 			"item": {
 				"name": "ringed mail",
-              "command": "take",
+        "command": "take",
 				"description": "A coat of tightly ringed brass mail with leather straps, well worn.",
 				"hitPoints": "100",
 				"slot": "chest"
@@ -40,8 +32,7 @@
 			"row": "100",
 			"col": "100",
 			"type": "loot",
-			"description": "In this corner is a pile of dented brass helms. But one {{boldRedOn}}shiny 
-			skullcap{{formatOff}} looks like it might fit you.",
+			"description": "In this corner is a pile of dented brass helms. But one {{boldRedOn}}shiny skullcap{{formatOff}} looks like it might fit you.",
 			"item": {
 				"name": "shiny skullcap",
               "command": "take",
@@ -54,8 +45,7 @@
 			"row": "100",
 			"col": "100",
 			"type": "loot",
-			"description": "In this corner is a pile of splintered wooden shields. But one 
-			{{boldRedOn}}wooden buckler{{foramtOff}} with brass fittings looks light and sturdy enough to be worth taking.",
+			"description": "In this corner is a pile of splintered wooden shields. But one {{boldRedOn}}wooden buckler{{foramtOff}} with brass fittings looks light and sturdy enough to be worth taking.",
 			"item": {
 				"name": "wooden buckler",
               "command": "take",
@@ -68,22 +58,15 @@
 			"row": "100",
 			"col": "100",
 			"type": "puzzel",
-			"description": "The tiles on the bulwark before you cover the wall without making a 
-			rational pattern. At least not one that you can perceive. It seems the tiles have 
-			been scrambled. Printed on each tile is a word. Some are even in a language you 
-			understand. The Tiles looks like you can sort them by swaping two tiles at 
-           a time. Currently the tiles are in the following order: {{current-tile-squence}}",
-           "successDescription": "Congratulations! The tiles are in the correct order: {{current-tile-squence}}.
-           You hear a click from the lock on the silver door. You should check it out."
+			"description": "The tiles on the bulwark before you cover the wall without making a rational pattern. At least not one that you can perceive. It seems the tiles have been scrambled. Printed on each tile is a word. Some are even in a language you understand. The Tiles looks like you can sort them by swaping two tiles at a time. Currently the tiles are in the following order: {{current-tile-squence}}",
+           "successDescription": "Congratulations! The tiles are in the correct order: {{current-tile-squence}}. You hear a click from the lock on the silver door. You should check it out."
            "failDescription": "Darn it all to heck! The tiles are not in the correct order: {{current-tile-squence}}."
            "items": {
              "item": {
               "name": "green tile",
               "command": "swap with",
-              "description": "A tile with the name of a famous poet on it. It's current position
-              on the wall is {{current-position}}",
-              "successDescription": "You easily swap the green tile with with the {{command-target}}. The green tile is 
-              now in position {{current-position}}."
+              "description": "A tile with the name of a famous poet on it. It's current position on the wall is {{current-position}}",
+              "successDescription": "You easily swap the green tile with with the {{command-target}}. The green tile is now in position {{current-position}}."
               "failDescription": "You can't swap the green tile with with the {{command-target}}."
               "currentPostion": "2",
               "sovedPosition": "1"
@@ -91,11 +74,8 @@
              "item": {
               "name": "blue tile",
               "command": "swap with",
-              "description": "A tile with the name of a famous poet on it. It's current position
-              on the wall is {{current-position}}",
-              on the wall is {{current-position}}",
-              "successDescription": "You easily swap the blue tile with with the {{command-target}}. The blue tile is 
-              now in position {{current-position}}."
+              "description": "A tile with the name of a famous poet on it. It's current position on the wall is {{current-position}}",
+              "successDescription": "You easily swap the blue tile with with the {{command-target}}. The blue tile is now in position {{current-position}}."
               "failDescription": "You can't swap the blue tile with with the {{command-target}}."
               "currentPostion": "1",
               "sovedPosition": "2"
@@ -103,11 +83,8 @@
              "item": {
               "name": "red tile",
               "command": "swap with",
-              "description": "A tile with the name of a famous poet on it.  It's current position
-              on the wall is {{current-position}}",
-              on the wall is {{current-position}}",
-              "successDescription": "You easily swap the red tile with with the {{command-target}}. The red tile is 
-              now in position {{current-position}}."
+              "description": "A tile with the name of a famous poet on it.  It's current position on the wall is {{current-position}}",
+              "successDescription": "You easily swap the red tile with with the {{command-target}}. The red tile is now in position {{current-position}}."
               "failDescription": "You can't swap the red tile with with the {{command-target}}."
               "currentPostion": "4",
               "sovedPosition": "3"
@@ -115,31 +92,27 @@
              "item": {
               "name": "yellow tile",
               "command": "swap with",
-              "description": "A tile with the name of a famous poet on it.  It's current position
-              on the wall is {{current-position}}",
-              on the wall is {{current-position}}",
-              "successDescription": "You easily swap the yellow tile with with the {{command-target}}. The yellow tile is 
-              now in position {{current-position}}."
+              "description": "A tile with the name of a famous poet on it.  It's current position on the wall is {{current-position}}",
+              "successDescription": "You easily swap the yellow tile with with the {{command-target}}. The yellow tile is now in position {{current-position}}."
               "failDescription": "You can't swap the yellow tile with with the {{command-target}}."
               "currentPostion": "3",
               "sovedPosition": "4"
             },           
           },
 		},
-      "hotSpot": {
-        "row": "100",
-        "col": "100",
-        "type": "door",
-        "description": "You stand before a silver door in which you can see your reflection. In the center of the 
-        door is a {{boldRedOn}golden knob{{formatOff}. The knob is {{golden-knob-locked-state}}",
-        "successDescription": "The silver door swings open. You can enter into the next room if you dare."
-        "item": {
-          "name": "golden knob",
-          "command": "turn"
-          "description": "A golden knob that is waiting to be turned. The knob is {{golden-knob-locked-state}}",
-          "failDescription": "The golden knob is locked. You can't turn it.",
-          "successDescription": "The golden know is unlocked. You easily turn it."
-        },
-      },
+		"hotSpot": {
+			"row": "100",
+			"col": "100",
+			"type": "door",
+			"description": "You stand before a silver door in which you can see your reflection. In the center of the door is a {{boldRedOn}golden knob{{formatOff}. The knob is {{golden-knob-locked-state}}",
+			"successDescription": "The silver door swings open. You can enter into the next room if you dare."
+			"item": {
+				"name": "golden knob",
+				"command": "turn"
+				"description": "A golden knob that is waiting to be turned. The knob is {{golden-knob-locked-state}}",
+				"failDescription": "The golden knob is locked. You can't turn it.",
+				"successDescription": "The golden know is unlocked. You easily turn it."
+			},
+		},
 	},
 }
