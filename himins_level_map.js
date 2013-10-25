@@ -27,7 +27,9 @@ var levelMapFileName = "",
     levelMapWidth = 0,
     levelMapHeight = 0,
     currentLevel = 0,
-    currentLevelMap = [];
+    currentLevelMap = [],
+    roomFiles = [],
+    roomObjects = [];
     
 // # loadLevelMap(level)
 var loadLevelMap = function (level) {
@@ -37,7 +39,8 @@ var loadLevelMap = function (level) {
     defaultSpawnRow = 14;
     defaultSpawnCol = 2;
     levelMapWidth = 43;
-    levelMapHeight = 29;
+    levelMapHeight = 29
+    roomFiles = ["himins_room_01.json"];
     
     currentLevelMap = fs.readFileSync(levelMapFileName).toString().split("\n");
 
@@ -45,9 +48,23 @@ var loadLevelMap = function (level) {
           console.log("Error loading level map: " + levelMapFile);
     }
     //console.log(currentLevelMap);
+    
+    loadRoomsForLevel();
   }
 };
 module.exports.loadLevelMap = loadLevelMap;
+
+// # loadRoomsForLevel()
+var loadRoomsForLevel = function() {
+	for (var i = 0; i < roomFiles.length; i++) {
+		var data = fs.readFileSync(roomFiles[i]);
+		console.log("**** room data ****");
+		//console.log(data.toString());
+		console.log("**** room object ****");
+		roomObjects[i] = JSON.parse(data);
+		console.log(roomObjects[i]);
+	}
+};
 
 // # getLevelMapName()
 var getLevelMapName = function () {

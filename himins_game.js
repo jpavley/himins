@@ -29,7 +29,6 @@ module.exports.run = run;
 var init = function () {
   // load the level map and room
   level.loadLevelMap(1);
-  room.init("himins_room_01.json");
 
   // start up the game loop
   intervalID = setInterval(run, 1000 / UPDATES_PER_SECOND);
