@@ -1,0 +1,19 @@
+{
+	"name": "Himins",
+	"version": "0.0.1",
+	"description": "Himins is a MUD, a multi user dungeon with a command line interface. It is written in JavaScript on Node.js and MongoDB. To play Himins you run it on a Node.js server and access the server with a Telnet client from a terminal window.",
+	"commands": [
+		{
+			"name": "help",
+			"description": "Himins reports that the following commands work here: !COMMAND_LIST",
+			"action": "!NO_ACTION"
+		}
+	],
+	"rooms": [
+		{
+			""			
+		}
+	],
+	"players": [
+	]
+}
