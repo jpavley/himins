@@ -59,6 +59,27 @@ var init = function () {
 };
 module.exports.init = init;
 
+//# loadRoom(roomFileName)
+var loadRoom = function (roomFileName, testMode) {
+	console.log('** himins_room.js loadRoom(%s, %s)', roomFileName, testMode);
+
+	fs.readFile(roomFileName, 'utf8', function (err, data) {
+		if(err) {
+			console.log(err);
+		} else {
+			roomObject = JSON.parse(data);
+			//console.log(roomObject.name);
+			init();
+			if (testMode) {
+				moduleTests();
+			};
+			//processUserInput();
+		}
+	});
+};
+module.exports.loadRoom = loadRoom;
+
+
 // # loadSectionCommands(sectionName)
 var loadSectionCommands = function (sectionName) {
 	// console.log('*** himins_room.js loadSectionCommands(%s)', sectionName);
@@ -108,23 +129,6 @@ var getPlayerInventory = function () {
 	result = result.replace(/,/g, ", ");
 	return 'You have the following items: ' + result;
 };
-
-//# loadRoom(roomFileName)
-var loadRoom = function (roomFileName) {
-	//console.log('** himins_room.js loadRoom(%s)', roomFileName);
-
-	fs.readFile(roomFileName, 'utf8', function (err, data) {
-		if(err) {
-			console.log(err);
-		} else {
-			roomObject = JSON.parse(data);
-			//console.log(roomObject.name);
-			init();
-			processUserInput();
-		}
-	});
-};
-module.exports.loadRoom = loadRoom;
 
 // # getSectionByName(name)
 var getSectionByName = function (name) {
@@ -285,6 +289,13 @@ var resolveFunctions = function (text) {
 	result = result.replace(/!PLAYER_LOCATION/g, playerLocation);
 
 	return result;
+};
+
+// # tests()
+var moduleTests = function () {
+	console.log('*** himins_room.js test mode start ***')
+	console.log('*** himins_room.js test mode end ***')
+
 };
 
 
