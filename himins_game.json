@@ -8,12 +8,39 @@
 			"description": "Himins reports that the following commands work here: !COMMAND_LIST",
 			"action": "!NO_ACTION"
 		}
+		{
+			"name": "look",
+			"description": "!ROOM_DESCRIPTION",
+			"action": "!NO_ACTION"
+		}
+		{
+			"name": "where",
+			"description": "Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*",
+			"action": "!NO_ACTION"
+		}
+		{
+			"name": "quit",
+			"description": "Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*",
+			"action": "!NO_ACTION"
+		}
+		{
+			"name": "inventory",
+			"description": "You have the following items: !PLAYER_INVENTORY",
+			"action": "!NO_ACTION"
+		}
 	],
 	"rooms": [
 		{
-			""			
+			"name": "Narthex",
+			"file": "himins_room_1.json",
+			"position": 1			
 		}
 	],
 	"players": [
+		{
+			"name": "Mortal",
+			"file": "himins_player.json",
+			"kind": "player",
+		}
 	]
 }
