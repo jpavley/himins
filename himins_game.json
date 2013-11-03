@@ -5,28 +5,33 @@
 	"commands": [
 		{
 			"name": "help",
-			"description": "Himins reports that the following commands work here: !COMMAND_LIST",
-			"action": "!NO_ACTION"
-		}
+			"description": "Himins reports that the following commands work here: !COMMAND_NAMES",
+			"action": "!NO_ACTION",
+			"kind": "game"
+		},
 		{
 			"name": "look",
 			"description": "!ROOM_DESCRIPTION",
-			"action": "!NO_ACTION"
-		}
+			"action": "!NO_ACTION",
+			"kind": "game"
+		},
 		{
 			"name": "where",
 			"description": "Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*",
-			"action": "!NO_ACTION"
-		}
+			"action": "!NO_ACTION",
+			"kind": "game"
+		},
 		{
 			"name": "quit",
 			"description": "Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*",
-			"action": "!NO_ACTION"
-		}
+			"action": "!NO_ACTION",
+			"kind": "game"
+		},
 		{
 			"name": "inventory",
 			"description": "You have the following items: !PLAYER_INVENTORY",
-			"action": "!NO_ACTION"
+			"action": "!NO_ACTION",
+			"kind": "game"
 		}
 	],
 	"rooms": [
@@ -40,7 +45,7 @@
 		{
 			"name": "Mortal",
 			"file": "himins_player.json",
-			"kind": "player",
+			"kind": "player"
 		}
 	]
 }
