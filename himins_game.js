@@ -9,15 +9,20 @@ var gameObject = {};
 
 //# init()
 var init = function () {
-	console.log('** himins_game.js init()');
-	console.log(getCommandNames());
-	addCommand({ name: 'test', 
-		description: 'this is a test',
-		action: '!NO_ACTION',
-		kind: 'test' }
-	);
-	console.log(getCommandNames());
-	console.log(getCommandByName('test'));
+//console.log('** himins_game.js init()');
+
+// tests
+// console.log(getCommandNames());
+// addCommand({ name: 'test', 
+// 	description: 'this is a test',
+// 	action: '!NO_ACTION',
+// 	kind: 'test' }
+// );
+// console.log(getCommandNames());
+// console.log(getCommandByName('test'));
+// removeCommandByName('test');
+// console.log(getCommandNames());
+
 };
 module.exports.init = init;
 
@@ -68,6 +73,17 @@ var getCommandByName = function (commandName) {
 		}
 	}
 	return result;
+};
+
+// # removeCommandByName(commandName)
+var removeCommandByName = function (commandName) {
+
+	for (var i = gameObject.commands.length - 1; i >= 0; i--) {
+		if (gameObject.commands[i].name === commandName) {
+			gameObject.commands.splice(i, 1); // remove 1 element at index i
+			break;
+		}
+	}
 };
 
 // # main entry point
