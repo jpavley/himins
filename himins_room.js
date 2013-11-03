@@ -267,7 +267,7 @@ var renderFormatCodes = function (text) {
 	result = result.replace(/_-/g, NORMAL_ESC + '-');
 	result = result.replace(/_$/g, NORMAL_ESC); // match _ at EOL
 
-	result = result.replace(/ \*/g, ' ' + UL_BLUE_ESC);
+	result = result.replace(/ \*/g, ' ' + BOLD_GREEN_ESC);
 	result = result.replace(/\* /g, NORMAL_ESC + ' ');
 	result = result.replace(/\*,/g, NORMAL_ESC + ',');
 	result = result.replace(/\*\./g, NORMAL_ESC + '.');
