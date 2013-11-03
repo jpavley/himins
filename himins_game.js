@@ -2,10 +2,12 @@
 // Manages a game object from a himins game JSON file.
 
 // ## includes
-var fs = require('fs');
+var fs = require('fs'),
+		room = require('./himins_room.js');
 
 // ## module vars
-var gameObject = {};
+var gameObject = {}, 
+		roomObject = {};
 
 //# init()
 var init = function () {
@@ -17,6 +19,9 @@ addCommand({ name: gameObject.name.toLowerCase(),
 		action: '!NO_ACTION',
 		kind: 'game' }
 	);
+
+// load the starter room and add them to the room list
+room.loadRoom(gameObject.roomFile, gameObject.commands);
 
 };
 module.exports.init = init;
@@ -102,10 +107,10 @@ var moduleTests = function () {
 	console.log('command names: ' + getCommandNames());
 	console.log(gameObject.name);
 	console.log(gameObject.description);
-	console.log('*** himins_game.js test mode end ***')
+	console.log('*** himins_game.js test mode end ***');
 };
 
 // # main entry point
 // For testing purposes you can run this file directly with "node himins_game.js". The test logic expects a file named "himins_game.json" with the defination of a game object!
 
-loadGame('himins_game.json', true);
+loadGame('himins_game.json', false);

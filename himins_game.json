@@ -11,7 +11,7 @@
 		},
 		{
 			"name": "look",
-			"description": "!ROOM_DESCRIPTION",
+			"description": "!ROOM_DESCRIPTION !SECTION_DESCRIPTION",
 			"action": "!NO_ACTION",
 			"kind": "game"
 		},
@@ -34,18 +34,5 @@
 			"kind": "game"
 		}
 	],
-	"rooms": [
-		{
-			"name": "Narthex",
-			"file": "himins_room_1.json",
-			"position": 1			
-		}
-	],
-	"players": [
-		{
-			"name": "Mortal",
-			"file": "himins_player.json",
-			"kind": "player"
-		}
-	]
+	"roomFile": "himins_room_1.json"
 }
