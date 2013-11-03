@@ -11,6 +11,13 @@ var gameObject = {};
 var init = function () {
 //console.log('** himins_game.js init()');
 
+// add the name of the game as a command
+addCommand({ name: gameObject.name.toLowerCase(), 
+		description: gameObject.description,
+		action: '!NO_ACTION',
+		kind: 'game' }
+	);
+
 };
 module.exports.init = init;
 
@@ -93,6 +100,8 @@ var moduleTests = function () {
 	removeCommandByName('test');
 	console.log('*** removed command test ***')
 	console.log('command names: ' + getCommandNames());
+	console.log(gameObject.name);
+	console.log(gameObject.description);
 	console.log('*** himins_game.js test mode end ***')
 };
 
