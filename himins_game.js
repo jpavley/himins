@@ -11,23 +11,11 @@ var gameObject = {};
 var init = function () {
 //console.log('** himins_game.js init()');
 
-// tests
-// console.log(getCommandNames());
-// addCommand({ name: 'test', 
-// 	description: 'this is a test',
-// 	action: '!NO_ACTION',
-// 	kind: 'test' }
-// );
-// console.log(getCommandNames());
-// console.log(getCommandByName('test'));
-// removeCommandByName('test');
-// console.log(getCommandNames());
-
 };
 module.exports.init = init;
 
-//# loadGame(gameFileName)
-var loadGame = function (gameFileName) {
+//# loadGame(gameFileName, testMode)
+var loadGame = function (gameFileName, testMode) {
 	//console.log('** himins_game.js loadGame(%s)', gameFileName);
 
 	fs.readFile(gameFileName, 'utf8', function (err, data) {
@@ -37,6 +25,9 @@ var loadGame = function (gameFileName) {
 			gameObject = JSON.parse(data);
 			//console.log(gameObject);
 			init();
+			if (testMode) {
+				moduleTests();
+			};
 		}
 	});
 };
@@ -86,7 +77,26 @@ var removeCommandByName = function (commandName) {
 	}
 };
 
+// # tests()
+var moduleTests = function () {
+	console.log('*** himins_game.js test mode start ***')
+	console.log('command names: ' + getCommandNames());
+	addCommand({ name: 'test', 
+		description: 'this is a test',
+		action: '!NO_ACTION',
+		kind: 'test' }
+	);
+	console.log('*** added command test ***')
+	console.log('command names: ' + getCommandNames());
+	console.log('*** get a command by name (test) ***')
+	console.log(getCommandByName('test'));
+	removeCommandByName('test');
+	console.log('*** removed command test ***')
+	console.log('command names: ' + getCommandNames());
+	console.log('*** himins_game.js test mode end ***')
+};
+
 // # main entry point
 // For testing purposes you can run this file directly with "node himins_game.js". The test logic expects a file named "himins_game.json" with the defination of a game object!
 
-loadGame('himins_game.json');
+loadGame('himins_game.json', true);
