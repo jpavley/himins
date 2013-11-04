@@ -11,8 +11,12 @@ var commandsList = [];
 
 // # init(starterCommands)
 var init = function (starterCommands) {
+	//console.log('himins_command.js init(', starterCommands, ')');
 	if (starterCommands) {
-		commandsList.concat(starterCommands);
+		//commandsList.concat(starterCommands); concat no work!
+		for (var i = starterCommands.length - 1; i >= 0; i--) {
+			commandsList.push(starterCommands[i]);
+		};
 	};
 };
 module.exports.init = init;
