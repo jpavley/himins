@@ -9,7 +9,6 @@ var fs = require('fs'),
 // ## module vars
 var roomObject = {},
 		playerLocation = '',
-		playerInventory = ['silver obol'];
 
 // ## consts
 var BOLD_RED_ESC = '\033[1;31m',
@@ -79,12 +78,6 @@ var loadNavigationCommands = function () {
 													action: '!SET_LOCATION',
 													kind: 'navigation' });
 	}
-};
-
-var getPlayerInventory = function () {
-	var result = playerInventory.toString();
-	result = result.replace(/,/g, ", ");
-	return 'You have the following items: ' + result;
 };
 
 // # getSectionByName(name)
