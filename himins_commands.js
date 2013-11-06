@@ -69,8 +69,8 @@ var removeCommandByName = function (commandName) {
 };
 module.exports.removeCommandByName = removeCommandByName;
 
-// # removeCommandByKind(commandKind)
-var removeCommandByKind = function (commandKind) {
+// # removeCommandsByKind(commandKind)
+var removeCommandsByKind = function (commandKind) {
 
 	for (var i = commandsList.length - 1; i >= 0; i--) {
 		if (commandsList[i].kind === commandKind) {
@@ -79,6 +79,6 @@ var removeCommandByKind = function (commandKind) {
 		}
 	}
 };
-module.exports.removeCommandByName = removeCommandByKind;
+module.exports.removeCommandsByKind = removeCommandsByKind;
 
 
