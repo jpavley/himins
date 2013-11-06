@@ -4,7 +4,8 @@
 // ## includes
 var fs = require('fs'),
 	room = require('./himins_room.js'),
-	commands = require('./himins_commands.js');
+	commands = require('./himins_commands.js'),
+	strutils = require('./himins_string_utils.js');
 
 // ## module vars
 var gameObject = {}, 
@@ -13,6 +14,9 @@ var gameObject = {},
 //# init()
 var init = function () {
 	//console.log('** himins_game.js init()');
+
+	// add String object extentions
+	strutils.init();
 
 	// init the commands object and add the predefined game commands to it
 	commands.init(gameObject.commands);

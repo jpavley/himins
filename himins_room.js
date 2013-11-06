@@ -22,20 +22,6 @@ var BOLD_RED_ESC = '\033[1;31m',
 var init = function () {
 	//console.log('** himins_room.js init()'');
 
-	// add functionality to String object
-
-	String.prototype.repeat = function (count) {
-		return new Array(count + 1).join(this);
-	};
-
-	String.prototype.unformattedLength = function () {
-		var result = this;
-		 // remove underscores, astericks, and seperators!
-		result = this.split('_').join('');
-		result = this.split('*').join('');
-		return result.length;
-	};
-
 	// player
 	playerLocation = roomObject.spawnSection;
 
@@ -92,7 +78,6 @@ var loadNavigationCommands = function () {
 													description: roomObject.sections[i].description,
 													action: '!SET_LOCATION',
 													kind: 'navigation' });
-		}
 	}
 };
 
