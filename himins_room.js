@@ -3,13 +3,11 @@
 
 // ## includes
 var fs = require('fs'),
-		linewrap = require('linewrap');
+		linewrap = require('linewrap'),
+		commands = require('./himins_commands.js');
 
 // ## module vars
 var roomObject = {},
-		gameCommandsObject = {},
-		navigationCommandsObject = {},
-		sectionCommandsObject = {},
 		playerLocation = '',
 		playerInventory = ['silver obol'];
 
@@ -81,19 +79,22 @@ module.exports.loadRoom = loadRoom;
 
 
 // # loadSectionCommands(sectionName)
+// These are commands to pick up items
 var loadSectionCommands = function (sectionName) {
 	// console.log('*** himins_room.js loadSectionCommands(%s)', sectionName);
 
 	var sectionObject = getSectionByName(sectionName);
 
-	// clear the section commands
-	sectionCommandsObject = [];
+	// remove old section commands
+	commands.removeCommandsByKind('item');
 
 	if (sectionObject.items) {
 		// some items in section, load commands
 		for (var i = sectionObject.items.length - 1; i >= 0; i--) {
-			sectionCommandsObject[sectionObject.items[i].name] = sectionObject.items[i].description;
-			// console.log('*** key: %s, value: %s', sectionObject.items[i].name, sectionObject.items[i].description);
+			commands.addCommand({ name: sectionObject.items[i].name, 
+														description: sectionObject.items[i].description,
+														action: '!ADD_TO_INVENTORY',
+														kind: 'item' });
 		}
 	}
 };
