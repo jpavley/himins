@@ -39,21 +39,9 @@ var init = function () {
 	// player
 	playerLocation = roomObject.spawnSection;
 
-	// map the section commands to display strings
-	loadSectionCommands(playerLocation);
-
-	// map the room commands to display strings
-	for (var i = roomObject.sections.length - 1; i >= 0; i--) {
-		navigationCommandsObject[roomObject.sections[i].name] = roomObject.sections[i].description;
-	}
-
-	// map the game commands to display strings
-	gameCommandsObject['look'] = roomObject.description;
-	gameCommandsObject['where'] = getPlayerDisplayString();
-	gameCommandsObject['quit'] = 'Himins reports that you have left the ' + roomObject.name ;
-	gameCommandsObject['inventory'] = getPlayerInventory();
-	gameCommandsObject['help'] = getCommandList();
-
+	// commands
+	loadItemCommands(playerLocation);
+	loadNavigationCommands();
 };
 module.exports.init = init;
 
@@ -77,10 +65,8 @@ var loadRoom = function (roomFileName, testMode) {
 };
 module.exports.loadRoom = loadRoom;
 
-
-// # loadSectionCommands(sectionName)
-// These are commands to pick up items
-var loadSectionCommands = function (sectionName) {
+// # loadItemCommands(sectionName)
+var loadItemCommands = function (sectionName) {
 	// console.log('*** himins_room.js loadSectionCommands(%s)', sectionName);
 
 	var sectionObject = getSectionByName(sectionName);
@@ -99,30 +85,15 @@ var loadSectionCommands = function (sectionName) {
 	}
 };
 
-var getCommandList = function () {
-	var result = '',
-			keys = [];
-
-	for(var k in gameCommandsObject) {
-		keys.push('_' + k + '_');
+// # loadNavigationCommands()
+var loadNavigationCommands = function () {
+	for (var i = roomObject.sections.length - 1; i >= 0; i--) {
+		commands.addCommand({ name: roomObject.sections[i].name, 
+													description: roomObject.sections[i].description,
+													action: '!SET_LOCATION',
+													kind: 'navigation' });
+		}
 	}
-
-	for(var k in navigationCommandsObject) {
-		keys.push('_' + k + '_');
-	}
-
-	for(var k in sectionCommandsObject) {
-		keys.push('_' + k + '_');
-	}
-
-	result = keys.toString();
-	result = result.replace(/,/g, ", ");
-	result = 'Himins reports that the following commands work here: ' + result;
-	return result;
-}
-
-var getPlayerDisplayString = function () {
-	return 'Himins reports that you are in the _' + playerLocation + '_ of the ' + roomObject.name;
 };
 
 var getPlayerInventory = function () {
