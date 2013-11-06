@@ -7,9 +7,7 @@ var fs = require('fs'),
 		commands = require('./himins_commands.js');
 
 // ## module vars
-var roomObject = {},
-		playerLocation = '',
-
+var roomObject = {};
 // ## consts
 var BOLD_RED_ESC = '\033[1;31m',
 		BOLD_GREEN_ESC = '\033[1;32m',
