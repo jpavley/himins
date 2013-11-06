@@ -32,13 +32,13 @@
 			"description": "You have the following items: !PLAYER_INVENTORY",
 			"action": "!NO_ACTION",
 			"kind": "game"
-		}
+		},
 		{
 			"name": "health",
 			"description": "Your health level is: !PLAYER_HEALTH",
 			"action": "!NO_ACTION",
 			"kind": "game"
-		},
+		}
 
 	],
 	"roomFile": "himins_room_1.json"
