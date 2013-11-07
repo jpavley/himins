@@ -112,6 +112,32 @@ var doItemCommand = function (cmd, message) {
 };
 module.exports.doItemCommand = doItemCommand;
 
+// # getCommandMap()
+var getCommandMap = function () {
+	result = {};
+
+	for (var i = commandsList.length - 1; i >= 0; i--) {
+		result[resultcommandsList[i].name] = resultcommandsList[i].description;
+	}
+
+	return result;
+};
+module.exports.getCommandMap = getCommandMap;
+
+// # getCommandKindFromName(name)
+var getCommandKindFromName = function (name) {
+	var result = '';
+	for (var i = commandsList.length - 1; i >= 0; i--) {
+		if (commandsList[i].name === name) {
+			result = commandsList[i].kind;
+			break;
+		}
+	}
+
+	return result;
+};
+
+
 
 
 
