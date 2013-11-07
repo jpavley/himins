@@ -70,6 +70,9 @@ var loadItemCommands = function (sectionName) {
 
 // # loadNavigationCommands()
 var loadNavigationCommands = function () {
+	// remove all navigation commands
+	commands.removeCommandsByKind('navigation');
+
 	for (var i = roomObject.sections.length - 1; i >= 0; i--) {
 		commands.addCommand({ name: roomObject.sections[i].name, 
 													description: roomObject.sections[i].description,
@@ -104,35 +107,6 @@ var getItemByName = function (sectionName, itemName) {
 			}
 		}
 	}
-};
-
-// # doGameCommand(cmd, message)
-var doGameCommand = function (rl, cmd, message) {
-	console.log(formatText(message, 60));
-
-	// send a control-c from the terminal
-	if (cmd === 'quit') {
-		rl.write(null, {ctrl: true, name: 'c'});
-	}	
-};
-
-// # doNavigationCommand(cmd, message)
-var doNavigationCommand = function (cmd, message) {
-	playerLocation = cmd;
-	gameCommandsObject['where'] = getPlayerDisplayString();
-
-	// check if section contains items
-	loadSectionCommands(playerLocation);
-
-	// update list of commands displayed by help
-	gameCommandsObject['help'] = getCommandList();
-
-	console.log(formatText(message, 60));
-};
-
-// # doItemCommand(cmd, message)
-var doItemCommand = function (cmd, message) {
-	
 };
 
 // # welcome()

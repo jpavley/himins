@@ -81,4 +81,40 @@ var removeCommandsByKind = function (commandKind) {
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
+// # doGameCommand(cmd, message)
+var doGameCommand = function (rl, cmd, message) {
+	console.log(formatText(message, 60));
+
+	// send a control-c from the terminal
+	if (cmd === 'quit') {
+		rl.write(null, {ctrl: true, name: 'c'});
+	}	
+};
+module.exports.doGameCommand = doGameCommand;
+
+
+// # doNavigationCommand(cmd, message)
+var doNavigationCommand = function (cmd, message) {
+	playerLocation = cmd;
+	gameCommandsObject['where'] = getPlayerDisplayString();
+
+	// check if section contains items
+	loadSectionCommands(playerLocation);
+
+	// update list of commands displayed by help
+	gameCommandsObject['help'] = getCommandList();
+
+	console.log(formatText(message, 60));
+};
+module.exports.doNavigationCommand = doNavigationCommand;
+
+
+// # doItemCommand(cmd, message)
+var doItemCommand = function (cmd, message) {
+	
+};
+module.exports.doItemCommand = doItemCommand;
+
+
+
 
