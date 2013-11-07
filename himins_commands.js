@@ -117,7 +117,7 @@ var getCommandMap = function () {
 	result = {};
 
 	for (var i = commandsList.length - 1; i >= 0; i--) {
-		result[resultcommandsList[i].name] = resultcommandsList[i].description;
+		result[commandsList[i].name] = commandsList[i].description;
 	}
 
 	return result;

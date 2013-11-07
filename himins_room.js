@@ -10,13 +10,6 @@ var fs = require('fs'),
 // ## module vars
 var roomObject = {};
 
-// ## consts
-var BOLD_RED_ESC = '\033[1;31m',
-		BOLD_GREEN_ESC = '\033[1;32m',
-		UL_BLUE_ESC = '\033[4;34m',
-		NORMAL_ESC = '\033[0m',
-		NL = '\n';
-
 //# init()
 var init = function () {
 	console.log('*** (3) himins_room.js init()');
@@ -43,6 +36,7 @@ var loadRoom = function (roomFileName, testMode) {
 			roomObject = JSON.parse(data);
 			//console.log(roomObject.name);
 			init();
+			welcome();
 			if (testMode) {
 				moduleTests();
 			};
@@ -114,17 +108,13 @@ var getItemByName = function (sectionName, itemName) {
 };
 
 // # welcome()
+// called when a player spawns or enters a room
 var welcome = function () {
-	console.log();
-	console.log(formatText('Welcome to the ' + roomObject.name));
-	console.log(formatText('-'.repeat( 'Welcome to the '.length + roomObject.name.unformattedLength())));
-	console.log(formatText(roomObject.description, 80));
-	console.log();
+	var commandMap = commands.getCommandMap();
 
-	if (playerLocation) {
-		var message = navigationCommandsObject[playerLocation];
-		doNavigationCommand(playerLocation, message);
-	};
+	console.log();
+	commands.doGameCommand(null, '', commandMap['look']);
+	console.log();
 };
 
 // # tests()

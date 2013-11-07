@@ -7,6 +7,13 @@ var	room = require('./himins_room.js'),
 	player = require('./himins_player.js'),
 	linewrap = require('linewrap');
 
+// ## consts
+var BOLD_RED_ESC = '\033[1;31m',
+		BOLD_GREEN_ESC = '\033[1;32m',
+		UL_BLUE_ESC = '\033[4;34m',
+		NORMAL_ESC = '\033[0m',
+		NL = '\n';
+
 
 // # formatText(text, columnWidth)
 // Transforms text (with basic markdown syntax into ASCII TTY) 
@@ -24,6 +31,7 @@ var formatText = function (text, columnWidth) {
 
 	return result;
 };
+module.exports.formatText = formatText;
 
 var renderFormatCodes = function (text) {
 	var result = text;
