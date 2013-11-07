@@ -2,7 +2,8 @@
 // Manages a player object from a himins player JSON file.
 
 // ## includes
-var fs = require('fs');
+var fs = require('fs'),
+		commands = require('./himins_commands.js');
 
 // ## module vars
 var playerObject = {};
@@ -10,6 +11,12 @@ var playerObject = {};
 //# init()
 var init = function () {
 	console.log('** himins_player.js init()');
+
+	commands.addCommand({ name: playerObject.name, 
+												description: playerObject.description,
+												action: '!NO_ACTION',
+												kind: 'player' });
+
 };
 module.exports.init = init;
 
@@ -80,6 +87,29 @@ var setPlayerHealth = function (hitPoints) {
 	playerObject.health = hitPoints;
 };
 module.exports.getPlayerHealth = getPlayerHealth;
+
+// # getPlayerName()
+var getPlayerName = function () {
+	return playerObject.name;
+};
+module.exports.getPlayerName = getPlayerName;
+
+// # setPlayerName(name)
+var setPlayerName = function (name) {
+	// remove the player command with the old name...
+	commands.removeCommandByName(playerObject.name);
+
+	// update the name of the player
+	playerObject.name = name;
+
+	// ...add a player command with new name
+	commands.addCommand({ name: playerObject.name, 
+												description: playerObject.description,
+												action: '!NO_ACTION',
+												kind: 'player' });
+
+};
+module.exports.setPlayerName = setPlayerName;
 
 // # main entry point
 // For testing purposes you can run this file directly with "node himins_player.js". The test logic expects a file named "himins_player.json" with the defination of a player object!
