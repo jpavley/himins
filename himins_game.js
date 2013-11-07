@@ -9,11 +9,11 @@ var fs = require('fs'),
 
 // ## module vars
 var gameObject = {}, 
-	roomObject = {};
+		roomObject = {};
 
 //# init()
 var init = function () {
-	//console.log('** himins_game.js init()');
+	console.log('*** (2) himins_game.js init()');
 
 	// add String object extentions
 	strutils.init();
@@ -29,13 +29,13 @@ var init = function () {
 		);
 
 	// load the starter room and add them to the room list
-	room.loadRoom(gameObject.roomFile, true);
+	room.loadRoom(gameObject.roomFile, false);
 };
 module.exports.init = init;
 
 //# loadGame(gameFileName, testMode)
 var loadGame = function (gameFileName, testMode) {
-	//console.log('** himins_game.js loadGame(%s)', gameFileName);
+	console.log('*** (1) himins_game.js loadGame(%s)', gameFileName);
 
 	fs.readFile(gameFileName, 'utf8', function (err, data) {
 		if(err) {
@@ -76,4 +76,4 @@ var moduleTests = function () {
 // # main entry point
 // For testing purposes you can run this file directly with "node himins_game.js". The test logic expects a file named "himins_game.json" with the defination of a game object!
 
-loadGame('himins_game.json', true);
+loadGame('himins_game.json', false);

@@ -3,9 +3,9 @@
 
 // ## includes
 var game = require('./himins_game.js'),
-	room = require('./himins_room.js'),
-	player = require('./himins_player.js'),
-	format = require('./himins_format.js');
+ 		room = require('./himins_room.js'),
+ 		player = require('./himins_player.js'),
+ 		format = require('./himins_format.js');
 
 // ## module vars
 var commandsList = [];

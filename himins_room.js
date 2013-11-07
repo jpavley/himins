@@ -3,10 +3,13 @@
 
 // ## includes
 var fs = require('fs'),
-		commands = require('./himins_commands.js');
+		commands = require('./himins_commands.js'),
+		game = require('./himins_game.js'),
+		player = require('./himins_player.js');
 
 // ## module vars
 var roomObject = {};
+
 // ## consts
 var BOLD_RED_ESC = '\033[1;31m',
 		BOLD_GREEN_ESC = '\033[1;32m',
@@ -16,20 +19,22 @@ var BOLD_RED_ESC = '\033[1;31m',
 
 //# init()
 var init = function () {
-	//console.log('** himins_room.js init()'');
+	console.log('*** (3) himins_room.js init()');
 
 	// player
-	playerLocation = roomObject.spawnSection;
+	player.loadPlayer(roomObject.defaultPlayer, false);
+	player.setPlayerLocation(roomObject.spawnSection);
+
 
 	// commands
-	loadItemCommands(playerLocation);
+	loadItemCommands(player.getPlayerLocation());
 	loadNavigationCommands();
 };
 module.exports.init = init;
 
 //# loadRoom(roomFileName)
 var loadRoom = function (roomFileName, testMode) {
-	console.log('** himins_room.js loadRoom(%s, %s)', roomFileName, testMode);
+	console.log('*** (3) himins_room.js loadRoom(%s, %s)', roomFileName, testMode);
 
 	fs.readFile(roomFileName, 'utf8', function (err, data) {
 		if(err) {
@@ -122,47 +127,6 @@ var welcome = function () {
 	};
 };
 
-//# processUserInput()
-var processUserInput = function () {
-	//console.log("** himins_room.js processUserInput()");
-
-	var readline = require('readline'),
-			rl = readline.createInterface(process.stdin, process.stdout);
-
-	welcome();
-
-	rl.setPrompt('himins> ');
-	rl.prompt();
-
-	rl.on('line', function(line) {
-		var cmd = line.trim().toLowerCase(),
-				message = '';
-
-		message = gameCommandsObject[cmd];
-		if (message) {
-			doGameCommand(rl, cmd, message);
-		}
-
-		message = navigationCommandsObject[cmd];
-		if (message) {
-			doNavigationCommand(cmd, message);
-		}
-
-		message = sectionCommandsObject[cmd];
-		if(message) {
-			doItemCommand(cmd, message);
-		}
-
-		rl.prompt(true);
-
-	});
-
-	rl.on('close', function () {
-		process.exit(0);
-	});
-};
-module.exports.processUserInput = processUserInput;
-
 // # tests()
 var moduleTests = function () {
 	console.log('*** himins_room.js test mode start ***')
@@ -174,4 +138,4 @@ var moduleTests = function () {
 // # main entry point
 // For testing purposes you can run this file directly with "node himins_room.js". The test logic expects a file named "himins_room_1.json" with the defination of a room object!
 
-loadRoom("himins_room_1.json");
+//loadRoom("himins_room_1.json");
