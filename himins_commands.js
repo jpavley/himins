@@ -4,7 +4,8 @@
 // ## includes
 var game = require('./himins_game.js'),
 	room = require('./himins_room.js'),
-	player = require('./himins_player.js');
+	player = require('./himins_player.js'),
+	format = require('./himins_format.js');
 
 // ## module vars
 var commandsList = [];
@@ -83,7 +84,7 @@ module.exports.removeCommandsByKind = removeCommandsByKind;
 
 // # doGameCommand(cmd, message)
 var doGameCommand = function (rl, cmd, message) {
-	console.log(formatText(message, 60));
+	console.log(format.formatText(message, 60));
 
 	// send a control-c from the terminal
 	if (cmd === 'quit') {
@@ -95,16 +96,12 @@ module.exports.doGameCommand = doGameCommand;
 
 // # doNavigationCommand(cmd, message)
 var doNavigationCommand = function (cmd, message) {
-	playerLocation = cmd;
-	gameCommandsObject['where'] = getPlayerDisplayString();
+	player.setPlayerLocation = cmd;
 
 	// check if section contains items
-	loadSectionCommands(playerLocation);
+	loadSectionCommands(player.getPlayerLocation());
 
-	// update list of commands displayed by help
-	gameCommandsObject['help'] = getCommandList();
-
-	console.log(formatText(message, 60));
+	console.log(format.formatText(message, 60));
 };
 module.exports.doNavigationCommand = doNavigationCommand;
 
