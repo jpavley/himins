@@ -2,50 +2,52 @@
 // Manages a game object from a himins game JSON file.
 
 // ## includes
-var fs = require('fs'),
-	room = require('./himins_room.js'),
-	commands = require('./himins_commands.js'),
-	strutils = require('./himins_string_utils.js');
+var
+  fs = require('fs'),
+  room = require('./himins_room.js'),
+  commands = require('./himins_commands.js'),
+  strutils = require('./himins_string_utils.js');
 
 // ## module vars
-var gameObject = {}, 
-		roomObject = {};
+var
+  gameObject = {},
+  roomObject = {};
 
 //# init()
 var init = function () {
-	console.log('*** (2) himins_game.js init()');
+  console.log('*** (2) himins_game.js init()');
 
-	// add String object extentions
-	strutils.init();
+  // add String object extentions
+  strutils.init();
 
-	// init the commands object and add the predefined game commands to it
-	commands.init(gameObject.commands);
+  // init the commands object and add the predefined game commands to it
+  commands.init(gameObject.commands);
 
-	// add the name of the game as a command
-	commands.addCommand({ name: gameObject.name.toLowerCase(), 
-			description: gameObject.description,
-			action: '!NO_ACTION',
-			kind: 'game' }
-		);
+  // add the name of the game as a command
+  commands.addCommand({ name: gameObject.name.toLowerCase(),
+      description: gameObject.description,
+      action: '!NO_ACTION',
+      kind: 'game' }
+    );
 
-	// load the starter room and add them to the room list
-	room.loadRoom(gameObject.roomFile);
+  // load the starter room and add them to the room list
+  room.loadRoom(gameObject.roomFile);
 };
 module.exports.init = init;
 
 //# loadGame(gameFileName)
 var loadGame = function (gameFileName) {
-	console.log('*** (1) himins_game.js loadGame(%s)', gameFileName);
+  console.log('*** (1) himins_game.js loadGame(%s)', gameFileName);
 
-	fs.readFile(gameFileName, 'utf8', function (err, data) {
-		if(err) {
-			console.log(err);
-		} else {
-			gameObject = JSON.parse(data);
-			//console.log(gameObject);
-			init();
-		}
-	});
+  fs.readFile(gameFileName, 'utf8', function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      gameObject = JSON.parse(data);
+      //console.log(gameObject);
+      init();
+    }
+  });
 };
 module.exports.loadGame = loadGame;
 
