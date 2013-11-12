@@ -1,14 +1,14 @@
 {
-	"name": "me",
-	"description": "You look and feel like yourself only thinned, like too little butter over too much toast.",
-	"room": "Narthex",
-	"location": "center",
-	"health": 100,
-	"inventory": [
-		{
-			"name": "silver obol",
-			"description": "An ancient silver coin. You found it in your mounth and put it in your pocket",
-			"slot": "ITEM_POCKET"
-		}				
-	]
+  "name": "me",
+  "description": "You look and feel like yourself only thinned, like too little butter over too much toast.",
+  "room": "Narthex",
+  "location": "center",
+  "health": 100,
+  "inventory": [
+    {
+      "name": "silver obol",
+      "description": "An ancient silver coin. You found it in your mounth and put it in your pocket",
+      "slot": "ITEM_POCKET"
+    }
+  ]
 }
