@@ -1,6 +1,6 @@
 {
 	"name": "Narthex",
-	"description": "You stand in the _!PLAYER_LOCATION_ of a musty, mostly-empty, square room, the size of a large crypt. The floor is ice-cold marble caked in inches of fine gray dust. The footprints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in the _north east_, _north west_, _south east_, and _south west_ corners of the room. The walls are tessellated with dirty ceramic tiles. On the _west_ wall four of the tiles look clean and shiny. On the _east_ wall is a silver door with a golden knob. You hear a murmur of soft whispers from behind the silver door.",
+	"description": "You stand in the *Narthex*, a musty, mostly-empty, square room, the size of a large crypt. The floor is ice-cold marble caked in inches of fine gray dust. The footprints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in the _north east_, _north west_, _south east_, and _south west_ corners of the room. The walls are tessellated with dirty ceramic tiles. On the _west_ wall four of the tiles look clean and shiny. On the _east_ wall is a silver door with a golden knob. You hear a murmur of soft whispers from behind the silver door.",
 	"spawnSection": "center",
 	"defaultPlayer": "himins_player.json",
 	"sections": [
