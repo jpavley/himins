@@ -61,6 +61,8 @@ var resolveFunctions = function (text) {
 	var result = text;
 
 	result = result.replace(/!PLAYER_LOCATION/g, player.getPlayerLocation());
+	result = result.replace(/!ROOM_DESCRIPTION/g, room.getRoomDescription());
+	result = result.replace(/!SECTION_DESCRIPTION/g, room.getSectionDescription());
 
 	return result;
 };
