@@ -54,8 +54,6 @@ var resolveFunctions = function (text) {
 // # formatText(text, columnWidth)
 // Transforms text (with basic markdown syntax into ASCII TTY) 
 // and wraps it to fit column specified by columnWidth.
-// Words between underscores (_word_) are formatted as bold red.
-// Words between astericks (*word*) are for underline blue.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
 var formatText = function (text, columnWidth) {
   var result = text,
