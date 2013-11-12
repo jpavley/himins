@@ -1,46 +1,44 @@
 // # himins_repl.js
 // Read, evaluate, and print loop
 
-var commands = require('./himins_commands.js'),
-	readline = require('readline');
+var
+  commands = require('./himins_commands.js'),
+  readline = require('readline');
 
 
 //# processUserInput()
 var processUserInput = function () {
-	//console.log("** himins_repl.js processUserInput()");
+  //console.log("** himins_repl.js processUserInput()");
 
-	var rl = readline.createInterface(process.stdin, process.stdout);
+  var
+    rl = readline.createInterface(process.stdin, process.stdout);
 
-	welcome();
+  rl.setPrompt('himins> ');
+  rl.prompt();
 
-	rl.setPrompt('himins> ');
-	rl.prompt();
+  rl.on('line', function (line) {
+    var
+      cmd = line.trim().toLowerCase(),
+      cmdMap = commands.getCommandMap(),
+      cmdKind = commands.getCommandKindFromName(cmd),
+      message = cmdMap[cmd];
 
-	rl.on('line', function(line) {
-		var cmd = line.trim().toLowerCase(),
-				message = '';
+    if (message && cmdKind === 'game') {
+      commands.doGameCommand(rl, cmd, message);
 
-		message = gameCommandsObject[cmd];
-		if (message) {
-			commands.doGameCommand(rl, cmd, message);
-		}
+    } else if (message && cmdKind === 'navigation') {
+      commands.doNavigationCommand(cmd, message);
 
-		message = navigationCommandsObject[cmd];
-		if (message) {
-			commands.doNavigationCommand(cmd, message);
-		}
+    } else if (message && cmdKind === 'item') {
+      commands.doItemCommand(cmd, message);
+    }
 
-		message = sectionCommandsObject[cmd];
-		if(message) {
-			commands.doItemCommand(cmd, message);
-		}
+    rl.prompt(true);
 
-		rl.prompt(true);
+  });
 
-	});
-
-	rl.on('close', function () {
-		process.exit(0);
-	});
+  rl.on('close', function () {
+    process.exit(0);
+  });
 };
 module.exports.processUserInput = processUserInput;
