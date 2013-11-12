@@ -21,7 +21,7 @@ var init = function () {
 module.exports.init = init;
 
 //# loadPlayer(playerFileName)
-var loadPlayer = function (playerFileName, testMode) {
+var loadPlayer = function (playerFileName) {
 	console.log('*** (4) himins_player.js playerRoom(%s)', playerFileName);
 
 	fs.readFile(playerFileName, 'utf8', function (err, data) {
@@ -31,9 +31,6 @@ var loadPlayer = function (playerFileName, testMode) {
 			playerObject = JSON.parse(data);
 			//console.log(playerObject);
 			init();
-			if (testMode) {
-				moduleTests();
-			};
 		}
 	});
 };
@@ -113,15 +110,3 @@ var setPlayerName = function (name) {
 
 };
 module.exports.setPlayerName = setPlayerName;
-
-// # moduleTests() 
-var moduleTests = function () {
-	console.log('*** himins_player.js test mode start ***');
-	console.log('*** himins_player.js test mode end ***');
-
-}
-
-// # main entry point
-// For testing purposes you can run this file directly with "node himins_player.js". The test logic expects a file named "himins_player.json" with the defination of a player object!
-
-// loadPlayer("himins_player.json", true);

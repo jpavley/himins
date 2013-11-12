@@ -29,12 +29,12 @@ var init = function () {
 		);
 
 	// load the starter room and add them to the room list
-	room.loadRoom(gameObject.roomFile, false);
+	room.loadRoom(gameObject.roomFile);
 };
 module.exports.init = init;
 
-//# loadGame(gameFileName, testMode)
-var loadGame = function (gameFileName, testMode) {
+//# loadGame(gameFileName)
+var loadGame = function (gameFileName) {
 	console.log('*** (1) himins_game.js loadGame(%s)', gameFileName);
 
 	fs.readFile(gameFileName, 'utf8', function (err, data) {
@@ -44,36 +44,12 @@ var loadGame = function (gameFileName, testMode) {
 			gameObject = JSON.parse(data);
 			//console.log(gameObject);
 			init();
-			if (testMode) {
-				moduleTests();
-			};
 		}
 	});
 };
 module.exports.loadGame = loadGame;
 
-// # tests()
-var moduleTests = function () {
-	console.log('*** himins_game.js test mode start ***')
-	console.log('command names: ' + commands.getCommandNames());
-	commands.addCommand({ name: 'test', 
-		description: 'this is a test',
-		action: '!NO_ACTION',
-		kind: 'test' }
-	);
-	console.log('*** added command test ***')
-	console.log('command names: ' + commands.getCommandNames());
-	console.log('*** get a command by name (test) ***')
-	console.log(commands.getCommandByName('test'));
-	commands.removeCommandByName('test');
-	console.log('*** removed command test ***')
-	console.log('command names: ' + commands.getCommandNames());
-	console.log(gameObject.name);
-	console.log(gameObject.description);
-	console.log('*** himins_game.js test mode end ***');
-};
-
 // # main entry point
-// For testing purposes you can run this file directly with "node himins_game.js". The test logic expects a file named "himins_game.json" with the defination of a game object!
+// Run this file directly with "node himins_game.js". It expects a file named "himins_game.json" with the defination of the main game object!
 
-loadGame('himins_game.json', false);
+loadGame('himins_game.json');

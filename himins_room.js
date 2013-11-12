@@ -26,8 +26,8 @@ var init = function () {
 module.exports.init = init;
 
 //# loadRoom(roomFileName)
-var loadRoom = function (roomFileName, testMode) {
-	console.log('*** (3) himins_room.js loadRoom(%s, %s)', roomFileName, testMode);
+var loadRoom = function (roomFileName) {
+	console.log('*** (3) himins_room.js loadRoom(%s)', roomFileName);
 
 	fs.readFile(roomFileName, 'utf8', function (err, data) {
 		if(err) {
@@ -37,9 +37,6 @@ var loadRoom = function (roomFileName, testMode) {
 			//console.log(roomObject.name);
 			init();
 			welcome();
-			if (testMode) {
-				moduleTests();
-			};
 			//processUserInput();
 		}
 	});
@@ -116,16 +113,3 @@ var welcome = function () {
 	commands.doGameCommand(null, '', commandMap['look']);
 	console.log();
 };
-
-// # tests()
-var moduleTests = function () {
-	console.log('*** himins_room.js test mode start ***')
-	console.log('*** himins_room.js test mode end ***')
-
-};
-
-
-// # main entry point
-// For testing purposes you can run this file directly with "node himins_room.js". The test logic expects a file named "himins_room_1.json" with the defination of a room object!
-
-//loadRoom("himins_room_1.json");
