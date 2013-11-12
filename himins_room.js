@@ -45,7 +45,7 @@ module.exports.loadRoom = loadRoom;
 
 // # loadItemCommands(sectionName)
 var loadItemCommands = function (sectionName) {
-	// console.log('*** himins_room.js loadSectionCommands(%s)', sectionName);
+	// console.log('*** himins_room.js loadItemCommands(%s)', sectionName);
 
 	var sectionObject = getSectionByName(sectionName);
 
