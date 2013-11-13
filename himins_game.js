@@ -53,8 +53,3 @@ var loadGame = function (gameFileName) {
   });
 };
 module.exports.loadGame = loadGame;
-
-// # main entry point
-// Run this file directly with "node himins_game.js". It expects a file named "himins_game.json" with the defination of the main game object!
-
-loadGame('himins_game.json');

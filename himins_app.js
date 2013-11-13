@@ -14,12 +14,24 @@ var
   clientList = [],
   ipAddress = "127.0.0.1",
   portNumber = 9000,
-  count = 0;
+  count = 0,
+  startingGameFile = 'himins_game.json';
+
+// # writeToClient(message, client);
+var writeToClient = function (message, client) {
+  if (client.writable) {
+    client.write(message + '\n');
+  } else {
+    console.log('cleint not writable');
+    console.log('*** himins_app.js writeToClient(%s, %s)', message, client);
+  }
+};
+module.exports.writeToClient = writeToClient;
 
 // # broadcast(message, client, kind)
 // broadcast messages to every client but this one
 // if a client is discovered to be unresponsive it is removed from the client list
-var broadcast = function(message, client, kind) {
+var broadcast = function (message, client, kind) {
     var cleanup = [], i, l, payload;
     
     for (i = 0, l = clientList.length; i < l; i += 1) {
@@ -29,9 +41,9 @@ var broadcast = function(message, client, kind) {
                 // compose the message
                 if (kind === 'user') {
                     // todo: localize "say"
-                    payload = client.name + ' yells to everyone ' + message;
+                    payload = client.name + ' yells to everyone: ' + message;
                 } else {
-                    payload = message;
+                    payload = 'Himins reports ' + message;
                 }
                 clientList[i].write(payload);
             } else {
@@ -64,9 +76,12 @@ himinsServer.on('connection', function (client) {
   // tell everyone the user is here
   broadcast('Hello ', client, 'system');
   
+  // ## start the game with the default map
+  game.loadGame(startingGameFile);
+
   // ## client.on('data', function (data))
   // handle incoming client data
-  client.on('data', function (data) {
+ client.on('data', function (data) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     
@@ -136,6 +151,3 @@ console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNu
 
 // start up the server
 himinsServer.listen(portNumber);
-
-// initialize the game before any users are created
-game.init();

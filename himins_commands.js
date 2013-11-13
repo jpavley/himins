@@ -9,7 +9,8 @@ var
   game = require('./himins_game.js'),
   room = require('./himins_room.js'),
   player = require('./himins_player.js'),
-  format = require('./himins_format.js');
+  format = require('./himins_format.js'),
+  app = require('./himins_app.js');
 
 // ## module vars
 var
@@ -95,13 +96,13 @@ var removeCommandsByKind = function (commandKind) {
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
-// # doGameCommand(cmd, message)
-var doGameCommand = function (rl, cmd, message) {
-  console.log(format.formatText(message, 60));
+// # doGameCommand(client, cmd, message)
+var doGameCommand = function (client, cmd, message) {
+  app.writeToClient(client, format.formatText(message, 60));
 
   // send a control-c from the terminal
   if (cmd === 'quit') {
-    rl.write(null, {ctrl: true, name: 'c'});
+    client.write(null, {ctrl: true, name: 'c'});
   }
 };
 module.exports.doGameCommand = doGameCommand;
