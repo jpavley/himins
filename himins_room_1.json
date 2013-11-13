@@ -1,127 +1,127 @@
 {
-	"name": "Narthex",
-	"description": "You stand in the *Narthex*, a musty, mostly-empty, square room, the size of a large crypt. The floor is ice-cold marble caked in inches of fine gray dust. The footprints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in the _north east_, _north west_, _south east_, and _south west_ corners of the room. The walls are tessellated with dirty ceramic tiles. On the _west_ wall four of the tiles look clean and shiny. On the _east_ wall is a silver door with a golden knob. You hear a murmur of soft whispers from behind the silver door.",
-	"spawnSection": "center",
-	"defaultPlayer": "himins_player.json",
-	"sections": [
-		{
-			"name": "north east",
-			"type": "SECTION_LOOT",
-			"description": "In the _north east_ corner is a pile of rusty broadswords, daggers, and axes. But one _small knife_ looks clean and sharp.",
-			"items": [
-				{
-					"name": "small knife",
-					"description": "A small steel knife, sharp but not worthy of a name.",
-					"successMessage": "You pickup the small knife and hold it in your right hand.",
-					"failMessage": "You pickup the small knife but it slips through your fingers.",
-					"hitPoints": "10",
-					"slot": "ITEM_SWORD"
-				}				
-			]
-		},
-		{
-			"name": "north west",
-			"type": "SECTION_LOOT",
-			"description": "In the _north west_ corner is a pile of tarnished brass chain mail. But one coat of tightly _ringed mail_ with leather straps looks new and ready to wear",
-			"items": [
-				{
-					"name": "ringed mail",
-					"description": "A coat of tightly ringed brass mail with leather straps, well worn.",
-					"successMessage": "You pickup the ringed mail and throw it over your chest and back.",
-					"failMessage": "You pickup the ringed mail but it slips through your fingers.",
-					"hitPoints": "100",
-					"slot": "ITEM_CHEST"
-				}				
-			]
-		},
-		{
-			"name": "south west",
-			"type": "SECTION_LOOT",
-			"description": "In the _south west_ corner is a pile of dented brass helms. But one _shiny skullcap_ looks like it might fit you.",
-			"items": [
-				{
-					"name": "shiny skullcap",
-					"description": "A shiny brass skullcap with just a few minor dents and bloodstains.",
-					"successMessage": "You pickup the brass skullcap and set it on your head.",
-					"failMessage": "You pickup the brass skullcap but it slips through your fingers.",
-					"hitPoints": "50",
-					"slot": "ITEM_HEAD"
-				}
-			]
-		},
-		{
-			"name": "south east",
-			"type": "SECTION_LOOT",
-			"description": "In the _south east_ corner is a pile of splintered wooden shields. But one _wooden buckler_ with brass fittings looks light and sturdy enough to be worth taking.",
-			"items": [
-				{
-					"name": "wooden buckler",
-					"description": "A light and sturdy wooden buckler with brass fittings.",
-					"successMessage": "You pickup the wooden buckler and hold it in your left hand.",
-					"failMessage": "You pickup the wooden buckler but it slips through your fingers.",
-					"hitPoints": "50",
-					"slot": "ITEM_SHIELD"
-				}
-			]
-		},
-		{
-			"name": "west",
-			"type": "SEQUENCE_PUZZLE",
-			"successSequence" : "green, red, blue, yellow",
-			"trapSequece": "red, green, yellow, blue",
-			"description": "You face _west_ before four tiles that look like colorful buttons: _red_, _green_, _yellow_, _blue_. A sign above the tiles contains instructions in a dozen languages. The words you recogize ask you to enter the color of each button in the correct order to unlock the silver gateway or trigger the exorcism rite. Since there are four buttons you have a one in twentyfour chance of doing either. A fifth tile, apart from the others, looks like a black button labeled _pray_ for help.",
-			"hint": "The philosopher noted the four hues of the deathbed as nausia, burning, jaundice, and unconsciouness.",
-			"successMessage": "Himins reports that you have entered a failthful sequence and the silver gateway is unlocked.",
-			"failMessage": "Himins reports that you have entered a nonconformist sequence. Please try again.",
-			"trapMessage": "Himins reports that you have entered a heretical sequence and exorcism will commence shortly. Please try again, while you still have time.",
-			"successAction": "!UNLOCK_SILVER_GATEWAY",
-			"failureAction": "!TRY_AGAIN",
-			"trapAction": "!TRIGGER_EXORCISM_COUNTDOWN",
-			"items": [
-				{
-					"name": "pray",
-					"description": "The philosopher noted the four hues of the deathbed as nausia, burning, jaundice, and unconsciouness."
-				}
-			]
-		},
-		{
-			"name": "east",
-			"type": "SECTION_DOOR",
-			"description": "You face _east_ before a silver door in which you can see your reflection. In the center of the door is a _golden knob_. The knob is !LOCKED_STATE",
-			"items": [
-				{
-					"name": "golden knob",
-					"description": "A golden knob in the center of a silver door. The knob is !LOCKED_STATE",
-					"successMessage": "Himins reports that you have open the silver gateway. You walk east though the doorway into the next room and the silver door slams shut behind you.",
-					"failMessage": "Himins reports that the gloden knob is locked. Perhaps there is a way to prove your worthiness and unlock it in another part of the Narthex?",
-					"successAction": "!ENTER_NEXT_ROOM",
-					"failureAction": "!TRY_AGAIN"
-				}
-			]
-		},
-		{
-			"name": "north",
-			"type": "SECTION_WALL",
-			"description": "You bump into the _north_ wall. The wall is covered with dirty ceramic tiles."
-		},
-		{
-			"name": "south",
-			"type": "SECTION_WALL",
-			"description": "You bump into the _south_ wall. The wall is covered with dirty ceramic tiles."
-		},
-		{
-			"name": "center",
-			"type": "SECTION_WALL",
-			"description": "In the _center_ of the *Narthex* it's chilly and loney and yet you feel the presence of many souls. On the floor lies a _skein of thread_.",
-			"items": [
-				{
-					"name": "skein of thread",
-					"description": "A ball of string.",
-					"successMessage": "You pickup the skein of thread and put it in your pocket.",
-					"failMessage": "You pickup the skein of thread but it slips through your fingers.",
-					"slot": "ITEM_POCKET"
-				}
-			]
-		}
-	]
+  "name": "Narthex",
+  "description": "You stand in the *Narthex*, a musty, mostly-empty, square room, the size of a large crypt. The floor is ice-cold marble caked in inches of fine gray dust. The footprints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in the _north east_, _north west_, _south east_, and _south west_ corners of the room. The walls are tessellated with dirty ceramic tiles. On the _west_ wall four of the tiles look clean and shiny. On the _east_ wall is a silver door with a golden knob. You hear a murmur of soft whispers from behind the silver door.",
+  "spawnSection": "center",
+  "defaultPlayer": "himins_player.json",
+  "sections": [
+    {
+      "name": "north east",
+      "type": "SECTION_LOOT",
+      "description": "In the _north east_ corner is a pile of rusty broadswords, daggers, and axes. But one _small knife_ looks clean and sharp.",
+      "items": [
+        {
+          "name": "small knife",
+          "description": "A small steel knife, sharp but not worthy of a name.",
+          "successMessage": "You pickup the small knife and hold it in your right hand.",
+          "failMessage": "You pickup the small knife but it slips through your fingers.",
+          "hitPoints": "10",
+          "slot": "ITEM_SWORD"
+        }
+      ]
+    },
+    {
+      "name": "north west",
+      "type": "SECTION_LOOT",
+      "description": "In the _north west_ corner is a pile of tarnished brass chain mail. But one coat of tightly _ringed mail_ with leather straps looks new and ready to wear",
+      "items": [
+        {
+          "name": "ringed mail",
+          "description": "A coat of tightly ringed brass mail with leather straps, well worn.",
+          "successMessage": "You pickup the ringed mail and throw it over your chest and back.",
+          "failMessage": "You pickup the ringed mail but it slips through your fingers.",
+          "hitPoints": "100",
+          "slot": "ITEM_CHEST"
+        }
+      ]
+    },
+    {
+      "name": "south west",
+      "type": "SECTION_LOOT",
+      "description": "In the _south west_ corner is a pile of dented brass helms. But one _shiny skullcap_ looks like it might fit you.",
+      "items": [
+        {
+          "name": "shiny skullcap",
+          "description": "A shiny brass skullcap with just a few minor dents and bloodstains.",
+          "successMessage": "You pickup the brass skullcap and set it on your head.",
+          "failMessage": "You pickup the brass skullcap but it slips through your fingers.",
+          "hitPoints": "50",
+          "slot": "ITEM_HEAD"
+        }
+      ]
+    },
+    {
+      "name": "south east",
+      "type": "SECTION_LOOT",
+      "description": "In the _south east_ corner is a pile of splintered wooden shields. But one _wooden buckler_ with brass fittings looks light and sturdy enough to be worth taking.",
+      "items": [
+        {
+          "name": "wooden buckler",
+          "description": "A light and sturdy wooden buckler with brass fittings.",
+          "successMessage": "You pickup the wooden buckler and hold it in your left hand.",
+          "failMessage": "You pickup the wooden buckler but it slips through your fingers.",
+          "hitPoints": "50",
+          "slot": "ITEM_SHIELD"
+        }
+      ]
+    },
+    {
+      "name": "west",
+      "type": "SEQUENCE_PUZZLE",
+      "successSequence" : "green, red, blue, yellow",
+      "trapSequece": "red, green, yellow, blue",
+      "description": "You face _west_ before four tiles that look like colorful buttons: _red_, _green_, _yellow_, _blue_. A sign above the tiles contains instructions in a dozen languages. The words you recogize ask you to enter the color of each button in the correct order to unlock the silver gateway or trigger the exorcism rite. Since there are four buttons you have a one in twentyfour chance of doing either. A fifth tile, apart from the others, looks like a black button labeled _pray_ for help.",
+      "hint": "The philosopher noted the four hues of the deathbed as nausia, burning, jaundice, and unconsciouness.",
+      "successMessage": "Himins reports that you have entered a failthful sequence and the silver gateway is unlocked.",
+      "failMessage": "Himins reports that you have entered a nonconformist sequence. Please try again.",
+      "trapMessage": "Himins reports that you have entered a heretical sequence and exorcism will commence shortly. Please try again, while you still have time.",
+      "successAction": "!UNLOCK_SILVER_GATEWAY",
+      "failureAction": "!TRY_AGAIN",
+      "trapAction": "!TRIGGER_EXORCISM_COUNTDOWN",
+      "items": [
+        {
+          "name": "pray",
+          "description": "The philosopher noted the four hues of the deathbed as nausia, burning, jaundice, and unconsciouness."
+        }
+      ]
+    },
+    {
+      "name": "east",
+      "type": "SECTION_DOOR",
+      "description": "You face _east_ before a silver door in which you can see your reflection. In the center of the door is a _golden knob_. The knob is !LOCKED_STATE",
+      "items": [
+        {
+          "name": "golden knob",
+          "description": "A golden knob in the center of a silver door. The knob is !LOCKED_STATE",
+          "successMessage": "Himins reports that you have open the silver gateway. You walk east though the doorway into the next room and the silver door slams shut behind you.",
+          "failMessage": "Himins reports that the gloden knob is locked. Perhaps there is a way to prove your worthiness and unlock it in another part of the Narthex?",
+          "successAction": "!ENTER_NEXT_ROOM",
+          "failureAction": "!TRY_AGAIN"
+        }
+      ]
+    },
+    {
+      "name": "north",
+      "type": "SECTION_WALL",
+      "description": "You bump into the _north_ wall. The wall is covered with dirty ceramic tiles."
+    },
+    {
+      "name": "south",
+      "type": "SECTION_WALL",
+      "description": "You bump into the _south_ wall. The wall is covered with dirty ceramic tiles."
+    },
+    {
+      "name": "center",
+      "type": "SECTION_WALL",
+      "description": "In the _center_ of the *Narthex* it's chilly and loney and yet you feel the presence of many souls. On the floor lies a _skein of thread_.",
+      "items": [
+        {
+          "name": "skein of thread",
+          "description": "A ball of string.",
+          "successMessage": "You pickup the skein of thread and put it in your pocket.",
+          "failMessage": "You pickup the skein of thread but it slips through your fingers.",
+          "slot": "ITEM_POCKET"
+        }
+      ]
+    }
+  ]
 }
