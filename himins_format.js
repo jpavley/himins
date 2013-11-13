@@ -1,6 +1,9 @@
 // # himins_format.js
 // formats text and resolves functions for display.
 
+/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/
+
 // ## includes
 var
   room = require('./himins_room.js'),

@@ -1,6 +1,9 @@
 // # himins_repl.js
 // Read, evaluate, and print loop
 
+/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/
+
 var
   commands = require('./himins_commands.js'),
   readline = require('readline');

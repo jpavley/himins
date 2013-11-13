@@ -1,6 +1,9 @@
 // # himins_player.js
 // Manages a player object from a himins player JSON file.
 
+/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/
+
 // ## includes
 var
   fs = require('fs'),
