@@ -9,6 +9,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
-  	"linewrap": "0.2.x"
+  	"linewrap": "0.2.x",
+    "underscore": "1.5.x"
   }
 }

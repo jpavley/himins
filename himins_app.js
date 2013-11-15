@@ -1,4 +1,4 @@
-// himins_app.hs
+// himins_app.js
 // Main entry point to Himins
 // Use telnet client to access: telnet 127.0.0.1 9000
 
