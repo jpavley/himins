@@ -73,20 +73,12 @@
     },
     {
       "name": "west",
-      "description": "You face _west_ before four tiles that look like colorful buttons: _red_, _green_, _yellow_, _blue_. A sign above the tiles contains instructions in a dozen languages. The words you recogize ask you to enter the color of each button in the correct order to unlock the silver gateway or trigger the exorcism rite. Since there are four buttons you have a one in twentyfour chance of doing either. A fifth tile, apart from the others, looks like a black button labeled _pray_ for help.",
+      "description": "You face _west_ before a wall with four tiles",
       "items": [],
       "doors": [],
       "puzzles": [
         {
-          "successSequence" : "green, red, blue, yellow",
-          "trapSequece": "red, green, yellow, blue",
-          "hint": "The philosopher noted the four hues of the deathbed as nausia, burning, jaundice, and unconsciouness.",
-          "successMessage": "Himins reports that you have entered a failthful sequence and the silver gateway is unlocked.",
-          "failMessage": "Himins reports that you have entered a nonconformist sequence. Please try again.",
-          "trapMessage": "Himins reports that you have entered a heretical sequence and exorcism will commence shortly. Please try again, while you still have time.",
-          "successAction": "!UNLOCK_SILVER_GATEWAY",
-          "failureAction": "!TRY_AGAIN",
-          "trapAction": "!TRIGGER_EXORCISM_COUNTDOWN"
+          "fileName": "himins_puzzel_1.json"
         }
       ],
       "monsters": [],
