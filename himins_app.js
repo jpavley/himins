@@ -7,22 +7,27 @@
 
 var 
   net = require('net'),
-  game = require('./himins_game');
+  game = require('./himins_game'),
+  player = require('./himins_player'),
+  commands = require('./himins_commands');
 
 var 
   himinsServer = net.createServer(),
   clientList = [],
+  gameObject = {},
+  roomList = [],
   ipAddress = "127.0.0.1",
   portNumber = 9000,
   count = 0,
-  startingGameFile = 'himins_game.json';
+  startingGameFile = 'himins_game.json',
+  defaultPlayerFile = 'himins_player.json';
 
-// # writeToClient(message, client);
-var writeToClient = function (message, client) {
-  if (client.writable) {
+// # writeToClient(client, message);
+var writeToClient = function (client, message) {
+  if (client && client.writable) {
     client.write(message + '\n');
   } else {
-    console.log('cleint not writable');
+    console.log('client not writable');
     console.log('*** himins_app.js writeToClient(%s, %s)', message, client);
   }
 };
@@ -67,21 +72,21 @@ module.exports.broadcast = broadcast;
 himinsServer.on('connection', function (client) {
     
   // give the client a name and add the client to the list of clients
-  client.name = 'mortal' + count++;
+  client.name = 'telnet_client_' + count++;
   clientList.push(client);
   
-  // weclome the user
-  client.write(client.name + ': ' + '> ');
-  
-  // tell everyone the user is here
-  broadcast('Hello ', client, 'system');
+  // ## associate a player with this client
+  client.player = player.loadPlayer(defaultPlayerFile);
   
   // ## start the game with the default map
-  game.loadGame(startingGameFile);
+  gameObject = game.loadGame(startingGameFile);
+
+  // ## welcome the player
+  commands.doGameCommand(null, 'look', commands.getCommandMap().look);
 
   // ## client.on('data', function (data))
   // handle incoming client data
- client.on('data', function (data) {
+  client.on('data', function (data) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
     
@@ -115,19 +120,6 @@ var getClientList = function () {
   return clientList;
 };
 module.exports.getClientList = getClientList;
-
-// # setClientName(oldID, newID)
-var setClientName = function (oldID, newID) {
-  var i;
-
-  for (i = 0; i < clientList.length; i++) {
-    if (clientList[i].name.toLowerCase() === oldID.toLowerCase()) {
-      clientList[i].name = newID.toLowerCase();
-      break;
-    }
-  }
-};
-module.exports.setClientName = setClientName;
 
 // # getClientByID(clientID)
 var getClientByID = function(clientID) {

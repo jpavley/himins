@@ -1,0 +1,85 @@
+{
+  "name": "Empty Room",
+  "description": "You stand in an empty room. You can walk _north east_, _north west_, _south east_, _south west_, _west_, _east_, _north_, or _south. You can just stand in the _center_.",
+  "spawnSection": "center",
+  "sections": [
+    {
+      "name": "north east",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "north west",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "south west",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "south east",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "west",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "east",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "north",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "south",
+      "description": "Nothing to see here, might as well move along...",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": []
+    },
+    {
+      "name": "center",
+      "description": "Nothing to see here but a _mote of dust_, might as well move along...",
+      "items": [
+        {
+          "name": "mote of dust",
+          "description": "A tiny mote of dust.",
+          "successMessage": "You pickup the mote of dust.",
+          "failMessage": "You pickup the mote of dust but it slips through your fingers.",
+          "hitPoints": "0",
+          "slot": "ITEM_POCKET"
+        }
+      ]
+    }
+  ]
+}

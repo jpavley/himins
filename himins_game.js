@@ -7,18 +7,12 @@
 // ## includes
 var
   fs = require('fs'),
-  room = require('./himins_room.js'),
   commands = require('./himins_commands.js'),
   strutils = require('./himins_string_utils.js');
 
-// ## module vars
-var
-  gameObject = {},
-  roomObject = {};
-
-//# init()
-var init = function () {
-  console.log('*** (2) himins_game.js init()');
+//# init(gameObject)
+var init = function (gameObject) {
+  console.log('*** himins_game.js init()');
 
   // add String object extentions
   strutils.init();
@@ -32,15 +26,14 @@ var init = function () {
       action: '!NO_ACTION',
       kind: 'game' }
     );
-
-  // load the starter room and add them to the room list
-  room.loadRoom(gameObject.roomFile);
 };
 module.exports.init = init;
 
 //# loadGame(gameFileName)
 var loadGame = function (gameFileName) {
-  console.log('*** (1) himins_game.js loadGame(%s)', gameFileName);
+  console.log('*** himins_game.js loadGame(%s)', gameFileName);
+  var
+    gameObject = {};
 
   fs.readFile(gameFileName, 'utf8', function (err, data) {
     if (err) {
@@ -48,8 +41,9 @@ var loadGame = function (gameFileName) {
     } else {
       gameObject = JSON.parse(data);
       //console.log(gameObject);
-      init();
+      init(gameObject);
     }
   });
+  return gameObject;
 };
 module.exports.loadGame = loadGame;

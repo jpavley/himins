@@ -62,21 +62,11 @@ var loadNavigationCommands = function () {
   }
 };
 
-// # welcome()
-// called when a player spawns or enters a room
-var welcome = function () {
-  var commandMap = commands.getCommandMap();
-
-  console.log();
-  commands.doGameCommand(null, '', commandMap.look);
-  console.log();
-};
-
 //# init()
 var init = function () {
   console.log('*** (3) himins_room.js init()');
 
-  // player
+  // TODO: move to game
   player.loadPlayer(roomObject.defaultPlayer, false);
   player.setPlayerLocation(roomObject.spawnSection);
 
@@ -98,7 +88,6 @@ var loadRoom = function (roomFileName) {
       roomObject = JSON.parse(data);
       //console.log(roomObject.name);
       init();
-      welcome();
       //processUserInput();
     }
   });

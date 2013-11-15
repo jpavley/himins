@@ -41,5 +41,9 @@
     }
 
   ],
-  "roomFile": "himins_room_1.json"
+  "rooms": [
+    {
+      "fileName": "himins_room_1.json",
+    }
+  ]
 }

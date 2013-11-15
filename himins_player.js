@@ -36,6 +36,7 @@ var loadPlayer = function (playerFileName) {
       //console.log(playerObject);
       init();
     }
+    return playerObject;
   });
 };
 module.exports.loadPlayer = loadPlayer;
