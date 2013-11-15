@@ -12,10 +12,10 @@ Text-based interactive fiction MMORPG using Node.js/MongoDB on the backend and t
 
 Technical Details
 -----------------
-* Multi-user Node.js TCP server app with MongoDB for data services
-* To start the app enter the following in a terminal window: node himins_chat
-* To test the app enter the the following in terminal window: telnet 127.0.0.1 9000
-* Himins is divided up into a set of services and data templates
+* Multi-user Node.js TCP server with MongoDB for data services
+* To start the game enter the following in a terminal window: node himins_app.js
+* To test the game enter the the following in terminal window: telnet 127.0.0.1 9000
+* Himins is divided up into a set of services and JSON data templates
 
 Architecture
 ------------
@@ -86,90 +86,12 @@ Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and r
 
 Game play is realtime with turn-based fighting. All interaction with Himins is accomplished through text commands. The commands are not fully documented and need to be discovered.
 
-Movement Commands
------------------
+Playing the Game
+================
 
-* north
-* south
-* east
-* west
-* up
-* down
-* jump
-* duck
+A game in Himins is a collection of interconnected rooms. Rooms are divided up into sections. Sections can contain items, puzzles, monsters, and doors.
 
-Description Commands
---------------------
-* look
-* verbose
-* score
-* diagnostic
-* brief
-* superbrief
-* map - displays ASCII map of current player location
-* inventory
-* examine (object)
-
-Action Commands
----------------
-* take (item)
-* take all
-* break (item)
-* open (container)
-* open (door)
-* close (door)
-* read (item)
-* drop (item)
-* put (item) in (container)
-* activate (item)
-* deactivate (item)
-* move (item)
-* attack (creature) with (item)
-* eat (item)
-* drink (item)
-
-Construction Commands
----------------------
-* dig (direction)
-* make (item) with (items)
-* destroy (item)
-* place (item)
-* diagram (item) - displays ASCII picture of item
-
-Emote Commands
---------------
-* shout
-* cry
-* laugh
-* dance
-* kiss
-* slap
-* hug
-* cheer
-
-Communication Commands
-----------------------
-
-* tell (player) - public
-* whisper (player) - private
-* friend (player)
-* defriend (player)
-* ignore (player)
-* deignore (player)
-* info (player) - display stats
-* list all - all players online
-* list area - all players in vacinity
-* list friends - all players on friend list
-* list ignored players
-* list defriened players
-
-Player Management Commands
---------------------------
-* create new character (name, class)
-* list characters
-* play character
-* delete character
-* rename character (new name)
+Commands in Himins are contextual. There is a small set of game-level commands otherwise each room and each section of a room provides its own interface to the  actions available to the player. Actions in Himins are implied by the context in which an object (the target of an action is found). To move from one section to another the player has to enter the name of that section. To add an item to the inventory a player enters the name of that item. To use an item already in inventory a player enters the name of that item. To remove an item from inventory a player would move into a storage section and enter the name of the item. The Himins contextual user interface is intuitive and eliminates typing in combinations of terms to find the right expression that activates a desired action.
 
 
 
