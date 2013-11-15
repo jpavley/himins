@@ -9,7 +9,8 @@ var
   net = require('net'),
   game = require('./himins_game'),
   player = require('./himins_player'),
-  commands = require('./himins_commands');
+  commands = require('./himins_commands'),
+  strutils = require('./himins_string_utils.js');
 
 var 
   himinsServer = net.createServer(),
@@ -137,6 +138,10 @@ module.exports.getClientByID = getClientByID;
 
 
 // # main entry point of himins_app
+
+// add String object extentions
+strutils.init();
+
 
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
