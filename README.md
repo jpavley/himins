@@ -19,6 +19,7 @@ Technical Details
 
 Architecture
 ------------
+ ```
                                             +------+
      +-----+                                | Chat
    Items   |                                | Commands          List of Clients
@@ -46,6 +47,8 @@ Architecture
              +---------------+  |
                                 |
                           ------+
+
+```
 
 Backstory
 ----------
