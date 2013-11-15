@@ -17,6 +17,36 @@ Technical Details
 * To test the app enter the the following in terminal window: telnet 127.0.0.1 9000
 * Himins is divided up into a set of services and data templates
 
+Architecture
+------------
+                                            +------+
+     +-----+                                | Chat
+   Items   |                                | Commands          List of Clients
+   Puzzles |                                | Repl              +-------
+   Doors   |                                | Formatter         |
+   Monsters|             list of Rooms      +-+----+            | +-----------+     +-----------+
+     +--+--+             -------+             |                 | |           |     |           |
+        |                       |             |                 | | Client    <-----+ Player Obj|
+        |    +---------------+  |     +-------v---------+       | |           |     |           |
+        |    |               |  |     |                 |       | +-----------+     +-----------+
+        +----> Room Object   |  |     |  Himins App     |       |
+             |               |  |     |  Server         <-------+ +-----------+     +-----------+
+             +---------------+  |     |                 |       | |           |     |           |
+                                |     +--------^--------+       | | Client    <-----+ Player Obj|
+             +---------------+  |              |                | |           |     |           |
+             |               |  |              |                | +-----------+     +-----------+
+             | Room Object   |  |     +--------+--------+       |
+             |               |  |     |                 |       | +-----------+     +-----------+
+             +---------------+  +----->  Game Object    |       | |           |     |           |
+                                |     |                 |       | | Client    <-----+ Player Obj|
+             +---------------+  |     +-----------------+       | |           |     |           |
+             |               |  |                               | +-----------+     +-----------+
+             | Room Object   |  |                               |
+             |               |  |                               +--------
+             +---------------+  |
+                                |
+                          ------+
+
 Backstory
 ----------
 
