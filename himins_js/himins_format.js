@@ -45,7 +45,7 @@ var renderFormatCodes = function (text) {
 };
 
 var resolveFunctions = function (text) {
-  console.log('*** himins_format.js resolveFunctions(%s)', text);
+  //console.log('*** himins_format.js resolveFunctions(%s)', text);
   var result = text;
 
   //result = result.replace(/!PLAYER_LOCATION/g, player.getPlayerLocation());
@@ -60,7 +60,7 @@ var resolveFunctions = function (text) {
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
 var formatText = function (text, columnWidth) {
-  console.log('*** himins_format.js formatText(%s, %d)', text, columnWidth);
+  //console.log('*** himins_format.js formatText(%s, %d)', text, columnWidth);
   
   var
     result = text,

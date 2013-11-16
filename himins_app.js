@@ -99,12 +99,14 @@ himinsServer.on('connection', function (client) {
     client.player = resultObject;
     welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage.trim());
+    client.write('me: ');
   });
 
   // ## associate a game with this app
   files.loadJSON(startingGameFile, function (resultObject) {
     game.init(resultObject);
     gameObject = resultObject;
+    console.log('*** gameObject has loaded: ', gameObject.name);
   });
 
   // ## client.on('data', function (data))
@@ -146,27 +148,24 @@ module.exports.getClientList = getClientList;
 
 // # getClientByID(clientID)
 var getClientByID = function(clientID) {
-  var result = "", i;
+  var result = "";
 
-  for (i = 0; i < clientList.length; i++) {
-    if (clientList[i].name.toLowerCase() === clientID.toLowerCase()) {
-      result = clientList[i];
-      break;
-    }
-  } 
+  result = _.find(clientList, function (client) {
+    return client.name.toLowerCase() === clientID.toLowerCase();
+  });
+
   return result; 
 };
 module.exports.getClientByID = getClientByID;
 
-
 // # main entry point of himins_app
 
-// add String object extentions
+// ## Add String object extentions
 strutils.init();
 
-
-// give a hint to the webmaster
+// ## Give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
-// start up the server
+// ## Start up the server
+himinsServer.maxConnections = 10;
 himinsServer.listen(portNumber);
