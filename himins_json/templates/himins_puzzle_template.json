@@ -1,0 +1,33 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "description": "",
+  "kind": "",
+  "hint": "",
+  "solutions": [
+    {
+      "kind": "",
+      "sequence": ""
+    }
+  ],
+  "messages": [
+    {
+      "kind": "",
+      "message": ""
+    }
+  ],
+  "actions": [
+    {
+      "kind": "",
+      "action": ""
+    }
+  ],
+  "commands": [
+    {
+      "name": "",
+      "description": "",
+      "action": "",
+      "kind": ""
+    }
+  ]
+}

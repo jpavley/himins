@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "description": "",
+  "spawnSection": "",
+  "sections": [
+    {
+      "name": "",
+      "description": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    }
+  ],
+  "commands": [
+    {
+      "name": "",
+      "description": "",
+      "action": "",
+      "kind": ""
+    }
+  ]
+}

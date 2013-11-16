@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "description": "",
+  "kind": "",
+  "hitPoints": "",
+  "clientID": "",
+  "loginDateTime": "",
+  "game": "",
+  "room": "",
+  "section": "",
+  "inventory": [
+    {
+      "fileName": ""
+    }
+  ],
+  "commands": [
+    {
+      "name": "",
+      "description": "",
+      "action": "",
+      "kind": ""
+    }
+  ]
+}
