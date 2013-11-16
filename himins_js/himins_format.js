@@ -45,11 +45,12 @@ var renderFormatCodes = function (text) {
 };
 
 var resolveFunctions = function (text) {
+  console.log('*** himins_format.js resolveFunctions(%s)', text);
   var result = text;
 
-  result = result.replace(/!PLAYER_LOCATION/g, player.getPlayerLocation());
-  result = result.replace(/!ROOM_DESCRIPTION/g, room.getRoomDescription());
-  result = result.replace(/!SECTION_DESCRIPTION/g, room.getSectionDescription());
+  //result = result.replace(/!PLAYER_LOCATION/g, player.getPlayerLocation());
+  //result = result.replace(/!ROOM_DESCRIPTION/g, room.getRoomDescription());
+  //result = result.replace(/!SECTION_DESCRIPTION/g, room.getSectionDescription());
 
   return result;
 };
@@ -59,13 +60,15 @@ var resolveFunctions = function (text) {
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
 var formatText = function (text, columnWidth) {
-  var result = text,
+  console.log('*** himins_format.js formatText(%s, %d)', text, columnWidth);
+  
+  var
+    result = text,
     wrap = linewrap(2, 78, {skipScheme: 'ansi-color'});
 
   result = resolveFunctions(text);
   result = renderFormatCodes(result);
   result = wrap(result);
-
   return result;
 };
 module.exports.formatText = formatText;

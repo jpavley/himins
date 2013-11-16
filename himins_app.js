@@ -1,38 +1,39 @@
-// himins_app.js
-// Main entry point to Himins
-// Use telnet client to access: telnet 127.0.0.1 9000
+// # himins_app.js
+// Main entry point to Himins application.
 
 /*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
 */
 
-var 
+// ## includes
+var
+  // ### Node modules
   net = require('net'),
-  game = require('./himins_game'),
-  player = require('./himins_player'),
-  commands = require('./himins_commands'),
-  strutils = require('./himins_string_utils.js');
 
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### Himins modules
+  game = require('./himins_js/himins_game'),
+  player = require('./himins_js/himins_player'),
+  commands = require('./himins_js/himins_commands'),
+  repl = require('./himins_js/himins_repl'),
+  format = require('./himins_js/himins_format'),
+  strutils = require('./himins_js/himins_string_utils'),
+  files = require('./himins_js/himins_file_utils');
+
+// ## module vars
 var 
   himinsServer = net.createServer(),
+
   clientList = [],
   gameObject = {},
-  roomList = [],
-  ipAddress = "127.0.0.1",
-  portNumber = 9000,
-  count = 0,
-  startingGameFile = 'himins_game.json',
-  defaultPlayerFile = 'himins_player.json';
 
-// # writeToClient(client, message);
-var writeToClient = function (client, message) {
-  if (client && client.writable) {
-    client.write(message + '\n');
-  } else {
-    console.log('client not writable');
-    console.log('*** himins_app.js writeToClient(%s, %s)', message, client);
-  }
-};
-module.exports.writeToClient = writeToClient;
+  ipAddress = "127.0.0.1", // TODO: get from environment var
+  portNumber = 9000, // TODO: get from environment var
+
+  startingGameFile = './himins_json/himins_game.json',
+  defaultPlayerFile = './himins_json/himins_player.json',
+  titleScreen = './himins_txt/himins_screen_title.txt';
 
 // # broadcast(message, client, kind)
 // broadcast messages to every client but this one
@@ -71,19 +72,40 @@ module.exports.broadcast = broadcast;
 // # himinsServer('connection', function (client))
 // handle a client connection and other client events (data, end, error)
 himinsServer.on('connection', function (client) {
+  var
+    cmdMap = {},
+    welcomeMessage = '';
     
   // give the client a name and add the client to the list of clients
-  client.name = 'telnet_client_' + count++;
+  client.name = _.uniqueId('client_');
   clientList.push(client);
-  
-  // ## associate a player with this client
-  client.player = player.loadPlayer(defaultPlayerFile);
-  
-  // ## start the game with the default map
-  gameObject = game.loadGame(startingGameFile);
 
-  // ## welcome the player
-  commands.doGameCommand(null, 'look', commands.getCommandMap().look);
+    // ## init the commands list and any add app commands
+    commands.init([{ 
+        name: 'quit',
+        description: 'Himins reports you have descended to earth. Your progress has not been saved.',
+        action: '!NO_ACTION',
+        kind: 'app' 
+      }]
+    );
+
+  files.loadTEXT(titleScreen, function (resultObject) {
+    client.write(resultObject);
+  });
+
+  // ## associate a player with this client
+  files.loadJSON(defaultPlayerFile, function (resultObject) {
+    player.init(resultObject);
+    client.player = resultObject;
+    welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
+    repl.writeToClient(client, welcomeMessage.trim());
+  });
+
+  // ## associate a game with this app
+  files.loadJSON(startingGameFile, function (resultObject) {
+    game.init(resultObject);
+    gameObject = resultObject;
+  });
 
   // ## client.on('data', function (data))
   // handle incoming client data

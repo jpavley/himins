@@ -27,12 +27,6 @@
       "kind": "game"
     },
     {
-      "name": "quit",
-      "description": "Himins reports you have descended to earth",
-      "action": "!NO_ACTION",
-      "kind": "game"
-    },
-    {
       "name": "inventory",
       "description": "You have the following items: !PLAYER_INVENTORY",
       "action": "!NO_ACTION",

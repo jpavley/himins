@@ -11,10 +11,7 @@ var
 
 //# init(gameObject)
 var init = function (gameObject) {
-  console.log('*** himins_game.js init()');
-
-  // init the commands object and add the predefined game commands to it
-  commands.init(gameObject.commands);
+  console.log('*** himins_game.js init(', gameObject.name, ')');
 
   // add the name of the game as a command
   commands.addCommand({ name: gameObject.name.toLowerCase(),
@@ -24,22 +21,3 @@ var init = function (gameObject) {
     );
 };
 module.exports.init = init;
-
-//# loadGame(gameFileName)
-var loadGame = function (gameFileName) {
-  console.log('*** himins_game.js loadGame(%s)', gameFileName);
-  var
-    gameObject = {};
-
-  fs.readFile(gameFileName, 'utf8', function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      gameObject = JSON.parse(data);
-      //console.log(gameObject);
-      init(gameObject);
-    }
-  });
-  return gameObject;
-};
-module.exports.loadGame = loadGame;

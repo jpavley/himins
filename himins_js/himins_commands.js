@@ -6,11 +6,17 @@
 
 // ## includes
 var
-  game = require('./himins_game.js'),
-  room = require('./himins_room.js'),
-  player = require('./himins_player.js'),
-  format = require('./himins_format.js'),
-  app = require('./himins_app.js');
+  // ### Node modules
+
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### Himins modules
+  game = require('./himins_game'),
+  room = require('./himins_room'),
+  player = require('./himins_player'),
+  format = require('./himins_format'),
+  repl = require('./himins_repl');
 
 // ## module vars
 var
@@ -18,7 +24,7 @@ var
 
 // # init(starterCommands)
 var init = function (starterCommands) {
-  //console.log('himins_command.js init(', starterCommands, ')');
+  console.log('*** himins_command.js init(', starterCommands[0].name, ')');
   var i;
 
   if (starterCommands) {
@@ -27,6 +33,7 @@ var init = function (starterCommands) {
       commandsList.push(starterCommands[i]);
     }
   }
+  //console.log('**** commandsList: ', commandsList);
 };
 module.exports.init = init;
 
@@ -98,7 +105,9 @@ module.exports.removeCommandsByKind = removeCommandsByKind;
 
 // # doGameCommand(client, cmd, message)
 var doGameCommand = function (client, cmd, message) {
-  app.writeToClient(client, format.formatText(message, 60));
+  console.log('*** himins_commands.js doGameCommand(%s, %s, %s)', client, cmd, message);
+
+  repl.writeToClient(client, format.formatText(message, 60));
 
   // send a control-c from the terminal
   if (cmd === 'quit') {
@@ -129,10 +138,12 @@ var getCommandMap = function () {
     result = {},
     i;
 
+  //console.log('**** commandsList: ', commandsList);
   for (i = commandsList.length - 1; i >= 0; i--) {
     result[commandsList[i].name] = commandsList[i].description;
   }
 
+  //console.log('**** commandMap: ', result);
   return result;
 };
 module.exports.getCommandMap = getCommandMap;
@@ -142,6 +153,7 @@ var getCommandKindFromName = function (name) {
   var
     result = '',
     i;
+
   for (i = commandsList.length - 1; i >= 0; i--) {
     if (commandsList[i].name === name) {
       result = commandsList[i].kind;
