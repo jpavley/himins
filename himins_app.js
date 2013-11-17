@@ -52,7 +52,7 @@ var broadcast = function (message, client, kind) {
           payload = 'Himins reports ' + message;
         }
         payload = format.formatText(payload);
-        repl.writeToClient(e, payload.trim());
+        repl.writeToClient(e, payload);
       } else {
         // client is not writable, kill it
         deadList.push(e);
@@ -72,10 +72,12 @@ module.exports.broadcast = broadcast;
 himinsServer.on('connection', function (client) {
   var
     cmdMap = {},
-    welcomeMessage = '';
+    welcomeMessage = '',
+    uuid = 0;
     
   // give the client a name and add the client to the list of clients
-  client.name = _.uniqueId('client_');
+  uuid = _.uniqueId();
+  client.name = 'client_' + uuid;
   clientList.push(client);
 
     // init the commands list and any add app commands
@@ -94,17 +96,11 @@ himinsServer.on('connection', function (client) {
   // associate a player with this client
   files.loadJSON(defaultPlayerFile, function (resultObject) {
     player.init(resultObject);
+    resultObject.name = resultObject.name + uuid;
     client.player = resultObject;
     welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
-    repl.writeToClient(client, welcomeMessage.trim());
-    broadcast('another ' + client.player.name + ' has joined the game', client, 'system');
-  });
-
-  // associate a game with this app
-  files.loadJSON(startingGameFile, function (resultObject) {
-    game.init(resultObject);
-    gameObject = resultObject;
-    console.log('*** gameObject has loaded: ', gameObject.name);
+    repl.writeToClient(client, welcomeMessage);
+    broadcast(client.player.name + ' has joined the game', client, 'system');
   });
 
   // ## client.on('data', function (data))
@@ -158,12 +154,20 @@ module.exports.getClientByID = getClientByID;
 
 // # main entry point of himins_app
 
-// ## Add String object extentions
+// add String object extentions
 strutils.init();
 
-// ## Give a hint to the webmaster
+// associate a game with this app
+files.loadJSON(startingGameFile, function (resultObject) {
+  game.init(resultObject);
+  gameObject = resultObject;
+  console.log('*** gameObject has loaded: ', gameObject.name);
+});
+
+
+// give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
-// ## Start up the server
+// start up the server
 himinsServer.maxConnections = 10;
 himinsServer.listen(portNumber);

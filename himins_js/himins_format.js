@@ -64,7 +64,7 @@ var formatText = function (text, columnWidth) {
   
   var
     result = text,
-    wrap = linewrap(2, 78, {skipScheme: 'ansi-color'});
+    wrap = linewrap(0, 80, {skipScheme: 'ansi-color'});
 
   result = resolveFunctions(text);
   result = renderFormatCodes(result);
