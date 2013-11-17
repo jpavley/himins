@@ -96,7 +96,7 @@ himinsServer.on('connection', function (client) {
   // associate a player with this client
   files.loadJSON(defaultPlayerFile, function (resultObject) {
     player.init(resultObject);
-    resultObject.name = resultObject.name + uuid;
+    player.setPlayerName(resultObject, resultObject.name + uuid);
     client.player = resultObject;
     welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage);
