@@ -71,7 +71,6 @@ module.exports.broadcast = broadcast;
 // handle a client connection and other client events (data, end, error)
 himinsServer.on('connection', function (client) {
   var
-    cmdMap = {},
     welcomeMessage = '',
     uuid = 0;
     
@@ -96,11 +95,13 @@ himinsServer.on('connection', function (client) {
   // associate a player with this client
   files.loadJSON(defaultPlayerFile, function (resultObject) {
     player.init(resultObject);
-    player.setPlayerName(resultObject, resultObject.name + uuid);
+    resultObject.name = resultObject.name + uuid;
     client.player = resultObject;
-    welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
+
+    welcomeMessage = format.formatText('Welcome to _Himins_. Your name is *' + client.player.name + '*. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage);
-    broadcast(client.player.name + ' has joined the game', client, 'system');
+
+    broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
 
   // ## client.on('data', function (data))
@@ -108,7 +109,7 @@ himinsServer.on('connection', function (client) {
   client.on('data', function (data) {
     // log it
     console.log(client.name + ' incoming data: ' + data);
-    
+    repl.processUserInput(client, data);
   });
   
   // ## client.on('end', function ())
@@ -163,7 +164,6 @@ files.loadJSON(startingGameFile, function (resultObject) {
   gameObject = resultObject;
   console.log('*** gameObject has loaded: ', gameObject.name);
 });
-
 
 // give a hint to the webmaster
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);

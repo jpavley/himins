@@ -14,12 +14,6 @@ var
 //# init(playerObject)
 var init = function (playerObject) {
   console.log('*** himins_player.js init(', playerObject.name, ')');
-
-  commands.addCommand({ name: playerObject.name,
-                        description: playerObject.description,
-                        action: '!NO_ACTION',
-                        kind: 'player' });
-
 };
 module.exports.init = init;
 
@@ -40,20 +34,3 @@ var getPlayerInventoryNames = function (playerObject) {
   return result;
 };
 module.exports.getPlayerInventoryNames = getPlayerInventoryNames;
-
-// # setPlayerName(name)
-var setPlayerName = function (playerObject, name) {
-  // remove the player command with the old name...
-  commands.removeCommandByName(playerObject.name);
-
-  // update the name of the player
-  playerObject.name = name;
-
-  // ...add a player command with new name
-  commands.addCommand({ name: playerObject.name,
-                        description: playerObject.description,
-                        action: '!NO_ACTION',
-                        kind: 'player' });
-
-};
-module.exports.setPlayerName = setPlayerName;
