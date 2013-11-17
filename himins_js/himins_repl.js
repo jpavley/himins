@@ -52,7 +52,7 @@ module.exports.processUserInput = processUserInput;
 // # writeToClient(client, message);
 var writeToClient = function (client, message) {
   if (client && client.writable) {
-    client.write(himinsPrompt + message + '\n');
+    client.write(message + '\n');
   } else {
     console.log('client not writable');
     console.log('*** himins_app.js writeToClient(%s, %s)', message, client);

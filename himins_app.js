@@ -39,33 +39,31 @@ var
 // broadcast messages to every client but this one
 // if a client is discovered to be unresponsive it is removed from the client list
 var broadcast = function (message, client, kind) {
-    var cleanup = [], i, l, payload;
-    
-    for (i = 0, l = clientList.length; i < l; i += 1) {
-        if (client !== clientList[i]) {
-            // client is in the client list
-            if (clientList[i].writable) {
-                // compose the message
-                if (kind === 'user') {
-                    // todo: localize "say"
-                    payload = client.name + ' yells to everyone: ' + message;
-                } else {
-                    payload = 'Himins reports ' + message;
-                }
-                clientList[i].write(payload);
-            } else {
-                // client is not writable, kill it
-                cleanup.push(clientList[i]);
-                clientList[i].destroy();
-            }
-        }
-    }
-    
-    // remove dead clients from client list
-    for (i = 0, l = cleanup.length; i < l; i += 1 ) {
-      clientList.splice(clientList.indexOf(cleanup[i]), 1);
-    }
+  var 
+    deadList = [],
+    payload = '';
 
+  _.each(clientList, function (e, i, l) {
+    if (client !== e) {
+      if (e.writable) {
+        if (kind === 'user') {
+          payload = e.player.name + ' yells to everyone: ' + message;
+        } else {
+          payload = 'Himins reports ' + message;
+        }
+        payload = format.formatText(payload);
+        repl.writeToClient(e, payload.trim());
+      } else {
+        // client is not writable, kill it
+        deadList.push(e);
+        e.destroy();   
+      }
+    }
+  });
+
+  _.each(deadList, function (client, index, deadList) {
+    clientList.splice(clientList.indexOf(client), 1);
+  });
 };
 module.exports.broadcast = broadcast;
 
@@ -80,7 +78,7 @@ himinsServer.on('connection', function (client) {
   client.name = _.uniqueId('client_');
   clientList.push(client);
 
-    // ## init the commands list and any add app commands
+    // init the commands list and any add app commands
     commands.init([{ 
         name: 'quit',
         description: 'Himins reports you have descended to earth. Your progress has not been saved.',
@@ -93,16 +91,16 @@ himinsServer.on('connection', function (client) {
     client.write(resultObject);
   });
 
-  // ## associate a player with this client
+  // associate a player with this client
   files.loadJSON(defaultPlayerFile, function (resultObject) {
     player.init(resultObject);
     client.player = resultObject;
     welcomeMessage = format.formatText('Welcome to _Himins_ mortal. Your name is _' + client.player.name + '_. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage.trim());
-    client.write('me: ');
+    broadcast('another ' + client.player.name + ' has joined the game', client, 'system');
   });
 
-  // ## associate a game with this app
+  // associate a game with this app
   files.loadJSON(startingGameFile, function (resultObject) {
     game.init(resultObject);
     gameObject = resultObject;
