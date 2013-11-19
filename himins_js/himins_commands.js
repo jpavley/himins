@@ -12,158 +12,81 @@ var
   _ = require('underscore'),
 
   // ### Himins modules
-  game = require('./himins_game'),
-  room = require('./himins_room'),
-  player = require('./himins_player'),
   format = require('./himins_format'),
   repl = require('./himins_repl');
 
 // ## module vars
-var
-  commandsList = [];
 
 // # init(starterCommands)
-var init = function (starterCommands) {
-  console.log('*** himins_command.js init(', starterCommands[0].name, ')');
-  var i;
-
-  if (starterCommands) {
-    //commandsList.concat(starterCommands); concat no work!
-    for (i = starterCommands.length - 1; i >= 0; i--) {
-      commandsList.push(starterCommands[i]);
-    }
-  }
-  //console.log('**** commandsList: ', commandsList);
+var init = function (commands) {
+  console.log('*** himins_command.js init()');
 };
 module.exports.init = init;
 
-// # getCommandNames()
+// # getCommandNames(commands)
 // Returns a string of the names of each command.
-var getCommandNames = function () {
+var getCommandNames = function (commands) {
   var
     resultString = '',
-    resultList = [],
-    i;
+    resultList = [];
 
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    resultList.push('_' + commandsList[i].name + '_');
-  }
+  _.each(commands, function (e, i, l) {
+    resultList.push('_' + e.name + '_');
+  });
 
   resultString = resultList.toString().replace(/,/g, ', ');
   return resultString;
 };
 module.exports.getCommandNames = getCommandNames;
 
-// # addCommand(commandObject)
+// # addCommand(commands, commandObject)
 // Commmand object = { name, description, action, kind }
-var addCommand = function (commandObject) {
-  commandsList.push(commandObject);
+var addCommand = function (commands, commandObject) {
+  commands.push(commandObject);
 };
 module.exports.addCommand = addCommand;
 
-// # getCommandByName(commandName)
-var getCommandByName = function (commandName) {
-  var
-    result = {},
-    i;
+// # getCommandByName(commands, commandName)
+var getCommandByName = function (commands, commandName) {
+  var result = _.find(commands, function (command) {
+    return command.name.toLowerCase() === commandName.toLowerCase();
+  });
 
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    if (commandsList[i].name === commandName) {
-      result = commandsList[i];
-      break;
-    }
-  }
   return result;
 };
 module.exports.getCommandByName = getCommandByName;
 
-// # removeCommandByName(commandName)
-var removeCommandByName = function (commandName) {
-  var i;
+// # removeCommandByName(commands, commandName)
+var removeCommandByName = function (commands, commandName) {
+  var updatedCommands = _.reject(commands, function (commandName) {
+    return commands.name.toLowerCase() === commandName.toLowerCase();
+  });
 
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    if (commandsList[i].name === commandName) {
-      commandsList.splice(i, 1); // remove 1 element at index i
-      break;
-    }
-  }
+  commands = updatedCommands;
 };
 module.exports.removeCommandByName = removeCommandByName;
 
-// # removeCommandsByKind(commandKind)
-var removeCommandsByKind = function (commandKind) {
-  var i;
+// # removeCommandsByKind(commands, commandKind)
+var removeCommandsByKind = function (commands, commandKind) {
+  var updatedCommands = _.reject(commands, function (commandKind) {
+    return commands.kind.toLowerCase() === commandKind.toLowerCase();
+  });
 
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    if (commandsList[i].kind === commandKind) {
-      commandsList.splice(i, 1); // remove 1 element at index i
-      break;
-    }
-  }
+  commands = updatedCommands;
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
-// # doGameCommand(client, cmd, message)
-var doGameCommand = function (client, cmd, message) {
-  console.log('*** himins_commands.js doGameCommand(%s, %s, %s)', client, cmd, message);
+// # doCommand(command, client)
+var doCommand = function (command, client) {
+  console.log('*** himins_commands.js doGameCommand()');
 
-  repl.writeToClient(client, format.formatText(message, 60));
+  // display the commands description
+  repl.writeToClient(client, format.formatText(command.description, 60));
 
-  // send a control-c from the terminal
-  if (cmd === 'quit') {
-    client.write(null, {ctrl: true, name: 'c'});
-  }
+  // TODO: do any action specified by the command
+
 };
-module.exports.doGameCommand = doGameCommand;
-
-
-// # doNavigationCommand(cmd, message)
-var doNavigationCommand = function (cmd, message) {
-  player.setPlayerLocation = cmd;
-  room.loadItemCommands(player.getPlayerLocation());
-
-  console.log(format.formatText(message, 60));
-};
-module.exports.doNavigationCommand = doNavigationCommand;
-
-
-// # doItemCommand(cmd, message)
-var doItemCommand = function (cmd, message) {
-};
-module.exports.doItemCommand = doItemCommand;
-
-// # getCommandMap()
-var getCommandMap = function () {
-  var
-    result = {},
-    i;
-
-  //console.log('**** commandsList: ', commandsList);
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    result[commandsList[i].name] = commandsList[i].description;
-  }
-
-  //console.log('**** commandMap: ', result);
-  return result;
-};
-module.exports.getCommandMap = getCommandMap;
-
-// # getCommandKindFromName(name)
-var getCommandKindFromName = function (name) {
-  var
-    result = '',
-    i;
-
-  for (i = commandsList.length - 1; i >= 0; i--) {
-    if (commandsList[i].name === name) {
-      result = commandsList[i].kind;
-      break;
-    }
-  }
-
-  return result;
-};
-
+module.exports.doCommand = doCommand;
 
 
 
