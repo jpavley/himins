@@ -46,6 +46,12 @@ var addCommand = function (commands, commandObject) {
 };
 module.exports.addCommand = addCommand;
 
+var combineCommands = function (myCommands, yourCommands) {
+  var ourCommands = _.union(myCommands, yourCommands);
+  return ourCommands;
+};
+module.exports.combineCommands = combineCommands;
+
 // # getCommandByName(commands, commandName)
 var getCommandByName = function (commands, commandName) {
   var result = _.find(commands, function (command) {
