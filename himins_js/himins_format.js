@@ -48,22 +48,23 @@ var resolveFunctions = function (client, text) {
   //console.log('*** himins_format.js resolveFunctions(%s)', text);
   var result = text;
 
-  result = result.replace(/!GAME_NAME/g, '_' + client.player.game.name + '_');
-  result = result.replace(/!PLAYER_NAME/g, '_' + client.player.name + '_');
+  result = result.replace(/!GAME_NAME/g, client.player.game.name);
+  result = result.replace(/!PLAYER_NAME/g, client.player.name);
+  result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(client.player.commands));
 
   return result;
 };
 
-// # formatText(text, columnWidth)
+// # formatText(client, text, indent, columnWidth)
 // Transforms text (with basic markdown syntax into ASCII TTY) 
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
-var formatText = function (client, text, columnWidth) {
+var formatText = function (client, text, indent, columnWidth) {
   //console.log('*** himins_format.js formatText(%s, %d)', text, columnWidth);
   
   var
     result = text,
-    wrap = linewrap(0, 80, {skipScheme: 'ansi-color'});
+    wrap = linewrap(indent, columnWidth, {skipScheme: 'ansi-color'});
 
   result = resolveFunctions(client, text);
   result = renderFormatCodes(result);

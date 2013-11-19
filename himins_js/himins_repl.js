@@ -4,8 +4,12 @@
 /*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
 */
 
-// # module includes
+// ## module includes
 var
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### himins modules
   commands = require('./himins_commands'),
   format = require('./himins_format');
 
@@ -26,9 +30,19 @@ var processUserInput = function (client, data) {
   //console.log('*** himins_repl.js processUserInput());
   var 
     input = String(data).trim().toLowerCase(),
-    message = 'hi *there*';
+    command = {},
+    message = 'Himins is sorry to report that *' + input+ '* is not available at this time';
 
-    writeToClient(client, format.formatText(client, message, 80));
+    console.log(client.player.commands);
+
+    command = _.find(client.player.commands, function (cmd) {
+      return cmd.name.toLowerCase() === input;
+    });
+
+    if (command) {
+      message = command.description;
+    }
+    writeToClient(client, format.formatText(client, message, 2, 78));      
 
 };
 module.exports.processUserInput = processUserInput;

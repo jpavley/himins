@@ -51,7 +51,7 @@ var broadcast = function (message, client, kind) {
         } else {
           payload = 'Himins reports ' + message;
         }
-        payload = format.formatText(e, payload);
+        payload = format.formatText(e, payload, 2, 78);
         repl.writeToClient(e, payload);
       } else {
         // client is not writable, kill it
@@ -114,7 +114,7 @@ himinsServer.on('connection', function (client) {
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
     }
 
-    repl.writeToClient(client, format.formatText(client, gameObject.welcome, 80));
+    repl.writeToClient(client, format.formatText(client, gameObject.welcome, 0, 80));
 
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
