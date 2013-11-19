@@ -11,7 +11,10 @@ var
 
 // # writeToClient(client, message);
 var writeToClient = function (client, message) {
+
+  // BUG: Need to write to client to reliably write to client?
   console.log('writeToClient(', client.name, message, ')');
+
   if (client && client.writable) {
     client.write(message + '\n');
   } else {
