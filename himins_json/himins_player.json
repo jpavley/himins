@@ -10,5 +10,7 @@
       "description": "An ancient silver coin. You found it in your mounth and put it in your pocket",
       "slot": "ITEM_POCKET"
     }
+  ],
+  "commands": [
   ]
 }
