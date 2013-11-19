@@ -79,15 +79,6 @@ himinsServer.on('connection', function (client) {
   client.name = 'client_' + uuid;
   clientList.push(client);
 
-    // init the commands list and any add app commands
-    commands.init([{ 
-        name: 'quit',
-        description: 'Himins reports you have descended to earth. Your progress has not been saved.',
-        action: '!NO_ACTION',
-        kind: 'app' 
-      }]
-    );
-
   files.loadTEXT(titleScreen, function (resultObject) {
     client.write(resultObject);
   });
@@ -97,6 +88,14 @@ himinsServer.on('connection', function (client) {
     player.init(resultObject);
     resultObject.name = resultObject.name + uuid;
     client.player = resultObject;
+
+    commands.init(client.player.commands);
+    commands.addCommand(client.player.commands, { 
+      name: 'quit',
+      description: 'Himins reports you have descended to earth. Your progress has not been saved.',
+      action: '!NO_ACTION',
+      kind: 'app' 
+    });
 
     welcomeMessage = format.formatText('Welcome to _Himins_. Your name is *' + client.player.name + '*. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage);
