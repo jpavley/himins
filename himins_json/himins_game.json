@@ -1,7 +1,8 @@
 {
-  "name": "Himins",
+  "name": "himins",
   "version": "0.0.1",
   "description": "Himins is a MUD, a multi user dungeon with a command line interface. It is written in JavaScript using Node.js and MongoDB. To play Himins you run it on a Node.js server and access the server with a Telnet client from a terminal window. Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Himins closest to the surface are protected and great for learning the game. The areas deep within Himins are unregulated and require advanced knowlege of the game. The core of the Moon is the most dangerous of all and a player who reaches the core becomes the master of Himins. The core is one giant game of text-based PVP *King of the Hill*.",
+  "welcome": "Welcome to !GAME_NAME. Your name is !PLAYER_NAME. You should _pray_ for _help_ or _quit_.",
   "rooms": [
     {
       "fileName": "himins_room_1.json"

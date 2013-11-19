@@ -28,7 +28,7 @@ var processUserInput = function (client, data) {
     input = String(data).trim().toLowerCase(),
     message = 'hi *there*';
 
-    writeToClient(client, format.formatText(message, 80));
+    writeToClient(client, format.formatText(client, message, 80));
 
 };
 module.exports.processUserInput = processUserInput;

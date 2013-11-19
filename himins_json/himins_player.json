@@ -1,8 +1,9 @@
 {
-  "name": "Mortal",
+  "name": "mortal",
   "description": "You look and feel like yourself only thinned, like too little butter over too much toast.",
-  "room": "Narthex",
-  "location": "center",
+  "game": {},
+  "room": {},
+  "section": "center",
   "health": 100,
   "inventory": [
     {

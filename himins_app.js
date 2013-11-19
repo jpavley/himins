@@ -51,7 +51,7 @@ var broadcast = function (message, client, kind) {
         } else {
           payload = 'Himins reports ' + message;
         }
-        payload = format.formatText(payload);
+        payload = format.formatText(e, payload);
         repl.writeToClient(e, payload);
       } else {
         // client is not writable, kill it
@@ -70,9 +70,9 @@ module.exports.broadcast = broadcast;
 // # himinsServer('connection', function (client))
 // handle a client connection and other client events (data, end, error)
 himinsServer.on('connection', function (client) {
-  var
-    welcomeMessage = '',
-    uuid = 0;
+  var uuid = 0;
+
+  // TODO: If a client tries to connect before the game has loaded it should be rejected!
     
   // give the client a name and add the client to the list of clients
   uuid = _.uniqueId();
@@ -108,13 +108,13 @@ himinsServer.on('connection', function (client) {
     );
 
 
-    // add any game level commands
+    // associate the player with the game add any game level commands
     if (gameObject) {
+      client.player.game = gameObject;
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
     }
 
-    welcomeMessage = format.formatText('Welcome to _Himins_. Your name is *' + client.player.name + '*. You should pray for _help_.', 80);
-    repl.writeToClient(client, welcomeMessage);
+    repl.writeToClient(client, format.formatText(client, gameObject.welcome, 80));
 
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
@@ -123,7 +123,7 @@ himinsServer.on('connection', function (client) {
   // handle incoming client data
   client.on('data', function (data) {
     // log it
-    console.log(client.name, ' incoming data:', data);
+    console.log(client.name, ' incoming data:', String(data));
     repl.processUserInput(client, data);
   });
   
