@@ -123,7 +123,7 @@ himinsServer.on('connection', function (client) {
   // handle incoming client data
   client.on('data', function (data) {
     // log it
-    console.log(client.name + ' incoming data: ' + data);
+    console.log(client.name, ' incoming data:', data);
     repl.processUserInput(client, data);
   });
   

@@ -12,9 +12,6 @@ var
 // # writeToClient(client, message);
 var writeToClient = function (client, message) {
 
-  // BUG: Need to write to client to reliably write to client?
-  console.log('writeToClient(', client.name, message, ')');
-
   if (client && client.writable) {
     client.write(message + '\n');
   } else {
@@ -29,11 +26,9 @@ var processUserInput = function (client, data) {
   //console.log('*** himins_repl.js processUserInput());
   var 
     input = String(data).trim().toLowerCase(),
-    cmdMap = commands.getCommandMap();
+    message = 'hi *there*';
 
-    writeToClient(client, format.formatText(cmdMap.input, 80));
-
-    console.log('*** cmdMap: ', cmdMap);
+    writeToClient(client, format.formatText(message, 80));
 
 };
 module.exports.processUserInput = processUserInput;
