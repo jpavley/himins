@@ -89,13 +89,21 @@ himinsServer.on('connection', function (client) {
     resultObject.name = resultObject.name + uuid;
     client.player = resultObject;
 
+    // each player gets her own potentialy unqie set of commands
     commands.init(client.player.commands);
+
+    // all players can quit (disconnect actually)
     commands.addCommand(client.player.commands, { 
       name: 'quit',
       description: 'Himins reports you have descended to earth. Your progress has not been saved.',
-      action: '!NO_ACTION',
+      action: '!QUIT_APP',
       kind: 'app' 
     });
+
+    // add any game level commands
+    if (gameObject) {
+      client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
+    }
 
     welcomeMessage = format.formatText('Welcome to _Himins_. Your name is *' + client.player.name + '*. You should pray for _help_.', 80);
     repl.writeToClient(client, welcomeMessage);
