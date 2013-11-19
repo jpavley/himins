@@ -42,6 +42,7 @@ module.exports.getCommandNames = getCommandNames;
 // # addCommand(commands, commandObject)
 // Commmand object = { name, description, action, kind }
 var addCommand = function (commands, commandObject) {
+  //console.log('*** himins_commands.js addCommand(', commands, commandObject, ')');
   commands.push(commandObject);
 };
 module.exports.addCommand = addCommand;

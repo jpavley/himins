@@ -100,6 +100,14 @@ himinsServer.on('connection', function (client) {
       kind: 'app' 
     });
 
+    // add the name of the game as a command
+    commands.addCommand(client.player.commands, { name: gameObject.name.toLowerCase(),
+      description: gameObject.description,
+      action: '!NO_ACTION',
+      kind: 'game' }
+    );
+
+
     // add any game level commands
     if (gameObject) {
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);

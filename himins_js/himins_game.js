@@ -12,12 +12,5 @@ var
 //# init(gameObject)
 var init = function (gameObject) {
   console.log('*** himins_game.js init(', gameObject.name, ')');
-
-  // add the name of the game as a command
-  commands.addCommand({ name: gameObject.name.toLowerCase(),
-      description: gameObject.description,
-      action: '!NO_ACTION',
-      kind: 'game' }
-    );
 };
 module.exports.init = init;
