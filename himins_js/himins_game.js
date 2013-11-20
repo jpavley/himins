@@ -29,7 +29,7 @@ var init = function (gameObject) {
   // load the rooms
 
   _.each(gameObject.rooms, function (e, i, l) {
-    files.loadJSON('himins_json/' + e.fileName, function (resultObject) {
+    files.loadJSON('himins_json/' + e, function (resultObject) {
       room.init(resultObject);
       roomList.push(resultObject);
       console.log('*** a room has loaded: ', resultObject.name);

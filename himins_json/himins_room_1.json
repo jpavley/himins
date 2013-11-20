@@ -1,5 +1,6 @@
 {
   "name": "Narthex",
+  "version": "0.0.0",
   "description": "You stand in the *Narthex*, a musty, mostly-empty, square room, the size of a large crypt. The floor is ice-cold marble caked in inches of fine gray dust. The footprints of hundreds or thousands of bare feet criss cross the room. Mysterious piles sit in shadow in the _north east_, _north west_, _south east_, and _south west_ corners of the room. The walls are tessellated with dirty ceramic tiles. On the _west_ wall four of the tiles look clean and shiny. On the _east_ wall is a silver door with a golden knob. You hear a murmur of soft whispers from behind the silver door.",
   "spawnSection": "center",
   "sections": [
@@ -18,7 +19,8 @@
       ],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "north west",
@@ -139,6 +141,14 @@
       "doors": [],
       "puzzles": [],
       "monsters": []
+    }
+  ],
+    "commands": [
+    {
+      "name": "northeast",
+      "description": "You go to the northeast section of the !ROOM_NAME.",
+      "action": "!GO_NORTHEAST",
+      "kind": "room"
     }
   ]
 }

@@ -4,82 +4,150 @@
   "spawnSection": "center",
   "sections": [
     {
-      "name": "north east",
-      "description": "Nothing to see here, might as well move along...",
+      "name": "northeast",
+      "description": "",
+      "atmosphere": "",
+     "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+   },
+    {
+      "name": "northwest",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
-      "name": "north west",
-      "description": "Nothing to see here, might as well move along...",
+      "name": "southwest",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
-      "name": "south west",
-      "description": "Nothing to see here, might as well move along...",
+      "name": "southeast",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
-    },
-    {
-      "name": "south east",
-      "description": "Nothing to see here, might as well move along...",
-      "items": [],
-      "doors": [],
-      "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "west",
-      "description": "Nothing to see here, might as well move along...",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "east",
-      "description": "Nothing to see here, might as well move along...",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "north",
-      "description": "Nothing to see here, might as well move along...",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "south",
-      "description": "Nothing to see here, might as well move along...",
+      "description": "",
+      "atmosphere": "",
       "items": [],
       "doors": [],
       "puzzles": [],
-      "monsters": []
+      "monsters": [],
+      "commands": []
     },
     {
       "name": "center",
-      "description": "Nothing to see here but a _mote of dust_, might as well move along...",
-      "items": [
-        {
-          "name": "mote of dust",
-          "description": "A tiny mote of dust.",
-          "successMessage": "You pickup the mote of dust.",
-          "failMessage": "You pickup the mote of dust but it slips through your fingers.",
-          "hitPoints": "0",
-          "slot": "ITEM_POCKET"
-        }
-      ]
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+   }
+  ],
+  "commands": [
+    {
+      "name": "northeast",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northeast section of the !ROOM_NAME.",
+      "action": "!GO_NORTHEAST",
+      "kind": "room"
+    },
+    {
+      "name": "northwest",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northwest section of the !ROOM_NAME.",
+      "action": "!GO_NORTHWEST",
+      "kind": "room"
+    },
+    {
+      "name": "southeast",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southeast section of the !ROOM_NAME.",
+      "action": "!GO_SOUTHEAST",
+      "kind": "room"
+    },
+    {
+      "name": "southwest",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southwest section of the !ROOM_NAME.",
+      "action": "!GO_SOUTHWEST",
+      "kind": "room"
+    },
+    {
+      "name": "north",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the north section of the !ROOM_NAME.",
+      "action": "!GO_NORTH",
+      "kind": "room"
+    },
+    {
+      "name": "south",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the south section of the !ROOM_NAME.",
+      "action": "!GO_SOUTH",
+      "kind": "room"
+    },
+    {
+      "name": "east",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the east section of the !ROOM_NAME.",
+      "action": "!GO_EAST",
+      "kind": "room"
+    },
+    {
+      "name": "west",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the west section of the !ROOM_NAME.",
+      "action": "!GO_WEST",
+      "kind": "room"
+    },
+    {
+      "name": "center",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the center section of the !ROOM_NAME.",
+      "action": "!GO_CENTER",
+      "kind": "room"
     }
   ]
 }
