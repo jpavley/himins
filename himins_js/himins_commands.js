@@ -83,18 +83,5 @@ var removeCommandsByKind = function (commands, commandKind) {
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
-// # doCommand(command, client)
-var doCommand = function (command, client) {
-  console.log('*** himins_commands.js doGameCommand()');
-
-  // display the commands description
-  repl.writeToClient(client, format.formatText(command.description, 60));
-
-  // TODO: do any action specified by the command
-
-};
-module.exports.doCommand = doCommand;
-
-
 
 
