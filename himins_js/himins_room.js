@@ -65,34 +65,8 @@ var loadNavigationCommands = function () {
 //# init()
 var init = function () {
   console.log('*** (3) himins_room.js init()');
-
-  // TODO: move to game
-  player.loadPlayer(roomObject.defaultPlayer, false);
-  player.setPlayerLocation(roomObject.spawnSection);
-
-
-  // commands
-  loadItemCommands(player.getPlayerLocation());
-  loadNavigationCommands();
 };
 module.exports.init = init;
-
-//# loadRoom(roomFileName)
-var loadRoom = function (roomFileName) {
-  console.log('*** (3) himins_room.js loadRoom(%s)', roomFileName);
-
-  fs.readFile(roomFileName, 'utf8', function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      roomObject = JSON.parse(data);
-      //console.log(roomObject.name);
-      init();
-      //processUserInput();
-    }
-  });
-};
-module.exports.loadRoom = loadRoom;
 
 // # getItemByName(sectionName, itemName)
 var getItemByName = function (sectionName, itemName) {

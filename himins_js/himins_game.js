@@ -6,11 +6,36 @@
 
 // ## includes
 var
+  // ### Node modules
   fs = require('fs'),
-  commands = require('./himins_commands.js');
+
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### Himins modules
+  commands = require('./himins_commands'),
+  room = require('./himins_room'),
+  files = require('./himins_file_utils');
+
+
+// ## module vars
+var
+  roomList = [];
 
 //# init(gameObject)
 var init = function (gameObject) {
   console.log('*** himins_game.js init(', gameObject.name, ')');
+
+  // load the rooms
+
+  _.each(gameObject.rooms, function (e, i, l) {
+    files.loadJSON('himins_json/' + e.fileName, function (resultObject) {
+      room.init(resultObject);
+      roomList.push(resultObject);
+      console.log('*** a room has loaded: ', resultObject.name);
+    });
+ });
+
+
 };
 module.exports.init = init;
