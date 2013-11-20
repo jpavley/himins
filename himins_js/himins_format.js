@@ -51,6 +51,8 @@ var resolveFunctions = function (client, text) {
   result = result.replace(/!GAME_NAME/g, client.player.game.name);
   result = result.replace(/!PLAYER_NAME/g, client.player.name);
   result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(client.player.commands));
+  result = result.replace(/!PLAYER_INVENTORY/g, player.getInventoryNames(client.player));
+
 
   return result;
 };

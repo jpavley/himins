@@ -6,7 +6,10 @@
 
 // ## includes
 var
-  fs = require('fs'),
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### Himins modules
   commands = require('./himins_commands.js');
 
 // ## module vars
@@ -14,23 +17,31 @@ var
 //# init(playerObject)
 var init = function (playerObject) {
   console.log('*** himins_player.js init(', playerObject.name, ')');
+
+  // if the player has any starter items in her inventory add their names as commands
+   _.each(playerObject.inventory, function (e, i, l) {
+    commands.addCommand(playerObject.commands, { 
+      name: e.name,
+      description: e.description,
+      action: e.action,
+      kind: e.kind 
+    });
+  });
 };
 module.exports.init = init;
 
-//# getPlayerInventoryNames(playerObject)
+//# getInventoryNames(playerObject)
 // Returns a string with the names of the items in the player inventory
-var getPlayerInventoryNames = function (playerObject) {
+var getInventoryNames = function (playerObject) {
   var
-    namesList = [],
-    result = '',
-    i;
+    resultString = '',
+    resultList = [];
 
-  for (i = playerObject.inventory.length - 1; i >= 0; i--) {
-    namesList.push(playerObject.inventory[i].name);
-  }
+  _.each(playerObject.inventory, function (e, i, l) {
+    resultList.push('_' + e.name + '_');
+  });
 
-  result = namesList.toString();
-  result = result.replace(/,/g, ", ");
-  return result;
+  resultString = resultList.toString().replace(/,/g, ', ');
+  return resultString;
 };
-module.exports.getPlayerInventoryNames = getPlayerInventoryNames;
+module.exports.getInventoryNames = getInventoryNames;

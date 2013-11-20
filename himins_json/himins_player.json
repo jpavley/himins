@@ -9,7 +9,8 @@
     {
       "name": "silver obol",
       "description": "An ancient silver coin. You found it in your mounth and put it in your pocket",
-      "slot": "ITEM_POCKET"
+      "action": "!NO_ACTION",
+      "kind": "ITEM_POCKET"
     }
   ],
   "commands": [

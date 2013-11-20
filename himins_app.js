@@ -107,7 +107,6 @@ himinsServer.on('connection', function (client) {
       kind: 'game' }
     );
 
-
     // associate the player with the game add any game level commands
     if (gameObject) {
       client.player.game = gameObject;
