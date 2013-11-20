@@ -1,6 +1,6 @@
 {
   "name": "Empty Room",
-  "description": "You stand in an empty room. You can walk _north east_, _north west_, _south east_, _south west_, _west_, _east_, _north_, or _south. You can just stand in the _center_.",
+  "description": "You stand in an empty room. You can walk _northeast_, _northwest_, _southeast_, _southwest_, _west_, _east_, _north_, or _south_. You can just stand in the _center_.",
   "spawnSection": "center",
   "sections": [
     {
