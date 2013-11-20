@@ -16,7 +16,7 @@ var
 
 //# init()
 var init = function (roomObject) {
-  console.log('*** himins_room.js init()');
+  console.log('*** himins_room.js init(', roomObject.name, ')');
 };
 module.exports.init = init;
 

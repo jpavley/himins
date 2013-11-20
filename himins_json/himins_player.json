@@ -1,9 +1,9 @@
 {
   "name": "mortal",
   "description": "You look and feel like yourself only thinned, like too little butter over too much toast.",
-  "game": {},
-  "room": {},
-  "section": "center",
+  "gameName": "",
+  "roomName": "",
+  "sectionName": "",
   "health": 100,
   "inventory": [
     {

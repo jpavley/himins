@@ -14,6 +14,7 @@ var
 
   // ### Himins modules
   game = require('./himins_js/himins_game'),
+  room = require('./himins_js/himins_room'),
   player = require('./himins_js/himins_player'),
   commands = require('./himins_js/himins_commands'),
   repl = require('./himins_js/himins_repl'),
@@ -102,7 +103,8 @@ himinsServer.on('connection', function (client) {
     });
 
     // add the name of the game as a command
-    commands.addCommand(client.player.commands, { name: gameObject.name.toLowerCase(),
+    commands.addCommand(client.player.commands, { 
+      name: gameObject.name.toLowerCase(),
       description: gameObject.description,
       action: '!NO_ACTION',
       kind: 'game' }
@@ -112,6 +114,9 @@ himinsServer.on('connection', function (client) {
     if (gameObject) {
       client.player.game = gameObject;
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
+      client.player.gameName = gameObject.name;
+      client.player.roomName = gameObject.startRoom;
+      client.player.sectionName = game.getRoomByName(gameObject, gameObject.startRoom).spawnSection;
     }
 
     repl.writeToClient(client, format.formatText(client, gameObject.welcome, 0, 80));
@@ -187,5 +192,5 @@ files.loadJSON(startingGameFile, function (resultObject) {
 console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
 
 // start up the server
-himinsServer.maxConnections = 10;
+himinsServer.maxConnections = maxUsers;
 himinsServer.listen(portNumber);

@@ -31,11 +31,19 @@ var init = function (gameObject) {
   _.each(gameObject.roomFiles, function (e, i, l) {
     files.loadJSON('himins_json/' + e, function (resultObject) {
       room.init(resultObject);
-      roomList.push(resultObject);
-      console.log('*** a room has loaded: ', resultObject.name);
+      gameObject.rooms.push(resultObject);
     });
- });
 
-
+  });
 };
 module.exports.init = init;
+
+var getRoomByName = function (gameObject, roomName) {
+
+  var result = _.find(gameObject.rooms, function (room) {
+    return room.name.toLowerCase() === roomName.toLowerCase();
+  });
+
+  return result;
+};
+module.exports.getRoomByName = getRoomByName;

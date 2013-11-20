@@ -12,6 +12,7 @@
     "himins_room_crypt.json",
     "himins_room_arcade.json"
   ],
+  "startRoom": "narthex",
   "rooms": [],
   "commands": [
     {
