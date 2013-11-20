@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "description": "",
   "kind": "",
-  "action": "",
   "hitPoints": "",
   "commands": [
     {
       "name": "",
       "description": "",
       "action": "",
-      "kind": ""
+      "kind": "",
+      "successMessage": "",
+      "failMessage": ""
     }
   ]
 }

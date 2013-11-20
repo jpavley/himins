@@ -6,13 +6,19 @@
 
 // ## includes
 var
-  fs = require('fs'),
-  commands = require('./himins_commands.js'),
-  game = require('./himins_game.js'),
-  player = require('./himins_player.js');
+  // ### 3rd party modules
+  _ = require('underscore'),
 
-// ## module vars
-var roomObject = {};
+  // ### Himins modules
+  commands = require('./himins_commands'),
+  game = require('./himins_game'),
+  player = require('./himins_player');
+
+//# init()
+var init = function () {
+  console.log('*** himins_room.js init()');
+};
+module.exports.init = init;
 
 // # getSectionByName(name)
 var getSectionByName = function (name) {
@@ -61,12 +67,6 @@ var loadNavigationCommands = function () {
                           kind: 'navigation' });
   }
 };
-
-//# init()
-var init = function () {
-  console.log('*** (3) himins_room.js init()');
-};
-module.exports.init = init;
 
 // # getItemByName(sectionName, itemName)
 var getItemByName = function (sectionName, itemName) {
