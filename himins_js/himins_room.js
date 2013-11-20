@@ -84,20 +84,3 @@ var getItemByName = function (sectionName, itemName) {
   }
 };
 
-// # getRoomDescription()
-var getRoomDescription = function () {
-  return roomObject.description;
-};
-module.exports.getRoomDescription = getRoomDescription;
-
-// # getSectionDescription()
-var getSectionDescription = function () {
-  var
-    section = getSectionByName(player.getPlayerLocation()),
-    result = section.description;
-
-  return result;
-};
-module.exports.getSectionDescription = getSectionDescription;
-
-
