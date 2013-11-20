@@ -31,7 +31,8 @@ var processUserInput = function (client, data) {
   var 
     input = String(data).trim().toLowerCase(),
     command = {},
-    message = 'Himins is sorry to report that *' + input+ '* is not available at this time';
+    message = 'Himins is sorry to report that *' + input+ '* is not available at this time',
+    action = '!NO_ACTION';
 
     //console.log(client.player.commands);
 
@@ -41,6 +42,7 @@ var processUserInput = function (client, data) {
 
     if (command) {
       message = command.description;
+      commands.doAction(client, command.action);
     }
     writeToClient(client, format.formatText(client, message, 2, 78));      
 

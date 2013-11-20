@@ -83,5 +83,26 @@ var removeCommandsByKind = function (commands, commandKind) {
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
+// # doAction(client, action)
+var doAction = function (client, action) {
+  if (action === '!NO_ACTION') {
+    return;
+  }
+  switch (action) {
+    case '!NO_ACTION':
+      // nothing to do!
+      break;
+
+     case '!QUIT_APP':
+      break;
+
+   default:
+      console.log('*** missing case for action in himins_commands.js doAction: ', action);
+      break;
+  }
+};
+module.exports.doAction = doAction;
+
+
 
 
