@@ -168,6 +168,9 @@ var getClientByID = function(clientID) {
 module.exports.getClientByID = getClientByID;
 
 // # main entry point of himins_app
+console.log('');
+console.log('**** **** **** himins is starting up **** **** ****');
+console.log('');
 
 // add String object extentions
 strutils.init();

@@ -1,0 +1,153 @@
+{
+  "name": "choir",
+  "description": "You stand in the choir. You can walk _northeast_, _northwest_, _southeast_, _southwest_, _west_, _east_, _north_, or _south_. You can just stand in the _center_.",
+  "spawnSection": "center",
+  "sections": [
+    {
+      "name": "northeast",
+      "description": "",
+      "atmosphere": "",
+     "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+   },
+    {
+      "name": "northwest",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "southwest",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "southeast",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "west",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "east",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "north",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "south",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+    },
+    {
+      "name": "center",
+      "description": "",
+      "atmosphere": "",
+      "items": [],
+      "doors": [],
+      "puzzles": [],
+      "monsters": [],
+      "commands": []
+   }
+  ],
+  "commands": [
+    {
+      "name": "northeast",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northeast section of the !ROOM_NAME.",
+      "action": "!GO_NORTHEAST",
+      "kind": "room"
+    },
+    {
+      "name": "northwest",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northwest section of the !ROOM_NAME.",
+      "action": "!GO_NORTHWEST",
+      "kind": "room"
+    },
+    {
+      "name": "southeast",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southeast section of the !ROOM_NAME.",
+      "action": "!GO_SOUTHEAST",
+      "kind": "room"
+    },
+    {
+      "name": "southwest",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southwest section of the !ROOM_NAME.",
+      "action": "!GO_SOUTHWEST",
+      "kind": "room"
+    },
+    {
+      "name": "north",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the north section of the !ROOM_NAME.",
+      "action": "!GO_NORTH",
+      "kind": "room"
+    },
+    {
+      "name": "south",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the south section of the !ROOM_NAME.",
+      "action": "!GO_SOUTH",
+      "kind": "room"
+    },
+    {
+      "name": "east",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the east section of the !ROOM_NAME.",
+      "action": "!GO_EAST",
+      "kind": "room"
+    },
+    {
+      "name": "west",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the west section of the !ROOM_NAME.",
+      "action": "!GO_WEST",
+      "kind": "room"
+    },
+    {
+      "name": "center",
+      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the center section of the !ROOM_NAME.",
+      "action": "!GO_CENTER",
+      "kind": "room"
+    }
+  ]
+}
