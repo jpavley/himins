@@ -136,6 +136,7 @@ himinsServer.on('connection', function (client) {
   // handle client disconnection
   client.on('end', function () {
     // stop updating the user loop associated with this client
+    broadcast('*' + client.player.name + '* has left the game', client, 'system');
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // log it

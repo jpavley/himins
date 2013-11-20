@@ -31,7 +31,6 @@ var processUserInput = function (client, data) {
   var 
     input = String(data).trim().toLowerCase(),
     command = {},
-    message = 'Himins is sorry to report that *' + input+ '* is not available at this time',
     action = '!NO_ACTION';
 
     //console.log(client.player.commands);
@@ -41,10 +40,11 @@ var processUserInput = function (client, data) {
     });
 
     if (command) {
-      message = command.description;
+      writeToClient(client, format.formatText(client, command.description, 2, 78));
       commands.doAction(client, command.action);
+    } else {
+       writeToClient(client, format.formatText(client, 'Himins is sorry to report that *' + input+ '* is not available at this time', 2, 78));    
     }
-    writeToClient(client, format.formatText(client, message, 2, 78));      
 
 };
 module.exports.processUserInput = processUserInput;

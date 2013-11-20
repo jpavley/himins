@@ -94,6 +94,7 @@ var doAction = function (client, action) {
       break;
 
      case '!QUIT_APP':
+      client.end();
       break;
 
    default:
