@@ -33,7 +33,7 @@ var processUserInput = function (client, data) {
     command = {},
     message = 'Himins is sorry to report that *' + input+ '* is not available at this time';
 
-    console.log(client.player.commands);
+    //console.log(client.player.commands);
 
     command = _.find(client.player.commands, function (cmd) {
       return cmd.name.toLowerCase() === input;

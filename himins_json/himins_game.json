@@ -41,7 +41,7 @@
     },
     {
       "name": "health",
-      "description": "Your health level is: !PLAYER_HEALTH",
+      "description": "Your health level is !PLAYER_HEALTH",
       "action": "!NO_ACTION",
       "kind": "game"
     }

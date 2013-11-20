@@ -21,18 +21,16 @@ var init = function (roomObject) {
 module.exports.init = init;
 
 // # getSectionByName(name)
-var getSectionByName = function (roomObject, name) {
-  //console.log("*** himins_room.js getSectionByName(%s)", name);
-  var result = {}, i;
+var getSectionByName = function (roomObject, sectionName) {
+  //console.log('*** himins_room.js getSectionByName()');
 
-  for (i = roomObject.sections.length - 1; i >= 0; i--) {
-    if (roomObject.sections[i].name === name) {
-      result = roomObject.sections[i];
-      break;
-    }
-  }
+  var result = _.find(roomObject.sections, function (section) {
+    return section.name.toLowerCase() === sectionName.toLowerCase();
+  });
+
   return result;
 };
+module.exports.getSectionByName = getSectionByName;
 
 // # loadItemCommands(sectionName)
 var loadItemCommands = function (roomObject, sectionName) {

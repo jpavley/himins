@@ -48,10 +48,24 @@ var resolveFunctions = function (client, text) {
   //console.log('*** himins_format.js resolveFunctions(%s)', text);
   var result = text;
 
-  result = result.replace(/!GAME_NAME/g, client.player.game.name);
-  result = result.replace(/!PLAYER_NAME/g, client.player.name);
-  result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(client.player.commands));
-  result = result.replace(/!PLAYER_INVENTORY/g, player.getInventoryNames(client.player));
+  result = result.replace(/!GAME_NAME/g, 
+    client.player.game.name);
+  result = result.replace(/!PLAYER_NAME/g, 
+    client.player.name);
+  result = result.replace(/!COMMAND_NAMES/g, 
+    commands.getCommandNames(client.player.commands));
+  result = result.replace(/!PLAYER_INVENTORY/g, 
+    player.getInventoryNames(client.player));
+  result = result.replace(/!ROOM_DESCRIPTION/g, 
+    game.getRoomByName(client.player.game, client.player.roomName).description);
+  result = result.replace(/!SECTION_DESCRIPTION/g, 
+    room.getSectionByName(game.getRoomByName(client.player.game, client.player.roomName), client.player.sectionName).description);
+  result = result.replace(/!PLAYER_LOCATION/g, 
+    client.player.sectionName);
+  result = result.replace(/!ROOM_NAME/g, 
+    client.player.roomName);
+  result = result.replace(/!PLAYER_HEALTH/g, 
+    client.player.health);
 
 
   return result;
