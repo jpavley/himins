@@ -117,6 +117,7 @@ himinsServer.on('connection', function (client) {
       client.player.gameName = gameObject.name;
       client.player.roomName = gameObject.startRoom;
       client.player.sectionName = game.getRoomByName(gameObject, gameObject.startRoom).spawnSection;
+      player.enterRoom(client.player, game.getRoomByName(gameObject, gameObject.startRoom));
     }
 
     repl.writeToClient(client, format.formatText(client, gameObject.welcome, 0, 80));

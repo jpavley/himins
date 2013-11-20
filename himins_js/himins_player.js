@@ -45,3 +45,18 @@ var getInventoryNames = function (playerObject) {
   return resultString;
 };
 module.exports.getInventoryNames = getInventoryNames;
+
+// # enterRoom(playerObject, roomObject)
+// Call when a player first spawns or enters a room
+var enterRoom = function (playerObject, roomObject) {
+  // add commands for this room and its default spawn section
+};
+
+// # exitRoom(playerObject, roomObject)
+// Call when a player finally despawns or leaves a room
+var exitRoom = function (playerObject, roomObject) {
+  // remove commands for this room and its default spawn section
+};
+
+
+
