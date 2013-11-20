@@ -28,8 +28,9 @@ var
   clientList = [],
   gameObject = {},
 
-  ipAddress = "127.0.0.1", // TODO: get from environment var
-  portNumber = 9000, // TODO: get from environment var
+  ipAddress = "127.0.0.1",  // TODO: get from environment var
+  portNumber = 9000,        // TODO: get from environment var
+  maxUsers = 10,            // TODO: get from environment var
 
   startingGameFile = './himins_json/himins_game.json',
   defaultPlayerFile = './himins_json/himins_player.json',

@@ -15,13 +15,13 @@ var
   player = require('./himins_player');
 
 //# init()
-var init = function () {
+var init = function (roomObject) {
   console.log('*** himins_room.js init()');
 };
 module.exports.init = init;
 
 // # getSectionByName(name)
-var getSectionByName = function (name) {
+var getSectionByName = function (roomObject, name) {
   //console.log("*** himins_room.js getSectionByName(%s)", name);
   var result = {}, i;
 
@@ -35,7 +35,7 @@ var getSectionByName = function (name) {
 };
 
 // # loadItemCommands(sectionName)
-var loadItemCommands = function (sectionName) {
+var loadItemCommands = function (roomObject, sectionName) {
   // console.log('*** himins_room.js loadItemCommands(%s)', sectionName);
 
   var sectionObject = getSectionByName(sectionName), i;
@@ -55,7 +55,7 @@ var loadItemCommands = function (sectionName) {
 };
 
 // # loadNavigationCommands()
-var loadNavigationCommands = function () {
+var loadNavigationCommands = function (roomObject) {
   var i;
   // remove all navigation commands
   commands.removeCommandsByKind('navigation');
@@ -69,7 +69,7 @@ var loadNavigationCommands = function () {
 };
 
 // # getItemByName(sectionName, itemName)
-var getItemByName = function (sectionName, itemName) {
+var getItemByName = function (roomObject, sectionName, itemName) {
   var
     result = {},
     sectionObject = getSectionByName(sectionName),
