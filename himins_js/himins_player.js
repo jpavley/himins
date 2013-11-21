@@ -10,7 +10,10 @@ var
   _ = require('underscore'),
 
   // ### Himins modules
-  commands = require('./himins_commands.js');
+  commands = require('./himins_commands'),
+  game = require('./himins_game'),
+  room = require('./himins_room'),
+  player = require('./himins_player');
 
 // ## module vars
 
@@ -76,6 +79,22 @@ var exitSection = function (playerObject, sectionObject) {
   // remove commands for this section
 };
 module.exports.exitSection = exitSection;
+
+// # moveToSection(playerObject, action)
+var moveToSection = function (playerObject, action) {
+  var gameObject = playerObject.game,
+      roomObject = game.getRoomByName(gameObject, playerObject.roomName),
+      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
+      targetSectionName = action.substring(4).toLowerCase(), // remove '!GO_'
+      targetSectionObject = room.getSectionByName(roomObject, targetSectionName);
+
+  exitSection(playerObject, sectionObject);
+  playerObject.sectionName = targetSectionName;
+  enterSection(playerObject, targetSectionObject);
+
+};
+module.exports.moveToSection = moveToSection;
+
 
 
 

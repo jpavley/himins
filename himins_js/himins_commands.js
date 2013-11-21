@@ -13,7 +13,8 @@ var
 
   // ### Himins modules
   format = require('./himins_format'),
-  repl = require('./himins_repl');
+  repl = require('./himins_repl'),
+  player = require('./himins_player');
 
 // ## module vars
 
@@ -89,13 +90,24 @@ var doAction = function (client, action) {
     return;
   }
   switch (action) {
-    case '!NO_ACTION':
+    case  '!NO_ACTION':
       // nothing to do!
-      break;
+    break;
 
-     case '!QUIT_APP':
+    case '!QUIT_APP':
       client.end();
-      break;
+    break;
+
+    case '!GO_NORTH':
+    case '!GO_SOUTH':
+    case '!GO_EAST':
+    case '!GO_WEST':
+    case '!GO_SOUTHEAST':
+    case '!GO_SOUTHWEST':
+    case '!GO_NORTHEAST':
+    case '!GO_NORTHWEST':
+      player.moveToSection(client.player, action);
+    break;
 
    default:
       console.log('*** missing case for action in himins_commands.js doAction: ', action);
