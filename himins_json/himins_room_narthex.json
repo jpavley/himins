@@ -97,55 +97,55 @@
   "commands": [
     {
       "name": "northeast",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the northeast section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _northeast_ section of the *!ROOM_NAME*.",
       "action": "!GO_NORTHEAST",
       "kind": "room"
     },
     {
       "name": "northwest",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the northwest section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _northwest_ section of the *!ROOM_NAME*.",
       "action": "!GO_NORTHWEST",
       "kind": "room"
     },
     {
       "name": "southeast",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the southeast section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _southeast_ section of the *!ROOM_NAME*.",
       "action": "!GO_SOUTHEAST",
       "kind": "room"
     },
     {
       "name": "southwest",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the southwest section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _southwest_ section of the *!ROOM_NAME*.",
       "action": "!GO_SOUTHWEST",
       "kind": "room"
     },
     {
       "name": "north",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the north section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _north_ section of the *!ROOM_NAME*.",
       "action": "!GO_NORTH",
       "kind": "room"
     },
     {
       "name": "south",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the south section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _south_ section of the *!ROOM_NAME*.",
       "action": "!GO_SOUTH",
       "kind": "room"
     },
     {
       "name": "east",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the east section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _east_ section of the *!ROOM_NAME*.",
       "action": "!GO_EAST",
       "kind": "room"
     },
     {
       "name": "west",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the west section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _west_ section of the *!ROOM_NAME*.",
       "action": "!GO_WEST",
       "kind": "room"
     },
     {
       "name": "center",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the center section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _center_ section of the *!ROOM_NAME*.",
       "action": "!GO_CENTER",
       "kind": "room"
     }

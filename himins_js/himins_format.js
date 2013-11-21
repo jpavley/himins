@@ -68,11 +68,9 @@ var resolveFunctions = function (client, text) {
   result = result.replace(/!PLAYER_LOCATION/g, playerObject.sectionName);
   result = result.replace(/!ROOM_NAME/g, playerObject.roomName);
   result = result.replace(/!PLAYER_HEALTH/g, playerObject.health);
-  result = result.replace(/!MOVING_VERB/g, _.sample(['walk', 'plod', 'wander', 'prowl', 'tiptoe', 'step', 'creep', 'slink', 'sidle', 'stumble', 'hobble', 'blunder']));
-  result = result.replace(/!MOVING_ADVERB/g, _.sample(['slowly', 'steadily', 'unhurriedly', 'leisurely', 'gradually', 'swiftly', 'radpily', 'suddenly', 'quickly', 'briskly', 'fearfully', 'nerviously']));
-  result = result.replace(/!SECTION_ATMOSPHERE/g, sectionObject.atmosphere);
-
-
+  result = result.replace(/!MOVING_VERB/g, _.sample(gameObject.movementVerbs));
+  result = result.replace(/!MOVING_ADVERB/g, _.sample(gameObject.movementAdverbs));
+  result = result.replace(/!GAME_ATMOSPHERE/g, _.sample(gameObject.atmosphereAdjectives));
 
   return result;
 };
