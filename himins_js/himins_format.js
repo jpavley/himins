@@ -6,11 +6,15 @@
 
 // ## includes
 var
+  // ### 3rd party modules
+  _ = require('underscore'),
+  linewrap = require('linewrap'),
+
+  // ### Himins modules
   room = require('./himins_room.js'),
   commands = require('./himins_commands.js'),
   game = require('./himins_game.js'),
-  player = require('./himins_player.js'),
-  linewrap = require('linewrap');
+  player = require('./himins_player.js');
 
 // ## consts
 var
@@ -46,26 +50,28 @@ var renderFormatCodes = function (text) {
 
 var resolveFunctions = function (client, text) {
   //console.log('*** himins_format.js resolveFunctions(%s)', text);
-  var result = text;
+  var
+    result = text,
+    playerObject = client.player,
+    gameObject = playerObject.game,
+    roomObject = game.getRoomByName(gameObject, playerObject.roomName),
+    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
 
-  result = result.replace(/!GAME_NAME/g, 
-    client.player.game.name);
-  result = result.replace(/!PLAYER_NAME/g, 
-    client.player.name);
-  result = result.replace(/!COMMAND_NAMES/g, 
-    commands.getCommandNames(client.player.commands));
-  result = result.replace(/!PLAYER_INVENTORY/g, 
-    player.getInventoryNames(client.player));
-  result = result.replace(/!ROOM_DESCRIPTION/g, 
-    game.getRoomByName(client.player.game, client.player.roomName).description);
+
+  result = result.replace(/!GAME_NAME/g, client.player.game.name);
+  result = result.replace(/!PLAYER_NAME/g, client.player.name);
+  result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(playerObject.commands));
+  result = result.replace(/!PLAYER_INVENTORY/g, player.getInventoryNames(playerObject));
+  result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);
   result = result.replace(/!SECTION_DESCRIPTION/g, 
-    room.getSectionByName(game.getRoomByName(client.player.game, client.player.roomName), client.player.sectionName).description);
-  result = result.replace(/!PLAYER_LOCATION/g, 
-    client.player.sectionName);
-  result = result.replace(/!ROOM_NAME/g, 
-    client.player.roomName);
-  result = result.replace(/!PLAYER_HEALTH/g, 
-    client.player.health);
+    sectionObject.description);
+  result = result.replace(/!PLAYER_LOCATION/g, playerObject.sectionName);
+  result = result.replace(/!ROOM_NAME/g, playerObject.roomName);
+  result = result.replace(/!PLAYER_HEALTH/g, playerObject.health);
+  result = result.replace(/!MOVING_VERB/g, _.sample(['walk', 'plod', 'wander', 'prowl', 'tiptoe', 'step', 'creep', 'slink', 'sidle', 'stumble', 'hobble', 'blunder']));
+  result = result.replace(/!MOVING_ADVERB/g, _.sample(['slowly', 'steadily', 'unhurriedly', 'leisurely', 'gradually', 'swiftly', 'radpily', 'suddenly', 'quickly', 'briskly', 'fearfully', 'nerviously']));
+  result = result.replace(/!SECTION_ATMOSPHERE/g, sectionObject.atmosphere);
+
 
 
   return result;

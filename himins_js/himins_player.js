@@ -49,14 +49,35 @@ module.exports.getInventoryNames = getInventoryNames;
 // # enterRoom(playerObject, roomObject)
 // Call when a player first spawns or enters a room
 var enterRoom = function (playerObject, roomObject) {
-  // add commands for this room and its default spawn section
+  // add commands for this room
+  playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
 };
+module.exports.enterRoom = enterRoom;
 
 // # exitRoom(playerObject, roomObject)
 // Call when a player finally despawns or leaves a room
 var exitRoom = function (playerObject, roomObject) {
-  // remove commands for this room and its default spawn section
+  // remove commands for this room
 };
+module.exports.exitRoom = exitRoom;
+
+
+// # enterSection(playerObject, sectionObject)
+// Call when a player first spawns or enters a section
+var enterSection = function (playerObject, sectionObject) {
+  // add commands for this section
+  playerObject.commands = commands.combineCommands(playerObject.commands, sectionObject.commands);
+};
+module.exports.enterSection = enterSection;
+
+// # exitSection(playerObject, sectionObject)
+// Call when a player finally despawns or leaves a room
+var exitSection = function (playerObject, sectionObject) {
+  // remove commands for this section
+};
+module.exports.exitSection = exitSection;
+
+
 
 
 

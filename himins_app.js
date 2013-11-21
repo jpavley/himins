@@ -72,7 +72,10 @@ module.exports.broadcast = broadcast;
 // # himinsServer('connection', function (client))
 // handle a client connection and other client events (data, end, error)
 himinsServer.on('connection', function (client) {
-  var uuid = 0;
+  var
+    uuid = 0,
+    roomObject = {},
+    sectionObject = {};
 
   // TODO: If a client tries to connect before the game has loaded it should be rejected!
     
@@ -110,14 +113,23 @@ himinsServer.on('connection', function (client) {
       kind: 'game' }
     );
 
-    // associate the player with the game add any game level commands
     if (gameObject) {
+      // associate the player with the game
       client.player.game = gameObject;
-      client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
       client.player.gameName = gameObject.name;
+
+      // add game commands to the player's command list
+      client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
+
+      // set the location of the player
       client.player.roomName = gameObject.startRoom;
-      client.player.sectionName = game.getRoomByName(gameObject, gameObject.startRoom).spawnSection;
-      player.enterRoom(client.player, game.getRoomByName(gameObject, gameObject.startRoom));
+      roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
+      client.player.sectionName = roomObject.spawnSection;
+
+      // do the spawn stuff based on player's location
+      player.enterRoom(client.player, roomObject);
+      sectionObject = room.getSectionByName(roomObject, client.player.sectionName);
+      player.enterSection(client.player, sectionObject);
     }
 
     repl.writeToClient(client, format.formatText(client, gameObject.welcome, 0, 80));

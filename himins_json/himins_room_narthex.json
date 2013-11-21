@@ -6,7 +6,7 @@
     {
       "name": "northeast",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "dark",
      "items": [],
       "doors": [],
       "puzzles": [],
@@ -16,7 +16,7 @@
     {
       "name": "northwest",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "pitch-black",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -26,7 +26,7 @@
     {
       "name": "southwest",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "gloomy",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -36,7 +36,7 @@
     {
       "name": "southeast",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "unilluminated",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -46,7 +46,7 @@
     {
       "name": "west",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "shadowy",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -56,7 +56,7 @@
     {
       "name": "east",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "murky",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -66,7 +66,7 @@
     {
       "name": "north",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "somber",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -76,7 +76,7 @@
     {
       "name": "south",
       "description": "",
-      "atmosphere": "",
+      "atmosphere": "grave",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -85,8 +85,8 @@
     },
     {
       "name": "center",
-      "description": "It's cold, damp, and dark in this section of the narthex.",
-      "atmosphere": "",
+      "description": "It's warm, dry, and bright in this section of the narthex.",
+      "atmosphere": "dim",
       "items": [],
       "doors": [],
       "puzzles": [],
@@ -97,55 +97,55 @@
   "commands": [
     {
       "name": "northeast",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northeast section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the northeast section of the !ROOM_NAME.",
       "action": "!GO_NORTHEAST",
       "kind": "room"
     },
     {
       "name": "northwest",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the northwest section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the northwest section of the !ROOM_NAME.",
       "action": "!GO_NORTHWEST",
       "kind": "room"
     },
     {
       "name": "southeast",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southeast section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the southeast section of the !ROOM_NAME.",
       "action": "!GO_SOUTHEAST",
       "kind": "room"
     },
     {
       "name": "southwest",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the southwest section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the southwest section of the !ROOM_NAME.",
       "action": "!GO_SOUTHWEST",
       "kind": "room"
     },
     {
       "name": "north",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the north section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the north section of the !ROOM_NAME.",
       "action": "!GO_NORTH",
       "kind": "room"
     },
     {
       "name": "south",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the south section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the south section of the !ROOM_NAME.",
       "action": "!GO_SOUTH",
       "kind": "room"
     },
     {
       "name": "east",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the east section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the east section of the !ROOM_NAME.",
       "action": "!GO_EAST",
       "kind": "room"
     },
     {
       "name": "west",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the west section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the west section of the !ROOM_NAME.",
       "action": "!GO_WEST",
       "kind": "room"
     },
     {
       "name": "center",
-      "description": "You're !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE to the center section of the !ROOM_NAME.",
+      "description": "You !MOVING_VERB !MOVING_ADVERB through the !SECTION_ATMOSPHERE room to the center section of the !ROOM_NAME.",
       "action": "!GO_CENTER",
       "kind": "room"
     }
