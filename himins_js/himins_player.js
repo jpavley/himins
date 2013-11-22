@@ -61,6 +61,7 @@ module.exports.enterRoom = enterRoom;
 // Call when a player finally despawns or leaves a room
 var exitRoom = function (playerObject, roomObject) {
   // remove commands for this room
+  playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'room');
 };
 module.exports.exitRoom = exitRoom;
 
@@ -95,6 +96,28 @@ var moveToSection = function (playerObject, action) {
 
 };
 module.exports.moveToSection = moveToSection;
+
+// # moveToRoom(playerObject, commandObject)
+var moveToRoom = function (playerObject, commandObject) {
+    var gameObject = playerObject.game,
+      roomObject = game.getRoomByName(gameObject, playerObject.roomName),
+      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
+      targetRoomName = commandObject.parameters.nextRoomName,
+      targetRoomObject = game.getRoomByName(gameObject, targetRoomName),
+      targetSectionName = roomObject.spawnSection,
+      targetSectionObject = room.getSectionByName(roomObject, targetSectionName);
+
+  exitRoom(playerObject, roomObject);
+  exitSection(playerObject, sectionObject);
+  playerObject.roomName = targetRoomName;
+  playerObject.sectionName = targetSectionName;
+  exitRoom(playerObject, targetRoomObject);
+  enterSection(playerObject, targetSectionObject);
+
+};
+module.exports.moveToRoom = moveToRoom;
+
+
 
 
 

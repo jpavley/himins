@@ -75,8 +75,11 @@ var removeCommandsByKind = function (commands, commandKind) {
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
-// # doAction(client, action)
-var doAction = function (client, action) {
+// # doAction(client, commandObject)
+var doAction = function (client, commandObject) {
+  var
+    action = commandObject.action;
+
   if (action === '!NO_ACTION') {
     return;
   }
@@ -99,6 +102,10 @@ var doAction = function (client, action) {
     case '!GO_NORTHWEST':
     case '!GO_CENTER':
       player.moveToSection(client.player, action);
+    break;
+
+    case '!GO_ROOM':
+      player.moveToRoom(client.player, commandObject);
     break;
 
    default:

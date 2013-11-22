@@ -55,13 +55,33 @@
     },
     {
       "name": "east",
-      "description": "",
+      "description": "There a large _silver door_ here set in the wall.",
       "atmosphere": "murky",
       "items": [],
       "doors": [],
       "puzzles": [],
       "monsters": [],
-      "commands": []
+      "commands": [
+        {
+          "name": "golden knob",
+          "description": "You grab the golden knob and try to turn it left and right. It doesn't budge. You grab it again with both hands and with mightly twist the knob slowly grinds to the right. The silver door gently opens inward into inky darkness.",
+          "action": "!GO_ROOM",
+          "parameters": {
+            "nextRoomName": "nave"
+            },
+          "kind": "section"
+        },
+        {
+          "name": "silver door",
+          "description": "You step up to the gleaming silver door. In its center you see a _golden knob_. You wonder what is on the other side and if the low moaning you hear is coming from the next room?",
+          "action": "!NO_ACTION",
+          "parameters": {
+            "locked": false
+          },
+          "kind": "section"
+        }
+
+      ]
     },
     {
       "name": "north",

@@ -30,18 +30,17 @@ var processUserInput = function (client, data) {
   //console.log('*** himins_repl.js processUserInput());
   var 
     input = String(data).trim().toLowerCase(),
-    command = {},
-    action = '!NO_ACTION';
+    commandObject = {};
 
     //console.log(client.player.commands);
 
-    command = _.find(client.player.commands, function (cmd) {
+    commandObject = _.find(client.player.commands, function (cmd) {
       return cmd.name.toLowerCase() === input;
     });
 
-    if (command) {
-      writeToClient(client, format.formatText(client, command.description, 2, 78));
-      commands.doAction(client, command.action);
+    if (commandObject) {
+      writeToClient(client, format.formatText(client, commandObject.description, 2, 78));
+      commands.doAction(client, commandObject);
     } else {
        writeToClient(client, format.formatText(client, 'Himins is sorry to report that *' + input+ '* is not available at this time', 2, 78));    
     }
