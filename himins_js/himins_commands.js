@@ -64,23 +64,14 @@ var getCommandByName = function (commands, commandName) {
 };
 module.exports.getCommandByName = getCommandByName;
 
-// # removeCommandByName(commands, commandName)
-var removeCommandByName = function (commands, commandName) {
-  var updatedCommands = _.reject(commands, function (commandName) {
-    return commands.name.toLowerCase() === commandName.toLowerCase();
-  });
-
-  commands = updatedCommands;
-};
-module.exports.removeCommandByName = removeCommandByName;
-
 // # removeCommandsByKind(commands, commandKind)
 var removeCommandsByKind = function (commands, commandKind) {
-  var updatedCommands = _.reject(commands, function (commandKind) {
-    return commands.kind.toLowerCase() === commandKind.toLowerCase();
+  //console.log('*** himins_commands.js removeCommandsByKind(', commands, commandKind, ')');
+  var updatedCommands = _.reject(commands, function (commandObject) {
+    return commandObject.kind.toLowerCase() === commandKind.toLowerCase();
   });
 
-  commands = updatedCommands;
+  return updatedCommands;
 };
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
@@ -106,6 +97,7 @@ var doAction = function (client, action) {
     case '!GO_SOUTHWEST':
     case '!GO_NORTHEAST':
     case '!GO_NORTHWEST':
+    case '!GO_CENTER':
       player.moveToSection(client.player, action);
     break;
 

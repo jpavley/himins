@@ -75,23 +75,37 @@
     },
     {
       "name": "south",
-      "description": "",
+      "description": "It's freezing cold in this section of the *narthex*",
       "atmosphere": "grave",
       "items": [],
       "doors": [],
       "puzzles": [],
       "monsters": [],
-      "commands": []
+      "commands": [
+        {
+          "name": "cry",
+          "description": "You are possessed by the spirit of sorrow and cry plump soggy tears uncontrolably.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        }
+      ]
     },
     {
       "name": "center",
-      "description": "It's warm, dry, and bright in this section of the narthex.",
+      "description": "It's warm, dry, and bright in this section of the *narthex*.",
       "atmosphere": "dim",
       "items": [],
       "doors": [],
       "puzzles": [],
       "monsters": [],
-      "commands": []
+      "commands": [
+        {
+          "name": "dance",
+          "description": "You are possessed by the spirit of dance and twirl and whirl without embarrassment.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        }
+      ]
    }
   ],
   "commands": [

@@ -77,6 +77,7 @@ module.exports.enterSection = enterSection;
 // Call when a player finally despawns or leaves a room
 var exitSection = function (playerObject, sectionObject) {
   // remove commands for this section
+  playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'section');
 };
 module.exports.exitSection = exitSection;
 
