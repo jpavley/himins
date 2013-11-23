@@ -1,27 +1,37 @@
 {
   "name": "narthex",
-  "description": "You stand in the narthex. You can walk _northeast_, _northwest_, _southeast_, _southwest_, _west_, _east_, _north_, or _south_. You can just stand in the _center_.",
+  "description": "You stand in the *narthex*. The room is cavernous and it's air murky. Particles of dust bob slowly in shafts of light from the ceiling. The cool stone floor is caked in dust with hundreds of bare footprints running in all directions. Looking west you see a bricked-over portico. Looking east you see a bright rectangle shining in the middle of the marble wall. In each corner of the room a pile of debris. You should _quit_ or pray for _help_..",
   "spawnSection": "center",
   "sections": [
     {
       "name": "northeast",
-      "description": "",
+      "description": "This corner of the *narthex* is so dark you can barely see your fingers before your face. The air is moist yet bitterly cold. There is a pile of rusty old swords at your feet. One _bronze dagger_ seems serviceable. Perhaps you should take it with you?",
       "atmosphere": "dark",
-     "items": [],
-      "doors": [],
-      "puzzles": [],
+      "items": [],
       "monsters": [],
-      "commands": []
+      "commands": [
+        {
+          "name": "cry",
+          "description": "You are possessed by the spirit of sorrow and cry plump soggy tears uncontrolably.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        }
+      ]
    },
     {
       "name": "northwest",
-      "description": "",
+      "description": "This corner of the *narthex* is so dark you can barely see your fingers before your face. The air is moist yet bitterly cold. There is a pile of battered shields at your feet. One _wooden buckler_ seems in good condition. Perhaps you should take it with you?",
       "atmosphere": "pitch-black",
       "items": [],
-      "doors": [],
-      "puzzles": [],
       "monsters": [],
-      "commands": []
+      "commands": [
+        {
+          "name": "swoon",
+          "description": "You are possessed by the spirit of weakness and nearly fall to the floor in a heap.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        }
+      ]
     },
     {
       "name": "southwest",
@@ -58,7 +68,6 @@
       "description": "There a large _silver door_ here set in the wall.",
       "atmosphere": "murky",
       "items": [],
-      "doors": [],
       "puzzles": [],
       "monsters": [],
       "commands": [
@@ -81,33 +90,6 @@
           "kind": "section"
         }
 
-      ]
-    },
-    {
-      "name": "north",
-      "description": "",
-      "atmosphere": "somber",
-      "items": [],
-      "doors": [],
-      "puzzles": [],
-      "monsters": [],
-      "commands": []
-    },
-    {
-      "name": "south",
-      "description": "It's freezing cold in this section of the *narthex*",
-      "atmosphere": "grave",
-      "items": [],
-      "doors": [],
-      "puzzles": [],
-      "monsters": [],
-      "commands": [
-        {
-          "name": "cry",
-          "description": "You are possessed by the spirit of sorrow and cry plump soggy tears uncontrolably.",
-          "action": "!NO_ACTION",
-          "kind": "section"
-        }
       ]
     },
     {
@@ -151,18 +133,6 @@
       "name": "southwest",
       "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _southwest_ section of the *!ROOM_NAME*.",
       "action": "!GO_SOUTHWEST",
-      "kind": "room"
-    },
-    {
-      "name": "north",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _north_ section of the *!ROOM_NAME*.",
-      "action": "!GO_NORTH",
-      "kind": "room"
-    },
-    {
-      "name": "south",
-      "description": "You !MOVING_VERB !MOVING_ADVERB through the !GAME_ATMOSPHERE room to the _south_ section of the *!ROOM_NAME*.",
-      "action": "!GO_SOUTH",
       "kind": "room"
     },
     {
