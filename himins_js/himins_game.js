@@ -15,8 +15,11 @@ var
   // ### Himins modules
   commands = require('./himins_commands'),
   room = require('./himins_room'),
-  files = require('./himins_file_utils');
-
+  files = require('./himins_file_utils'),
+  repl = require('./himins_repl'),
+  format = require('./himins_format'),
+  player = require('./himins_player'),
+  game = require('./himins_game');
 
 // ## module vars
 var
@@ -47,3 +50,24 @@ var getRoomByName = function (gameObject, roomName) {
   return result;
 };
 module.exports.getRoomByName = getRoomByName;
+
+// # start(playerObject)
+var start = function (playerObject) {
+    var
+      roomObject = {},
+      sectionObject = {},
+      gameObject = {};
+
+      // set the location of the player
+      gameObject = playerObject.game;
+      playerObject.roomName = gameObject.startRoom;
+      roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
+      playerObject.sectionName = roomObject.spawnSection;
+
+      // do the spawn stuff based on player's location
+      player.enterRoom(playerObject, roomObject);
+      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
+      player.enterSection(playerObject, sectionObject);
+};
+module.exports.start = start;
+
