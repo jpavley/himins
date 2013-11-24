@@ -13,7 +13,9 @@ var
   commands = require('./himins_commands'),
   game = require('./himins_game'),
   room = require('./himins_room'),
-  player = require('./himins_player');
+  player = require('./himins_player'),
+  repl = require('./himins_repl'),
+  format = require('./himins_format');
 
 // ## module vars
 
@@ -54,6 +56,8 @@ module.exports.getInventoryNames = getInventoryNames;
 var enterRoom = function (playerObject, roomObject) {
   // add commands for this room
   playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
+
+  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
 };
 module.exports.enterRoom = enterRoom;
 
@@ -111,7 +115,7 @@ var moveToRoom = function (playerObject, commandObject) {
   exitSection(playerObject, sectionObject);
   playerObject.roomName = targetRoomName;
   playerObject.sectionName = targetSectionName;
-  exitRoom(playerObject, targetRoomObject);
+  enterRoom(playerObject, targetRoomObject);
   enterSection(playerObject, targetSectionObject);
 
 };
