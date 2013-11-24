@@ -55,16 +55,12 @@ var resolveFunctions = function (client, text) {
     playerObject = client.player,
     gameObject = playerObject.game,
     roomObject = game.getRoomByName(gameObject, playerObject.roomName),
-    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-
+    sectionObject = {};
 
   result = result.replace(/!GAME_NAME/g, client.player.game.name);
   result = result.replace(/!PLAYER_NAME/g, client.player.name);
   result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(playerObject.commands));
   result = result.replace(/!PLAYER_INVENTORY/g, player.getInventoryNames(playerObject));
-  result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);
-  result = result.replace(/!SECTION_DESCRIPTION/g, 
-    sectionObject.description);
   result = result.replace(/!PLAYER_LOCATION/g, playerObject.sectionName);
   result = result.replace(/!ROOM_NAME/g, playerObject.roomName);
   result = result.replace(/!PLAYER_HEALTH/g, playerObject.health);
@@ -72,6 +68,14 @@ var resolveFunctions = function (client, text) {
   result = result.replace(/!MOVING_ADVERB/g, _.sample(gameObject.movementAdverbs));
   result = result.replace(/!GAME_ATMOSPHERE/g, _.sample(gameObject.atmosphereAdjectives));
 
+  if (roomObject) {
+    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
+    result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);   
+  }
+
+  if (sectionObject) {
+    result = result.replace(/!SECTION_DESCRIPTION/g, sectionObject.description);
+  }
   return result;
 };
 
@@ -80,7 +84,7 @@ var resolveFunctions = function (client, text) {
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
 var formatText = function (client, text, indent, columnWidth) {
-  //console.log('*** himins_format.js formatText(%s, %d)', text, columnWidth);
+  console.log('*** himins_format.js formatText(%s, %s, %d, %d)', client.name, text, indent, columnWidth);
   
   var
     result = text,
@@ -92,5 +96,4 @@ var formatText = function (client, text, indent, columnWidth) {
   return result;
 };
 module.exports.formatText = formatText;
-
 
