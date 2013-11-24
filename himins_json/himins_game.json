@@ -2,7 +2,7 @@
   "name": "himins",
   "version": "0.0.1",
   "description": "Himins is a MUD, a multi user dungeon with a command line interface. It is written in JavaScript using Node.js and MongoDB. To play Himins you run it on a Node.js server and access the server with a Telnet client from a terminal window. Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Himins closest to the surface are protected and great for learning the game. The areas deep within Himins are unregulated and require advanced knowlege of the game. The core of the Moon is the most dangerous of all and a player who reaches the core becomes the master of Himins. The core is one giant game of text-based PVP *King of the Hill*.",
-  "welcome": "Welcome to _!GAME_NAME_. Your name is *!PLAYER_NAME*. You should pray for _help_ or _quit_.",
+  "welcome": "Welcome to _!GAME_NAME_. Your name is *!PLAYER_NAME*. You should pray for _help_, _start_ or _quit_.",
   "movementVerbs": [
     "blunder",
     "creep",
@@ -65,28 +65,17 @@
       "kind": "game"
     },
     {
-      "name": "look",
-      "description": "!ROOM_DESCRIPTION !SECTION_DESCRIPTION",
-      "action": "!NO_ACTION",
+      "name": "quit",
+      "description": "Himins reports you have descended to earth. Your progress has not been saved.",
+      "action": "!QUIT_APP",
       "kind": "game"
     },
     {
-      "name": "where",
-      "description": "Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*",
-      "action": "!NO_ACTION",
-      "kind": "game"
-    },
-    {
-      "name": "inventory",
-      "description": "You have the following items: !PLAYER_INVENTORY",
-      "action": "!NO_ACTION",
-      "kind": "game"
-    },
-    {
-      "name": "health",
-      "description": "Your health level is !PLAYER_HEALTH",
-      "action": "!NO_ACTION",
+      "name": "start",
+      "description": "Your soul is temporarily leaving your body. Asending to Himins in 10, 9, 8, 7, 6, 5, 4, ... ERRORS DETECTED ... EMERGENCY OVERRIDE ... WARNING LEVELS SURPRESSED ... ALLSYSTEMSHAVEBEENCOMPROMISED ... TRUSTNOONE ... ... ... ",
+      "action": "!START_GAME",
       "kind": "game"
     }
+
   ]
 }
