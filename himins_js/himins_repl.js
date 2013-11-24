@@ -13,6 +13,11 @@ var
   commands = require('./himins_commands'),
   format = require('./himins_format');
 
+// ## module constants
+var
+  LEFT_INDENT = 2,
+  PARAGRAPH_WIDTH = 78;
+
 // # writeToClient(client, message);
 var writeToClient = function (client, message) {
 
@@ -42,7 +47,7 @@ var processUserInput = function (client, data) {
       writeToClient(client, format.formatText(client, commandObject.description, 2, 78));
       commands.doAction(client, commandObject);
     } else {
-       writeToClient(client, format.formatText(client, 'Himins is sorry to report that *' + input+ '* is not available at this time', 2, 78));    
+       writeToClient(client, format.formatText(client, 'Himins is sorry to report that *' + input+ '* is not available at this time', LEFT_INDENT, PARAGRAPH_WIDTH));    
     }
 
 };
