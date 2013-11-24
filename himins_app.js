@@ -74,10 +74,13 @@ module.exports.broadcast = broadcast;
 himinsServer.on('connection', function (client) {
   var
     uuid = 0,
-    roomObject = {},
-    sectionObject = {};
+    messageText = '';
 
   // TODO: If a client tries to connect before the game has loaded it should be rejected!
+
+console.log('');
+console.log('**** **** **** a client is starting up **** **** ****');
+console.log('');
     
   // give the client a name and add the client to the list of clients
   uuid = _.uniqueId();
@@ -92,18 +95,11 @@ himinsServer.on('connection', function (client) {
   files.loadJSON(defaultPlayerFile, function (resultObject) {
     player.init(resultObject);
     resultObject.name = resultObject.name + uuid;
+    resultObject.client = client;
     client.player = resultObject;
 
     // each player gets her own potentialy unqie set of commands
     commands.init(client.player.commands);
-
-    // all players can quit (disconnect actually)
-    commands.addCommand(client.player.commands, { 
-      name: 'quit',
-      description: 'Himins reports you have descended to earth. Your progress has not been saved.',
-      action: '!QUIT_APP',
-      kind: 'app' 
-    });
 
     // add the name of the game as a command
     commands.addCommand(client.player.commands, { 
@@ -114,6 +110,8 @@ himinsServer.on('connection', function (client) {
     );
 
     if (gameObject) {
+      console.log('*** initializing player ', client.player.name, 'with game ', gameObject.name);
+
       // associate the player with the game
       client.player.game = gameObject;
       client.player.gameName = gameObject.name;
@@ -121,18 +119,12 @@ himinsServer.on('connection', function (client) {
       // add game commands to the player's command list
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
 
-      // set the location of the player
-      client.player.roomName = gameObject.startRoom;
-      roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
-      client.player.sectionName = roomObject.spawnSection;
+      // Bug: somehow repl.LEFT_INDENT and repl.PARAGRAPH_WIDTH are not set yet! So I'm using the actual values above (2, 78)
+      messageText = format.formatText(client, gameObject.welcome, 2, 78);
 
-      // do the spawn stuff based on player's location
-      player.enterRoom(client.player, roomObject);
-      sectionObject = room.getSectionByName(roomObject, client.player.sectionName);
-      player.enterSection(client.player, sectionObject);
+      // welcome the player to the game
+      repl.writeToClient(client, messageText);
     }
-
-    repl.writeToClient(client, format.formatText(client, gameObject.welcome, 0, 80));
 
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
