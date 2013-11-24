@@ -15,7 +15,8 @@ var
   room = require('./himins_room'),
   player = require('./himins_player'),
   repl = require('./himins_repl'),
-  format = require('./himins_format');
+  format = require('./himins_format'),
+  files = require('./himins_file_utils');
 
 // ## module vars
 
@@ -57,7 +58,11 @@ var enterRoom = function (playerObject, roomObject) {
   // add commands for this room
   playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
 
-  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
+  files.loadTEXT('./himins_txt/himins_screen_narthex.txt', function (resultObject) {
+    playerObject.client.write(resultObject + '\n');
+
+    repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
+  });
 };
 module.exports.enterRoom = enterRoom;
 

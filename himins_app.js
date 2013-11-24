@@ -88,7 +88,7 @@ console.log('');
   clientList.push(client);
 
   files.loadTEXT(titleScreen, function (resultObject) {
-    client.write(resultObject);
+    client.write(resultObject + '\n');
   });
 
   // associate a player with this client

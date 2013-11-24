@@ -53,21 +53,38 @@ module.exports.getRoomByName = getRoomByName;
 
 // # start(playerObject)
 var start = function (playerObject) {
-    var
-      roomObject = {},
-      sectionObject = {},
-      gameObject = {};
+  var
+    roomObject = {},
+    sectionObject = {},
+    gameObject = {};
 
-      // set the location of the player
-      gameObject = playerObject.game;
-      playerObject.roomName = gameObject.startRoom;
-      roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
-      playerObject.sectionName = roomObject.spawnSection;
+    // add commands that only make sense once the game is started
 
-      // do the spawn stuff based on player's location
-      player.enterRoom(playerObject, roomObject);
-      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-      player.enterSection(playerObject, sectionObject);
+  commands.addCommand(playerObject.commands, { 
+    name: 'look',
+    description: "!SECTION_DESCRIPTION",
+    action: '!NO_ACTION',
+    kind: 'game' }
+  );
+
+  commands.addCommand(playerObject.commands, { 
+    name: 'where',
+    description: 'Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*',
+    action: '!NO_ACTION',
+    kind: 'game' }
+  );
+
+
+  // set the location of the player
+  gameObject = playerObject.game;
+  playerObject.roomName = gameObject.startRoom;
+  roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
+  playerObject.sectionName = roomObject.spawnSection;
+
+  // do the spawn stuff based on player's location
+  player.enterRoom(playerObject, roomObject);
+  sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
+  player.enterSection(playerObject, sectionObject);
 };
 module.exports.start = start;
 
