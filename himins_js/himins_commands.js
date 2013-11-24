@@ -14,13 +14,14 @@ var
   // ### Himins modules
   format = require('./himins_format'),
   repl = require('./himins_repl'),
-  player = require('./himins_player');
+  player = require('./himins_player'),
+  game = require('./himins_game');
 
 // ## module vars
 
-// # init(starterCommands)
-var init = function (commands) {
-  console.log('*** himins_command.js init()');
+// # init(commandList)
+var init = function (commandList) {
+  console.log('*** himins_command.js init(', commandList.length,')');
 };
 module.exports.init = init;
 
@@ -86,6 +87,10 @@ var doAction = function (client, commandObject) {
   switch (action) {
     case  '!NO_ACTION':
       // nothing to do!
+    break;
+
+    case '!START_GAME':
+      game.start(client.player, client.player.game);
     break;
 
     case '!QUIT_APP':
