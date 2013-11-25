@@ -72,7 +72,7 @@
     },
     {
       "name": "start",
-      "description": "Your soul is temporarily leaving your body. Asending to Himins in 10, 9, 8, 7, 6, 5, 4, ... ERRORS DETECTED ... EMERGENCY OVERRIDE ... WARNING LEVELS SURPRESSED ... ALLSYSTEMSHAVEBEENCOMPROMISED ... TRUSTNOONE ... ... ... ",
+      "description": "Your soul is temporarily leaving your body. Ascending to Himins in 10, 9, 8, 7, 6, 5, 4, ... ERRORS DETECTED ... EMERGENCY OVERRIDE ... WARNING LEVELS SURPRESSED ... ALLSYSTEMSHAVEBEENCOMPROMISED ... TRUSTNOONE ... ... ... ",
       "action": "!START_GAME",
       "kind": "game"
     }
