@@ -84,7 +84,7 @@ var resolveFunctions = function (client, text) {
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
 var formatText = function (client, text, indent, columnWidth) {
-  console.log('*** himins_format.js formatText(%s, %s, %d, %d)', client.name, text, indent, columnWidth);
+  //console.log('*** himins_format.js formatText(%s, %s, %d, %d)', client.name, text, indent, columnWidth);
   
   var
     result = text,
