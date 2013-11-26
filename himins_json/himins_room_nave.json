@@ -1,6 +1,7 @@
 {
   "name": "nave",
-  "description": "You stand in the nave. You can walk _northeast_, _northwest_, _southeast_, _southwest_, _west_, _east_, _north_, or _south_. You can just stand in the _center_.",
+  "description": "You stand in the *nave*.",
+  "artFileName": "himins_screen_narthex.txt",
   "spawnSection": "center",
   "sections": [
     {

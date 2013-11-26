@@ -55,10 +55,11 @@ module.exports.getInventoryNames = getInventoryNames;
 // # enterRoom(playerObject, roomObject)
 // Call when a player first spawns or enters a room
 var enterRoom = function (playerObject, roomObject) {
+  var artFileURI = './himins_txt/' + roomObject.artFileName;
   // add commands for this room
   playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
 
-  files.loadTEXT('./himins_txt/himins_screen_narthex.txt', function (resultObject) {
+  files.loadTEXT(artFileURI, function (resultObject) {
     playerObject.client.write(resultObject + '\n');
 
     repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
