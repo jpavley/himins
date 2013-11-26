@@ -20,6 +20,7 @@ var
 
 // # writeToClient(client, message);
 var writeToClient = function (client, message) {
+  console.log('himins_repl.js writeToClient(', client.name, message, ')');
 
   if (client && client.writable) {
     client.write(message + '\n');
@@ -32,22 +33,21 @@ module.exports.writeToClient = writeToClient;
 
 //# processUserInput(client, data)
 var processUserInput = function (client, data) {
-  //console.log('*** himins_repl.js processUserInput());
+  //console.log('*** himins_repl.js processUserInput(', client.name, ', ', data, ')');
+
   var 
     input = String(data).trim().toLowerCase(),
     commandObject = {};
-
-    //console.log(client.player.commands);
 
     commandObject = _.find(client.player.commands, function (cmd) {
       return cmd.name.toLowerCase() === input;
     });
 
     if (commandObject) {
-      writeToClient(client, format.formatText(client, commandObject.description, 2, 78));
+      writeToClient(client, format.formatText(client, commandObject.description, LEFT_INDENT, PARAGRAPH_WIDTH));
       commands.doAction(client, commandObject);
     } else {
-       writeToClient(client, format.formatText(client, 'Himins is sorry to report that *' + input+ '* is not available at this time', LEFT_INDENT, PARAGRAPH_WIDTH));    
+       writeToClient(client, format.formatText(client, '_himins_ is sorry to report that *' + input+ '* is not available at this time', LEFT_INDENT, PARAGRAPH_WIDTH));    
     }
 
 };

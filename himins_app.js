@@ -123,7 +123,6 @@ console.log('');
       messageText = format.formatText(client, gameObject.welcome, 2, 78);
 
       // welcome the player to the game
-      console.log('@@@', messageText);
       repl.writeToClient(client, messageText);
     }
 
@@ -133,18 +132,23 @@ console.log('');
   // ## client.on('data', function (data))
   // handle incoming client data
   client.on('data', function (data) {
-    // log it
-    console.log(client.name, ' incoming data:', String(data));
-    repl.processUserInput(client, data);
+    var inputStr = String(data);
+
+    // if inputStr is not standard ascii block it
+    if(inputStr.isPrintable()) {
+      console.log(client.name, ' incoming data:', inputStr); // log it
+      repl.processUserInput(client, data);      
+    }
+
   });
   
   // ## client.on('end', function ())
   // handle client disconnection
   client.on('end', function () {
-    // stop updating the user loop associated with this client
-    broadcast('*' + client.player.name + '* has left the game', client, 'system');
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
+    // tell the other clients
+    broadcast('*' + client.player.name + '* has left the game', client, 'system');
     // log it
     console.log(client.name + ' disconnected by end');
   });

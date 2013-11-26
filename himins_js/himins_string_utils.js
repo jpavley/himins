@@ -29,11 +29,22 @@ var addStringUnformattedLength = function () {
   };
 };
 
+// # isPrintable()
+// Returns true if the chars of the string are within the printable ASCII character range
+var addIsPrintable = function () {
+  String.prototype.isPrintable = function () {
+    // test each char to see if it is between space (x20) and ~ (x7E)
+    var result = /^[\x20-\x7E]*$/.test(this);
+    return result;
+  };
+};
+
 // # init()
 var init = function () {
   if (!addedFlag) {
     addStringRepeat();
     addStringUnformattedLength();
+    addIsPrintable();
     addedFlag = true;
   }
 };
