@@ -132,7 +132,7 @@ console.log('');
   // ## client.on('data', function (data))
   // handle incoming client data
   client.on('data', function (data) {
-    var inputStr = String(data);
+    var inputStr = String(data).trim().toLowerCase();
 
     // if inputStr is not standard ascii block it
     if(inputStr.isPrintable()) {
