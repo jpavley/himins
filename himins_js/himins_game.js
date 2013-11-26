@@ -69,7 +69,7 @@ var start = function (playerObject) {
 
   commands.addCommand(playerObject.commands, { 
     name: 'where',
-    description: 'Himins reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*',
+    description: '_himins_ reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*',
     action: '!NO_ACTION',
     kind: 'game' }
   );

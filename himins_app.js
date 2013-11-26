@@ -51,7 +51,7 @@ var broadcast = function (message, client, kind) {
         if (kind === 'user') {
           payload = e.player.name + ' yells to everyone: ' + message;
         } else {
-          payload = 'Himins reports ' + message;
+          payload = '_himins_ reports ' + message;
         }
         payload = format.formatText(e, payload, 2, 78);
         repl.writeToClient(e, payload);
@@ -123,6 +123,7 @@ console.log('');
       messageText = format.formatText(client, gameObject.welcome, 2, 78);
 
       // welcome the player to the game
+      console.log('@@@', messageText);
       repl.writeToClient(client, messageText);
     }
 
