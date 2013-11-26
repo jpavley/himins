@@ -27,8 +27,6 @@ var
 var renderFormatCodes = function (text) {
   var result = text;
 
-  console.log('@@@', result);
-
   result = result.replace(/^_/g, ' ' + BOLD_RED_ESC); // match _ at SOL
   result = result.replace(/ _/g, ' ' + BOLD_RED_ESC);
   result = result.replace(/_ /g, NORMAL_ESC + ' ');
