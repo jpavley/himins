@@ -81,6 +81,7 @@ module.exports.exitRoom = exitRoom;
 var enterSection = function (playerObject, sectionObject) {
   // add commands for this section
   playerObject.commands = commands.combineCommands(playerObject.commands, sectionObject.commands);
+  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, sectionObject.description, 2, 78));
 };
 module.exports.enterSection = enterSection;
 
