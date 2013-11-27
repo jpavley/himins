@@ -119,6 +119,8 @@ var moveToRoom = function (playerObject, commandObject) {
       targetSectionObject = room.getSectionByName(roomObject, targetSectionName),
       artFileURI = './himins_txt/' + roomObject.artFileName;
 
+    //TODO: refactor from game.start()
+
   exitRoom(playerObject, roomObject);
   exitSection(playerObject, sectionObject);
   playerObject.roomName = targetRoomName;

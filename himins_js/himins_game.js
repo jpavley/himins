@@ -75,6 +75,8 @@ var start = function (playerObject) {
     kind: 'game' }
   );
 
+  //TODO: refactor to player.moveToRoom()
+
   // set the location of the player
   gameObject = playerObject.game;
   playerObject.roomName = gameObject.startRoom;
