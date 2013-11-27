@@ -56,7 +56,8 @@ var start = function (playerObject) {
   var
     roomObject = {},
     sectionObject = {},
-    gameObject = {};
+    gameObject = {},
+    artFileURI = '';
 
     // add commands that only make sense once the game is started
 
@@ -74,17 +75,22 @@ var start = function (playerObject) {
     kind: 'game' }
   );
 
-
   // set the location of the player
   gameObject = playerObject.game;
   playerObject.roomName = gameObject.startRoom;
   roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
   playerObject.sectionName = roomObject.spawnSection;
 
-  // do the spawn stuff based on player's location
-  player.enterRoom(playerObject, roomObject);
-  sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-  player.enterSection(playerObject, sectionObject);
+  artFileURI = './himins_txt/' + roomObject.artFileName;
+
+  files.loadTEXT(artFileURI, function (resultObject) {
+    playerObject.client.write(resultObject + '\n');
+
+    // do the spawn stuff based on player's location
+    player.enterRoom(playerObject, roomObject);
+    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
+    player.enterSection(playerObject, sectionObject);
+  });
 };
 module.exports.start = start;
 

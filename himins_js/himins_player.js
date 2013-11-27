@@ -55,15 +55,11 @@ module.exports.getInventoryNames = getInventoryNames;
 // # enterRoom(playerObject, roomObject)
 // Call when a player first spawns or enters a room
 var enterRoom = function (playerObject, roomObject) {
-  var artFileURI = './himins_txt/' + roomObject.artFileName;
+
   // add commands for this room
   playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
 
-  files.loadTEXT(artFileURI, function (resultObject) {
-    playerObject.client.write(resultObject + '\n');
-
-    repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
-  });
+  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
 };
 module.exports.enterRoom = enterRoom;
 
@@ -79,6 +75,10 @@ module.exports.exitRoom = exitRoom;
 // # enterSection(playerObject, sectionObject)
 // Call when a player first spawns or enters a section
 var enterSection = function (playerObject, sectionObject) {
+  var
+    gameObject = playerObject.game,
+    roomObject = game.getRoomByName(gameObject, playerObject.roomName);
+
   // add commands for this section
   playerObject.commands = commands.combineCommands(playerObject.commands, sectionObject.commands);
   repl.writeToClient(playerObject.client, format.formatText(playerObject.client, sectionObject.description, 2, 78));
@@ -116,14 +116,20 @@ var moveToRoom = function (playerObject, commandObject) {
       targetRoomName = commandObject.parameters.nextRoomName,
       targetRoomObject = game.getRoomByName(gameObject, targetRoomName),
       targetSectionName = roomObject.spawnSection,
-      targetSectionObject = room.getSectionByName(roomObject, targetSectionName);
+      targetSectionObject = room.getSectionByName(roomObject, targetSectionName),
+      artFileURI = './himins_txt/' + roomObject.artFileName;
 
   exitRoom(playerObject, roomObject);
   exitSection(playerObject, sectionObject);
   playerObject.roomName = targetRoomName;
   playerObject.sectionName = targetSectionName;
-  enterRoom(playerObject, targetRoomObject);
-  enterSection(playerObject, targetSectionObject);
+
+  files.loadTEXT(artFileURI, function (resultObject) {
+    playerObject.client.write(resultObject + '\n');
+
+    enterRoom(playerObject, targetRoomObject);
+    enterSection(playerObject, targetSectionObject);
+  });
 
 };
 module.exports.moveToRoom = moveToRoom;

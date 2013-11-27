@@ -1,6 +1,6 @@
 {
   "name": "narthex",
-  "description": "You stand in the *narthex*. The room is cavernous and the air murky. Particles of dust bob slowly in shafts of light from the ceiling. The cool stone floor is caked in dust with hundreds of bare footprints running in all directions. Looking *west* you see a bricked-over portico. Looking *east* you see a bright rectangle shining in the middle a marbled arch. In each corner of the room sits a pile of debris.",
+  "description": "The *narthex* is cavernous and its air murky. Particles of soot bob slowly in shafts of light from the ceiling. The cool stone floor is caked in dust with hundreds of bare footprints running in all directions. Looking *west* you see a bricked-over portico. Looking *east* you see a bright rectangle shining in the middle a marbled arch. In each corner of the room sits a pile of debris.",
   "artFileName": "himins_screen_narthex.txt",
   "spawnSection": "center",
   "sections": [
@@ -95,7 +95,7 @@
     },
     {
       "name": "center",
-      "description": "You stand in the center of the *narthex*; in a pool of bright warm light. All around you are shadowy vales that the light does not penetrate. The scent of decay and age drifts in from each corner of the room. Something bright shines on the east wall but behind it you hear a low chorus of anguished moans.",
+      "description": "In the _center_ of the *narthex* the scent of decay is strong.",
       "atmosphere": "dim",
       "items": [],
       "doors": [],

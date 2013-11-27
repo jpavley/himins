@@ -41,6 +41,24 @@ var getCommandNames = function (commands) {
 };
 module.exports.getCommandNames = getCommandNames;
 
+// # getCommandNamesByKind(commands, kind)
+// Returns a string of the names of each command.
+var getCommandNamesByKind = function (commands, kind) {
+  var
+    resultString = '',
+    resultList = [];
+
+  _.each(commands, function (e, i, l) {
+    if (e.kind === kind) {
+      resultList.push('_' + e.name + '_');      
+    }
+  });
+
+  resultString = resultList.toString().replace(/,/g, ', ');
+  return resultString;
+};
+module.exports.getCommandNamesByKind = getCommandNamesByKind;
+
 // # addCommand(commands, commandObject)
 // Commmand object = { name, description, action, kind }
 var addCommand = function (commands, commandObject) {
