@@ -24,8 +24,18 @@
               </a>
             
               
-              <a class="source" href="himins_client.html">
-                himins_client.js
+              <a class="source" href="himins_commands.html">
+                himins_commands.js
+              </a>
+            
+              
+              <a class="source" href="himins_file_utils.html">
+                himins_file_utils.js
+              </a>
+            
+              
+              <a class="source" href="himins_format.html">
+                himins_format.js
               </a>
             
               
@@ -34,18 +44,23 @@
               </a>
             
               
-              <a class="source" href="himins_parser.html">
-                himins_parser.js
+              <a class="source" href="himins_player.html">
+                himins_player.js
               </a>
             
               
-              <a class="source" href="himins_user.html">
-                himins_user.js
+              <a class="source" href="himins_repl.html">
+                himins_repl.js
               </a>
             
               
-              <a class="source" href="scrap.html">
-                scrap.js
+              <a class="source" href="himins_room.html">
+                himins_room.js
+              </a>
+            
+              
+              <a class="source" href="himins_string_utils.html">
+                himins_string_utils.js
               </a>
             
           </div>
@@ -54,38 +69,21 @@
     
     <ul class="sections">
         
-          <li id="title">
-              <div class="annotation">
-                  <h1>himins_app.js</h1>
-              </div>
-          </li>
-        
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>himins_app.hs
-Main entry point to Himins
-Use telnet client to access: telnet 127.0.0.1 9000</p>
+              <h1>himins_app.js</h1>
+<p>Main entry point to Himins application.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> net = require(<span class="string">'net'</span>),
-    parser = require(<span class="string">'./himins_parser'</span>),
-    user = require(<span class="string">'./himins_user'</span>),
-    display = require(<span class="string">'./himins_client'</span>),
-    game = require(<span class="string">'./himins_game'</span>);
-
-<span class="keyword">var</span> himinsServer = net.createServer(),
-    clientList = [],
-    ipAddress = <span class="string">"127.0.0.1"</span>,
-    portNumber = <span class="number">9000</span>;
-
-himinsServer.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(client)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="comment">/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/</span></pre></div></div>
             
         </li>
         
@@ -93,15 +91,14 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>do initialization tasks</p>
+              <h2>includes</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> lingo = <span class="string">"en_US"</span>; <span class="comment">// todo: get the lingo from the client</span>
-  parser.loadClientStrings(lingo);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span></pre></div></div>
             
         </li>
         
@@ -109,15 +106,14 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>give the client a name and add the client to the list of clients</p>
+              <h3>Node modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  client.name = user.createUser(client.remoteAddress, client.remotePort, lingo);
-  clientList.push(client);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  net = require(<span class="string">'net'</span>),</pre></div></div>
             
         </li>
         
@@ -125,15 +121,14 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>start up the game loop</p>
+              <h3>3rd party modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> clientIntervalID = setInterval(game.run, <span class="number">1000</span> / game.UPDATES_PER_SECOND);
-  user.setIntervalID(client.name, clientIntervalID);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _ = require(<span class="string">'underscore'</span>),</pre></div></div>
             
         </li>
         
@@ -141,16 +136,21 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>weclome the user</p>
+              <h3>Himins modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  client.write(display.eraseScreen);
-  client.write(parser.renderMessageForDisplay(client, <span class="number">0</span>, lingo) + <span class="string">'\n'</span>);
-  client.write(display.prompt);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  game = require(<span class="string">'./himins_js/himins_game'</span>),
+  room = require(<span class="string">'./himins_js/himins_room'</span>),
+  player = require(<span class="string">'./himins_js/himins_player'</span>),
+  commands = require(<span class="string">'./himins_js/himins_commands'</span>),
+  repl = require(<span class="string">'./himins_js/himins_repl'</span>),
+  format = require(<span class="string">'./himins_js/himins_format'</span>),
+  strutils = require(<span class="string">'./himins_js/himins_string_utils'</span>),
+  files = require(<span class="string">'./himins_js/himins_file_utils'</span>);</pre></div></div>
             
         </li>
         
@@ -158,14 +158,26 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>tell everyone the user is here</p>
+              <h2>module vars</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  broadcast(parser.renderMessageForDisplay(client, <span class="number">15</span>, lingo) + <span class="string">'\n'</span>, client, <span class="string">'system'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> 
+  himinsServer = net.createServer(),
+
+  clientList = [],
+  gameObject = {},
+
+  ipAddress = <span class="string">"127.0.0.1"</span>,  <span class="comment">// TODO: get from environment var</span>
+  portNumber = <span class="number">9000</span>,        <span class="comment">// TODO: get from environment var</span>
+  maxUsers = <span class="number">10</span>,            <span class="comment">// TODO: get from environment var</span>
+
+  startingGameFile = <span class="string">'./himins_json/himins_game.json'</span>,
+  defaultPlayerFile = <span class="string">'./himins_json/himins_player.json'</span>,
+  titleScreen = <span class="string">'./himins_txt/himins_screen_title.txt'</span>;</pre></div></div>
             
         </li>
         
@@ -173,14 +185,31 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-7">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>handle incoming client data</p>
+              <h1>broadcast(message, client, kind)</h1>
+<p>broadcast messages to every client but this one
+if a client is discovered to be unresponsive it is removed from the client list</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> broadcast = <span class="function"><span class="keyword">function</span> <span class="params">(message, client, kind)</span> {</span>
+  <span class="keyword">var</span> 
+    deadList = [],
+    payload = <span class="string">''</span>;
+
+  _.each(clientList, <span class="function"><span class="keyword">function</span> <span class="params">(e, i, l)</span> {</span>
+    <span class="keyword">if</span> (client !== e) {
+      <span class="keyword">if</span> (e.writable) {
+        <span class="keyword">if</span> (kind === <span class="string">'user'</span>) {
+          payload = e.player.name + <span class="string">' yells to everyone: '</span> + message;
+        } <span class="keyword">else</span> {
+          payload = <span class="string">'_himins_ reports '</span> + message;
+        }
+        payload = format.formatText(e, payload, <span class="number">2</span>, <span class="number">78</span>);
+        repl.writeToClient(e, payload);
+      } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -191,11 +220,21 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>log it</p>
+              <p>client is not writable, kill it</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    console.log(client.name + <span class="string">' incoming data: '</span> + data);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        deadList.push(e);
+        e.destroy();   
+      }
+    }
+  });
+
+  _.each(deadList, <span class="function"><span class="keyword">function</span> <span class="params">(client, index, deadList)</span> {</span>
+    clientList.splice(clientList.indexOf(client), <span class="number">1</span>);
+  });
+};
+module.exports.broadcast = broadcast;</pre></div></div>
             
         </li>
         
@@ -203,16 +242,18 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         <li id="section-9">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>send data to the parser</p>
+              <h1>himinsServer(&#39;connection&#39;, function (client))</h1>
+<p>handle a client connection and other client events (data, end, error)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    parser.processClientData(client, data, lingo);
-    
-  });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>himinsServer.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(client)</span> {</span>
+  <span class="keyword">var</span>
+    uuid = <span class="number">0</span>,
+    messageText = <span class="string">''</span>;</pre></div></div>
             
         </li>
         
@@ -223,12 +264,13 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>handle client disconnection</p>
+              <p>TODO: If a client tries to connect before the game has loaded it should be rejected!</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  client.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    stopUpdates(client);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>console.log(<span class="string">''</span>);
+console.log(<span class="string">'**** **** **** a client is starting up **** **** ****'</span>);
+console.log(<span class="string">''</span>);</pre></div></div>
             
         </li>
         
@@ -239,11 +281,17 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>remove client from the list of clients</p>
+              <p>give the client a name and add the client to the list of clients</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    clientList.splice(clientList.indexOf(client), <span class="number">1</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  uuid = _.uniqueId();
+  client.name = <span class="string">'client_'</span> + uuid;
+  clientList.push(client);
+
+  files.loadTEXT(titleScreen, <span class="function"><span class="keyword">function</span> <span class="params">(resultObject)</span> {</span>
+    client.write(resultObject + <span class="string">'\n'</span>);
+  });</pre></div></div>
             
         </li>
         
@@ -253,6 +301,215 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>associate a player with this client</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  files.loadJSON(defaultPlayerFile, <span class="function"><span class="keyword">function</span> <span class="params">(resultObject)</span> {</span>
+    player.init(resultObject);
+    resultObject.name = resultObject.name + uuid;
+    resultObject.client = client;
+    client.player = resultObject;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>each player gets her own potentialy unqie set of commands</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    commands.init(client.player.commands);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>add the name of the game as a command</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    commands.addCommand(client.player.commands, { 
+      name: gameObject.name.toLowerCase(),
+      description: gameObject.description,
+      parameters: { 
+        <span class="string">"dataKey"</span>: <span class="string">"descriptionScreenCast"</span>,
+        <span class="string">"screenKey"</span>: <span class="string">"currentScreen"</span>
+      },
+      action: <span class="string">'!SCREEN_CAST'</span>,
+      kind: <span class="string">'game'</span> }
+    );
+
+    <span class="keyword">if</span> (gameObject) {
+      console.log(<span class="string">'*** initializing player '</span>, client.player.name, <span class="string">'with game '</span>, gameObject.name);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>associate the player with the game</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      client.player.game = gameObject;
+      client.player.gameName = gameObject.name;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>add game commands to the player&#39;s command list</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Bug: somehow repl.LEFT_INDENT and repl.PARAGRAPH_WIDTH are not set yet! So I&#39;m using the actual values above (2, 78)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      messageText = format.formatText(client, gameObject.welcome, <span class="number">2</span>, <span class="number">78</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>welcome the player to the game</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      repl.writeToClient(client, messageText);
+    }
+
+    broadcast(<span class="string">'*'</span> + client.player.name + <span class="string">'* has joined the game'</span>, client, <span class="string">'system'</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <h2>client.on(&#39;data&#39;, function (data))</h2>
+<p>handle incoming client data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+    <span class="keyword">var</span> inputStr = String(data).trim().toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>if inputStr is not standard ascii block it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span>(inputStr.isPrintable()) {
+      console.log(client.name, <span class="string">' incoming data:'</span>, inputStr); <span class="comment">// log it</span>
+      repl.processUserInput(client, data);      
+    }
+
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <h2>client.on(&#39;end&#39;, function ())</h2>
+<p>handle client disconnection</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  client.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>remove client from the list of clients</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    clientList.splice(clientList.indexOf(client), <span class="number">1</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>tell the other clients</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    broadcast(<span class="string">'*'</span> + client.player.name + <span class="string">'* has left the game'</span>, client, <span class="string">'system'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>log it</p>
 
@@ -264,13 +521,14 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         </li>
         
         
-        <li id="section-13">
+        <li id="section-25">
             <div class="annotation">
               
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>handle client error (OMG!)</p>
+              <h2>client.on(&#39;error&#39;, function (e))</h2>
+<p>handle client error (OMG!)</p>
 
             </div>
             
@@ -282,147 +540,122 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         </li>
         
         
-        <li id="section-14">
+        <li id="section-26">
             <div class="annotation">
               
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>broadcast messages to every client but this one</p>
+              <h1>clientCount()</h1>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">broadcast</span><span class="params">(message, client, kind)</span> {</span>
-    <span class="keyword">var</span> cleanup = [];
-    
-    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = clientList.length; i &lt; l; i += <span class="number">1</span>) {
-        <span class="keyword">if</span> (client !== clientList[i]) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <p>client is in the client list</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (clientList[i].writable) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
-              <p>compose the message</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                <span class="keyword">var</span> payload;
-                <span class="keyword">if</span> (kind === <span class="string">'user'</span>) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-17">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
-              </div>
-              <p>todo: localize &quot;say&quot;</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                    payload = display.boldRedOn + client.name + display.formatOff + <span class="string">' says '</span> + message;
-                } <span class="keyword">else</span> {
-                    payload = message;
-                }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <p>write the message</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                clientList[i].write(display.cursorLeftThreeSpaces);
-                clientList[i].write(payload);
-                clientList[i].write(display.prompt);
-            } <span class="keyword">else</span> {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p>client is not writable, kill it</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                stopUpdates(client);
-                cleanup.push(clientList[i]);
-                clientList[i].destory();
-            }
-        }
-    }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>remove dead clients from client list</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = cleanup.length; i &lt; l; i += <span class="number">1</span> ) {
-        clientList.splice(clientList.indexOf(cleanup[i]), <span class="number">1</span>);
-    }
-};
-
-<span class="keyword">var</span> clientCount = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> clientCount = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
   <span class="keyword">return</span> clientList.length;
-}
-
-<span class="keyword">var</span> stopUpdates = <span class="function"><span class="keyword">function</span> <span class="params">(client)</span> {</span>
-  clearInterval(user.getIntervalID(client.name));
-}
-
-<span class="keyword">var</span> getClientList = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-  <span class="keyword">return</span> clientList;
-}</pre></div></div>
+};
+module.exports.clientCount = clientCount;</pre></div></div>
             
         </li>
         
         
-        <li id="section-21">
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h1>getClientList()</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> getClientList = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">return</span> clientList;
+};
+module.exports.getClientList = getClientList;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h1>getClientByID(clientID)</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> getClientByID = <span class="keyword">function</span>(clientID) {
+  <span class="keyword">var</span> result = <span class="string">""</span>;
+
+  result = _.find(clientList, <span class="function"><span class="keyword">function</span> <span class="params">(client)</span> {</span>
+    <span class="keyword">return</span> client.name.toLowerCase() === clientID.toLowerCase();
+  });
+
+  <span class="keyword">return</span> result; 
+};
+module.exports.getClientByID = getClientByID;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h1>main entry point of himins_app</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>console.log(<span class="string">''</span>);
+console.log(<span class="string">'**** **** **** himins is starting up **** **** ****'</span>);
+console.log(<span class="string">''</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>add String object extentions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>strutils.init();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>associate a game with this app</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>files.loadJSON(startingGameFile, <span class="function"><span class="keyword">function</span> <span class="params">(resultObject)</span> {</span>
+  game.init(resultObject);
+  gameObject = resultObject;
+  console.log(<span class="string">'*** gameObject has loaded: '</span>, gameObject.name);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>give a hint to the webmaster</p>
 
@@ -433,37 +666,18 @@ himinsServer.on(<span class="string">'connection'</span>, <span class="function"
         </li>
         
         
-        <li id="section-22">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p>start up the server</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>himinsServer.listen(portNumber);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-23">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <p>initialize the game</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>game.init();
-
-module.exports.broadcast = broadcast;
-module.exports.clientCount = clientCount;
-module.exports.stopUpdates = stopUpdates;
-module.exports.getClientList = getClientList;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>himinsServer.maxConnections = maxUsers;
+himinsServer.listen(portNumber);</pre></div></div>
             
         </li>
         

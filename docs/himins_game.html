@@ -24,8 +24,18 @@
               </a>
             
               
-              <a class="source" href="himins_client.html">
-                himins_client.js
+              <a class="source" href="himins_commands.html">
+                himins_commands.js
+              </a>
+            
+              
+              <a class="source" href="himins_file_utils.html">
+                himins_file_utils.js
+              </a>
+            
+              
+              <a class="source" href="himins_format.html">
+                himins_format.js
               </a>
             
               
@@ -34,18 +44,23 @@
               </a>
             
               
-              <a class="source" href="himins_parser.html">
-                himins_parser.js
+              <a class="source" href="himins_player.html">
+                himins_player.js
               </a>
             
               
-              <a class="source" href="himins_user.html">
-                himins_user.js
+              <a class="source" href="himins_repl.html">
+                himins_repl.js
               </a>
             
               
-              <a class="source" href="scrap.html">
-                scrap.js
+              <a class="source" href="himins_room.html">
+                himins_room.js
+              </a>
+            
+              
+              <a class="source" href="himins_string_utils.html">
+                himins_string_utils.js
               </a>
             
           </div>
@@ -63,20 +78,12 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1>himins_game.js</h1>
-<h2>Game engine that drives the himins world.</h2>
+<p>Manages a game object from a himins game JSON file.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> user = require(<span class="string">'./himins_user'</span>),
-    app = require(<span class="string">'./himins_app'</span>),
-    parser = require(<span class="string">'./himins_parser'</span>),
-    display = require(<span class="string">'./himins_client'</span>);
-
-<span class="keyword">var</span> MAX_PLAY_TIME_MS = <span class="number">5</span> * (<span class="number">60</span> * <span class="number">1000</span>),
-    UPDATES_PER_SECOND = <span class="number">1</span>;
-
-<span class="keyword">var</span> timeCheckPercentages = [<span class="number">0.5</span>, <span class="number">0.75</span>, <span class="number">0.8</span>, <span class="number">0.9</span>, <span class="number">0.95</span>, <span class="number">0.99</span>],
-    timeCheckValuesInMinutes = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="comment">/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/</span></pre></div></div>
             
         </li>
         
@@ -84,15 +91,14 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h1>run();</h1>
+              <h2>includes</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> run = <span class="keyword">function</span>() {
-  update();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span></pre></div></div>
             
         </li>
         
@@ -100,15 +106,14 @@
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>world.update();
-users.update();</p>
+              <h3>Node modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  fs = require(<span class="string">'fs'</span>),</pre></div></div>
             
         </li>
         
@@ -116,14 +121,14 @@ users.update();</p>
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h1>Init()</h1>
+              <h3>3rd party modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _ = require(<span class="string">'underscore'</span>),</pre></div></div>
             
         </li>
         
@@ -131,23 +136,20 @@ users.update();</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Precalc time check values (performance optimization)</p>
+              <h3>Himins modules</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; timeCheckPercentages.length; i++) {
-    <span class="keyword">var</span> timeCheckValue = Math.ceil(MAX_PLAY_TIME_MS * timeCheckPercentages[i]);
-    timeCheckValue = Math.ceil((timeCheckValue/<span class="number">60</span>)/<span class="number">1000</span>);
-    timeCheckValue = ((MAX_PLAY_TIME_MS/<span class="number">60</span>)/<span class="number">1000</span>) - timeCheckValue;
-    <span class="keyword">if</span> (timeCheckValue != <span class="number">0</span>) {
-      timeCheckValuesInMinutes.push(timeCheckValue);      
-    }
-  }
-  
-  console.log(timeCheckValuesInMinutes);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  commands = require(<span class="string">'./himins_commands'</span>),
+  room = require(<span class="string">'./himins_room'</span>),
+  files = require(<span class="string">'./himins_file_utils'</span>),
+  repl = require(<span class="string">'./himins_repl'</span>),
+  format = require(<span class="string">'./himins_format'</span>),
+  player = require(<span class="string">'./himins_player'</span>),
+  game = require(<span class="string">'./himins_game'</span>);</pre></div></div>
             
         </li>
         
@@ -155,14 +157,15 @@ users.update();</p>
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>For small values of MAX_PLAY_TIME_MS avoid duplicate time checks in array</p>
+              <h2>module vars</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  timeCheckValuesInMinutes = timeCheckValuesInMinutes.filter(<span class="function"><span class="keyword">function</span> <span class="params">(valueOfElement, indexOfElement, thisArray)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span>
+  roomList = [];</pre></div></div>
             
         </li>
         
@@ -170,18 +173,15 @@ users.update();</p>
         <li id="section-7">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>for each element in the array only return true if it&#39;s index matches the first index found in the array!</p>
+              <h1>init(gameObject)</h1>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">return</span> thisArray.indexOf(valueOfElement) === indexOfElement;
-  });
-
-  console.log(timeCheckValuesInMinutes);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span> <span class="params">(gameObject)</span> {</span>
+  console.log(<span class="string">'*** himins_game.js init('</span>, gameObject.name, <span class="string">')'</span>);</pre></div></div>
             
         </li>
         
@@ -189,18 +189,32 @@ users.update();</p>
         <li id="section-8">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <h1>Update()</h1>
-<ul>
-<li>A client can only connect to himins for <em>MAX_PLAY_TIME_MS</em></li>
-<li>Check on each client every <em>UPDATES_PER_SECOND</em> event</li>
-</ul>
+              <p>load the rooms</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> update = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _.each(gameObject.roomFiles, <span class="function"><span class="keyword">function</span> <span class="params">(e, i, l)</span> {</span>
+    files.loadJSON(<span class="string">'himins_json/'</span> + e, <span class="function"><span class="keyword">function</span> <span class="params">(resultObject)</span> {</span>
+      room.init(resultObject);
+      gameObject.rooms.push(resultObject);
+    });
+
+  });
+};
+module.exports.init = init;
+
+<span class="keyword">var</span> getRoomByName = <span class="function"><span class="keyword">function</span> <span class="params">(gameObject, roomName)</span> {</span>
+
+  <span class="keyword">var</span> result = _.find(gameObject.rooms, <span class="function"><span class="keyword">function</span> <span class="params">(room)</span> {</span>
+    <span class="keyword">return</span> room.name.toLowerCase() === roomName.toLowerCase();
+  });
+
+  <span class="keyword">return</span> result;
+};
+module.exports.getRoomByName = getRoomByName;</pre></div></div>
             
         </li>
         
@@ -208,19 +222,19 @@ users.update();</p>
         <li id="section-9">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>console.log(&quot;himins_game update()&quot;);</p>
+              <h1>start(playerObject)</h1>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> clientList = app.getClientList();
-  
-  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; clientList.length; i++) {
-    <span class="keyword">var</span> timeRemaining = parser.calcClientTimeRemaining(clientList[i]);
-    
-    <span class="keyword">if</span> (timeRemaining &lt;= <span class="number">0</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> start = <span class="function"><span class="keyword">function</span> <span class="params">(playerObject)</span> {</span>
+  <span class="keyword">var</span>
+    roomObject = {},
+    sectionObject = {},
+    gameObject = {},
+    artFileURI = <span class="string">''</span>;</pre></div></div>
             
         </li>
         
@@ -231,12 +245,23 @@ users.update();</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>If a client is alive beyond <em>MAX_PLAY_TIME_MS</em> then disconnect it</p>
+              <p>add commands that only make sense once the game is started</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      parser.processClientData(clientList[i], <span class="string">"quit"</span>, user.getUserLingo(clientList[i].name));
-    } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  commands.addCommand(playerObject.commands, { 
+    name: <span class="string">'look'</span>,
+    description: <span class="string">"!SECTION_DESCRIPTION"</span>,
+    action: <span class="string">'!NO_ACTION'</span>,
+    kind: <span class="string">'game'</span> }
+  );
+
+  commands.addCommand(playerObject.commands, { 
+    name: <span class="string">'where'</span>,
+    description: <span class="string">'_himins_ reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*'</span>,
+    action: <span class="string">'!NO_ACTION'</span>,
+    kind: <span class="string">'game'</span> }
+  );</pre></div></div>
             
         </li>
         
@@ -247,11 +272,20 @@ users.update();</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>If a client is about to hit a <em>timeChecks[]</em> interval then notify it</p>
+              <p>TODO: refactor to player.moveToRoom()</p>
+<p>set the location of the player</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; timeCheckValuesInMinutes.length; j++) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  gameObject = playerObject.game;
+  playerObject.roomName = gameObject.startRoom;
+  roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
+  playerObject.sectionName = roomObject.spawnSection;
+
+  artFileURI = <span class="string">'./himins_txt/'</span> + roomObject.artFileName;
+
+  files.loadTEXT(artFileURI, <span class="function"><span class="keyword">function</span> <span class="params">(resultObject)</span> {</span>
+    playerObject.client.write(resultObject + <span class="string">'\n'</span>);</pre></div></div>
             
         </li>
         
@@ -262,59 +296,16 @@ users.update();</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>if a client has not recieved this time check before and it&#39;s time to recieve one...</p>
+              <p>do the spawn stuff based on player&#39;s location</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">if</span> (timeCheckValuesInMinutes[j] === timeRemaining &amp;&amp; (j + <span class="number">1</span>) != user.getTimeCheckCount(clientList[i].name)) {
-          <span class="keyword">var</span> message = parser.renderMessageForDisplay(clientList[i], <span class="number">18</span>, user.getUserLingo(clientList[i].name));
-          message = display.boldRedOn + timeCheckValuesInMinutes[j] + display.formatOff + <span class="string">" "</span> + message;
-          clientList[i].write(message + <span class="string">'\n'</span>);
-          clientList[i].write(display.prompt);
-          user.incrementTimeCheckCount(clientList[i].name);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
-              </div>
-              <p>no need to check again during this update for this client    </p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>          <span class="keyword">break</span>;
-        }
-      }
-    }
-  }
+            <div class="content"><div class='highlight'><pre>    player.enterRoom(playerObject, roomObject);
+    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
+    player.enterSection(playerObject, sectionObject);
+  });
 };
-
-<span class="keyword">var</span> getTimeCheckCount = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-14">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
-              </div>
-              <p>Note: call getTimeCheckCount() after init() or it will return 0</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">return</span> timeCheckValuesInMinutes.length;
-}
-
-module.exports.MAX_PLAY_TIME_MS = MAX_PLAY_TIME_MS;
-module.exports.UPDATES_PER_SECOND = UPDATES_PER_SECOND;
-module.exports.run = run;
-module.exports.init = init;</pre></div></div>
+module.exports.start = start;</pre></div></div>
             
         </li>
         

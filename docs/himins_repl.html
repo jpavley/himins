@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>himins_repl.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="himins_app.html">
+                himins_app.js
+              </a>
+            
+              
+              <a class="source" href="himins_commands.html">
+                himins_commands.js
+              </a>
+            
+              
+              <a class="source" href="himins_file_utils.html">
+                himins_file_utils.js
+              </a>
+            
+              
+              <a class="source" href="himins_format.html">
+                himins_format.js
+              </a>
+            
+              
+              <a class="source" href="himins_game.html">
+                himins_game.js
+              </a>
+            
+              
+              <a class="source" href="himins_player.html">
+                himins_player.js
+              </a>
+            
+              
+              <a class="source" href="himins_repl.html">
+                himins_repl.js
+              </a>
+            
+              
+              <a class="source" href="himins_room.html">
+                himins_room.js
+              </a>
+            
+              
+              <a class="source" href="himins_string_utils.html">
+                himins_string_utils.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1>himins_repl.js</h1>
+<p>Read, evaluate, and print loop</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="comment">/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+*/</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2>module includes</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h3>3rd party modules</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _ = require(<span class="string">'underscore'</span>),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3>himins modules</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  commands = require(<span class="string">'./himins_commands'</span>),
+  format = require(<span class="string">'./himins_format'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2>module constants</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span>
+  LEFT_INDENT = <span class="number">2</span>,
+  PARAGRAPH_WIDTH = <span class="number">78</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h1>writeToClient(client, message);</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> writeToClient = <span class="function"><span class="keyword">function</span> <span class="params">(client, message)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>console.log(&#39;himins_repl.js writeToClient(&#39;, client.name, message, &#39;)&#39;);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">if</span> (client &amp;&amp; client.writable) {
+    client.write(message + <span class="string">'\n'</span>);
+  } <span class="keyword">else</span> {
+    console.log(<span class="string">'client not writable'</span>);
+    console.log(<span class="string">'*** himins_app.js writeToClient(%s, %s)'</span>, message, client);
+  }
+};
+module.exports.writeToClient = writeToClient;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h1>screenCast(client, dataKey, screenKey)</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> screenCast = <span class="function"><span class="keyword">function</span> <span class="params">(client, dataKey, screenKey)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>console.log(&#39;himins_repl.js screenCast(&#39;, client.name, dataKey, screenKey, &#39;)&#39;);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span>
+    screenList = client.player.game[dataKey],
+    currentScreen = client.player.game[screenKey],
+    pageInfo = <span class="string">''</span>,
+    pageNumber = currentScreen + <span class="number">1</span>;
+
+    <span class="keyword">if</span> (currentScreen &lt; screenList.length) {
+      client.player.game.casting = <span class="literal">true</span>;
+    } <span class="keyword">else</span> {
+      client.player.game.casting = <span class="literal">false</span>;
+    }
+
+    <span class="keyword">if</span>(client.player.game.casting) {
+      writeToClient(client, <span class="string">'+-------+---------+---------+---------+---------+---------+---------+---------+'</span>);
+      writeToClient(client, format.formatText(client, screenList[currentScreen], LEFT_INDENT, PARAGRAPH_WIDTH));
+      writeToClient(client, <span class="string">'+-------+---------+---------+---------+---------+---------+---------+---------+'</span>);
+
+      pageInfo = <span class="string">'['</span> + pageNumber + <span class="string">' of '</span> + screenList.length + <span class="string">']'</span>;
+
+      <span class="keyword">if</span> (currentScreen + <span class="number">1</span> &lt; screenList.length) {
+        writeToClient(client, format.formatText(client, <span class="string">'Press *return* to continue '</span> + pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
+        client.player.game[screenKey] = currentScreen + <span class="number">1</span>;
+      } <span class="keyword">else</span> {
+        writeToClient(client, format.formatText(client, pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
+        writeToClient(client, <span class="string">''</span>); <span class="comment">// blankline</span>
+        writeToClient(client, format.formatText(client, <span class="string">'You should pray for !COMMAND_NAMES.'</span>, LEFT_INDENT, PARAGRAPH_WIDTH)); 
+        client.player.game[screenKey] = <span class="number">0</span>;
+        client.player.game.casting = <span class="literal">false</span>;  
+      }
+    }
+};
+module.exports.screenCast = screenCast;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h1>processUserInput(client, data)</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> processUserInput = <span class="function"><span class="keyword">function</span> <span class="params">(client, data)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>console.log(&#39;<em>*</em> himins_repl.js processUserInput(&#39;, client.name, &#39;, &#39;, data, &#39;)&#39;);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> 
+    input = String(data).trim().toLowerCase(),
+    commandObject = {};
+
+  <span class="keyword">if</span> (client.player.game.casting){
+    screenCast(client, <span class="string">"descriptionScreenCast"</span>, <span class="string">"currentScreen"</span>);
+  } <span class="keyword">else</span> {
+    commandObject = _.find(client.player.commands, <span class="function"><span class="keyword">function</span> <span class="params">(cmd)</span> {</span>
+      <span class="keyword">return</span> cmd.name.toLowerCase() === input;
+    });
+
+    <span class="keyword">if</span> (commandObject) {
+      writeToClient(client, format.formatText(client, commandObject.description, LEFT_INDENT, PARAGRAPH_WIDTH));
+      commands.doAction(client, commandObject);
+    } <span class="keyword">else</span> {
+       writeToClient(client, format.formatText(client, <span class="string">'_himins_ is sorry to report that *'</span> + input+ <span class="string">'* is not available at this time'</span>, LEFT_INDENT, PARAGRAPH_WIDTH));    
+    }
+  }
+
+};
+module.exports.processUserInput = processUserInput;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
