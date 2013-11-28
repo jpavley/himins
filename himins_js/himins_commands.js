@@ -96,6 +96,8 @@ module.exports.removeCommandsByKind = removeCommandsByKind;
 
 // # doAction(client, commandObject)
 var doAction = function (client, commandObject) {
+  //console.log('*** himins_commands.js doAction(', client.name, commandObject, ')');
+
   var
     action = commandObject.action;
 
@@ -113,6 +115,10 @@ var doAction = function (client, commandObject) {
 
     case '!QUIT_APP':
       client.end();
+    break;
+
+    case '!SCREEN_CAST':
+      repl.screenCast(client, commandObject.parameters.dataKey, commandObject.parameters.screenKey);
     break;
 
     case '!GO_NORTH':

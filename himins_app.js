@@ -105,7 +105,11 @@ console.log('');
     commands.addCommand(client.player.commands, { 
       name: gameObject.name.toLowerCase(),
       description: gameObject.description,
-      action: '!NO_ACTION',
+      parameters: { 
+        "dataKey": "descriptionScreenCast",
+        "screenKey": "currentScreen"
+      },
+      action: '!SCREEN_CAST',
       kind: 'game' }
     );
 

@@ -31,6 +31,43 @@ var writeToClient = function (client, message) {
 };
 module.exports.writeToClient = writeToClient;
 
+// #screenCast(client, dataKey, screenKey)
+var screenCast = function (client, dataKey, screenKey) {
+  //console.log('himins_repl.js screenCast(', client.name, dataKey, screenKey, ')');
+
+  var
+    screenList = client.player.game[dataKey],
+    currentScreen = client.player.game[screenKey],
+    pageInfo = '',
+    pageNumber = currentScreen + 1;
+
+    if (currentScreen < screenList.length) {
+      client.player.game.casting = true;
+    } else {
+      client.player.game.casting = false;
+    }
+
+    if(client.player.game.casting) {
+      writeToClient(client, '+-------+---------+---------+---------+---------+---------+---------+---------+');
+      writeToClient(client, format.formatText(client, screenList[currentScreen], LEFT_INDENT, PARAGRAPH_WIDTH));
+      writeToClient(client, '+-------+---------+---------+---------+---------+---------+---------+---------+');
+
+      pageInfo = '[' + pageNumber + ' of ' + screenList.length + ']';
+
+      if (currentScreen + 1 < screenList.length) {
+        writeToClient(client, format.formatText(client, 'Press *return* to continue ' + pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
+        client.player.game[screenKey] = currentScreen + 1;
+      } else {
+        writeToClient(client, format.formatText(client, pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
+        writeToClient(client, ''); // blankline
+        writeToClient(client, format.formatText(client, 'You should pray for !COMMAND_NAMES.', LEFT_INDENT, PARAGRAPH_WIDTH)); 
+        client.player.game[screenKey] = 0;
+        client.player.game.casting = false;  
+      }
+    }
+};
+module.exports.screenCast = screenCast;
+
 //# processUserInput(client, data)
 var processUserInput = function (client, data) {
   //console.log('*** himins_repl.js processUserInput(', client.name, ', ', data, ')');
@@ -39,6 +76,9 @@ var processUserInput = function (client, data) {
     input = String(data).trim().toLowerCase(),
     commandObject = {};
 
+  if (client.player.game.casting){
+    screenCast(client, "descriptionScreenCast", "currentScreen");
+  } else {
     commandObject = _.find(client.player.commands, function (cmd) {
       return cmd.name.toLowerCase() === input;
     });
@@ -49,6 +89,7 @@ var processUserInput = function (client, data) {
     } else {
        writeToClient(client, format.formatText(client, '_himins_ is sorry to report that *' + input+ '* is not available at this time', LEFT_INDENT, PARAGRAPH_WIDTH));    
     }
+  }
 
 };
 module.exports.processUserInput = processUserInput;

@@ -1,7 +1,23 @@
 {
   "name": "himins",
   "version": "0.0.1",
-  "description": "Himins is a MUD, a multi user dungeon with a command line interface. It is written in JavaScript using Node.js and MongoDB. To play Himins you run it on a Node.js server and access the server with a Telnet client from a terminal window. Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Himins closest to the surface are protected and great for learning the game. The areas deep within Himins are unregulated and require advanced knowlege of the game. The core of the Moon is the most dangerous of all and a player who reaches the core becomes the master of Himins. The core is one giant game of text-based PVP *King of the Hill*.",
+  "description": "Our story so far...",
+  "currentScreen": 0,
+  "casting": false,
+  "descriptionScreenCast": [
+    "The Earth is dead. Its air poisoned. Its water fouled. Its soil corrupted. All 510 million square kilometers unclean. Humanity is doomed but it does nothing but squabble, bicker, and blame.",
+    "Tennin landed on a Friday evening in the center of town. Tennin flew on a meteorite that crashed and burned in front of the old elementary school. The noise and fire brought the people out of their homes. Tennin, battered and bruised, crawled out of the wreckage and looked into the collective eyes of the crowd that had gathered around her smoldering fireball.",
+    "'People of Earth,' Tennin sang, 'I bring you salutations from your friends the Selenites. We have watched you slowly destroy your world from our home on the Moon. We have been your hidden neighbors for hundreds of thousands of years. While you evolved from apes on the Earth's surface, we have evolved from arthropods in the interior of our world. After centuries of observing your behavior you should be able to forgive us for not announcing our presence. We were a little worried in 1969 when your ancestors landed on our surface but thankfully, except for the occasional probe, you never returned. While we have remained hidden we have not ignored you. We've learned a great deal from your radio, television, and Internet. We've even played games with you, masquerading as human in chatrooms and social networks. We've grown to love you. You are dangerous, mostly to yourselves, but you are clever and beautiful.'",
+    "Tennin paused, catching it's breath as pieces of it's body began to crack and fall off.",
+    "'I don't have many stanzas remaining, so please listen carefully. We have outgrown our world, your Moon, and we bequeath it to you. Your world, the Earth, no longer supports you needs. We urge you to band together and take possession of ours. You'll have to rediscover the technology to build rockets and transport large quantities of your people. We have confidence that you will live long enough for that.'",
+    "More pieces of Tennin body disintegrate. Pink and green fluids bled from her interior.",
+    "'You can live on. My choir has abandoned the Moon. It is yours now. You need only to find the door, hack the key, and enter. You won't need to bring supplies as we have provided for you every need. But I must warn you. Our world was built for us and not you. And some of our kind remain behind. But we are sure you will have no problem wrestling the Moon away from these traitors.'",
+    "Tennin’s head sloughed off its torso.",
+    "'This is the end of my song but a bridge your new verse. Oh, just one more thing... You must be very careful not to let Himins...'",
+    "Abruptly Tennin’s head dried up and blew away in the breeze of the meteorite's flames.",
+    "The townspeople thought this messenger a trick, a rickroll, a troll. Later that night news sites across the Internet reported the same meteorite, the same messenger, with the same message appearing in the center of every town and city across the world.",
+    "Hope began to dawn on humanity that night. But who or what was Himins?"
+  ],
   "welcome": "Welcome to _!GAME_NAME_. Your name is *!PLAYER_NAME*. You should pray for !COMMAND_NAMES.",
   "movementVerbs": [
     "blunder",
