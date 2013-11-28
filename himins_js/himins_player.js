@@ -36,6 +36,14 @@ var init = function (playerObject) {
 };
 module.exports.init = init;
 
+// # addToInventory(playerObject, itemObject)
+// Items are discovered in sections and added to player inventory.
+// Step 1: remove item from the section and the players command list. 
+// Step 2: add the item to the inventory and the players command list.
+var addToInventory = function (playerObject, itemObject, sectionObject) {
+  
+};
+
 //# getInventoryNames(playerObject)
 // Returns a string with the names of the items in the player inventory
 var getInventoryNames = function (playerObject) {

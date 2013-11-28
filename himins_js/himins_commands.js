@@ -96,7 +96,7 @@ module.exports.removeCommandsByKind = removeCommandsByKind;
 
 // # doAction(client, commandObject)
 var doAction = function (client, commandObject) {
-  //console.log('*** himins_commands.js doAction(', client.name, commandObject, ')');
+  //console.log('*** himins_commands.js doAction(', client.name, commandObject.action, ')');
 
   var
     action = commandObject.action;
@@ -119,6 +119,9 @@ var doAction = function (client, commandObject) {
 
     case '!SCREEN_CAST':
       repl.screenCast(client, commandObject.parameters.dataKey, commandObject.parameters.screenKey);
+    break;
+
+    case '!ADD_TO_INVENTORY'
     break;
 
     case '!GO_NORTH':

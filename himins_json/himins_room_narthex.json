@@ -8,7 +8,39 @@
       "name": "northeast",
       "description": "This corner of the *narthex* is so dark you can barely see your fingers before your face. The air is moist yet bitterly cold. There is a pile of rusty old swords at your feet. One _bronze dagger_ seems serviceable. Perhaps you should take it with you?",
       "atmosphere": "dark",
-      "items": [],
+      "items": [
+        {
+          "name": "bronze dagger",
+          "version": "0.0.1",
+          "description": "A battered and notched dagger with a sharp bronze blade.",
+          "kind": "melee",
+          "hitPoints": "10",
+          "commands": [
+            {
+              "name": "stab",
+              "description": "You thrust with the pointy end of the dagger.",
+              "action": "!STAB_ATTACK",
+              "parameters": {
+                "owner": "bronze dagger"
+              },
+              "kind": "attack",
+              "successMessage": "The point of the dagger punctures your enemy.",
+              "failMessage": "The point of the dagger poke the air."
+            },
+            {
+              "name": "trow",
+              "description": "You trow the dagger like a deadly dart.",
+              "action": "!THROW_ATTACK",
+              "parameters": {
+                "owner": "bronze dagger"
+              },
+              "kind": "attack",
+              "successMessage": "The point of the dagger punctures your enemy.",
+              "failMessage": "The dagger flies harmlessly into the darkness. And you just lost it."
+            }
+          ]
+        }
+      ],
       "monsters": [],
       "commands": [
         {
@@ -16,9 +48,15 @@
           "description": "You are possessed by the spirit of sorrow and cry plump soggy tears uncontrolably.",
           "action": "!NO_ACTION",
           "kind": "section"
+        },
+        {
+          "name": "bronze dagger",
+          "description": "You pick up up the bronze dagger.",
+          "action": "!ADD_TO_INVENTORY",
+          "kind": "section"
         }
       ]
-   },
+    },
     {
       "name": "northwest",
       "description": "This corner of the *narthex* is so dark you can barely see your fingers before your face. The air is moist yet bitterly cold. There is a pile of battered shields at your feet. One _wooden buckler_ seems in good condition. Perhaps you should take it with you?",
@@ -95,7 +133,7 @@
     },
     {
       "name": "center",
-      "description": "In the _center_ of the *narthex* the scent of decay is strong.",
+      "description": "In the _center_ of the *narthex* the scent of decay is strong. There is a _terminal_ here.",
       "atmosphere": "dim",
       "items": [],
       "doors": [],
@@ -105,6 +143,12 @@
         {
           "name": "dance",
           "description": "You are possessed by the spirit of dance and twirl and whirl without embarrassment.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        },
+        {
+          "name": "terminal",
+          "description": "How quaint, this terminal has a CRT and machanical keybroad. Touching the spacebar brings it to life.",
           "action": "!NO_ACTION",
           "kind": "section"
         }
