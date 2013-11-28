@@ -59,7 +59,7 @@ var start = function (playerObject) {
     gameObject = {},
     artFileURI = '';
 
-    // add commands that only make sense once the game is started
+  // add commands that only make sense once the game is started
 
   commands.addCommand(playerObject.commands, { 
     name: 'look',
