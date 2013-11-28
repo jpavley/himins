@@ -35,6 +35,7 @@ var renderFormatCodes = function (text) {
   result = result.replace(/_;/g, NORMAL_ESC + ';');
   result = result.replace(/_:/g, NORMAL_ESC + ':');
   result = result.replace(/_-/g, NORMAL_ESC + '-');
+  //result = result.replace(/_\?/g, NORMAL_ESC + '?');
   result = result.replace(/_$/g, NORMAL_ESC); // match _ at EOL
 
   result = result.replace(/^\*/g, ' ' + BOLD_GREEN_ESC); // match * at SOL
@@ -45,6 +46,7 @@ var renderFormatCodes = function (text) {
   result = result.replace(/\*;/g, NORMAL_ESC + ';');
   result = result.replace(/\*:/g, NORMAL_ESC + ':');
   result = result.replace(/\*-/g, NORMAL_ESC + '-');
+  //result = result.replace(/\*\?/g, NORMAL_ESC + '?');
   result = result.replace(/\*$/g, NORMAL_ESC); // match * at EOL
 
   return result;
