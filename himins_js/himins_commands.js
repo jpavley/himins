@@ -121,7 +121,7 @@ var doAction = function (client, commandObject) {
       repl.screenCast(client, commandObject.parameters.dataKey, commandObject.parameters.screenKey);
     break;
 
-    case '!ADD_TO_INVENTORY'
+    case '!ADD_TO_INVENTORY':
     break;
 
     case '!GO_NORTH':
