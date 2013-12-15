@@ -1,5 +1,5 @@
 Level Map
----------
+=========
 
 Three levels
 ------------
@@ -53,12 +53,18 @@ Narthex
 -------
 * Starting room
 * Spawn point in the center
-* Computer in the center that explains parts of the game
 * West section is blocked
 * East sections contains puzzel and door to the Nave
 * Each corner section contains equipment and armor
-  * Northeast: Sword
-  * Nothwest: Helm
-  * Southeast: Mail
-  * Southwest: Shield
-* Each section contains a command
+  * Northeast: Gloves
+  * Nothwest: Shield
+  * Southeast: Helm
+  * Southwest: Cape
+* Each section contains a command that manifests an NPC
+  * Northeast: Command: Cry, NPC: Ariade (gives a sword and a spool of thread)
+  * Northwest: Command: Swoon, NPC: Fenrir (asks the player to cut his chains, if freed Fenrir eats and kills the player)
+  * Southwest: 
+  * Southeast:
+  * West:
+  * East: 
+  * Center: Command: Dance, NPC: Uzume (heals the player to full health)
