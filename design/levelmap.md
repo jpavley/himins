@@ -52,9 +52,22 @@ Rooms
 Narthex
 -------
 * Starting room
-* Spawn point in the center
-* West section is blocked
-* East sections contains puzzel and door to the Nave
+* Spawn point: center
+* Notible features
+	* West section is a blocked door
+	* East sections contains puzzel and door to the Nave
+	* No north or south sections
+* Sections
+	* Center
+	  * Commands
+	* North
+	* South
+	* East
+	* West
+	* Northeast
+	* Northwest
+	* Southeast
+	* Southwest
 * Each corner section contains equipment and armor
   * Northeast: Gloves
   * Nothwest: Shield
