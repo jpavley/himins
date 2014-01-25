@@ -23,6 +23,9 @@ var
   UL_BLUE_ESC = '\u001b[4;34m',
   NORMAL_ESC = '\u001b[0m',
   NL = '\n';
+  
+module.exports.BOLD_RED_ESC = BOLD_RED_ESC;
+module.exports.NORMAL_ESC = NORMAL_ESC;
 
 var renderFormatCodes = function (text) {
   var result = text;

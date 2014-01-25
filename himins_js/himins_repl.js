@@ -1,5 +1,4 @@
-// # himins_repl.js
-// Read, evaluate, and print loop
+// # himins_repl.js // Read, evaluate, and print loop
 
 /*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
 */
@@ -48,9 +47,9 @@ var screenCast = function (client, dataKey, screenKey) {
     }
 
     if(client.player.game.casting) {
-      writeToClient(client, '+-------+---------+---------+---------+---------+---------+---------+---------+');
+      writeToClient(client, format.BOLD_RED_ESC + '%~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~%' + format.NORMAL_ESC);
       writeToClient(client, format.formatText(client, screenList[currentScreen], LEFT_INDENT, PARAGRAPH_WIDTH));
-      writeToClient(client, '+-------+---------+---------+---------+---------+---------+---------+---------+');
+      writeToClient(client, format.BOLD_RED_ESC + '%~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~*~~~~~~~~~%' + format.NORMAL_ESC);
 
       pageInfo = '[' + pageNumber + ' of ' + screenList.length + ']';
 
