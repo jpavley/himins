@@ -1,4 +1,5 @@
 var events = require('events');
+var colors = require('colors');
 
 // player definition
 
@@ -8,7 +9,7 @@ function Player() {
 
 	// properties
 
-	this.name = "Someone"
+	this.name = "Thankgar the Mighty"
 	this.healthPoints = 0;
 	events.EventEmitter.call(this);
 
@@ -33,22 +34,23 @@ function displayHealthPoints() {
 
 function checkDead() {
 	if(this.healthPoints < 0 ) {
-		console.log("Player %s is dead!!!", this.name);
+		console.log("Player %s is dead!!!".red.bold, this.name);
 	}
 }
 
 function checkHealthGoal(player, lowGoal, highGoal) {
 	if (player.healthPoints < lowGoal && player.healthPoints >= 0) {
-		console.log("Player %s is weak!", this.name);
+		console.log("Player %s is weak!".yellow.bold, player.name);
 	}
 	if (player.healthPoints > highGoal) {
-		console.log("Player %s is energized!", this.name);
+		console.log("Player %s is energized!".green.bold, player.name);
 	}
 }
 
 // player 1 implementation
 
 var player1 = new Player();
+
 player1.on("healthPointsChanged", displayHealthPoints);
 player1.on("healthPointsChanged", checkDead);
 player1.on("healthPointsChanged", function() {
