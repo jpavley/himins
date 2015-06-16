@@ -1,3 +1,4 @@
+var colors = require('colors');
 var MongoClient = require('mongodb').MongoClient;
 var mongo = new MongoClient();
 
@@ -6,12 +7,11 @@ mongo.connect("mongodb://localhost/", function(err, db) {
 
 	himinsTestDB.collection("players", function(err, collection) {
 		allKnights(collection);
-		//strongest(collection);
-		//unluckyMagicians(collection);
-		//balancedStats(collection);
+		strongest(collection);
+		unluckyMagicians(collection);
 
 		// kill the connection after 3 seconds
-		setTimeout(function() { himinsTestDB.close(); } 3000);
+		setTimeout(function() { himinsTestDB.close(); }, 3000);
 	});
 });
 
@@ -19,8 +19,36 @@ function displayCursor(cursor, message) {
 	cursor.toArray(function(err, resultList) {
 		var resultStr = "";
 		for (var i in resultList) {
-			resultStr += resultList[i].name + ",";
+			resultStr += resultList[i].name;
+			if (i < resultList.length - 1) {
+				// no comma for the last item of a list
+				resultStr += ", "
+			}
 		}
-		console.log("\n" + message + "\n" + resultStr);
+		console.log(message.cyan.bold + "\n" + resultStr.yellow);
 	});
+}
+
+function allKnights(collection) {
+	var query = {'specialization': 'Knight'};
+	var cursor = collection.find(query);
+	displayCursor(cursor, "All the Knights in the party");
+}
+
+function strongest(collection) {
+	var query = {'$and': [ 
+					{'attackPower': {'$gt': 60}},
+					{'defensePower': {'$gt': 60}}
+	]};
+	var cursor = collection.find(query);
+	displayCursor(cursor, "The strongest members of the party");
+}
+
+function unluckyMagicians(collection) {
+	var query = {'$and': [ 
+					{'specialization': 'Magician'},
+					{'luck': {'$lt': 50}}
+	]};
+	var cursor = collection.find(query);
+	displayCursor(cursor, "The magicians with the least luck");
 }
