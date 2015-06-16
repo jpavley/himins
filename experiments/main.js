@@ -66,4 +66,3 @@ player1.heal(30);
 player1.hurt(40);
 player1.heal(50);
 player1.hurt(200);
-
