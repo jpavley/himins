@@ -1,3 +1,7 @@
+// usage:
+// mongo player_init.js
+// (run it with mongo not node!)
+
 var mongo = new Mongo('localhost');
 
 var maleNames = ["Alfred", "Edward", "Aelfweard", "Aethelstan", "Edmund", "Eadred", "Eadwig", "Edgar", "Sweyn", "Cnut"];

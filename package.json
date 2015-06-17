@@ -10,6 +10,10 @@
   },
   "dependencies": {
   	"linewrap": "0.2.x",
-    "underscore": "1.5.x"
+    "underscore": "1.5.x",
+    "colors": "*",
+    "mongodb": "*",
+    "mongo": "*",
+    "connect-mongo": "*"
   }
 }
