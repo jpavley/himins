@@ -1,4 +1,7 @@
-var colors = require('colors');
+var colors = require('colors'),
+	linewrap = require('linewrap');
+
+
 var MongoClient = require('mongodb').MongoClient;
 var mongo = new MongoClient();
 
@@ -6,6 +9,7 @@ mongo.connect("mongodb://localhost/", function(err, db) {
 	var himinsTestDB = db.db('himinsTest');
 
 	himinsTestDB.collection("players", function(err, collection) {
+		allPartyMembers(collection);
 		allKnights(collection);
 		strongest(collection);
 		unluckyMagicians(collection);
@@ -25,8 +29,16 @@ function displayCursor(cursor, message) {
 				resultStr += ", "
 			}
 		}
-		console.log(message.cyan.bold + "\n" + resultStr.yellow);
+		var wrap = linewrap(4, 60);
+		console.log(message.cyan.bold);
+		console.log(wrap(resultStr).yellow);
 	});
+}
+
+function allPartyMembers(collection) {
+	var query = {};
+	var cursor = collection.find(query);
+	displayCursor(cursor, "All the members of the party");
 }
 
 function allKnights(collection) {
