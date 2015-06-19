@@ -26,7 +26,7 @@ function displayCursor(cursor, message) {
 			resultStr += resultList[i].name;
 			if (i < resultList.length - 1) {
 				// no comma for the last item of a list
-				resultStr += ", "
+				resultStr += ", ";
 			}
 		}
 		var wrap = linewrap(4, 60);

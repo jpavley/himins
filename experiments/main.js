@@ -9,7 +9,7 @@ function Player() {
 
 	// properties
 
-	this.name = "Thankgar the Mighty"
+	this.name = "Thankgar the Mighty";
 	this.healthPoints = 0;
 	events.EventEmitter.call(this);
 
