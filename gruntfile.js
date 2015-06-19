@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
 
-	var banner = '/*n<%= pkg.name %> <%= pkg.version %> - <%= pkg.description %>n<%= pkg.repository.url %>nBuilt on <%= grunt.template.today("yyyy-mm-dd") %>n*/n';
+	var banner = '/*n<%= pkg.name %> <%= pkg.version %>';
+	banner += '- <%= pkg.description %>n<%= pkg.repository.url %>n';
+	banner += 'Built on <%= grunt.template.today("yyyy-mm-dd") %>n*/n';
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -8,7 +10,7 @@ module.exports = function(grunt) {
 		jshint: {
 			files: [
 				'gruntfile.js', 
-				//'himins_js/*.js',
+				'himins_js/*.js',
 				'experiments/*.js'
 			],
 		}
