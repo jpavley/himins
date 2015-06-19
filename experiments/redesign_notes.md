@@ -15,7 +15,7 @@
 * Json templates used to specify and "program" the game, maps, rooms, players, things, and commands
 * The ability to display ASCII art screens
 * A great REPL with completion and command history
-* Automatically generated docs, well commented code, coding style enforsed by JSLint
+* Automatically generated docs, well commented code, coding style enforsed by JSHint
 
 ## Potential go forward strategy
 
@@ -26,7 +26,7 @@
 
 * Color for CLI text appearance (instald of buggy ANSI codes)
 
-* MongoDB for persistance
+* MongoDB (via Mongoose) for persistance
   * The entire game will be come MongoDB based so this a big change but the benefits are huge
   * The Json templates that define and drive the game will easily persist and survive server reboots
   * Each player will have an account with different levels of access on the MongoDB server
@@ -40,6 +40,6 @@
 
 * The game itself will implement and emit ticks (15 fps) to enable realtime interactions like combat
 
-* Grunt or Gulp will be used for build automation (still figuring that out)
+* Grunt will be used for build automation
 
 * JSDoc instead of Docco will be used to generate documentation

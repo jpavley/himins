@@ -3,97 +3,43 @@
 	|  .--.  ||  ||  |'.'|  ||  ||  |' '  |`.  `-. 
 	|  |  |  ||  ||  |   |  ||  ||  | `   |.-'    |
 	`--'  `--'`--'`--'   `--'`--'`--'  `--'`-----' 
-				WATCH WHAT YOUR PRAY FOR
+				Modern Node.js MUD Server
 
-Himins
-======
+# Himins
 
-Text-based interactive fiction MMORPG using Node.js/MongoDB on the backend and terminal emulation as the client.
+* Multi-user dungeon telnet server written in JavaScript using Node.JS, MongoDB, JSON, and some excellent NPM libraries
+* Works with just about any termlinal appplication
+* Provides realtime, multi-user, text-based game play
+* Games (including world, player, npcs, rooms, events, commands, and items) all defined in declaritive JSON
 
-Technical Details
------------------
-* Multi-user Node.js TCP server with MongoDB for data services
-* To start the game enter the following in a terminal window: node himins_app.js
-* To test the game enter the the following in terminal window: telnet 127.0.0.1 9000
-* Himins is divided up into a set of services and JSON data templates
+# Developer's Guide
 
-Architecture
-------------
- ```
-                                   +------+
-  +-----+                          | Chat
-Items   |                          | Commands    List of Clients
-Puzzles |                          | Repl        +-------
-Doors   |                          | Formatter   |
-Monsters|         list of Rooms    +-+----+      | +--------+     +-----------+
-  +--+--+         -------+           |           | |        |     |           |
-     |                   |           |           | | Client <-----+ Player Obj|
-     |    +-----------+  |     +-----v------+    | |        |     |           |
-     |    |           |  |     |            |    | +--------+     +-----------+
-     +----> Room Obj  |  |     |  Himins    |    |
-          |           |  |     |  Server    <----+ +--------+     +-----------+
-          +-----------+  |     |            |    | |        |     |           |
-                         |     +--------^---+    | | Client <-----+ Player Obj|
-          +-----------+  |              |        | |        |     |           |
-          |           |  |              |        | +--------+     +-----------+
-          | Room Obj  |  |     +--------+---+    |
-          |           |  |     |            |    | +--------+     +-----------+
-          +-----------+  +----->  Game Obj  |    | |        |     |           |
-                         |     |            |    | | Client <-----+ Player Obj|
-          +-----------+  |     +------------+    | |        |     |           |
-          |           |  |                       | +--------+     +-----------+
-          | Room Obj  |  |                       |
-          |           |  |                       +--------
-          +-----------+  |
-                         |
-                   ------+
+* Clone or fork the source form GitHub
+* In the himins directory execute "npm install" to get all the modules
+* For command line usage use nmp to globally install mongodb, jshint, mocha, js doc and grunt
+* Follow MongoDB's instructions for setting and running MongoDB with mongod
+* Setup, build, and test himins with the Grunt file
+* Read the developer's part of the Wiki on GitHub
 
-```
+# Dungeon Master's Guide
 
-Backstory
-----------
+* Review the world, player, npcs, rooms, events, commands, and items JSON templates
+* Read the dungeon master's part of the Wiki on GitHub
+* Design, implement, and test your game!
 
-The Earth was dead. It was only a matter of time. Our air poisoned. Our water fouled. Our soil corrupted. All 510 million square kilometers were unclean. Humanity was doomed but we did nothing but squabble, bicker, and blame. 
+# Player's Guide
 
-The messenger landed on a Friday evening in the center of town. It flew in on a meteorite that crashed and burned in front of the old elementary school. The noise and fire brought the people out of their homes. The messenger, battered and bruised, crawled out of the wreckage and looked into the collective eyes of the crowd that had gathered around it's smoldering fireball.
-
-"People of Earth," it announced, "I bring you salutations from your friends the Selenites. We have watched you slowly destroy your home world from our bases on the Moon. We have been your hidden neighbors for hundreds of thousands of years. While you evolved from apes on the Earth's surface, we have evolved from arthropods in the interior of our world. After centuries of observing your behavior you should be able to forgive us for not announcing our presence. We were a little worried in 1969 when your ancestors landed on our surface but, except for the occasional probe, you never returned. While we have remained hidden we have not ignored you. We've learned a great deal from your radio, television, and wireless networks. We've even played games with you, masquerading as human in chatrooms and social networks. We've grown to love you. You are dangerous, mostly to yourselves, but you are clever and beautiful."
-
-The messenger paused, catching it's breath and pieces of it's body began to crack and fall off.
-
-"I don't have much time, so please listen carefully. We have outgrown our world, your Moon, and we bequeath it to you. Your world, the Earth, will not support you needs much longer. We urge you to band together and take possession of ours. You'll have to rediscovered the technology to build rockets and transport large quantities of your people. We have confidence that you will live long enough for that."
-
-More pieces of the messenger's body disintegrated.
-
-"My time is done but you can live on. My hive has abandoned the Moon. It is yours now. You need only to find the door, hack the key, and enter. You won't need to bring supplies as we have provided for you every need. But I must warn you. Our world was built for us and not you. And some of our kind remain behind. But we are sure you will have no problem wrestling the Moon away from these traitors."
-
-The messengers head sloughed off its torso.
-
-"This is my end but your new beginning. Oh, just one more thing. You must be very careful not to..."
-
-At this point the messenger's head dried up and blew away in the breeze of the meteorite's flames.
-
-The townspeople thought this messenger a trick, a rickroll, a troll. Later that night news sites reported the same meteorite, the same messenger, with the same message appearing in the center of every town and city across the world.
-
-Hope began to dawn on humanity that night.
-
-The Game
-========
-
-Himins is a text-based, multiplayer adventure game with a terminal emulation client. Players log in and participate in exploring the world of Himins, constructing bases, competing for territory and riches, and fighting monstrous Selenites and each other.
-
-Himins takes place on the inside of the Moon. It is a labyrinth of tunnels and rooms on a vast scale. Players create characters, collect tools, weapons, armor, and loot and gain experience. The areas of Himins closest to the surface are protected and great for learning the game. The areas deep within Himins are unregulated and require advanced knowlege of the game. The core of the Moon is the most dangerous of all and a player who reaches the core becomes the master of Himins. The core is one giant game of text-based PVP "King of the Hill."
-
-Game play is realtime with turn-based fighting. All interaction with Himins is accomplished through text commands. The commands are not fully documented and need to be discovered.
-
-Playing the Game
-================
-
-A game in Himins is a collection of interconnected rooms. Rooms are divided up into sections. Sections can contain items, puzzles, monsters, and doors.
-
-Commands in Himins are contextual. There is a small set of game-level commands otherwise each room and each section of a room provides its own interface to the  actions available to the player. Actions in Himins are implied by the context in which an object (the target of an action is found). To move from one section to another the player has to enter the name of that section. To add an item to the inventory a player enters the name of that item. To use an item already in inventory a player enters the name of that item. To remove an item from inventory a player would move into a storage section and enter the name of the item. The Himins contextual user interface is intuitive and eliminates typing in combinations of terms to find the right expression that activates a desired action.
-
-
+* You'll need to know how the use a terminal, a telenet client, and how to connect to a game server
+* How a game works is really up to the dungeon master but here is general approach based on the defualt feature set of the himins server:
+  * Read the text the game provides you carefully looking for nouns, tasks, and puzzles
+  * You can't break the game by experimenting so experiment and try different combinations of words and commands
+  * Typical game level commands: look, inventory, wait, again, about, info, help, undo, pray, sleep, wakeup, listen, curse, sing
+  * Movement commands are usually abbreviated as n, ne, nw, s, se, sw, e, w
+  * Additional movement commands include up, down, in, out, jump
+  * If you meet something that might be able to talk, like a person, animal, spirit, or an espcially smart tree try to communicate with it using talk to [name], ask [name] about [object], give [object] to [name], show [object] to [name]
+  * In combat games you can usually attack [name], kill [name], hit [name], cast [spell] on [name]
+  * If you find something try commands like these: examine [object], take [object], drop [object], open [object], put [object] in [object], put [object] on [object], push [object], pull [object], turn [object], feel [object], equip [object], wear [object], remove [object]
+  * Even more actions you can do with things:   eat, drink, fill, smell, listen to, break, burn, look under, unlock [object] with [object], climb, wave, turn on, dig in, enter, search
 
 
 

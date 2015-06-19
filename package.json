@@ -12,8 +12,11 @@
   	"linewrap": "0.2.x",
     "underscore": "1.5.x",
     "colors": "1.1.x",
-    "mongodb": "*",
-    "mongo": "*",
-    "connect-mongo": "*"
+    "mongoose": "4.0.x",
+    "commander": "2.8.x",
+    "jsdoc": "3.3.x",
+    "mocha": "2.2.x",
+    "grunt": "0.4.x",
+    "jshint": "2.8.x"
   }
 }
