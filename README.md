@@ -40,6 +40,7 @@
   * In combat games you can usually attack [name], kill [name], hit [name], cast [spell] on [name]
   * If you find something try commands like these: examine [object], take [object], drop [object], open [object], put [object] in [object], put [object] on [object], push [object], pull [object], turn [object], feel [object], equip [object], wear [object], remove [object]
   * Even more actions you can do with things:   eat, drink, fill, smell, listen to, break, burn, look under, unlock [object] with [object], climb, wave, turn on, dig in, enter, search
+  * Check out http://www.ifwiki.org/index.php/Starters for more ideas on how to play interactive fiction and MUDs well
 
 
 
