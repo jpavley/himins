@@ -1,12 +1,25 @@
 {
   "name": "himins",
   "subdomain": "jpavley-himins",
+  "version": "0.2.0",
+  "author": "John Pavley <john@pavley.com>",
+  "description": "Modern Node.js MUD Server",
+  "contributors": [
+    {
+      "name": "John Pavley",
+      "email": "john@pavley.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpavley/himins"
+  },
+  "license" : "MIT",
   "scripts": {
     "start": "himins_app.js"
   },
-  "version": "0.0.0-1",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x"
   },
   "dependencies": {
   	"linewrap": "0.2.x",
