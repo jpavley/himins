@@ -31,11 +31,13 @@ module.exports = function(grunt) {
 	            	'himins_app.js', 
 	            	'himins_js/*.js',
 	            	'experiments/*.js',
-	            	'test/*.js'
+	            	'test/*.js',
+	            	'README.md'
 	            ],
 	            jsdoc: './node_modules/.bin/jsdoc',
 	            options: {
 	                destination: 'docs',
+	                rescurse: true,
 	                configure: './node_modules/jsdoc/conf.json',
                 	template: './node_modules/ink-docstrap/template'
 	            }
