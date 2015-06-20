@@ -27,7 +27,6 @@
     "colors": "1.1.x",
     "mongoose": "4.0.x",
     "commander": "2.8.x",
-    "jsdoc": "3.3.x",
     "mocha": "2.2.x"
   },
   "devDependencies": {
@@ -35,6 +34,7 @@
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-jshint": "^0.11.2",
+    "grunt-jsdoc": "^0.6.7",
     "grunt-simple-mocha": "^0.4.0",
     "telnet-stream": "0.0.4"
   }

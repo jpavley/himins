@@ -23,14 +23,29 @@ module.exports = function(grunt) {
 			all: { 
 				src: ['test/*.js'] 
 			}
-		}
+		},
+
+		jsdoc: {
+	        dist: {
+	            src: [
+	            	'himins_app.js', 
+	            	'himins_js/*.js', 
+	            	'test/*.js'
+	            ],
+	            jsdoc: './node_modules/.bin/jsdoc',
+	            options: {
+	                destination: 'docs'
+	            }
+	        }
+	    }
 
 	});
 
-	// plub-in tasks
+	// plug-in tasks
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.loadNpmTasks('grunt-jsdoc');
 
 	// grunt alias task
-	grunt.registerTask('default', ['jshint', 'simplemocha']);
+	grunt.registerTask('default', ['jshint', 'simplemocha', 'jsdoc']);
 };
