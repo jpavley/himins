@@ -36,6 +36,7 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-jsdoc": "^0.6.7",
     "grunt-simple-mocha": "^0.4.0",
+    "ink-docstrap": "^0.5.2",
     "telnet-stream": "0.0.4"
   }
 }
