@@ -29,7 +29,8 @@ module.exports = function(grunt) {
 	        dist: {
 	            src: [
 	            	'himins_app.js', 
-	            	'himins_js/*.js', 
+	            	'himins_js/*.js',
+	            	'experiments/*.js',
 	            	'test/*.js'
 	            ],
 	            jsdoc: './node_modules/.bin/jsdoc',

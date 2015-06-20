@@ -1,18 +1,16 @@
-// # himins_app.js
-// Main entry point to Himins application.
-
-/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
+/**
+ * Main entry point for himins server
+ * @module himins_app
 */
 
-// ## includes
 var
-  // ### Node modules
+  
   net = require('net'),
 
-  // ### 3rd party modules
+  
   _ = require('underscore'),
 
-  // ### Himins modules
+  
   game = require('./himins_js/himins_game'),
   room = require('./himins_js/himins_room'),
   player = require('./himins_js/himins_player'),
@@ -22,7 +20,7 @@ var
   strutils = require('./himins_js/himins_string_utils'),
   files = require('./himins_js/himins_file_utils');
 
-// ## module vars
+
 var 
   himinsServer = net.createServer(),
 
@@ -37,9 +35,13 @@ var
   defaultPlayerFile = './himins_json/himins_player.json',
   titleScreen = './himins_txt/himins_screen_title.txt';
 
-// # broadcast(message, client, kind)
-// broadcast messages to every client but this one
-// if a client is discovered to be unresponsive it is removed from the client list
+/**
+ * Broadcasts messages to client
+ * @param {string} message
+ * @param {object} client
+ * @param {string} kind - Type of client (user or system)
+*/
+
 var broadcast = function (message, client, kind) {
   var 
     deadList = [],
@@ -69,8 +71,10 @@ var broadcast = function (message, client, kind) {
 };
 module.exports.broadcast = broadcast;
 
-// # himinsServer('connection', function (client))
-// handle a client connection and other client events (data, end, error)
+/** 
+  * Handles client connection events
+  * @name Connection Handler 
+  */
 himinsServer.on('connection', function (client) {
   var
     uuid = 0,
@@ -133,8 +137,10 @@ console.log('');
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
 
-  // ## client.on('data', function (data))
-  // handle incoming client data
+  /** 
+    * Handles incoming client data
+    * @name Data Handler 
+    */
   client.on('data', function (data) {
     var inputStr = String(data).trim().toLowerCase();
 
@@ -145,9 +151,12 @@ console.log('');
     }
 
   });
+
   
-  // ## client.on('end', function ())
-  // handle client disconnection
+  /** 
+    * Handles client disconnection
+    * @name End Handler 
+    */
   client.on('end', function () {
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
@@ -156,27 +165,39 @@ console.log('');
     // log it
     console.log(client.name + ' disconnected by end');
   });
+
   
-  // ## client.on('error', function (e))
-  // handle client error (OMG!)
+  /** 
+    * Handles client error (OMG!)
+    * @name Error Handler 
+    */
   client.on('error', function (e) {
     console.log(e);
   });
 });
 
-// # clientCount()
+/**
+ * Returns the number of clients connected to the server
+ */
+
 var clientCount = function () {
   return clientList.length;
 };
 module.exports.clientCount = clientCount;
 
-// # getClientList()
+/**
+ * Returns the list of clients connected to the server
+ */
+
 var getClientList = function () {
   return clientList;
 };
 module.exports.getClientList = getClientList;
 
-// # getClientByID(clientID)
+/**
+ * Returns a client connected to the server by ID
+ */
+
 var getClientByID = function(clientID) {
   var result = "";
 
@@ -188,7 +209,10 @@ var getClientByID = function(clientID) {
 };
 module.exports.getClientByID = getClientByID;
 
-// # main entry point of himins_app
+/** 
+  * Main entry point of the himins server app
+  * @name Main 
+  */
 console.log('');
 console.log('**** **** **** himins is starting up **** **** ****');
 console.log('');
