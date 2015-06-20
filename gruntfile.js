@@ -7,7 +7,8 @@ module.exports = function(grunt) {
 			files: [
 				'gruntfile.js', 
 				'himins_js/*.js',
-				'experiments/*.js'
+				'experiments/*.js',
+				'himins_app.js'
 			],
 		},
 
