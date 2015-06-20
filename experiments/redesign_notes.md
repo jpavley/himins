@@ -16,6 +16,7 @@
 * The ability to display ASCII art screens
 * A great REPL with completion and command history
 * Automatically generated docs, well commented code, coding style enforsed by JSHint
+* The ability to log app events
 
 ## Potential go forward strategy
 
@@ -43,3 +44,5 @@
 * Grunt will be used for build automation
 
 * JSDoc instead of Docco will be used to generate documentation
+
+* Bunyan for app event logging
