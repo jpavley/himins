@@ -9,7 +9,7 @@ function Player() {
 
 	// properties
 
-	this.name = "Thankgar the Mighty";
+	this.name = "noname";
 	this.healthPoints = 0;
 	events.EventEmitter.call(this);
 
@@ -53,25 +53,4 @@ function checkHealthGoal(player, lowGoal, highGoal) {
 	}
 }
 
-module.exports.checkHealthGoal = checkHealthGoal;
-
-// player 1 implementation
-
-var player1 = new Player();
-
-player1.on("healthPointsChanged", displayHealthPoints);
-player1.on("healthPointsChanged", checkDead);
-player1.on("healthPointsChanged", function() {
-	checkHealthGoal(this, 10, 110);
-});
-
-// player test game
-
-player1.heal(5);
-player1.heal(20);
-player1.heal(50);
-player1.heal(30);
-player1.hurt(40);
-player1.heal(50);
-player1.hurt(200);
 module.exports.checkHealthGoal = checkHealthGoal;

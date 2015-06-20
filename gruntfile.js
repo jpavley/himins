@@ -11,11 +11,23 @@ module.exports = function(grunt) {
 			],
 		},
 
+		simplemocha: {
+			options: {
+				globals: [],
+				timeout: 3000,
+				ignoreLeaks: false,
+				ui: 'bdd',
+				reporter: 'Nyan'
+			},
+			all: { src: ['test/*.js'] }
+		}
+
 	});
 
 	// plub-in tasks
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-simple-mocha');
 
 	// grunt alias task
-	grunt.registerTask('default', ['jshint']);
+	grunt.registerTask('default', ['jshint', 'simplemocha']);
 };
