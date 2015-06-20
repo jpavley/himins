@@ -46,3 +46,5 @@
 * JSDoc instead of Docco will be used to generate documentation
 
 * Bunyan for app event logging
+
+* Telenet-Stream for managing telnet connections
