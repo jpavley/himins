@@ -1,55 +1,73 @@
 /**
- * Experiment with event based player object
- * @module experiments/main
+ * @fileOverview Experiment with event based player object
+ * @module
+ * @requires events
+ * @requires colors
+ * @requires bunyan
  */
 
 var events = require('events');
 var colors = require('colors');
-
-/**
- * A player is an character controlled by a client (i.e. a human)
- * @class Player
- */
+var bunyan = require('bunyan');
 
 Player.prototype = events.EventEmitter.prototype;
 
+/**
+ * @class
+ * @classdesc A player is an character controlled by a client (i.e. a human)
+ * @constructor
+ */
 function Player() {
 
-	// properties
-
+	/**
+	  * The user visible name of the player object, should be unique
+	  * @type String
+	  * @default "noname"
+	  */
 	this.name = "noname";
+
+	/**
+	  * The amount of health a player has
+	  * @type Number
+	  * @default 0
+	  */
 	this.healthPoints = 0;
+
+	/**
+	  * Message emitted if health points have changed
+	  * @type String
+	  * @default "healthPointsChanged"
+	  * @readonly
+	  */
+	this.healthPointsChanged = "healthPointsChanged";
+
 	events.EventEmitter.call(this);
 
 	/**
 	 * Restores player health
-	 * @name heal
-	 * @function
+	 * @param {number} points
 	 */
-
 	this.heal = function(points) {
 		this.healthPoints += points;
-		this.emit('healthPointsChanged');
+		this.emit(this.healthPointsChanged);
 	};
 
 	/**
 	 * Reduces player health
-	 * @name hurt
-	 * @function
+	 * @param {number} points
 	 */
-
 	this.hurt = function(points) {
 		this.healthPoints -= points;
-		this.emit('healthPointsChanged');		
+		this.emit(this.healthPointsChanged);		
 	};
 }
 
 module.exports.Player = Player;
 
-// player handlers
-
 /**
  * Outputs a message about players healthpoints
+ * @example 
+ * player1.on(player1.healthPointsChanged, main.displayHealthPoints);
  */
 function displayHealthPoints() {
 	console.log("Player %s HP: %d", this.name, this.healthPoints);
@@ -58,7 +76,9 @@ function displayHealthPoints() {
 module.exports.displayHealthPoints = displayHealthPoints;
 
 /**
- * Outputs a message if the player is dead
+ * Outputs a message if the player is dead.
+ * @example 
+ * player1.on(player1.healthPointsChanged, main.checkDead);
  */
 function checkDead() {
 	if(this.healthPoints < 0 ) {
@@ -70,9 +90,9 @@ module.exports.checkDead = checkDead;
 
 /**
  * Outputs a message if the player hits a health related goal
- * @param player
- * @param lowGoal
- * @param highGoal
+ * @param player {object} The player object to attach this goal to
+ * @param lowGoal {integer} lower limit that triggers a message
+ * @param highGoal {integer} upper limit that triggers a message
  */
 function checkHealthGoal(player, lowGoal, highGoal) {
 	if (player.healthPoints < lowGoal && player.healthPoints >= 0) {

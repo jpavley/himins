@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>himins Module: himins_app</title>
+	<title>himins Module: experiments/main.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -51,10 +51,10 @@
 	<div class="col-md-8">
 	
 		<div id="main">
-    		<h1 class="page-title">Module: himins_app</h1>
+    		<h1 class="page-title">Module: experiments/main.js</h1>
 			
 
-	<h1 class="page-title">Module: himins_app</h1>
+	<h1 class="page-title">Module: experiments/main.js</h1>
 <section>
 
 <header>
@@ -66,7 +66,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Main entry point for himins server</p></div>
+            <div class="description"><p>Experiment with event based player object</p></div>
         
 
         
@@ -116,312 +116,30 @@
     
 
     
+        <h3 class="subsection-title">Requires</h3>
 
+        <ul>
+            <li>module:events</li>
+        
+            <li>module:colors</li>
+        
+            <li>module:bunyan</li>
+        </ul>
     
 
     
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
+        <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            
-<dt class="name" id="~ConnectionHandler">
-    <h4><span class="type-signature">&lt;inner> </span>Connection Handler<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Handles client connection events</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<dt class="name" id="~DataHandler">
-    <h4><span class="type-signature">&lt;inner> </span>Data Handler<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Handles incoming client data</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<dt class="name" id="~EndHandler">
-    <h4><span class="type-signature">&lt;inner> </span>End Handler<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Handles client disconnection</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<dt class="name" id="~ErrorHandler">
-    <h4><span class="type-signature">&lt;inner> </span>Error Handler<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Handles client error (OMG!)</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<dt class="name" id="~Main">
-    <h4><span class="type-signature">&lt;inner> </span>Main<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Main entry point of the himins server app</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
+            <dt><a href="experiments_main.module_js-Player.html">Player</a></dt>
+            <dd></dd>
         </dl>
+    
+
+    
+
+    
+
     
 
     
@@ -430,7 +148,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="~broadcast"><span class="type-signature">&lt;inner> </span>broadcast<span class="signature">(message, client, kind)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~checkDead"><span class="type-signature">&lt;inner> </span>checkDead<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -438,7 +156,90 @@
     
     
     <div class="description">
-        <p>Broadcasts messages to client</p>
+        <p>Outputs a message if the player is dead.</p>
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">player1.on(player1.healthPointsChanged, main.checkDead);</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="~checkHealthGoal"><span class="type-signature">&lt;inner> </span>checkHealthGoal<span class="signature">(player, lowGoal, highGoal)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Outputs a message if the player hits a health related goal</p>
     </div>
     
 
@@ -473,30 +274,7 @@
 
         <tr>
             
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>client</code></td>
+                <td class="name"><code>player</code></td>
             
 
             <td class="type">
@@ -512,20 +290,20 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The player object to attach this goal to</p></td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name"><code>kind</code></td>
+                <td class="name"><code>lowGoal</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">integer</span>
 
 
             
@@ -535,7 +313,30 @@
 
             
 
-            <td class="description last"><p>Type of client (user or system)</p></td>
+            <td class="description last"><p>lower limit that triggers a message</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>highGoal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>upper limit that triggers a message</p></td>
         </tr>
 
 	
@@ -602,7 +403,7 @@
         
             
 <dt>
-    <h4 class="name" id="~clientCount"><span class="type-signature">&lt;inner> </span>clientCount<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~displayHealthPoints"><span class="type-signature">&lt;inner> </span>displayHealthPoints<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -610,7 +411,7 @@
     
     
     <div class="description">
-        <p>Returns the number of clients connected to the server</p>
+        <p>Outputs a message about players healthpoints</p>
     </div>
     
 
@@ -674,159 +475,11 @@
     
     
     
-</dd>
-
+        <h5>Example</h5>
         
-            
-<dt>
-    <h4 class="name" id="~getClientByID"><span class="type-signature">&lt;inner> </span>getClientByID<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Returns a client connected to the server by ID</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
+    <pre class="sunlight-highlight-javascript">player1.on(player1.healthPointsChanged, main.displayHealthPoints);</pre>
 
 
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="~getClientList"><span class="type-signature">&lt;inner> </span>getClientList<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Returns the list of clients connected to the server</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
     
 </dd>
 

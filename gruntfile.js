@@ -36,8 +36,9 @@ module.exports = function(grunt) {
 	            ],
 	            jsdoc: './node_modules/.bin/jsdoc',
 	            options: {
+	            	verbose: true,
 	                destination: 'docs',
-	                rescurse: true,
+	                'private': false,
 	                configure: './node_modules/jsdoc/conf.json',
                 	template: './node_modules/ink-docstrap/template'
 	            }

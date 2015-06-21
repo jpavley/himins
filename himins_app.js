@@ -1,6 +1,6 @@
 /**
  * Main entry point for himins server
- * @module himins_app
+ * @module
 */
 
 var

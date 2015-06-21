@@ -47,4 +47,4 @@
 
 * Bunyan for app event logging
 
-* Telenet-Stream for managing telnet connections
+* Telenet-Stream for managing telnet connections 
