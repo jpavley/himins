@@ -10,6 +10,14 @@ var events = require('events');
 var colors = require('colors');
 var bunyan = require('bunyan');
 
+var log = bunyan.createLogger({
+		name: 'himins_experiment', 
+		streams: [{
+			path: 'himins_experiment.log', 
+			level: 'info'
+		}],
+	});
+
 Player.prototype = events.EventEmitter.prototype;
 
 /**
@@ -41,6 +49,8 @@ function Player() {
 	  */
 	this.healthPointsChanged = "healthPointsChanged";
 
+	log.info('Instance of player ' + this.name + ' object created');
+
 	events.EventEmitter.call(this);
 
 	/**
@@ -70,7 +80,8 @@ module.exports.Player = Player;
  * player1.on(player1.healthPointsChanged, main.displayHealthPoints);
  */
 function displayHealthPoints() {
-	console.log("Player %s HP: %d", this.name, this.healthPoints);
+	//console.log("Player %s HP: %d", this.name, this.healthPoints);
+	log.info("Player %s HP: %d", this.name, this.healthPoints);
 }
 
 module.exports.displayHealthPoints = displayHealthPoints;
@@ -82,7 +93,8 @@ module.exports.displayHealthPoints = displayHealthPoints;
  */
 function checkDead() {
 	if(this.healthPoints < 0 ) {
-		console.log("Player %s is dead!!!".red.bold, this.name);
+		//console.log("Player %s is dead!!!".red.bold, this.name);
+		log.info("Player %s is dead!!!", this.name);
 	}
 }
 
@@ -96,10 +108,12 @@ module.exports.checkDead = checkDead;
  */
 function checkHealthGoal(player, lowGoal, highGoal) {
 	if (player.healthPoints < lowGoal && player.healthPoints >= 0) {
-		console.log("Player %s is weak!".yellow.bold, player.name);
+		//console.log("Player %s is weak!".yellow.bold, player.name);
+		log.info("Player %s is weak!", player.name);
 	}
 	if (player.healthPoints > highGoal) {
-		console.log("Player %s is energized!".green.bold, player.name);
+		//console.log("Player %s is energized!".green.bold, player.name);
+		log.info("Player %s is energized!", player.name);
 	}
 }
 
