@@ -3,6 +3,14 @@
 /*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
 */
 
+/**
+ * @fileOverview Read, evaluate, and print loop
+ * @module
+ * @requires underscore
+ * @requires ./himins_js/himins_commands
+ * @requires ./himins_js/himins_format
+ */
+
 // ## module includes
 var
   // ### 3rd party modules

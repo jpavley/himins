@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>himins Class: Player</title>
+	<title>himins Module: himins_app.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -51,22 +51,13 @@
 	<div class="col-md-8">
 	
 		<div id="main">
-    		<h1 class="page-title">Class: Player</h1>
+    		<h1 class="page-title">Module: himins_app.js</h1>
 			
 
-	<h1 class="page-title">Class: Player</h1>
+	<h1 class="page-title">Module: himins_app.js</h1>
 <section>
 
 <header>
-    
-        <h2>
-            <span class="ancestors"><a href="experiments_main.module_js.html">experiments/main.js</a>~</span>
-        
-        Player
-        </h2>
-        
-            <div class="class-description"><p>A player is an character controlled by a client (i.e. a human)</p></div>
-        
     
 </header>
 
@@ -75,23 +66,10 @@
     <div class="container-overview">
     
         
-<dt>
-    <h4 class="name" id="Player"><span class="type-signature"></span>new Player<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
+            <div class="description"><p>Main entry point for himins app</p></div>
+        
 
-    
-
-    
-    
-    
-    
-    
-    
+        
 <dl class="details">
 	
 
@@ -130,27 +108,37 @@
 	
 </dl>
 
-    
-    
 
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
+        
     
     </div>
 
     
 
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:net</li>
+        
+            <li>module:underscore</li>
+        
+            <li>module:./himins_js/himins_game</li>
+        
+            <li>module:./himins_js/himins_room</li>
+        
+            <li>module:./himins_js/himins_player</li>
+        
+            <li>module:./himins_js/himins_commands</li>
+        
+            <li>module:./himins_js/himins_repl</li>
+        
+            <li>module:./himins_js/himins_format</li>
+        
+            <li>module:./himins_js/himins_string_utils</li>
+        
+            <li>module:./himins_js/himins_file_utils</li>
+        </ul>
     
 
     
@@ -164,28 +152,18 @@
 
         <dl>
             
-<dt class="name" id="healthPoints">
-    <h4><span class="type-signature"></span>healthPoints<span class="type-signature"> :Number</span></h4>
+<dt class="name" id="~ConnectionHandler">
+    <h4><span class="type-signature">&lt;inner> </span>Connection Handler<span class="type-signature"></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The amount of health a player has</p>
+        <p>Handles client connection events</p>
     </div>
     
 
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Number</span>
-
-
-            </li>
-        </ul>
     
 
     
@@ -214,13 +192,6 @@
 
 	
 
-	
-	<dt class="tag-default">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>0</li>
-		</ul>
-	</dd>
 	
 
 
@@ -240,28 +211,18 @@
 
         
             
-<dt class="name" id="healthPointsChanged">
-    <h4><span class="type-signature">&lt;readonly> </span>healthPointsChanged<span class="type-signature"> :String</span></h4>
+<dt class="name" id="~DataHandler">
+    <h4><span class="type-signature">&lt;inner> </span>Data Handler<span class="type-signature"></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Message emitted if health points have changed</p>
+        <p>Handles incoming client data</p>
     </div>
     
 
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">String</span>
-
-
-            </li>
-        </ul>
     
 
     
@@ -290,13 +251,6 @@
 
 	
 
-	
-	<dt class="tag-default">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>"healthPointsChanged"</li>
-		</ul>
-	</dd>
 	
 
 
@@ -316,28 +270,18 @@
 
         
             
-<dt class="name" id="name">
-    <h4><span class="type-signature"></span>name<span class="type-signature"> :String</span></h4>
+<dt class="name" id="~EndHandler">
+    <h4><span class="type-signature">&lt;inner> </span>End Handler<span class="type-signature"></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The user visible name of the player object, should be unique</p>
+        <p>Handles client disconnection</p>
     </div>
     
 
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">String</span>
-
-
-            </li>
-        </ul>
     
 
     
@@ -367,12 +311,123 @@
 	
 
 	
-	<dt class="tag-default">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>"noname"</li>
-		</ul>
-	</dd>
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<dt class="name" id="~ErrorHandler">
+    <h4><span class="type-signature">&lt;inner> </span>Error Handler<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Handles client error (OMG!)</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<dt class="name" id="~Main">
+    <h4><span class="type-signature">&lt;inner> </span>Main<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Main entry point of the himins server app</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
@@ -399,7 +454,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="heal"><span class="type-signature"></span>heal<span class="signature">(points)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~broadcast"><span class="type-signature">&lt;inner> </span>broadcast<span class="signature">(message, client, kind)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -407,7 +462,7 @@
     
     
     <div class="description">
-        <p>Restores player health</p>
+        <p>Broadcasts messages to client</p>
     </div>
     
 
@@ -442,13 +497,13 @@
 
         <tr>
             
-                <td class="name"><code>points</code></td>
+                <td class="name"><code>message</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -459,6 +514,52 @@
             
 
             <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>kind</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Type of client (user or system)</p></td>
         </tr>
 
 	
@@ -525,7 +626,7 @@
         
             
 <dt>
-    <h4 class="name" id="hurt"><span class="type-signature"></span>hurt<span class="signature">(points)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~clientCount"><span class="type-signature">&lt;inner> </span>clientCount<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -533,7 +634,7 @@
     
     
     <div class="description">
-        <p>Reduces player health</p>
+        <p>Returns the number of clients connected to the server</p>
     </div>
     
 
@@ -543,54 +644,159 @@
     
     
     
-        <h5>Parameters:</h5>
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
         
+            
+<dt>
+    <h4 class="name" id="~getClientByID"><span class="type-signature">&lt;inner> </span>getClientByID<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Returns a client connected to the server by ID</p>
+    </div>
+    
 
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
+    
 
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
+    
+    
+    
+    
+    
+    
+<dl class="details">
 	
 
-        <tr>
-            
-                <td class="name"><code>points</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
+	
 
 	
-	</tbody>
-</table>
 
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="~getClientList"><span class="type-signature">&lt;inner> </span>getClientList<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Returns the list of clients connected to the server</p>
+    </div>
+    
+
+    
+
+    
+    
+    
     
     
     

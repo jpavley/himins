@@ -1,8 +1,14 @@
-// # himins_player.js
-// Manages a player object from a himins player JSON file.
-
-/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
-*/
+/**
+ * @fileOverview Manages a player object from a himins player JSON file
+ * @module
+ * @requires underscore
+ * @requires ./himins_js/himins_game
+ * @requires ./himins_js/himins_room
+ * @requires ./himins_js/himins_commands
+ * @requires ./himins_js/himins_repl
+ * @requires ./himins_js/himins_format
+ * @requires ./himins_js/himins_file_utils
+ */
 
 // ## includes
 var

@@ -1,8 +1,11 @@
-// # himins_room.js
-// Manages a room object from a himins room JSON file.
-
-/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
-*/
+/**
+ * @fileOverview Manages a room object from a himins room JSON file
+ * @module
+ * @requires underscore
+ * @requires ./himins_js/himins_game
+ * @requires ./himins_js/himins_player
+ * @requires ./himins_js/himins_commands
+ */
 
 // ## includes
 var

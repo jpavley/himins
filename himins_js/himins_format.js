@@ -1,8 +1,14 @@
-// # himins_format.js
-// formats text and resolves functions for display.
+/**
+ * @fileOverview formats text and resolves functions for display
+ * @module
+ * @requires linewrap
+ * @requires underscore
+ * @requires ./himins_js/himins_game
+ * @requires ./himins_js/himins_room
+ * @requires ./himins_js/himins_player
+ * @requires ./himins_js/himins_commands
+ */
 
-/*jslint browser: false, continue: true, devel: true, indent: 2, maxerr: 50, newcap : true, nomen: true, plusplus: true, regexp: true, sloppy: true, vars: false, white: true
-*/
 
 // ## includes
 var

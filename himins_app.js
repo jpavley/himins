@@ -1,16 +1,21 @@
 /**
- * Main entry point for himins server
+ * @fileOverview Main entry point for himins app
  * @module
-*/
+ * @requires net
+ * @requires underscore
+ * @requires ./himins_js/himins_game
+ * @requires ./himins_js/himins_room
+ * @requires ./himins_js/himins_player
+ * @requires ./himins_js/himins_commands
+ * @requires ./himins_js/himins_repl
+ * @requires ./himins_js/himins_format
+ * @requires ./himins_js/himins_string_utils
+ * @requires ./himins_js/himins_file_utils
+ */
 
 var
-  
   net = require('net'),
-
-  
   _ = require('underscore'),
-
-  
   game = require('./himins_js/himins_game'),
   room = require('./himins_js/himins_room'),
   player = require('./himins_js/himins_player'),
@@ -19,7 +24,6 @@ var
   format = require('./himins_js/himins_format'),
   strutils = require('./himins_js/himins_string_utils'),
   files = require('./himins_js/himins_file_utils');
-
 
 var 
   himinsServer = net.createServer(),

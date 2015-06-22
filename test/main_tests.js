@@ -1,4 +1,9 @@
-// Tests for experiments/main.js
+/**
+ * @fileOverview Tests for experiments/main.js
+ * @module
+ * @requires assert
+ * @requires ../experiments/main
+ */
 
 var assert = require('assert');
 var main = require('../experiments/main');
