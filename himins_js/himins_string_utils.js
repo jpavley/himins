@@ -1,5 +1,5 @@
 /**
- * @fileOverview Adds functionality to Javascript's String 
+ * @fileOverview Adds functionality to Javascript's String
  * @module
  */
 
@@ -8,8 +8,8 @@
 var addedFlag = false;
 
 // # addStringRepeat()
-var addStringRepeat = function () {
-  String.prototype.repeat = function (count) {
+var addStringRepeat = function() {
+  String.prototype.repeat = function(count) {
     var result = [];
     result = result.join(this);
     return result;
@@ -19,8 +19,8 @@ var addStringRepeat = function () {
 
 // # addStringUnformattedLength()
 // Calcs the length of a string without markdown
-var addStringUnformattedLength = function () {
-  String.prototype.unformattedLength = function () {
+var addStringUnformattedLength = function() {
+  String.prototype.unformattedLength = function() {
     var result = this;
      // remove underscores, astericks, and seperators!
     result = this.split('_').join('');
@@ -31,8 +31,8 @@ var addStringUnformattedLength = function () {
 
 // # isPrintable()
 // Returns true if the chars of the string are within the printable ASCII character range
-var addIsPrintable = function () {
-  String.prototype.isPrintable = function () {
+var addIsPrintable = function() {
+  String.prototype.isPrintable = function() {
     // test each char to see if it is between space (x20) and ~ (x7E)
     var result = /^[\x20-\x7E]*$/.test(this);
     return result;
@@ -40,7 +40,7 @@ var addIsPrintable = function () {
 };
 
 // # init()
-var init = function () {
+var init = function() {
   if (!addedFlag) {
     addStringRepeat();
     addStringUnformattedLength();

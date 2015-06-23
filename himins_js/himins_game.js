@@ -33,13 +33,13 @@ var
   roomList = [];
 
 //# init(gameObject)
-var init = function (gameObject) {
+var init = function(gameObject) {
   console.log('*** himins_game.js init(', gameObject.name, ')');
 
   // load the rooms
 
-  _.each(gameObject.roomFiles, function (e, i, l) {
-    files.loadJSON('himins_json/' + e, function (resultObject) {
+  _.each(gameObject.roomFiles, function(e, i, l) {
+    files.loadJSON('himins_json/' + e, function(resultObject) {
       room.init(resultObject);
       gameObject.rooms.push(resultObject);
     });
@@ -48,9 +48,9 @@ var init = function (gameObject) {
 };
 module.exports.init = init;
 
-var getRoomByName = function (gameObject, roomName) {
+var getRoomByName = function(gameObject, roomName) {
 
-  var result = _.find(gameObject.rooms, function (room) {
+  var result = _.find(gameObject.rooms, function(room) {
     return room.name.toLowerCase() === roomName.toLowerCase();
   });
 
@@ -59,7 +59,7 @@ var getRoomByName = function (gameObject, roomName) {
 module.exports.getRoomByName = getRoomByName;
 
 // # start(playerObject)
-var start = function (playerObject) {
+var start = function(playerObject) {
   var
     roomObject = {},
     sectionObject = {},
@@ -68,14 +68,14 @@ var start = function (playerObject) {
 
   // add commands that only make sense once the game is started
 
-  commands.addCommand(playerObject.commands, { 
+  commands.addCommand(playerObject.commands, {
     name: 'look',
-    description: "!SECTION_DESCRIPTION",
+    description: '!SECTION_DESCRIPTION',
     action: '!NO_ACTION',
     kind: 'game' }
   );
 
-  commands.addCommand(playerObject.commands, { 
+  commands.addCommand(playerObject.commands, {
     name: 'where',
     description: '_himins_ reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*',
     action: '!NO_ACTION',
@@ -92,7 +92,7 @@ var start = function (playerObject) {
 
   artFileURI = './himins_txt/' + roomObject.artFileName;
 
-  files.loadTEXT(artFileURI, function (resultObject) {
+  files.loadTEXT(artFileURI, function(resultObject) {
     playerObject.client.write(resultObject + '\n');
 
     // do the spawn stuff based on player's location

@@ -29,11 +29,11 @@ var
   UL_BLUE_ESC = '\u001b[4;34m',
   NORMAL_ESC = '\u001b[0m',
   NL = '\n';
-  
+
 module.exports.BOLD_RED_ESC = BOLD_RED_ESC;
 module.exports.NORMAL_ESC = NORMAL_ESC;
 
-var renderFormatCodes = function (text) {
+var renderFormatCodes = function(text) {
   var result = text;
 
   result = result.replace(/^_/g, ' ' + BOLD_RED_ESC); // match _ at SOL
@@ -61,7 +61,7 @@ var renderFormatCodes = function (text) {
   return result;
 };
 
-var resolveFunctions = function (client, text) {
+var resolveFunctions = function(client, text) {
   //console.log('*** himins_format.js resolveFunctions(%s)', text);
   var
     result = text,
@@ -83,7 +83,7 @@ var resolveFunctions = function (client, text) {
 
   if (roomObject) {
     sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-    result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);   
+    result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);
   }
 
   if (sectionObject) {
@@ -93,12 +93,12 @@ var resolveFunctions = function (client, text) {
 };
 
 // # formatText(client, text, indent, columnWidth)
-// Transforms text (with basic markdown syntax into ASCII TTY) 
+// Transforms text (with basic markdown syntax into ASCII TTY)
 // and wraps it to fit column specified by columnWidth.
 // Words that start with an exclamation point (!WORD) are treated as function identifiers
-var formatText = function (client, text, indent, columnWidth) {
+var formatText = function(client, text, indent, columnWidth) {
   //console.log('*** himins_format.js formatText(%s, %s, %d, %d)', client.name, text, indent, columnWidth);
-  
+
   var
     result = text,
     wrap = linewrap(indent, columnWidth, {skipScheme: 'ansi-color'});

@@ -24,19 +24,19 @@ var
 // ## module vars
 
 // # init(commandList)
-var init = function (commandList) {
-  console.log('*** himins_command.js init(', commandList.length,')');
+var init = function(commandList) {
+  console.log('*** himins_command.js init(', commandList.length, ')');
 };
 module.exports.init = init;
 
 // # getCommandNames(commands)
 // Returns a string of the names of each command.
-var getCommandNames = function (commands) {
+var getCommandNames = function(commands) {
   var
     resultString = '',
     resultList = [];
 
-  _.each(commands, function (e, i, l) {
+  _.each(commands, function(e, i, l) {
     resultList.push('_' + e.name + '_');
   });
 
@@ -47,14 +47,14 @@ module.exports.getCommandNames = getCommandNames;
 
 // # getCommandNamesByKind(commands, kind)
 // Returns a string of the names of each command.
-var getCommandNamesByKind = function (commands, kind) {
+var getCommandNamesByKind = function(commands, kind) {
   var
     resultString = '',
     resultList = [];
 
-  _.each(commands, function (e, i, l) {
+  _.each(commands, function(e, i, l) {
     if (e.kind === kind) {
-      resultList.push('_' + e.name + '_');      
+      resultList.push('_' + e.name + '_');
     }
   });
 
@@ -65,21 +65,21 @@ module.exports.getCommandNamesByKind = getCommandNamesByKind;
 
 // # addCommand(commands, commandObject)
 // Commmand object = { name, description, action, kind }
-var addCommand = function (commands, commandObject) {
+var addCommand = function(commands, commandObject) {
   //console.log('*** himins_commands.js addCommand(', commands, commandObject, ')');
   commands.push(commandObject);
 };
 module.exports.addCommand = addCommand;
 
-var combineCommands = function (myCommands, yourCommands) {
+var combineCommands = function(myCommands, yourCommands) {
   var ourCommands = _.union(myCommands, yourCommands);
   return ourCommands;
 };
 module.exports.combineCommands = combineCommands;
 
 // # getCommandByName(commands, commandName)
-var getCommandByName = function (commands, commandName) {
-  var result = _.find(commands, function (command) {
+var getCommandByName = function(commands, commandName) {
+  var result = _.find(commands, function(command) {
     return command.name.toLowerCase() === commandName.toLowerCase();
   });
 
@@ -88,9 +88,9 @@ var getCommandByName = function (commands, commandName) {
 module.exports.getCommandByName = getCommandByName;
 
 // # removeCommandsByKind(commands, commandKind)
-var removeCommandsByKind = function (commands, commandKind) {
+var removeCommandsByKind = function(commands, commandKind) {
   //console.log('*** himins_commands.js removeCommandsByKind(', commands, commandKind, ')');
-  var updatedCommands = _.reject(commands, function (commandObject) {
+  var updatedCommands = _.reject(commands, function(commandObject) {
     return commandObject.kind.toLowerCase() === commandKind.toLowerCase();
   });
 
@@ -99,7 +99,7 @@ var removeCommandsByKind = function (commands, commandKind) {
 module.exports.removeCommandsByKind = removeCommandsByKind;
 
 // # doAction(client, commandObject)
-var doAction = function (client, commandObject) {
+var doAction = function(client, commandObject) {
   //console.log('*** himins_commands.js doAction(', client.name, commandObject.action, ')');
 
   var
@@ -109,7 +109,7 @@ var doAction = function (client, commandObject) {
     return;
   }
   switch (action) {
-    case  '!NO_ACTION':
+    case '!NO_ACTION':
       // nothing to do!
     break;
 

@@ -27,16 +27,16 @@ var
 // ## module vars
 
 //# init(playerObject)
-var init = function (playerObject) {
+var init = function(playerObject) {
   console.log('*** himins_player.js init(', playerObject.name, ')');
 
   // if the player has any starter items in her inventory add their names as commands
-   _.each(playerObject.inventory, function (e, i, l) {
-    commands.addCommand(playerObject.commands, { 
+   _.each(playerObject.inventory, function(e, i, l) {
+    commands.addCommand(playerObject.commands, {
       name: e.name,
       description: e.description,
       action: e.action,
-      kind: e.kind 
+      kind: e.kind
     });
   });
 };
@@ -44,20 +44,20 @@ module.exports.init = init;
 
 // # addToInventory(playerObject, itemObject)
 // Items are discovered in sections and added to player inventory.
-// Step 1: remove item from the section and the players command list. 
+// Step 1: remove item from the section and the players command list.
 // Step 2: add the item to the inventory and the players command list.
-var addToInventory = function (playerObject, itemObject, sectionObject) {
-  
+var addToInventory = function(playerObject, itemObject, sectionObject) {
+
 };
 
 //# getInventoryNames(playerObject)
 // Returns a string with the names of the items in the player inventory
-var getInventoryNames = function (playerObject) {
+var getInventoryNames = function(playerObject) {
   var
     resultString = '',
     resultList = [];
 
-  _.each(playerObject.inventory, function (e, i, l) {
+  _.each(playerObject.inventory, function(e, i, l) {
     resultList.push('_' + e.name + '_');
   });
 
@@ -68,7 +68,7 @@ module.exports.getInventoryNames = getInventoryNames;
 
 // # enterRoom(playerObject, roomObject)
 // Call when a player first spawns or enters a room
-var enterRoom = function (playerObject, roomObject) {
+var enterRoom = function(playerObject, roomObject) {
 
   // add commands for this room
   playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
@@ -79,7 +79,7 @@ module.exports.enterRoom = enterRoom;
 
 // # exitRoom(playerObject, roomObject)
 // Call when a player finally despawns or leaves a room
-var exitRoom = function (playerObject, roomObject) {
+var exitRoom = function(playerObject, roomObject) {
   // remove commands for this room
   playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'room');
 };
@@ -88,7 +88,7 @@ module.exports.exitRoom = exitRoom;
 
 // # enterSection(playerObject, sectionObject)
 // Call when a player first spawns or enters a section
-var enterSection = function (playerObject, sectionObject) {
+var enterSection = function(playerObject, sectionObject) {
   var
     gameObject = playerObject.game,
     roomObject = game.getRoomByName(gameObject, playerObject.roomName);
@@ -101,14 +101,14 @@ module.exports.enterSection = enterSection;
 
 // # exitSection(playerObject, sectionObject)
 // Call when a player finally despawns or leaves a room
-var exitSection = function (playerObject, sectionObject) {
+var exitSection = function(playerObject, sectionObject) {
   // remove commands for this section
   playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'section');
 };
 module.exports.exitSection = exitSection;
 
 // # moveToSection(playerObject, action)
-var moveToSection = function (playerObject, action) {
+var moveToSection = function(playerObject, action) {
   var gameObject = playerObject.game,
       roomObject = game.getRoomByName(gameObject, playerObject.roomName),
       sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
@@ -123,7 +123,7 @@ var moveToSection = function (playerObject, action) {
 module.exports.moveToSection = moveToSection;
 
 // # moveToRoom(playerObject, commandObject)
-var moveToRoom = function (playerObject, commandObject) {
+var moveToRoom = function(playerObject, commandObject) {
     var gameObject = playerObject.game,
       roomObject = game.getRoomByName(gameObject, playerObject.roomName),
       sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
@@ -140,7 +140,7 @@ var moveToRoom = function (playerObject, commandObject) {
   playerObject.roomName = targetRoomName;
   playerObject.sectionName = targetSectionName;
 
-  files.loadTEXT(artFileURI, function (resultObject) {
+  files.loadTEXT(artFileURI, function(resultObject) {
     playerObject.client.write(resultObject + '\n');
 
     enterRoom(playerObject, targetRoomObject);
