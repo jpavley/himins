@@ -25,13 +25,13 @@ var
   strutils = require('./himins_js/himins_string_utils'),
   files = require('./himins_js/himins_file_utils');
 
-var 
+var
   himinsServer = net.createServer(),
 
   clientList = [],
   gameObject = {},
 
-  ipAddress = "127.0.0.1",  // TODO: get from environment var
+  ipAddress = '127.0.0.1',  // TODO: get from environment var
   portNumber = 9000,        // TODO: get from environment var
   maxUsers = 10,            // TODO: get from environment var
 
@@ -46,12 +46,12 @@ var
  * @param {string} kind - Type of client (user or system)
 */
 
-var broadcast = function (message, client, kind) {
-  var 
+var broadcast = function(message, client, kind) {
+  var
     deadList = [],
     payload = '';
 
-  _.each(clientList, function (e, i, l) {
+  _.each(clientList, function(e, i, l) {
     if (client !== e) {
       if (e.writable) {
         if (kind === 'user') {
@@ -64,22 +64,22 @@ var broadcast = function (message, client, kind) {
       } else {
         // client is not writable, kill it
         deadList.push(e);
-        e.destroy();   
+        e.destroy();
       }
     }
   });
 
-  _.each(deadList, function (client, index, deadList) {
+  _.each(deadList, function(client, index, deadList) {
     clientList.splice(clientList.indexOf(client), 1);
   });
 };
 module.exports.broadcast = broadcast;
 
-/** 
+/**
   * Handles client connection events
-  * @name Connection Handler 
+  * @name Connection Handler
   */
-himinsServer.on('connection', function (client) {
+himinsServer.on('connection', function(client) {
   var
     uuid = 0,
     messageText = '';
@@ -89,18 +89,18 @@ himinsServer.on('connection', function (client) {
 console.log('');
 console.log('**** **** **** a client is starting up **** **** ****');
 console.log('');
-    
+
   // give the client a name and add the client to the list of clients
   uuid = _.uniqueId();
   client.name = 'client_' + uuid;
   clientList.push(client);
 
-  files.loadTEXT(titleScreen, function (resultObject) {
+  files.loadTEXT(titleScreen, function(resultObject) {
     client.write(resultObject + '\n');
   });
 
   // associate a player with this client
-  files.loadJSON(defaultPlayerFile, function (resultObject) {
+  files.loadJSON(defaultPlayerFile, function(resultObject) {
     player.init(resultObject);
     resultObject.name = resultObject.name + uuid;
     resultObject.client = client;
@@ -110,12 +110,12 @@ console.log('');
     commands.init(client.player.commands);
 
     // add the name of the game as a command
-    commands.addCommand(client.player.commands, { 
+    commands.addCommand(client.player.commands, {
       name: gameObject.name.toLowerCase(),
       description: gameObject.description,
-      parameters: { 
-        "dataKey": "descriptionScreenCast",
-        "screenKey": "currentScreen"
+      parameters: {
+        'dataKey': 'descriptionScreenCast',
+        'screenKey': 'currentScreen'
       },
       action: '!SCREEN_CAST',
       kind: 'game' }
@@ -141,27 +141,27 @@ console.log('');
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
 
-  /** 
+  /**
     * Handles incoming client data
-    * @name Data Handler 
+    * @name Data Handler
     */
-  client.on('data', function (data) {
+  client.on('data', function(data) {
     var inputStr = String(data).trim().toLowerCase();
 
     // if inputStr is not standard ascii block it
-    if(inputStr.isPrintable()) {
+    if (inputStr.isPrintable()) {
       console.log(client.name, ' incoming data:', inputStr); // log it
-      repl.processUserInput(client, data);      
+      repl.processUserInput(client, data);
     }
 
   });
 
-  
-  /** 
+
+  /**
     * Handles client disconnection
-    * @name End Handler 
+    * @name End Handler
     */
-  client.on('end', function () {
+  client.on('end', function() {
     // remove client from the list of clients
     clientList.splice(clientList.indexOf(client), 1);
     // tell the other clients
@@ -170,12 +170,12 @@ console.log('');
     console.log(client.name + ' disconnected by end');
   });
 
-  
-  /** 
+
+  /**
     * Handles client error (OMG!)
-    * @name Error Handler 
+    * @name Error Handler
     */
-  client.on('error', function (e) {
+  client.on('error', function(e) {
     console.log(e);
   });
 });
@@ -184,7 +184,7 @@ console.log('');
  * Returns the number of clients connected to the server
  */
 
-var clientCount = function () {
+var clientCount = function() {
   return clientList.length;
 };
 module.exports.clientCount = clientCount;
@@ -193,7 +193,7 @@ module.exports.clientCount = clientCount;
  * Returns the list of clients connected to the server
  */
 
-var getClientList = function () {
+var getClientList = function() {
   return clientList;
 };
 module.exports.getClientList = getClientList;
@@ -203,19 +203,19 @@ module.exports.getClientList = getClientList;
  */
 
 var getClientByID = function(clientID) {
-  var result = "";
+  var result = '';
 
-  result = _.find(clientList, function (client) {
+  result = _.find(clientList, function(client) {
     return client.name.toLowerCase() === clientID.toLowerCase();
   });
 
-  return result; 
+  return result;
 };
 module.exports.getClientByID = getClientByID;
 
-/** 
+/**
   * Main entry point of the himins server app
-  * @name Main 
+  * @name Main
   */
 console.log('');
 console.log('**** **** **** himins is starting up **** **** ****');
@@ -225,14 +225,14 @@ console.log('');
 strutils.init();
 
 // associate a game with this app
-files.loadJSON(startingGameFile, function (resultObject) {
+files.loadJSON(startingGameFile, function(resultObject) {
   game.init(resultObject);
   gameObject = resultObject;
   console.log('*** gameObject has loaded: ', gameObject.name);
 });
 
 // give a hint to the webmaster
-console.log("// Use telnet client to access: telnet " + ipAddress + " " + portNumber);
+console.log('// Use telnet client to access: telnet ' + ipAddress + ' ' + portNumber);
 
 // start up the server
 himinsServer.maxConnections = maxUsers;
