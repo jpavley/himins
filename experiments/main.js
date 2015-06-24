@@ -26,51 +26,52 @@ Player.prototype = events.EventEmitter.prototype;
  */
 function Player() {
 
-    /**
-      * The user visible name of the player object, should be unique
-      * @type String
-      * @default "noname"
-      */
-    this.name = 'noname';
+  /**
+    * The user visible name of the player object, should be unique
+    * @type String
+    * @default "noname"
+    */
+  this.name = 'noname';
 
-    /**
-      * The amount of health a player has
-      * @type Number
-      * @default 0
-      */
-    this.healthPoints = 0;
+  /**
+    * The amount of health a player has
+    * @type Number
+    * @default 0
+    */
+  this.healthPoints = 0;
 
-    /**
-      * Message emitted if health points have changed
-      * @type String
-      * @default "healthPointsChanged"
-      * @readonly
-      */
-    this.healthPointsChanged = 'healthPointsChanged';
+  /**
+    * Message emitted if health points have changed
+    * @type String
+    * @default "healthPointsChanged"
+    * @readonly
+    */
+  this.healthPointsChanged = 'healthPointsChanged';
 
-    log.info('Instance of player ' + this.name + ' object created');
+  events.EventEmitter.call(this);
 
-    events.EventEmitter.call(this);
+  /**
+   * Restores player health
+   * @param {number} points
+   * @this Player
+   */
+  this.heal = function(points) {
+      this.healthPoints += points;
+      this.emit(this.healthPointsChanged);
+  };
 
-    /**
-     * Restores player health
-     * @param {number} points
-     * @this Player
-     */
-    this.heal = function(points) {
-        this.healthPoints += points;
-        this.emit(this.healthPointsChanged);
-    };
+  /**
+   * Reduces player health
+   * @param {number} points
+   * @this Player
+   */
+  this.hurt = function(points) {
+      this.healthPoints -= points;
+      this.emit(this.healthPointsChanged);
+  };
 
-    /**
-     * Reduces player health
-     * @param {number} points
-     * @this Player
-     */
-    this.hurt = function(points) {
-        this.healthPoints -= points;
-        this.emit(this.healthPointsChanged);
-    };
+  log.info('==== Instance of player ' + this.name + ' object created ====');
+  
 }
 module.exports.Player = Player;
 
@@ -94,7 +95,7 @@ module.exports.displayHealthPoints = displayHealthPoints;
  * player1.on(player1.healthPointsChanged, main.checkDead);
  */
 function checkDead() {
-    if (this.healthPoints < 0) {
+    if (this.healthPoints <= 0) {
         //console.log("Player %s is dead!!!".red.bold, this.name);
         log.info('Player %s is dead!!!', this.name);
     }
@@ -112,7 +113,7 @@ module.exports.checkDead = checkDead;
  * });
  */
 function checkHealthGoal(player, lowGoal, highGoal) {
-    if (player.healthPoints < lowGoal && player.healthPoints >= 0) {
+    if (player.healthPoints < lowGoal && player.healthPoints > 0) {
         //console.log("Player %s is weak!".yellow.bold, player.name);
         log.info('Player %s is weak!', player.name);
     }

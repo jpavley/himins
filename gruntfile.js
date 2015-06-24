@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 				'gruntfile.js', 
 				'himins_js/*.js',
 				'experiments/*.js',
+			    'test/*.js',
 				'himins_app.js'
 			],
 		},
@@ -44,6 +45,20 @@ module.exports = function(grunt) {
                 	//template: './node_modules/ink-docstrap/template'
 	            }
 	        }
+	    },
+
+	    watch: {
+	    		scripts: {
+	    			files: [
+	    				'gruntfile.js', 
+						'himins_js/*.js',
+						'experiments/*.js',
+						'himins_app.js',
+						'README.md',
+		            	'test/*.js'
+					],
+					tasks: ['development']
+	    		}
 	    }
 
 	});
@@ -52,7 +67,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-simple-mocha');
 	grunt.loadNpmTasks('grunt-jsdoc');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// grunt alias task
 	grunt.registerTask('default', ['jshint', 'simplemocha', 'jsdoc']);
+	grunt.registerTask('development', ['jshint', 'simplemocha']);
+
 };
