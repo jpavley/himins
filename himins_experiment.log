@@ -98,3 +98,24 @@
 {"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4618,"level":30,"msg":"Player noname HP: 98","time":"2015-06-23T02:29:43.709Z","v":0}
 {"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4618,"level":30,"msg":"Player noname HP: 0","time":"2015-06-23T02:29:43.710Z","v":0}
 {"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4618,"level":30,"msg":"Player noname is weak!","time":"2015-06-23T02:29:43.710Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4931,"level":30,"msg":"Instance of player noname object created","time":"2015-06-24T01:39:29.746Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4931,"level":30,"msg":"Player noname HP: 52","time":"2015-06-24T01:39:29.754Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4931,"level":30,"msg":"Player noname HP: 0","time":"2015-06-24T01:39:29.755Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4931,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:39:29.755Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4940,"level":30,"msg":"Instance of player noname object created","time":"2015-06-24T01:43:07.994Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4940,"level":30,"msg":"Player noname HP: 57","time":"2015-06-24T01:43:08.002Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4940,"level":30,"msg":"Player noname HP: 0","time":"2015-06-24T01:43:08.003Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4940,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:43:08.003Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4953,"level":30,"msg":"Instance of player noname object created","time":"2015-06-24T01:45:27.739Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4953,"level":30,"msg":"Player noname HP: 39","time":"2015-06-24T01:45:27.748Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4953,"level":30,"msg":"Player noname HP: 0","time":"2015-06-24T01:45:27.749Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4953,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:45:27.749Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4955,"level":30,"msg":"Instance of player noname object created","time":"2015-06-24T01:47:08.087Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4955,"level":30,"msg":"Player noname HP: 2","time":"2015-06-24T01:47:08.096Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4955,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:47:08.096Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4955,"level":30,"msg":"Player noname HP: 0","time":"2015-06-24T01:47:08.097Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4955,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:47:08.097Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4957,"level":30,"msg":"Instance of player noname object created","time":"2015-06-24T01:49:10.395Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4957,"level":30,"msg":"Player noname HP: 73","time":"2015-06-24T01:49:10.404Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4957,"level":30,"msg":"Player noname HP: 0","time":"2015-06-24T01:49:10.405Z","v":0}
+{"name":"himins_experiment","hostname":"Johns-iMac-2.local","pid":4957,"level":30,"msg":"Player noname is weak!","time":"2015-06-24T01:49:10.405Z","v":0}

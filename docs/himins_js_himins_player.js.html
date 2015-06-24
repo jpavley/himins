@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: himins_js/himins_player.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: himins_js/himins_player.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileOverview Manages a player object from a himins player JSON file
+ * @module
+ * @requires underscore
+ * @requires ./himins_js/himins_game
+ * @requires ./himins_js/himins_room
+ * @requires ./himins_js/himins_commands
+ * @requires ./himins_js/himins_repl
+ * @requires ./himins_js/himins_format
+ * @requires ./himins_js/himins_file_utils
+ */
+
+// ## includes
+var
+  // ### 3rd party modules
+  _ = require('underscore'),
+
+  // ### Himins modules
+  commands = require('./himins_commands'),
+  game = require('./himins_game'),
+  room = require('./himins_room'),
+  player = require('./himins_player'),
+  repl = require('./himins_repl'),
+  format = require('./himins_format'),
+  files = require('./himins_file_utils');
+
+// ## module vars
+
+//# init(playerObject)
+var init = function(playerObject) {
+  console.log('*** himins_player.js init(', playerObject.name, ')');
+
+  // if the player has any starter items in her inventory add their names as commands
+   _.each(playerObject.inventory, function(e, i, l) {
+    commands.addCommand(playerObject.commands, {
+      name: e.name,
+      description: e.description,
+      action: e.action,
+      kind: e.kind
+    });
+  });
+};
+module.exports.init = init;
+
+// # addToInventory(playerObject, itemObject)
+// Items are discovered in sections and added to player inventory.
+// Step 1: remove item from the section and the players command list.
+// Step 2: add the item to the inventory and the players command list.
+var addToInventory = function(playerObject, itemObject, sectionObject) {
+
+};
+
+//# getInventoryNames(playerObject)
+// Returns a string with the names of the items in the player inventory
+var getInventoryNames = function(playerObject) {
+  var
+    resultString = '',
+    resultList = [];
+
+  _.each(playerObject.inventory, function(e, i, l) {
+    resultList.push('_' + e.name + '_');
+  });
+
+  resultString = resultList.toString().replace(/,/g, ', ');
+  return resultString;
+};
+module.exports.getInventoryNames = getInventoryNames;
+
+// # enterRoom(playerObject, roomObject)
+// Call when a player first spawns or enters a room
+var enterRoom = function(playerObject, roomObject) {
+
+  // add commands for this room
+  playerObject.commands = commands.combineCommands(playerObject.commands, roomObject.commands);
+
+  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, roomObject.description, 2, 78));
+};
+module.exports.enterRoom = enterRoom;
+
+// # exitRoom(playerObject, roomObject)
+// Call when a player finally despawns or leaves a room
+var exitRoom = function(playerObject, roomObject) {
+  // remove commands for this room
+  playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'room');
+};
+module.exports.exitRoom = exitRoom;
+
+
+// # enterSection(playerObject, sectionObject)
+// Call when a player first spawns or enters a section
+var enterSection = function(playerObject, sectionObject) {
+  var
+    gameObject = playerObject.game,
+    roomObject = game.getRoomByName(gameObject, playerObject.roomName);
+
+  // add commands for this section
+  playerObject.commands = commands.combineCommands(playerObject.commands, sectionObject.commands);
+  repl.writeToClient(playerObject.client, format.formatText(playerObject.client, sectionObject.description, 2, 78));
+};
+module.exports.enterSection = enterSection;
+
+// # exitSection(playerObject, sectionObject)
+// Call when a player finally despawns or leaves a room
+var exitSection = function(playerObject, sectionObject) {
+  // remove commands for this section
+  playerObject.commands = commands.removeCommandsByKind(playerObject.commands, 'section');
+};
+module.exports.exitSection = exitSection;
+
+// # moveToSection(playerObject, action)
+var moveToSection = function(playerObject, action) {
+  var gameObject = playerObject.game,
+      roomObject = game.getRoomByName(gameObject, playerObject.roomName),
+      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
+      targetSectionName = action.substring(4).toLowerCase(), // remove '!GO_'
+      targetSectionObject = room.getSectionByName(roomObject, targetSectionName);
+
+  exitSection(playerObject, sectionObject);
+  playerObject.sectionName = targetSectionName;
+  enterSection(playerObject, targetSectionObject);
+
+};
+module.exports.moveToSection = moveToSection;
+
+// # moveToRoom(playerObject, commandObject)
+var moveToRoom = function(playerObject, commandObject) {
+    var gameObject = playerObject.game,
+      roomObject = game.getRoomByName(gameObject, playerObject.roomName),
+      sectionObject = room.getSectionByName(roomObject, playerObject.sectionName),
+      targetRoomName = commandObject.parameters.nextRoomName,
+      targetRoomObject = game.getRoomByName(gameObject, targetRoomName),
+      targetSectionName = roomObject.spawnSection,
+      targetSectionObject = room.getSectionByName(roomObject, targetSectionName),
+      artFileURI = './himins_txt/' + roomObject.artFileName;
+
+    //TODO: refactor from game.start()
+
+  exitRoom(playerObject, roomObject);
+  exitSection(playerObject, sectionObject);
+  playerObject.roomName = targetRoomName;
+  playerObject.sectionName = targetSectionName;
+
+  files.loadTEXT(artFileURI, function(resultObject) {
+    playerObject.client.write(resultObject + '\n');
+
+    enterRoom(playerObject, targetRoomObject);
+    enterSection(playerObject, targetSectionObject);
+  });
+
+};
+module.exports.moveToRoom = moveToRoom;
+
+
+
+
+
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="experiments_main.module_js.html">experiments/main.js</a></li><li><a href="himins_app.module_js.html">himins_app.js</a></li><li><a href="himins_js_himins_commands.module_js.html">himins_js/himins_commands.js</a></li><li><a href="himins_js_himins_file_utils.module_js.html">himins_js/himins_file_utils.js</a></li><li><a href="himins_js_himins_format.module_js.html">himins_js/himins_format.js</a></li><li><a href="himins_js_himins_game.module_js.html">himins_js/himins_game.js</a></li><li><a href="himins_js_himins_player.module_js.html">himins_js/himins_player.js</a></li><li><a href="himins_js_himins_repl.module_js.html">himins_js/himins_repl.js</a></li><li><a href="himins_js_himins_room.module_js.html">himins_js/himins_room.js</a></li><li><a href="himins_js_himins_string_utils.module_js.html">himins_js/himins_string_utils.js</a></li><li><a href="test_main_tests.module_js.html">test/main_tests.js</a></li></ul><h3>Classes</h3><ul><li><a href="experiments_main.module_js-Player.html">Player</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jun 23 2015 21:49:10 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

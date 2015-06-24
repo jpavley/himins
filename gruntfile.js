@@ -39,8 +39,9 @@ module.exports = function(grunt) {
 	            	verbose: true,
 	                destination: 'docs',
 	                'private': false,
-	                configure: './node_modules/jsdoc/conf.json',
-                	template: './node_modules/ink-docstrap/template'
+	                // DocStrap template and conf.json commented out because DocStrap seems to be incompatible with JSDoc 3.3.2
+	                //configure: 'conf.json',
+                	//template: './node_modules/ink-docstrap/template'
 	            }
 	        }
 	    }
