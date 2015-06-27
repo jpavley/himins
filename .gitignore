@@ -1,16 +1,15 @@
-# osx noise
+# osx
 .DS_store
 .DS_Store
 profile
 
-.DS_Store
-
-.DS_Store
-
+# node 
 node_modules/
 
+# sublime
+*.sublime-project
+*.sublime-workspace
+
+#himins
 himins_experiment.log
 
-*.sublime-project
-
-*.sublime-workspace
