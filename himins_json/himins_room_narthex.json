@@ -1,6 +1,6 @@
 {
   "name": "narthex",
-  "description": "The *narthex* is cavernous and its air murky. Particles of soot bob slowly in shafts of light from the ceiling. The cool stone floor is caked in dust with hundreds of bare footprints running in all directions. Looking *west* you see a bricked-over portico. Looking *east* you see a bright rectangle shining in the middle a marbled arch. In each corner of the room sits a pile of debris.",
+  "description": "The _narthex_ is cavernous and its air murky. Particles of soot bob slowly in shafts of light from the ceiling. The cool stone floor is caked in dust with hundreds of bare footprints running in all directions. Looking _west_ you see a bricked-over portico. Looking _east_ you see a bright rectangle shining in the middle a marbled arch. In each corner of the room sits a pile of debris.",
   "artFileName": "himins_screen_narthex.txt",
   "spawnSection": "center",
   "sections": [
@@ -148,7 +148,25 @@
         },
         {
           "name": "terminal",
-          "description": "How quaint, this terminal has a CRT and machanical keybroad. Touching the spacebar brings it to life.",
+          "description": "How quaint, this terminal has a CRT and machanical keybroad. Touching the spacebar brings it to life. There are three menu items: _execute_, _abort_, and _pause_",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        },
+        {
+          "name": "execute",
+          "description": "You choose *execute*. The screen blinks twice and winks out. Somewhere far off in the interior of the building echos an angished scream.",
+          "action": "!NO_ACTION",
+          "kind": "section"
+        },
+        {
+          "name": "abort",
+          "description": "You choose *abort*. The screen blinks twice and winks out. Everything starts to fade to black.",
+          "action": "!QUIT_APP",
+          "kind": "section"
+        },
+        {
+          "name": "pause",
+          "description": "You choose *pause*. The screen blinks twice and winks out. A throbbing you didn't notice before abruptly quiets.",
           "action": "!NO_ACTION",
           "kind": "section"
         }
