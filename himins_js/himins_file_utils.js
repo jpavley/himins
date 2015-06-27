@@ -15,7 +15,7 @@ var
 var loadJSON = function(fileName, callBackFunc) {
   console.log('*** himins_file_utils.js loadJSON(%s)', fileName);
   var
-    resultObject = {};
+    resultObject = {}; // this is the entity!
 
   fs.readFile(fileName, 'utf8', function(err, data) {
     if (err) {

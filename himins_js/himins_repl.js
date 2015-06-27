@@ -62,12 +62,14 @@ var screenCast = function(client, dataKey, screenKey) {
       pageInfo = '[' + pageNumber + ' of ' + screenList.length + ']';
 
       if (currentScreen + 1 < screenList.length) {
+        // show next page
         writeToClient(client, format.formatText(client, 'Press *return* to continue ' + pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
         client.player.game[screenKey] = currentScreen + 1;
       } else {
+        // story over, show prompt
         writeToClient(client, format.formatText(client, pageInfo, LEFT_INDENT, PARAGRAPH_WIDTH));
         writeToClient(client, ''); // blankline
-        writeToClient(client, format.formatText(client, 'You should pray for !COMMAND_NAMES.', LEFT_INDENT, PARAGRAPH_WIDTH));
+        writeToClient(client, format.formatText(client, client.player.game.welcome, LEFT_INDENT, PARAGRAPH_WIDTH));
         client.player.game[screenKey] = 0;
         client.player.game.casting = false;
       }
