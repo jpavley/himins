@@ -16,9 +16,9 @@
     "'This is the end of my song but a bridge your new verse. Oh, just one more thing... You must be very careful not to let Himins...'",
     "Abruptly Tennin’s head dried up and blew away in the breeze of the meteorite's flames.",
     "The townspeople thought this messenger a trick, a rickroll, a troll. Later that night news sites across the Internet reported the same meteorite, the same messenger, with the same message appearing in the center of every town and city across the world.",
-    "Hope began to dawn on humanity that night. But who or what was Himins?"
+    "Hope began to dawn on humanity that night. But who or what was Himins?",
   ],
-  "welcome": "Welcome to _!GAME_NAME_. Your name is *!PLAYER_NAME*. You should pray for !COMMAND_NAMES.",
+  "welcome": "Welcome to *!GAME_NAME*. Your name is *!PLAYER_NAME*. Type _story_ for the roleplay or _start_ to enter the game world.",
   "movementVerbs": [
     "blunder",
     "creep",

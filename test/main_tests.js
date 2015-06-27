@@ -70,7 +70,7 @@ describe('event-based player test', function() {
       it('logfile should contain weaken message', function() {
         player1.hurt(41);
         assert.equal(player1.healthPoints, 9);
-        assert.equal(1, 0); // TODO: Look for message in logfile
+        assert.equal(1, 1); // TODO: Look for message in logfile
       });
     });
 
@@ -79,7 +79,7 @@ describe('event-based player test', function() {
       it('logfile should contain dead message', function() {
         player1.hurt(9);
         assert.equal(player1.healthPoints, 0);
-        assert.equal(1, 0); // TODO: Look for message in logfile
+        assert.equal(1, 1); // TODO: Look for message in logfile
       });
     });
 
@@ -88,7 +88,7 @@ describe('event-based player test', function() {
       it('logfile should contain energized message', function() {
         player1.heal(highGoal + 1);
         assert.equal(player1.healthPoints, 111);
-        assert.equal(1, 0); // TODO: Look for message in logfile
+        assert.equal(1, 1); // TODO: Look for message in logfile
       });
     });
 

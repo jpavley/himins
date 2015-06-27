@@ -109,9 +109,9 @@ console.log('');
     // each player gets her own potentialy unqie set of commands
     commands.init(client.player.commands);
 
-    // add the name of the game as a command
+    // add the story command: it triggers the roleplay screen cast
     commands.addCommand(client.player.commands, {
-      name: gameObject.name.toLowerCase(),
+      name: 'story',
       description: gameObject.description,
       parameters: {
         'dataKey': 'descriptionScreenCast',
