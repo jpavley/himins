@@ -9,6 +9,8 @@ profile
 
 node_modules/
 
+himins_experiment.log
+
 *.sublime-project
 
 *.sublime-workspace
