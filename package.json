@@ -28,7 +28,6 @@
     "mongoose": "4.0.x",
     "commander": "2.8.x",
     "mocha": "2.2.x",
-    "node-uuid": "1.4.x"
   },
   "devDependencies": {
     "bunyan": "^1.4.0",
