@@ -37,7 +37,7 @@ var
 
   startingGameFile = './himins_json/himins_game.json',
   defaultPlayerFile = './himins_json/himins_player.json',
-  titleScreen = './himins_txt/himins_screen_title.txt';
+  titleScreenDirectory = './himins_txt/';
 
 /**
  * Broadcasts messages to client
@@ -95,10 +95,6 @@ console.log('');
   client.name = 'client_' + uuid;
   clientList.push(client);
 
-  files.loadTEXT(titleScreen, function(resultObject) {
-    client.write(resultObject + '\n');
-  });
-
   // associate a player with this client
   files.loadJSON(defaultPlayerFile, function(resultObject) {
     player.init(resultObject);
@@ -127,6 +123,7 @@ console.log('');
       // associate the player with the game
       client.player.game = gameObject;
       client.player.gameName = gameObject.name;
+      client.player.gameTitle = titleScreenDirectory + gameObject.titleScreen;
 
       // add game commands to the player's command list
       client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
@@ -134,8 +131,12 @@ console.log('');
       // Bug: somehow repl.LEFT_INDENT and repl.PARAGRAPH_WIDTH are not set yet! So I'm using the actual values above (2, 78)
       messageText = format.formatText(client, gameObject.welcome, 2, 78);
 
-      // welcome the player to the game
-      repl.writeToClient(client, messageText);
+      // load and send title screen to the client
+      files.loadTEXT(client.player.gameTitle, function(resultObject) {
+        client.write(resultObject + '\n');
+        // welcome the player to the game (after the title screen loads for sure)
+        repl.writeToClient(client, messageText);
+     });
     }
 
     broadcast('*' + client.player.name + '* has joined the game', client, 'system');

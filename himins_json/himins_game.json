@@ -1,6 +1,7 @@
 {
   "name": "himins",
   "version": "0.0.1",
+  "titleScreen": "himins_screen_title_mobile.txt",
   "description": "Our story so far...",
   "currentScreen": 0,
   "casting": false,
