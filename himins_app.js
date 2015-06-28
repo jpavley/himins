@@ -24,7 +24,7 @@ var
   format = require('./himins_js/himins_format'),
   strutils = require('./himins_js/himins_string_utils'),
   files = require('./himins_js/himins_file_utils');
-	log = requires('bunyan');
+	log = require('bunyan');
 
 var
   himinsServer = net.createServer(),
