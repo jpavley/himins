@@ -14,8 +14,15 @@
  */
 
 var
+  // node/npm modules
   net = require('net'),
+  telnetInput = require('telnet-stream').TelnetInput,
+  telnetOutput = require('telnet-stream').TelnetOutput,
   _ = require('underscore'),
+  log = require('bunyan'),
+
+
+  // himins modules
   game = require('./himins_js/himins_game'),
   room = require('./himins_js/himins_room'),
   player = require('./himins_js/himins_player'),
@@ -24,7 +31,6 @@ var
   format = require('./himins_js/himins_format'),
   strutils = require('./himins_js/himins_string_utils'),
   files = require('./himins_js/himins_file_utils');
-	log = require('bunyan');
 
 var
   himinsServer = net.createServer(),
@@ -39,6 +45,10 @@ var
   startingGameFile = './himins_json/himins_game.json',
   defaultPlayerFile = './himins_json/himins_player.json',
   titleScreenDirectory = './himins_txt/';
+
+  console.log("** Process Env **");
+  console.log(process.env);
+  console.log(" ");
 
 /**
  * Broadcasts messages to client
