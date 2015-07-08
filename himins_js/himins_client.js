@@ -28,11 +28,11 @@ module.exports.createNewEmptyClientList = createNewEmptyClientList;
 
 /**
  * Broadcasts messages to all clients
- * Kills any dead clients that can't be written to
- * Returns updated client list
+ * Kills any dead clients that can't be written to.
+ * Returns updated client list.
  * @param {string} message
  * @param {Array} clientList 
- * @param return {Array}
+ * @returns {Array}
 */
 
 var broadcast = function(message, clientList) {
