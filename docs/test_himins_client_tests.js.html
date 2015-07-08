@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: himins_js/himins_room.js</title>
+    <title>JSDoc: Source: test/himins_client_tests.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,106 +17,94 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: himins_js/himins_room.js</h1>
+    <h1 class="page-title">Source: test/himins_client_tests.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileOverview Client module tests
+ * @module
+ * @requires assert
+ * @requires ../himins_js/himins_client
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Manages a room object from a himins room JSON file</p></div>
-        
+var 
+  assert = require('assert'),
+  clientManager = require('../himins_js/himins_client');
 
-        
+describe('client manager unit tests', function() {
+
+  describe('#createNewEmptyClientList()', function() {
+
+    var
+      testClientList1 = clientManager.createNewEmptyClientList();
+
+    it('client list should not be null', function() {
+      assert.notEqual(testClientList1, null);
+    });
+
+    it('client list should type of Array', function() {
+      assert.equal(testClientList1.constructor, Array);
+    });
+
+    it('client list should be empty', function() {
+      assert.equal(testClientList1.length, 0);
+    });
+
+  });
+
+  describe('#broadcast()', function() {
+
+    var
+      testClientList2 = clientManager.createNewEmptyClientList(),
+      result;
+
+    testClientList2.push({
+      name: 'testClient1', 
+      writable: true,
+      destroy: function () {},
+      write: function() { }
+    });
+
+    testClientList2.push({
+      name: 'testClient2', 
+      writable: false,
+      destroy: function () {},
+      write: function() { }
+  });
+
+    result = clientManager.broadcast('hello', testClientList2);
+
+    it('result client list should not be null', function() {
+      assert.notEqual(result, null);
+    });
+
+    it('result client list should type of Array', function() {
+      assert.equal(result.constructor, Array);
+    });
+
+    it('result client list should have one member', function() {
+      assert.equal(result.length, 1);
+    });
+
+    it('result client list member name should testClient1', function() {
+      assert.equal(result[0].name, 'testClient1');
+    });
+
+  });
+
+});
 
 
-<dl class="details">
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="himins_js_himins_room.js.html">himins_js/himins_room.js</a>, <a href="himins_js_himins_room.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:underscore</li>
-        
-            <li>module:./himins_js/himins_game</li>
-        
-            <li>module:./himins_js/himins_player</li>
-        
-            <li>module:./himins_js/himins_commands</li>
-        </ul>
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+</code></pre>
+        </article>
+    </section>
 
 
 

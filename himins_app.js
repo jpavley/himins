@@ -16,180 +16,73 @@
 var
   // node/npm modules
   net = require('net'),
-  telnetInput = require('telnet-stream').TelnetInput,
-  telnetOutput = require('telnet-stream').TelnetOutput,
   _ = require('underscore'),
   log = require('bunyan'),
-
-
-  // himins modules
-  game = require('./himins_js/himins_game'),
-  room = require('./himins_js/himins_room'),
-  player = require('./himins_js/himins_player'),
-  commands = require('./himins_js/himins_commands'),
-  repl = require('./himins_js/himins_repl'),
-  format = require('./himins_js/himins_format'),
-  strutils = require('./himins_js/himins_string_utils'),
-  files = require('./himins_js/himins_file_utils');
+  telnet = require('telnet');
 
 var
-  himinsServer = net.createServer(),
-
+  // cleint vars
   clientList = [],
-  gameObject = {},
 
-  ipAddress = '127.0.0.1',  // TODO: get from environment var
-  portNumber = 9000,        // TODO: get from environment var
-  maxUsers = 10,            // TODO: get from environment var
+  // log vars
+  logUuid = _.uniqueId(),
+  logName = 'himmins_session_log' + logUuid,
+  log = bunyan.createLogger({
+      name: logName,
+      streams: [{
+          path: 'logs/' + logName + '.log',
+          level: 'info'
+      }],
+  }),
 
-  startingGameFile = './himins_json/himins_game.json',
-  defaultPlayerFile = './himins_json/himins_player.json',
-  titleScreenDirectory = './himins_txt/';
+  // server config vars
+  // TODO: Get from commandLine
+  ipAddress = "127.0.0.1",
+  portNumber = 99,
+  maxUsers = 10,
+  gameFile = './himins_json/himins_game.json',
+  playerFile = './himins_json/himins_player.json',
 
-  console.log("** Process Env **");
-  console.log(process.env);
-  console.log(" ");
-
-/**
- * Broadcasts messages to client
- * @param {string} message
- * @param {object} client
- * @param {string} kind - Type of client (user or system)
-*/
-
-var broadcast = function(message, client, kind) {
-  var
-    deadList = [],
-    payload = '';
-
-  _.each(clientList, function(e, i, l) {
-    if (client !== e) {
-      if (e.writable) {
-        if (kind === 'user') {
-          payload = e.player.name + ' yells to everyone: ' + message;
-        } else {
-          payload = '_himins_ reports ' + message;
-        }
-        payload = format.formatText(e, payload, 2, 78);
-        repl.writeToClient(e, payload);
-      } else {
-        // client is not writable, kill it
-        deadList.push(e);
-        e.destroy();
-      }
-    }
-  });
-
-  _.each(deadList, function(client, index, deadList) {
-    clientList.splice(clientList.indexOf(client), 1);
-  });
-};
-module.exports.broadcast = broadcast;
+  game = game.start();
 
 /**
-  * Handles client connection events
-  * @name Connection Handler
+  * Creates server and handles client communications
+  * @name telnet.createServer
   */
-himinsServer.on('connection', function(client) {
+telnet.createServer(function (client) {
   var
-    uuid = 0,
-    messageText = '';
+    uuid = _.uniqueId();
 
-  // TODO: If a client tries to connect before the game has loaded it should be rejected!
-
-console.log('');
-console.log('**** **** **** a client is starting up **** **** ****');
-console.log('');
-
-  // give the client a name and add the client to the list of clients
-  uuid = _.uniqueId();
   client.name = 'client_' + uuid;
   clientList.push(client);
 
-  // associate a player with this client
-  files.loadJSON(defaultPlayerFile, function(resultObject) {
-    player.init(resultObject);
-    resultObject.name = resultObject.name + uuid;
-    resultObject.client = client;
-    client.player = resultObject;
+  log.info('client %s connected!', client.name);
 
-    // each player gets her own potentialy unqie set of commands
-    commands.init(client.player.commands);
+  client.do.transmit_binary();
+  client.do.window_size();
 
-    // add the story command: it triggers the roleplay screen cast
-    commands.addCommand(client.player.commands, {
-      name: 'story',
-      description: gameObject.description,
-      parameters: {
-        'dataKey': 'descriptionScreenCast',
-        'screenKey': 'currentScreen'
-      },
-      action: '!SCREEN_CAST',
-      kind: 'game' }
-    );
+  client.player = game.createPlayer(client);
 
-    if (gameObject) {
-      console.log('*** initializing player ', client.player.name, 'with game ', gameObject.name);
-
-      // associate the player with the game
-      client.player.game = gameObject;
-      client.player.gameName = gameObject.name;
-      client.player.gameTitle = titleScreenDirectory + gameObject.titleScreen;
-
-      // add game commands to the player's command list
-      client.player.commands = commands.combineCommands(client.player.commands, gameObject.commands);
-
-      // Bug: somehow repl.LEFT_INDENT and repl.PARAGRAPH_WIDTH are not set yet! So I'm using the actual values above (2, 78)
-      messageText = format.formatText(client, gameObject.welcome, 2, 78);
-
-      // load and send title screen to the client
-      files.loadTEXT(client.player.gameTitle, function(resultObject) {
-        client.write(resultObject + '\n');
-        // welcome the player to the game (after the title screen loads for sure)
-        repl.writeToClient(client, messageText);
-     });
+  client.on('window size', function (e) {
+    if(e.command === 'sb') {
+      client.width = e.width;
+      client.height = e.height;
+      log.info('client %s resized window to %d by %d', 
+        client.name, client.width, client.height);
     }
-
-    broadcast('*' + client.player.name + '* has joined the game', client, 'system');
   });
 
-  /**
-    * Handles incoming client data
-    * @name Data Handler
-    */
-  client.on('data', function(data) {
+  client.on('data', function (b) {
     var inputStr = String(data).trim().toLowerCase();
 
     // if inputStr is not standard ascii block it
     if (inputStr.isPrintable()) {
-      console.log(client.name, ' incoming data:', inputStr); // log it
-      repl.processUserInput(client, data);
+      log.info(client.name, ' incoming data:', inputStr);
+      game.processUserInput(client, data);
     }
-
   });
 
-
-  /**
-    * Handles client disconnection
-    * @name End Handler
-    */
-  client.on('end', function() {
-    // remove client from the list of clients
-    clientList.splice(clientList.indexOf(client), 1);
-    // tell the other clients
-    broadcast('*' + client.player.name + '* has left the game', client, 'system');
-    // log it
-    console.log(client.name + ' disconnected by end');
-  });
-
-
-  /**
-    * Handles client error (OMG!)
-    * @name Error Handler
-    */
-  client.on('error', function(e) {
-    console.log(e);
-  });
+  game.welcome(client);
 });
 
 /**

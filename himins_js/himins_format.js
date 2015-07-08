@@ -69,7 +69,7 @@ var resolveFunctions = function(client, text) {
     gameObject = playerObject.game,
     roomObject = game.getRoomByName(gameObject, playerObject.roomName),
     sectionObject = {};
-
+  
   result = result.replace(/!GAME_NAME/g, client.player.game.name);
   result = result.replace(/!PLAYER_NAME/g, client.player.name);
   result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(playerObject.commands));
