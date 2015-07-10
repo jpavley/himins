@@ -25,7 +25,8 @@
     "linewrap": "0.2.x",
     "underscore": "1.5.x",
     "mocha": "2.2.x",
-    "telnet-stream": "0.0.x"
+    "telnet-stream": "0.0.x",
+    "mustache": "2.1.x"
   },
   "devDependencies": {
     "bunyan": "^1.4.0",
