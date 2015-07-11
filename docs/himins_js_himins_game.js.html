@@ -27,109 +27,126 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Manages a game object from a himins game JSON file
+ * @fileOverview Manages the himins game
+ * Connects to a the persistence server.
+ * Creates the logger.
+ * Manages clients and players.
+ * Processes user input.
+ * Processes game events.
+ * Contains the game loop
  * @module
- * @requires fs
- * @requires underscore
- * @requires ./himins_js/himins_room
- * @requires ./himins_js/himins_player
- * @requires ./himins_js/himins_commands
- * @requires ./himins_js/himins_repl
- * @requires ./himins_js/himins_format
- * @requires ./himins_js/himins_file_utils
  */
 
-// ## includes
+// Persistance
+
+var MongoClient = require('mongodb').MongoClient,
+    mongo = new MongoClient(),
+    gameObject = {};
+
+mongo.connect("mongodb://localhost/", function(err, db) { // TODO: Get server address from config file
+  var himinsGameDB = db.db('himinsGame'); //TODO: get game db name from config file
+  // TODO: load the game oboejct
+});
+
+// Logging
+
 var
-  // ### Node modules
-  fs = require('fs'),
-
-  // ### 3rd party modules
-  _ = require('underscore'),
-
-  // ### Himins modules
-  commands = require('./himins_commands'),
-  room = require('./himins_room'),
-  files = require('./himins_file_utils'),
-  repl = require('./himins_repl'),
-  format = require('./himins_format'),
-  player = require('./himins_player'),
-  game = require('./himins_game');
-
-// ## module vars
-var
-  roomList = [];
-
-//# init(gameObject)
-var init = function(gameObject) {
-  console.log('*** himins_game.js init(', gameObject.name, ')');
-
-  // load the rooms
-
-  _.each(gameObject.roomFiles, function(e, i, l) {
-    files.loadJSON('himins_json/' + e, function(resultObject) {
-      room.init(resultObject);
-      gameObject.rooms.push(resultObject);
-    });
-
+  // log vars
+  logName = 'himmins_client_log', // TODO: Get filename from config file 
+  log = bunyan.createLogger({
+      name: logName,
+      streams: [{
+          type: 'rotating-file',
+          path: 'logs/' + logName + '.log',
+          period: '1d',
+          count: 5
+      }],
   });
+
+// module vars
+var
+  clientList = [],
+  playerList = [];
+
+/**
+ * Starts or restarts the game
+ */
+
+var start = function() {
+  var result = {};
+  return result;
 };
-module.exports.init = init;
+module.exports.start = start;
 
-var getRoomByName = function(gameObject, roomName) {
+/**
+ * Add a client to the game
+ */
 
-  var result = _.find(gameObject.rooms, function(room) {
-    return room.name.toLowerCase() === roomName.toLowerCase();
+var addClient = function(game, client) {
+  // TODO: if client doesn't already exist add to clientList
+};
+module.exports.addClient = addClient;
+
+/**
+ * Returns a current or new player for the client
+ */
+
+var getPlayer = function(game, client) {
+  var result = {};
+  // TODO: return a player for this client or create one for this client and persist
+  return result;
+};
+module.exports.start = getPlayer;
+
+/**
+ * Returns a current or new player for the client
+ */
+
+var processUserInput = function(game, client, data) {
+  // TODO: updated game world based on user input and persist
+};
+module.exports.start = processUserInput;
+
+/**
+ * Sends a message to the logger
+ */
+
+var logInfo = function(message) {
+};
+module.exports.start = logInfo;
+
+/**
+ * Returns the number of clients connected to the server
+ */
+
+var clientCount = function() {
+  return clientList.length;
+};
+module.exports.clientCount = clientCount;
+
+/**
+ * Returns the list of clients connected to the server
+ */
+
+var getClientList = function() {
+  return clientList;
+};
+module.exports.getClientList = getClientList;
+
+/**
+ * Returns a client connected to the server by ID
+ */
+
+var getClientByID = function(clientID) {
+  var result = '';
+
+  result = _.find(clientList, function(client) {
+    return client.name.toLowerCase() === clientID.toLowerCase();
   });
 
   return result;
 };
-module.exports.getRoomByName = getRoomByName;
-
-// # start(playerObject)
-var start = function(playerObject) {
-  var
-    roomObject = {},
-    sectionObject = {},
-    gameObject = {},
-    artFileURI = '';
-
-  // add commands that only make sense once the game is started
-
-  commands.addCommand(playerObject.commands, {
-    name: 'look',
-    description: '!SECTION_DESCRIPTION',
-    action: '!NO_ACTION',
-    kind: 'game' }
-  );
-
-  commands.addCommand(playerObject.commands, {
-    name: 'where',
-    description: '_himins_ reports that you are in the _!PLAYER_LOCATION_ of the *!ROOM_NAME*',
-    action: '!NO_ACTION',
-    kind: 'game' }
-  );
-
-  //TODO: refactor to player.moveToRoom()
-
-  // set the location of the player
-  gameObject = playerObject.game;
-  playerObject.roomName = gameObject.startRoom;
-  roomObject = game.getRoomByName(gameObject, gameObject.startRoom);
-  playerObject.sectionName = roomObject.spawnSection;
-
-  artFileURI = './himins_txt/' + roomObject.artFileName;
-
-  files.loadTEXT(artFileURI, function(resultObject) {
-    playerObject.client.write(resultObject + '\n');
-
-    // do the spawn stuff based on player's location
-    player.enterRoom(playerObject, roomObject);
-    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-    player.enterSection(playerObject, sectionObject);
-  });
-};
-module.exports.start = start;
+module.exports.getClientByID = getClientByID;
 
 </code></pre>
         </article>
@@ -147,7 +164,7 @@ module.exports.start = start;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Jul 10 2015 22:27:13 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Sat Jul 11 2015 12:57:31 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

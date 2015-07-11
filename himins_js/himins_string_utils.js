@@ -4,10 +4,14 @@
  */
 
 
-// ## module vars
+// module vars
 var addedFlag = false;
 
-// # addStringRepeat()
+/**
+  * Extends String.prototype with function to repeat a string
+  * @param {Number} count the number of times to repeat the string
+  */
+
 var addStringRepeat = function() {
   String.prototype.repeat = function(count) {
     var result = [];

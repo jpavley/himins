@@ -18,13 +18,14 @@
 
 var
   // log vars
-  logUuid = _.uniqueId(),
-  logName = 'himmins_client_log' + logUuid,
+  logName = 'himmins_client_log', // TODO: Single rotating log file for all of himins moved to game level 
   log = bunyan.createLogger({
       name: logName,
       streams: [{
+          type: 'rotating-file',
           path: 'logs/' + logName + '.log',
-          level: 'info'
+          period: '1d',
+          count: 5
       }],
   });
 
