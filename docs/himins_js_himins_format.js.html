@@ -28,113 +28,66 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @fileOverview formats text and resolves functions for display
+ * User passes in a context and a template and format returns a rendered string
  * @module
  * @requires linewrap
  * @requires underscore
- * @requires ./himins_js/himins_game
- * @requires ./himins_js/himins_room
- * @requires ./himins_js/himins_player
- * @requires ./himins_js/himins_commands
+ * @requires mustache
+ * @requires colors
  */
 
 
-// ## includes
+// includes
 var
-  // ### 3rd party modules
-  _ = require('underscore'),
   linewrap = require('linewrap'),
+  mustache = require('mustache'),
+  colors = require('colors/safe');
 
-  // ### Himins modules
-  room = require('./himins_room.js'),
-  commands = require('./himins_commands.js'),
-  game = require('./himins_game.js'),
-  player = require('./himins_player.js');
-
-// ## consts
+// constants
 var
-  BOLD_RED_ESC = '\u001b[1;31m',
-  BOLD_GREEN_ESC = '\u001b[1;32m',
-  UL_BLUE_ESC = '\u001b[4;34m',
-  NORMAL_ESC = '\u001b[0m',
-  NL = '\n';
+  defaultTheme = {
+    silly: 'rainbow',
+    input: 'gray',
+    verbose: 'cyan',
+    prompt: 'magenta',
+    info: 'green',
+    data: 'inverse',
+    help: 'cyan',
+    warn: 'yellow',
+    debug: 'blue',
+    error: 'red',
+  };
 
-module.exports.BOLD_RED_ESC = BOLD_RED_ESC;
-module.exports.NORMAL_ESC = NORMAL_ESC;
-
-var renderFormatCodes = function(text) {
-  var result = text;
-
-  result = result.replace(/^_/g, ' ' + BOLD_RED_ESC); // match _ at SOL
-  result = result.replace(/ _/g, ' ' + BOLD_RED_ESC);
-  result = result.replace(/_ /g, NORMAL_ESC + ' ');
-  result = result.replace(/_,/g, NORMAL_ESC + ',');
-  result = result.replace(/_\./g, NORMAL_ESC + '.');
-  result = result.replace(/_;/g, NORMAL_ESC + ';');
-  result = result.replace(/_:/g, NORMAL_ESC + ':');
-  result = result.replace(/_-/g, NORMAL_ESC + '-');
-  //result = result.replace(/_\?/g, NORMAL_ESC + '?');
-  result = result.replace(/_$/g, NORMAL_ESC); // match _ at EOL
-
-  result = result.replace(/^\*/g, ' ' + BOLD_GREEN_ESC); // match * at SOL
-  result = result.replace(/ \*/g, ' ' + BOLD_GREEN_ESC);
-  result = result.replace(/\* /g, NORMAL_ESC + ' ');
-  result = result.replace(/\*,/g, NORMAL_ESC + ',');
-  result = result.replace(/\*\./g, NORMAL_ESC + '.');
-  result = result.replace(/\*;/g, NORMAL_ESC + ';');
-  result = result.replace(/\*:/g, NORMAL_ESC + ':');
-  result = result.replace(/\*-/g, NORMAL_ESC + '-');
-  //result = result.replace(/\*\?/g, NORMAL_ESC + '?');
-  result = result.replace(/\*$/g, NORMAL_ESC); // match * at EOL
-
-  return result;
-};
-
-var resolveFunctions = function(client, text) {
-  //console.log('*** himins_format.js resolveFunctions(%s)', text);
-  var
-    result = text,
-    playerObject = client.player,
-    gameObject = playerObject.game,
-    roomObject = game.getRoomByName(gameObject, playerObject.roomName),
-    sectionObject = {};
-  
-  result = result.replace(/!GAME_NAME/g, client.player.game.name);
-  result = result.replace(/!PLAYER_NAME/g, client.player.name);
-  result = result.replace(/!COMMAND_NAMES/g, commands.getCommandNames(playerObject.commands));
-  result = result.replace(/!PLAYER_INVENTORY/g, player.getInventoryNames(playerObject));
-  result = result.replace(/!PLAYER_LOCATION/g, playerObject.sectionName);
-  result = result.replace(/!ROOM_NAME/g, playerObject.roomName);
-  result = result.replace(/!PLAYER_HEALTH/g, playerObject.health);
-  result = result.replace(/!MOVING_VERB/g, _.sample(gameObject.movementVerbs));
-  result = result.replace(/!MOVING_ADVERB/g, _.sample(gameObject.movementAdverbs));
-  result = result.replace(/!GAME_ATMOSPHERE/g, _.sample(gameObject.atmosphereAdjectives));
-
-  if (roomObject) {
-    sectionObject = room.getSectionByName(roomObject, playerObject.sectionName);
-    result = result.replace(/!ROOM_DESCRIPTION/g, roomObject.description);
-  }
-
-  if (sectionObject) {
-    result = result.replace(/!SECTION_DESCRIPTION/g, sectionObject.description);
-  }
-  return result;
-};
-
-// # formatText(client, text, indent, columnWidth)
-// Transforms text (with basic markdown syntax into ASCII TTY)
-// and wraps it to fit column specified by columnWidth.
-// Words that start with an exclamation point (!WORD) are treated as function identifiers
-var formatText = function(client, text, indent, columnWidth) {
-  //console.log('*** himins_format.js formatText(%s, %s, %d, %d)', client.name, text, indent, columnWidth);
+/** 
+ * Transforms context and template into text.
+ * Waps text to fit column specified by indent and columnWidth.
+ * (See Mustache documentation for context and template usage.)
+ * Styles text according to style
+ * (See Colors documenation for style.)
+ * Returns the rendered text.
+ * @param {Object} context properties and values for template
+ * @param {String} template text with variable for subsitution
+ * @param {Number} indent how many spaces from the left to indent
+ * @param {Number} width the length of the column
+ * @param {String} style attribute from standard Colors theme
+ * @returns {String} text
+ */
+var formatText = function(context, template, indent, width, style) {
 
   var
-    result = text,
-    wrap = linewrap(indent, columnWidth, {skipScheme: 'ansi-color'});
+    output = "",
+    wrap = linewrap(indent, width, {skipScheme: 'ansi-color'});
 
-  result = resolveFunctions(client, text);
-  result = renderFormatCodes(result);
-  result = wrap(result);
-  return result;
+  colors.setTheme(defaultTheme);
+
+  output = mustache.render(template, context);
+  output = wrap(output);
+
+  if (style.length > 0) {
+    output = colors[style](output);
+  }
+
+  return output;
 };
 module.exports.formatText = formatText;
 
@@ -148,13 +101,13 @@ module.exports.formatText = formatText;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="experiments_main.module_js.html">experiments/main.js</a></li><li><a href="himins_app.module_js.html">himins_app.js</a></li><li><a href="himins_js_himins_client.module_js.html">himins_js/himins_client.js</a></li><li><a href="himins_js_himins_commands.module_js.html">himins_js/himins_commands.js</a></li><li><a href="himins_js_himins_file_utils.module_js.html">himins_js/himins_file_utils.js</a></li><li><a href="himins_js_himins_format.module_js.html">himins_js/himins_format.js</a></li><li><a href="himins_js_himins_game.module_js.html">himins_js/himins_game.js</a></li><li><a href="himins_js_himins_player.module_js.html">himins_js/himins_player.js</a></li><li><a href="himins_js_himins_repl.module_js.html">himins_js/himins_repl.js</a></li><li><a href="himins_js_himins_room.module_js.html">himins_js/himins_room.js</a></li><li><a href="himins_js_himins_string_utils.module_js.html">himins_js/himins_string_utils.js</a></li><li><a href="test_himins_client_tests.module_js.html">test/himins_client_tests.js</a></li><li><a href="test_main_tests.module_js.html">test/main_tests.js</a></li></ul><h3>Classes</h3><ul><li><a href="experiments_main.module_js-Player.html">Player</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="experiments_main.module_js.html">experiments/main.js</a></li><li><a href="himins_app.module_js.html">himins_app.js</a></li><li><a href="himins_js_himins_client.module_js.html">himins_js/himins_client.js</a></li><li><a href="himins_js_himins_commands.module_js.html">himins_js/himins_commands.js</a></li><li><a href="himins_js_himins_file_utils.module_js.html">himins_js/himins_file_utils.js</a></li><li><a href="himins_js_himins_format.module_js.html">himins_js/himins_format.js</a></li><li><a href="himins_js_himins_game.module_js.html">himins_js/himins_game.js</a></li><li><a href="himins_js_himins_player.module_js.html">himins_js/himins_player.js</a></li><li><a href="himins_js_himins_repl.module_js.html">himins_js/himins_repl.js</a></li><li><a href="himins_js_himins_room.module_js.html">himins_js/himins_room.js</a></li><li><a href="himins_js_himins_string_utils.module_js.html">himins_js/himins_string_utils.js</a></li><li><a href="test_himins_client_tests.module_js.html">test/himins_client_tests.js</a></li><li><a href="test_himins_format_tests.module_js.html">test/himins_format_tests.js</a></li><li><a href="test_main_tests.module_js.html">test/main_tests.js</a></li></ul><h3>Classes</h3><ul><li><a href="experiments_main.module_js-Player.html">Player</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jul 07 2015 23:42:19 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Jul 10 2015 22:27:13 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

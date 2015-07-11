@@ -34,11 +34,18 @@ describe('client manager unit tests', function() {
 
     var
       testClientList2 = clientManager.createNewEmptyClientList(),
+      template1 = "Human {{player}} haa joined the game! Watch for which you pray...",
+      context1 = {
+        player: "Greg Bear",
+      },
+      indent = 2,
+      width = 60,
       result;
 
     testClientList2.push({
       name: 'testClient1', 
       writable: true,
+      width: 30,
       destroy: function () {},
       write: function() { }
     });
@@ -46,11 +53,20 @@ describe('client manager unit tests', function() {
     testClientList2.push({
       name: 'testClient2', 
       writable: false,
+      width: 60,
       destroy: function () {},
       write: function() { }
   });
 
-    result = clientManager.broadcast('hello', testClientList2);
+    testClientList2.push({
+      name: 'testClient3', 
+      writable: true,
+      width: 80,
+      destroy: function () {},
+      write: function() { }
+  });
+
+    result = clientManager.broadcast(template1, context1, indent, testClientList2);
 
     it('result client list should not be null', function() {
       assert.notEqual(result, null);
@@ -61,7 +77,7 @@ describe('client manager unit tests', function() {
     });
 
     it('result client list should have one member', function() {
-      assert.equal(result.length, 1);
+      assert.equal(result.length, 2);
     });
 
     it('result client list member name should testClient1', function() {

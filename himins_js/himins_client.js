@@ -5,14 +5,28 @@
  * Broadcasts messages to all clients.
  * @module
  * @requires underscore
+ * @requires bunyan
+ * @requires himins_format
+
  */
 
  var
   // includes
   _ = require('underscore'),
-  format = require('./himins_format');
+  bunyan = require('bunyan'),
+  formatter = require('./himins_format');
 
-
+var
+  // log vars
+  logUuid = _.uniqueId(),
+  logName = 'himmins_client_log' + logUuid,
+  log = bunyan.createLogger({
+      name: logName,
+      streams: [{
+          path: 'logs/' + logName + '.log',
+          level: 'info'
+      }],
+  });
 
 /**
  * Creates and returns a new empty client list
@@ -35,27 +49,28 @@ module.exports.createNewEmptyClientList = createNewEmptyClientList;
  * @returns {Array}
 */
 
-var broadcast = function(message, clientList) {
+var broadcast = function(template, context, indent, clientList) {
   var
     deadList = [],
-    payload = '';
+    style = "info",
+    message = "";
 
   _.each(clientList, function(client, index, list) {
 
     if (client.writable) {
+        
+        message = formatter.formatText(context, template, indent, client.width, style);
+        client.write(message + '\n');
 
-      if (client.player) {
-        // TODO: Log payload
-        payload = format.formatText(e, payload, 2, 78);
-        client.write(payload + '\n');
-      } else {
-        // TODO: Log fact of client without player (could be a test!)       
-      }
+        log.info('client %s broadcast: %s', client.name, message);
+
+        console.log(message);
 
     } else {
 
       // TODO: Log fact of dead client
       // client is not writable, kill it
+      log.info('client %s is not writable', client.name);
       deadList.push(client);
       client.destroy();
 

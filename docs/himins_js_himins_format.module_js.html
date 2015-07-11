@@ -34,7 +34,8 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>formats text and resolves functions for display</p></div>
+            <div class="description"><p>formats text and resolves functions for display
+User passes in a context and a template and format returns a rendered string</p></div>
         
 
         
@@ -95,13 +96,9 @@
         
             <li>module:underscore</li>
         
-            <li>module:./himins_js/himins_game</li>
+            <li>module:mustache</li>
         
-            <li>module:./himins_js/himins_room</li>
-        
-            <li>module:./himins_js/himins_player</li>
-        
-            <li>module:./himins_js/himins_commands</li>
+            <li>module:colors</li>
         </ul>
     
 
@@ -113,6 +110,260 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~formatText"><span class="type-signature">(inner) </span>formatText<span class="signature">(context, template, indent, width, style)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Transforms context and template into text.
+Waps text to fit column specified by indent and columnWidth.
+(See Mustache documentation for context and template usage.)
+Styles text according to style
+(See Colors documenation for style.)
+Returns the rendered text.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>properties and values for template</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>template</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>text with variable for subsitution</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>how many spaces from the left to indent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the length of the column</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>attribute from standard Colors theme</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="himins_js_himins_format.js.html">himins_js/himins_format.js</a>, <a href="himins_js_himins_format.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>text</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -128,13 +379,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="experiments_main.module_js.html">experiments/main.js</a></li><li><a href="himins_app.module_js.html">himins_app.js</a></li><li><a href="himins_js_himins_client.module_js.html">himins_js/himins_client.js</a></li><li><a href="himins_js_himins_commands.module_js.html">himins_js/himins_commands.js</a></li><li><a href="himins_js_himins_file_utils.module_js.html">himins_js/himins_file_utils.js</a></li><li><a href="himins_js_himins_format.module_js.html">himins_js/himins_format.js</a></li><li><a href="himins_js_himins_game.module_js.html">himins_js/himins_game.js</a></li><li><a href="himins_js_himins_player.module_js.html">himins_js/himins_player.js</a></li><li><a href="himins_js_himins_repl.module_js.html">himins_js/himins_repl.js</a></li><li><a href="himins_js_himins_room.module_js.html">himins_js/himins_room.js</a></li><li><a href="himins_js_himins_string_utils.module_js.html">himins_js/himins_string_utils.js</a></li><li><a href="test_himins_client_tests.module_js.html">test/himins_client_tests.js</a></li><li><a href="test_main_tests.module_js.html">test/main_tests.js</a></li></ul><h3>Classes</h3><ul><li><a href="experiments_main.module_js-Player.html">Player</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="experiments_main.module_js.html">experiments/main.js</a></li><li><a href="himins_app.module_js.html">himins_app.js</a></li><li><a href="himins_js_himins_client.module_js.html">himins_js/himins_client.js</a></li><li><a href="himins_js_himins_commands.module_js.html">himins_js/himins_commands.js</a></li><li><a href="himins_js_himins_file_utils.module_js.html">himins_js/himins_file_utils.js</a></li><li><a href="himins_js_himins_format.module_js.html">himins_js/himins_format.js</a></li><li><a href="himins_js_himins_game.module_js.html">himins_js/himins_game.js</a></li><li><a href="himins_js_himins_player.module_js.html">himins_js/himins_player.js</a></li><li><a href="himins_js_himins_repl.module_js.html">himins_js/himins_repl.js</a></li><li><a href="himins_js_himins_room.module_js.html">himins_js/himins_room.js</a></li><li><a href="himins_js_himins_string_utils.module_js.html">himins_js/himins_string_utils.js</a></li><li><a href="test_himins_client_tests.module_js.html">test/himins_client_tests.js</a></li><li><a href="test_himins_format_tests.module_js.html">test/himins_format_tests.js</a></li><li><a href="test_main_tests.module_js.html">test/main_tests.js</a></li></ul><h3>Classes</h3><ul><li><a href="experiments_main.module_js-Player.html">Player</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jul 07 2015 23:42:19 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Jul 10 2015 22:27:13 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
