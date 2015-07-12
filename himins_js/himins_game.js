@@ -13,11 +13,18 @@
 
 var MongoClient = require('mongodb').MongoClient,
     mongo = new MongoClient(),
-    gameObject = {};
+    gameObject = {
+      clientList: [],
+      playerList: [],
+      gameYear: 0,
+      gameDay: 0,
+      gameHour: 0,
+      gameMinute: 0
+    };
 
 mongo.connect("mongodb://localhost/", function(err, db) { // TODO: Get server address from config file
   var himinsGameDB = db.db('himinsTest'); //TODO: get game db name from config file
-  // TODO: load the game oboejct
+  // TODO: load the game objects
 });
 
 // Logging
@@ -34,11 +41,6 @@ var
           count: 5
       }],
   });
-
-// module vars
-var
-  clientList = [],
-  playerList = [];
 
 /**
  * Starts or restarts the game
