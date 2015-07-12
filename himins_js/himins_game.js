@@ -16,7 +16,7 @@ var MongoClient = require('mongodb').MongoClient,
     gameObject = {};
 
 mongo.connect("mongodb://localhost/", function(err, db) { // TODO: Get server address from config file
-  var himinsGameDB = db.db('himinsGame'); //TODO: get game db name from config file
+  var himinsGameDB = db.db('himinsTest'); //TODO: get game db name from config file
   // TODO: load the game oboejct
 });
 
