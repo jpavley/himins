@@ -18,7 +18,7 @@
 
 var
   // log vars
-  logName = 'himmins_client_log', // TODO: Single rotating log file for all of himins moved to game level 
+  logName = 'himins_client', // TODO: Single rotating log file for all of himins moved to game level 
   log = bunyan.createLogger({
       name: logName,
       streams: [{

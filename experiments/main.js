@@ -6,17 +6,20 @@
  * @requires bunyan
  */
 
-var events = require('events');
-var colors = require('colors');
-var bunyan = require('bunyan');
-
-var log = bunyan.createLogger({
-        name: 'himins_experiment',
-        streams: [{
-            path: 'himins_experiment.log',
-            level: 'info'
-        }],
-    });
+var 
+  events = require('events'),
+  colors = require('colors'),
+  bunyan = require('bunyan'),
+  logName = 'himins_experiment', 
+  log = bunyan.createLogger({
+      name: logName,
+      streams: [{
+          type: 'rotating-file',
+          path: 'logs/' + logName + '.log',
+          period: '1d',
+          count: 5
+      }],
+  });
 
 Player.prototype = events.EventEmitter.prototype;
 

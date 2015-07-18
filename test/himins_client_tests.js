@@ -34,7 +34,7 @@ describe('client manager unit tests', function() {
 
     var
       testClientList2 = clientManager.createNewEmptyClientList(),
-      template1 = "Human {{player}} haa joined the game! Watch for which you pray...",
+      template1 = "Human {{player}} has joined the game! Watch for which you pray...",
       context1 = {
         player: "Greg Bear",
       },

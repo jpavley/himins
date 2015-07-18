@@ -13,7 +13,7 @@
 
 var
   bunyan = require('bunyan'),
-  logName = 'himmins_client_log', // TODO: Get filename from config file 
+  logName = 'himins_game', // TODO: Get filename from config file 
   log = bunyan.createLogger({
       name: logName,
       streams: [{
@@ -26,46 +26,68 @@ var
 
 // Persistance vars
 
-var 
-  MongoClient = require('mongodb').MongoClient,
-  mongoServerURL = 'mongodb://localhost/', // TODO: Get server address from config file
-  mongo = new MongoClient();
+// var 
+//   MongoClient = require('mongodb').MongoClient,
+//   mongoServerURL = 'mongodb://localhost/'; // TODO: Get server address from config file
 
 // Game vars
 
-var
-  gameObject = {
-    clientList: [],
-    playerList: []
-  },
-  playerObject = {},
-  thingObject = {},
-  worldObject = {
-    tickCount: 0,
-  };
+// var
+//   _ = require('underscore'),
+//   gameObject = {
+//     gameID: null,
+//     clientList: [],
+//     playerList: []
+//   },
+//   playerObject = {},
+//   thingObject = {},
+//   worldObject = {
+//     tickCount: 0,
+//   };
 
 /**
  * Starts or restarts the game
+ * @returns {Number} game ID
  */
 
 var start = function() {
-  var result = {};
+  //var result = false;
+  log.info('starting game');
 
   // create from scratch or load the game properties from persistence
 
-  mongo.connect(mongoServerURL, function(err, db) {
-    log.info("start() connected to Himins Mongo Server: %s", mongoServerURL);
-    loadGameVars(db, function() {
-      db.close();
-    });
-  });
+  // MongoClient.connect(mongoServerURL, function(err, db) {
+
+  //   if (err) {
+  //     log.info('start() could not connect to Himins Mongo Server: %s', mongoServerURL);
+
+  //   } else {
+  //     log.info('start() connected to Himins Mongo Server: %s', mongoServerURL);
+
+  //     loadGameVars(db, function() {
+  //       db.close();
+
+  //     });
+
+  //   }
+  // });
 
   // start the world clock ticking
   // get ready to welcome users to the game
 
-  return result;
+  // return result;
 };
+
 module.exports.start = start;
+
+/**
+ * Load or init game vars
+ */
+
+var loadGameVars = function(db, callback) {
+  // TODO: if game vars don't exist create them
+};
+module.exports.loadGameVars = loadGameVars;
 
 /**
  * Add a client to the game
