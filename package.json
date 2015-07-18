@@ -26,7 +26,8 @@
     "underscore": "1.5.x",
     "mocha": "2.2.x",
     "telnet-stream": "0.0.x",
-    "mustache": "2.1.x"
+    "mustache": "2.1.x",
+    "mongodb": "2.0.x"
   },
   "devDependencies": {
     "bunyan": "^1.4.0",

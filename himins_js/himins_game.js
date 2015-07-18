@@ -9,28 +9,10 @@
  * @module
  */
 
-// Persistance
-
-var MongoClient = require('mongodb').MongoClient,
-    mongo = new MongoClient(),
-    gameObject = {
-      clientList: [],
-      playerList: [],
-      gameYear: 0,
-      gameDay: 0,
-      gameHour: 0,
-      gameMinute: 0
-    };
-
-mongo.connect("mongodb://localhost/", function(err, db) { // TODO: Get server address from config file
-  var himinsGameDB = db.db('himinsTest'); //TODO: get game db name from config file
-  // TODO: load the game objects
-});
-
-// Logging
+// Logging vars
 
 var
-  // log vars
+  bunyan = require('bunyan'),
   logName = 'himmins_client_log', // TODO: Get filename from config file 
   log = bunyan.createLogger({
       name: logName,
@@ -42,12 +24,45 @@ var
       }],
   });
 
+// Persistance vars
+
+var 
+  MongoClient = require('mongodb').MongoClient,
+  mongoServerURL = 'mongodb://localhost/', // TODO: Get server address from config file
+  mongo = new MongoClient();
+
+// Game vars
+
+var
+  gameObject = {
+    clientList: [],
+    playerList: []
+  },
+  playerObject = {},
+  thingObject = {},
+  worldObject = {
+    tickCount: 0,
+  };
+
 /**
  * Starts or restarts the game
  */
 
 var start = function() {
   var result = {};
+
+  // create from scratch or load the game properties from persistence
+
+  mongo.connect(mongoServerURL, function(err, db) {
+    log.info("start() connected to Himins Mongo Server: %s", mongoServerURL);
+    loadGameVars(db, function() {
+      db.close();
+    });
+  });
+
+  // start the world clock ticking
+  // get ready to welcome users to the game
+
   return result;
 };
 module.exports.start = start;
