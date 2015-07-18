@@ -13,16 +13,13 @@ describe('game manager unit tests', function() {
 
   describe('#start()', function() {
 
-    var
-      gameID = gameManager.start();
+    it('return should be true because it just started', function() {
+      assert.equal(gameManager.start(), true);
+    });
 
-    // it('game id should not be null', function() {
-    //   assert.equal(gameID, null);
-    // });
-
-    // it('game id should type of Number', function() {
-    //   assert.equal(typeof gameID, Number);
-    // });
+    it('return should be false because it was already started', function() {
+      assert.equal(gameManager.start(), false);
+    });
 
   });
 });

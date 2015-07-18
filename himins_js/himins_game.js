@@ -26,56 +26,64 @@ var
 
 // Persistance vars
 
-// var 
-//   MongoClient = require('mongodb').MongoClient,
-//   mongoServerURL = 'mongodb://localhost/'; // TODO: Get server address from config file
+var 
+  MongoClient = require('mongodb').MongoClient,
+  mongoServerURL = 'mongodb://localhost/'; // TODO: Get server address from config file
 
 // Game vars
 
-// var
-//   _ = require('underscore'),
-//   gameObject = {
-//     gameID: null,
-//     clientList: [],
-//     playerList: []
-//   },
-//   playerObject = {},
-//   thingObject = {},
-//   worldObject = {
-//     tickCount: 0,
-//   };
+var
+  gameStarted = false,
+  gameDoc = {
+    clientList: [],
+    playerList: [],
+    tickCount: 0
+  };
 
 /**
  * Starts or restarts the game
- * @returns {Number} game ID
+ * If the game is already started does nothing and return false
+ * If the game is not started tries to load game from persistence
+ * If a saved game doesn't exist, create a new game
+ * either way returns true if the game successfully starts
+ * @returns {Boolean} game did start
  */
 
 var start = function() {
-  //var result = false;
-  log.info('starting game');
 
-  // create from scratch or load the game properties from persistence
+  var didGameStart = false;
 
-  // MongoClient.connect(mongoServerURL, function(err, db) {
+  if (gameStarted) {
+    // sorry, you can only call this function once!
+    log.error('game already started!');    
+  } else {
+    log.info('trying to start game');
 
-  //   if (err) {
-  //     log.info('start() could not connect to Himins Mongo Server: %s', mongoServerURL);
+    // create from scratch or load the game properties from persistence
 
-  //   } else {
-  //     log.info('start() connected to Himins Mongo Server: %s', mongoServerURL);
+    MongoClient.connect(mongoServerURL, function(err, db) {
 
-  //     loadGameVars(db, function() {
-  //       db.close();
+      if (err) {
+        log.error('start() could not connect to Himins Mongo Server: %s', mongoServerURL);
 
-  //     });
+      } else {
+        log.info('start() connected to Himins Mongo Server: %s', mongoServerURL);
 
-  //   }
-  // });
+        loadGameVars(db, function() {
+          log.info('game started successfully');
+          gameStarted = true;
+          didGameStart = true;
+          db.close();
+        });
 
-  // start the world clock ticking
-  // get ready to welcome users to the game
+      }
+    });
 
-  // return result;
+    // start the world clock ticking
+    // get ready to welcome users to the game
+
+  }
+  return didGameStart;
 };
 
 module.exports.start = start;
@@ -107,7 +115,7 @@ var getPlayer = function(game, client) {
   // TODO: return a player for this client or create one for this client and persist
   return result;
 };
-module.exports.start = getPlayer;
+module.exports.getPlayer = getPlayer;
 
 /**
  * Returns a current or new player for the client
@@ -116,7 +124,7 @@ module.exports.start = getPlayer;
 var processUserInput = function(game, client, data) {
   // TODO: updated game world based on user input and persist
 };
-module.exports.start = processUserInput;
+module.exports.getPlayer = processUserInput;
 
 /**
  * Sends a message to the logger
@@ -124,7 +132,7 @@ module.exports.start = processUserInput;
 
 var logInfo = function(message) {
 };
-module.exports.start = logInfo;
+module.exports.getPlayer = logInfo;
 
 /**
  * Returns the number of clients connected to the server
