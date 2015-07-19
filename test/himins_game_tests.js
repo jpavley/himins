@@ -43,6 +43,15 @@ describe('game manager unit tests', function() {
     });
   });
 
+  describe('#stop()', function() {
+
+    it('return should be true because it stopped the game', function() {
+      assert.equal(gameManager.stop(), true);
+    });
+
+  });
+
+
   describe('#getGameState()', function() {
 
     var gameState;

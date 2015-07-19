@@ -76,18 +76,18 @@ var start = function() {
       if (err) throw err;
 
       var collection = db.collection(mongoCollection);
-        collection.find(gameKey).toArray(function (err, results) {
-          if (results.length === 0) {
-            collection.insert(gameInitialState, function (err, docs) {
-              log.info('inserted gameInitialState into persistence');
-              db.close();
-            });
-          } else {
-            gameState = results[0]; // this might need to move to a call back!
-            log.info('loaded gameState from persistence');
-            db.close();            
-          }
-        });
+      collection.find(gameKey).toArray(function (err, results) {
+        if (results.length === 0) {
+          collection.insert(gameInitialState, function (err, docs) {
+            log.info('inserted gameInitialState into persistence');
+            db.close();
+          });
+        } else {
+          gameState = results[0]; // this might need to move to a call back!
+          log.info('loaded gameState from persistence');
+          db.close();            
+        }
+      });
     });
 
     // start the world clock ticking
@@ -107,7 +107,26 @@ module.exports.start = start;
  */ 
 
 var stop = function() {
-  return true;
+
+  var result = false; // return false if game is not started
+
+  if (gameStarted) {
+    result = true;
+    MongoClient.connect(mongoServerURL, function (err, db) {
+
+      if (err) throw err;
+
+      var collection = db.collection(mongoCollection);
+
+      collection.save(gameState, function (err, results) {
+        log.info('saved game state into persistence');
+        db.close();
+      });
+    });
+
+  }
+
+  return result;
 };
 
 module.exports.stop = stop;
