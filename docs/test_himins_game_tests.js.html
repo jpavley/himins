@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: himins_js/himins_file_utils.js</title>
+    <title>JSDoc: Source: test/himins_game_tests.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: himins_js/himins_file_utils.js</h1>
+    <h1 class="page-title">Source: test/himins_game_tests.js</h1>
 
     
 
@@ -27,54 +27,69 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Adds functionality to Javascript's String object
+ * @fileOverview Game module tests
  * @module
- * @requires fs
+ * @requires assert
+ * @requires ../himins_js/himins_game
  */
 
-// ## includes
-var
-  fs = require('fs');
+var 
+  assert = require('assert'),
+  gameManager = require('../himins_js/himins_game');
 
-// # loadJSON(fileName, callBackFunc)
-// Loads JSON data from a file into an object.
-// Returns the object in the callBack function.
-// Returns empty object on failure.
-var loadJSON = function(fileName, callBackFunc) {
-  console.log('*** himins_file_utils.js loadJSON(%s)', fileName);
-  var
-    resultObject = {}; // this is the entity!
+var 
+  MongoClient = require('mongodb').MongoClient,
+  mongoServerURL = 'mongodb://127.0.0.1:27017/himinsTest', // TODO: Get server address from config file
+  mongoCollection = 'himinsGame'; // TODO: Get server address from config file
 
-  fs.readFile(fileName, 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      resultObject = JSON.parse(data);
-      callBackFunc(resultObject);
-    }
+describe('game manager unit tests', function() {
+
+  var 
+    gameName = 'himinsGameState_0_1',
+    gameKey = { name: gameName };
+
+  gameManager.start();
+
+  describe('#start()', function() {
+
+    it('return should be false because it was already started', function() {
+      assert.equal(gameManager.start(), false);
+    });
+
+    it('should contain the initial game state data', function() {
+      MongoClient.connect(mongoServerURL, function (err, db) {
+
+        if (err) throw err;
+
+        var collection = db.collection(mongoCollection);
+
+          collection.find(gameKey).toArray(function (err, results) {
+            assert.equal(results[0].name, gameName);
+            db.close();
+          });
+      });
+    });
   });
-};
-module.exports.loadJSON = loadJSON;
 
-// # loadTEXT(fileName, callBackFunc)
-// Loads TEXT data from a file into an object.
-// Returns the object in the callBack function.
-// Returns empty object on failure.
-var loadTEXT = function(fileName, callBackFunc) {
-  console.log('*** himins_file_utils.js loadTEXT(%s)', fileName);
-  var
-    resultObject = {};
+  describe('#getGameState()', function() {
 
-  fs.readFile(fileName, 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      resultObject = data.toString('utf8');
-      callBackFunc(resultObject);
-    }
+    var gameState;
+
+    gameManager.start();
+    gameState = gameManager.getGameState();
+
+    console.log(gameState);
+
+    it('should not be null', function() {
+      assert.notEqual(gameState, null);
+    });
+
+    it('should have a name of ' + gameName, function() {
+      assert.equal(gameState.name, gameName);
+    });
   });
-};
-module.exports.loadTEXT = loadTEXT;
+
+});
 </code></pre>
         </article>
     </section>

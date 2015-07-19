@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: himins_js/himins_file_utils.js</title>
+    <title>JSDoc: Module: test/himins_game_tests.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,102 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: himins_js/himins_file_utils.js</h1>
+    <h1 class="page-title">Module: test/himins_game_tests.js</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Adds functionality to Javascript's String object
- * @module
- * @requires fs
- */
+</header>
 
-// ## includes
-var
-  fs = require('fs');
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Game module tests</p></div>
+        
 
-// # loadJSON(fileName, callBackFunc)
-// Loads JSON data from a file into an object.
-// Returns the object in the callBack function.
-// Returns empty object on failure.
-var loadJSON = function(fileName, callBackFunc) {
-  console.log('*** himins_file_utils.js loadJSON(%s)', fileName);
-  var
-    resultObject = {}; // this is the entity!
+        
 
-  fs.readFile(fileName, 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      resultObject = JSON.parse(data);
-      callBackFunc(resultObject);
-    }
-  });
-};
-module.exports.loadJSON = loadJSON;
 
-// # loadTEXT(fileName, callBackFunc)
-// Loads TEXT data from a file into an object.
-// Returns the object in the callBack function.
-// Returns empty object on failure.
-var loadTEXT = function(fileName, callBackFunc) {
-  console.log('*** himins_file_utils.js loadTEXT(%s)', fileName);
-  var
-    resultObject = {};
+<dl class="details">
 
-  fs.readFile(fileName, 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      resultObject = data.toString('utf8');
-      callBackFunc(resultObject);
-    }
-  });
-};
-module.exports.loadTEXT = loadTEXT;
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="test_himins_game_tests.js.html">test/himins_game_tests.js</a>, <a href="test_himins_game_tests.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:assert</li>
+        
+            <li>module:../himins_js/himins_game</li>
+        </ul>
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

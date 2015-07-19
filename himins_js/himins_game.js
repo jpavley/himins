@@ -28,13 +28,18 @@ var
 
 var 
   MongoClient = require('mongodb').MongoClient,
-  mongoServerURL = 'mongodb://localhost/'; // TODO: Get server address from config file
+  mongoServerURL = 'mongodb://127.0.0.1:27017/himinsTest', // TODO: Get server address from config file
+  mongoCollection = 'himinsGame'; // TODO: Get server address from config file
 
 // Game vars
 
 var
   gameStarted = false,
-  gameDoc = {
+  gameName = 'himinsGameState_0_1',
+  gameKey = { name: gameName },
+  gameState = {},
+  gameInitialState = {
+    name: gameName,
     clientList: [],
     playerList: [],
     tickCount: 0
@@ -47,7 +52,7 @@ var
  * If a saved game doesn't exist, create a new game
  * either way returns true if the game successfully starts
  * @returns {Boolean} game did start
- */
+ */ 
 
 var start = function() {
 
@@ -57,45 +62,64 @@ var start = function() {
     // sorry, you can only call this function once!
     log.error('game already started!');    
   } else {
-    log.info('trying to start game');
+    log.info('starting game');
+
+    gameStarted = true;
+    didGameStart = true;
+
+    gameState = gameInitialState;
 
     // create from scratch or load the game properties from persistence
 
-    MongoClient.connect(mongoServerURL, function(err, db) {
+    MongoClient.connect(mongoServerURL, function (err, db) {
 
-      if (err) {
-        log.error('start() could not connect to Himins Mongo Server: %s', mongoServerURL);
+      if (err) throw err;
 
-      } else {
-        log.info('start() connected to Himins Mongo Server: %s', mongoServerURL);
-
-        loadGameVars(db, function() {
-          log.info('game started successfully');
-          gameStarted = true;
-          didGameStart = true;
-          db.close();
+      var collection = db.collection(mongoCollection);
+        collection.find(gameKey).toArray(function (err, results) {
+          if (results.length === 0) {
+            collection.insert(gameInitialState, function (err, docs) {
+              db.close();
+            });
+          } else {
+            gameState = results[0];
+            db.close();            
+          }
         });
-
-      }
     });
 
     // start the world clock ticking
     // get ready to welcome users to the game
 
-  }
+  } // end else
+
   return didGameStart;
 };
 
 module.exports.start = start;
 
 /**
- * Load or init game vars
- */
+ * Stops the game
+ * Writes game state to persistence
+ * @returns {Boolean} game did stop
+ */ 
 
-var loadGameVars = function(db, callback) {
-  // TODO: if game vars don't exist create them
+var stop = function() {
+  return true;
 };
-module.exports.loadGameVars = loadGameVars;
+
+module.exports.stop = stop;
+
+/**
+ * Returns the game state object
+ * @returns {Object} game state
+ */ 
+
+var getGameState = function() {
+  return gameState;
+};
+
+module.exports.getGameState = getGameState;
 
 /**
  * Add a client to the game
