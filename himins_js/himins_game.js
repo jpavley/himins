@@ -79,10 +79,12 @@ var start = function() {
         collection.find(gameKey).toArray(function (err, results) {
           if (results.length === 0) {
             collection.insert(gameInitialState, function (err, docs) {
+              log.info('inserted gameInitialState into persistence');
               db.close();
             });
           } else {
             gameState = results[0]; // this might need to move to a call back!
+            log.info('loaded gameState from persistence');
             db.close();            
           }
         });
