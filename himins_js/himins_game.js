@@ -46,11 +46,11 @@ var
   };
 
 /**
- * Starts or restarts the game
- * If the game is already started does nothing and return false
- * If the game is not started tries to load game from persistence
- * If a saved game doesn't exist, create a new game
- * either way returns true if the game successfully starts
+ * Starts or restarts the game.
+ * If the game is already started does nothing and return false.
+ * If the game is not started tries to load game from persistence.
+ * If a saved game doesn't exist, create a new game.
+ * Either way returns true if the game successfully starts.
  * @returns {Boolean} game did start
  */ 
 
@@ -82,7 +82,7 @@ var start = function() {
               db.close();
             });
           } else {
-            gameState = results[0];
+            gameState = results[0]; // this might need to move to a call back!
             db.close();            
           }
         });
@@ -99,8 +99,8 @@ var start = function() {
 module.exports.start = start;
 
 /**
- * Stops the game
- * Writes game state to persistence
+ * Stops the game.
+ * Writes game state to persistence.
  * @returns {Boolean} game did stop
  */ 
 
