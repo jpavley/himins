@@ -16,8 +16,8 @@ var
 
 describe('game manager unit tests', function() {
 
-  var 
-    gameName = 'himinsGameState_0_1',
+  var
+    gameName = gameManager.getGameName(),
     gameKey = { name: gameName };
 
   gameManager.start();
@@ -50,7 +50,7 @@ describe('game manager unit tests', function() {
     gameManager.start();
     gameState = gameManager.getGameState();
 
-    console.log(gameState);
+    //console.log(gameState);
 
     it('should not be null', function() {
       assert.notEqual(gameState, null);

@@ -35,7 +35,7 @@ var
 
 var
   gameStarted = false,
-  gameName = 'himinsGameState_0_1',
+  gameName = 'himinsGameRelease_0_1',
   gameKey = { name: gameName },
   gameState = {},
   gameInitialState = {
@@ -110,6 +110,16 @@ var stop = function() {
 
 module.exports.stop = stop;
 
+/**
+ * Returns the game name
+ * @returns {String} game name
+ */ 
+
+var getGameName = function() {
+  return gameName;
+};
+
+module.exports.getGameName = getGameName;
 /**
  * Returns the game state object
  * @returns {Object} game state
