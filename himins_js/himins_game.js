@@ -38,6 +38,8 @@ var
   gameName = 'himinsGameRelease_0_1',
   gameKey = { name: gameName },
   gameState = {},
+  gameIntervalID = 0,
+  gameFPS = 1, // TODO: Get FPS from config file
   gameInitialState = {
     name: gameName,
     clientList: [],
@@ -60,7 +62,8 @@ var start = function() {
 
   if (gameStarted) {
     // sorry, you can only call this function once!
-    log.error('game already started!');    
+    log.error('game already started!');
+
   } else {
     log.info('starting game');
 
@@ -88,10 +91,12 @@ var start = function() {
           db.close();            
         }
       });
+
     });
 
     // start the world clock ticking
-    // get ready to welcome users to the game
+    run();
+    gameIntervalID = setInterval(run, 1000/gameFPS);
 
   } // end else
 
@@ -112,6 +117,8 @@ var stop = function() {
 
   if (gameStarted) {
     result = true;
+    clearInterval(gameIntervalID);
+
     MongoClient.connect(mongoServerURL, function (err, db) {
 
       if (err) throw err;
@@ -130,6 +137,50 @@ var stop = function() {
 };
 
 module.exports.stop = stop;
+
+/**
+ * Executes the game loop.
+ * Called by setInterval based on FPS.
+ */ 
+
+var run = function() {
+  updateGameState();
+  updatePlayers();
+  updateClients();
+};
+
+module.exports.run = run;
+
+/**
+ * Updates the game state
+ */ 
+
+var updateGameState = function() {
+  log.info('updateGameState');
+};
+
+module.exports.updateGameState = updateGameState;
+
+/**
+ * Updates the player states
+ */ 
+
+var updatePlayers = function() {
+  log.info('updatePlayers');
+};
+
+module.exports.updatePlayers = updatePlayers;
+
+/**
+ * Updates the client states
+ */ 
+
+var updateClients = function() {
+  log.info('updateClients');
+};
+
+module.exports.updateClients = updateClients;
+
 
 /**
  * Returns the game name
