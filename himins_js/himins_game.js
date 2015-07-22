@@ -237,6 +237,7 @@ module.exports.getPlayer = processUserInput;
  */
 
 var logInfo = function(message) {
+  log.info(message);
 };
 module.exports.getPlayer = logInfo;
 
