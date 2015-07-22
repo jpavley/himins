@@ -51,7 +51,6 @@ describe('game manager unit tests', function() {
 
   });
 
-
   describe('#getGameState()', function() {
 
     var gameState;
