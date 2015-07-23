@@ -22,12 +22,14 @@
     "node": "0.12.x"
   },
   "dependencies": {
+    "colors": "^1.1.2",
+    "gameloop": "^0.3.2",
     "linewrap": "0.2.x",
-    "underscore": "1.5.x",
     "mocha": "2.2.x",
-    "telnet-stream": "0.0.x",
+    "mongodb": "2.0.x",
     "mustache": "2.1.x",
-    "mongodb": "2.0.x"
+    "telnet": "0.0.1",
+    "underscore": "1.5.x"
   },
   "devDependencies": {
     "bunyan": "^1.4.0",
