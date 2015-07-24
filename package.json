@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "colors": "^1.1.2",
-    "gameloop": "^0.3.2",
     "linewrap": "0.2.x",
     "mocha": "2.2.x",
     "mongodb": "2.0.x",
