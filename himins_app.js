@@ -55,7 +55,7 @@ telnet.createServer(function (client) {
     if(e.command === 'sb') {
       client.width = e.width;
       client.height = e.height;
-      log.info('client %s resized window to %d by %d', 
+      gameManager.logInfo('client %s resized window to %d by %d', 
         client.name, client.width, client.height);
     }
 
