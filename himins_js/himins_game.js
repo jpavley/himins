@@ -156,7 +156,7 @@ module.exports.run = run;
  */ 
 
 var updateGameState = function() {
-  log.info('updateGameState');
+  //log.info('updateGameState');
 };
 
 module.exports.updateGameState = updateGameState;
@@ -166,7 +166,7 @@ module.exports.updateGameState = updateGameState;
  */ 
 
 var updatePlayers = function() {
-  log.info('updatePlayers');
+  //log.info('updatePlayers');
 };
 
 module.exports.updatePlayers = updatePlayers;
@@ -176,7 +176,7 @@ module.exports.updatePlayers = updatePlayers;
  */ 
 
 var updateClients = function() {
-  log.info('updateClients');
+  //log.info('updateClients');
 };
 
 module.exports.updateClients = updateClients;

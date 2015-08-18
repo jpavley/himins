@@ -58,12 +58,13 @@ telnet.createServer(function (client) {
     if(e.command === 'sb') {
       client.width = e.width;
       client.height = e.height;
-      gameManager.logInfo('client %s resized window to %d by %d', 
-        client.name, client.width, client.height);
+      var windowMessage = 'client ' + client.name + ' resized window to ' + client.width + ' by ' + client.height;
+      gameManager.logInfo(windowMessage);
     }
 
     gameManager.addClient(game, client);
-    gameManager.logInfo('client %s connected!', client.name);
+    var clientMessage = 'client ' + client.name + ' connected!';
+    gameManager.logInfo(clientMessage);
     client.player = gameManager.getPlayer(game, client);
   });
 
