@@ -91,6 +91,3 @@ console.log('');
 // give a hint to the webmaster
 console.log('// Use telnet client to access: telnet ' + ipAddress + ' ' + portNumber);
 
-// start up the server
-himinsServer.maxConnections = maxUsers;
-himinsServer.listen(portNumber);
