@@ -230,7 +230,7 @@ module.exports.getPlayer = getPlayer;
 var processUserInput = function(game, client, data) {
   // TODO: updated game world based on user input and persist
 };
-module.exports.getPlayer = processUserInput;
+module.exports.processUserInput = processUserInput;
 
 /**
  * Sends a message to the logger
@@ -239,7 +239,7 @@ module.exports.getPlayer = processUserInput;
 var logInfo = function(message) {
   log.info(message);
 };
-module.exports.getPlayer = logInfo;
+module.exports.logInfo = logInfo;
 
 /**
  * Returns the number of clients connected to the server
