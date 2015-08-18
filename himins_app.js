@@ -19,7 +19,8 @@ var
   _ = require('underscore'),
   telnet = require('telnet'),
   gameManager = require('./himins_js/himins_game'),
-  clientManager = require('./himins_js/himins_client');
+  clientManager = require('./himins_js/himins_client'),
+  strTools = require('./himins_js/himins_string_utils');
 
 var
 
@@ -40,6 +41,8 @@ var
 telnet.createServer(function (client) {
   var
     uuid = _.uniqueId();
+
+  strTools.init();
 
   client.name = 'client_' + uuid;
 
@@ -75,11 +78,11 @@ telnet.createServer(function (client) {
     // if inputStr is not standard ascii block it
     if (inputStr.isPrintable()) {
       gameManager.logInfo(client.name, ' incoming data:', inputStr);
-      gameManager.processUserInput(game, client, data);
+      gameManager.processUserInput(game, client, inputStr);
     }
   });
 
-  client.write('Welcome to the himins server... Login or sign up!');
+  client.write('Welcome to the himins server... Login or sign up: ');
 }).listen(portNumber);
 
 /**
