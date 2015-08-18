@@ -26,7 +26,7 @@ var
   // server config vars
   // TODO: Get from config file
   ipAddress = "127.0.0.1",
-  portNumber = 99,
+  portNumber = 23,
   maxUsers = 10,
 
   // TODO: Start new game or restart old game?
@@ -78,7 +78,9 @@ telnet.createServer(function (client) {
       gameManager.processUserInput(game, client, data);
     }
   });
-});
+
+  client.write('Welcome to the himins server... Login or sign up!');
+}).listen(portNumber);
 
 /**
   * Main entry point of the himins server app
