@@ -70,7 +70,7 @@ telnet.createServer(function (client) {
   */
 
   client.on('data', function (b) {
-    var inputStr = String(data).trim().toLowerCase();
+    var inputStr = String(b).trim().toLowerCase();
 
     // if inputStr is not standard ascii block it
     if (inputStr.isPrintable()) {
