@@ -67,6 +67,18 @@ describe('game manager unit tests', function() {
     it('should have a name of ' + gameName, function() {
       assert.equal(gameState.name, gameName);
     });
+
+    it('should have a clientList', function() {
+      assert.equal(typeof(gameState.clientList),'object');
+    });
+
+    it('should have a playerList', function() {
+      assert.equal(typeof(gameState.playerList),'object');
+    });
+  });
+
+  describe('#run()', function() {
+
   });
 
 });
