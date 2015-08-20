@@ -20,64 +20,71 @@ describe('game manager unit tests', function() {
     gameName = gameManager.getGameName(),
     gameKey = { name: gameName };
 
-  gameManager.start();
+  gameManager.start(function(gameState) {
+    console.log(gameState); // TODO: Remove
 
-  describe('#start()', function() {
+    describe('#start()', function() {
 
-    it('return should be false because it was already started', function() {
-      assert.equal(gameManager.start(), false);
-    });
+      it('should have a running game state because game was started', function() {
+        assert.equal(gameState.isRunning, true);
+      });
 
-    it('should contain the initial game state data', function() {
-      MongoClient.connect(mongoServerURL, function (err, db) {
+      it('should have game already started message in the log', function() {
+        gameManager.start(function(gameState) {
+          // check the log for a game already started message
+        });
+      });
 
-        if (err) throw err;
+      it('should contain the initial game state data', function() {
+        MongoClient.connect(mongoServerURL, function (err, db) {
 
-        var collection = db.collection(mongoCollection);
+          if (err) throw err;
 
-          collection.find(gameKey).toArray(function (err, results) {
-            assert.equal(results[0].name, gameName);
-            db.close();
-          });
+          var collection = db.collection(mongoCollection);
+
+            collection.find(gameKey).toArray(function (err, results) {
+              assert.equal(results[0].name, gameName);
+              db.close();
+            });
+        });
       });
     });
-  });
 
-  describe('#stop()', function() {
+    describe('#getGameState()', function() {
 
-    it('return should be true because it stopped the game', function() {
-      assert.equal(gameManager.stop(), true);
+      it('should not be null', function() {
+        var gameState2 = gameManager.getGameState();
+        assert.notEqual(gameState2, null);
+      });
+
+      it('should have a name of ' + gameName, function() {
+        var gameState3 = gameManager.getGameState();
+        assert.equal(gameState3.name, gameName);
+      });
+
+      it('should have a clientList', function() {
+        var gameState4 = gameManager.getGameState();
+        assert.equal(typeof(gameState4.clientList),'object');
+      });
+
+      it('should have a playerList', function() {
+        var gameState5 = gameManager.getGameState();
+        assert.equal(typeof(gameState5.playerList),'object');
+      });
+
+      it('should have an isRunning flag', function() {
+        var gameState6 = gameManager.getGameState();
+        assert.equal(typeof(gameState6.isRunning),'boolean');
+      });
     });
 
-  });
-
-  describe('#getGameState()', function() {
-
-    var gameState;
-
-    gameManager.start();
-    gameState = gameManager.getGameState();
-
-    //console.log(gameState);
-
-    it('should not be null', function() {
-      assert.notEqual(gameState, null);
+    describe('#stop()', function() {
+      it('should have a not running game state because game was stopped', function() {
+        gameManager.stop(function(stoppedGameState) {
+          assert.equal(stoppedGameState.isRunning, false);          
+        });
+      });
     });
-
-    it('should have a name of ' + gameName, function() {
-      assert.equal(gameState.name, gameName);
-    });
-
-    it('should have a clientList', function() {
-      assert.equal(typeof(gameState.clientList),'object');
-    });
-
-    it('should have a playerList', function() {
-      assert.equal(typeof(gameState.playerList),'object');
-    });
-  });
-
-  describe('#run()', function() {
 
   });
 

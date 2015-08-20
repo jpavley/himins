@@ -34,7 +34,6 @@ var
 // Game vars
 
 var
-  gameStarted = false,
   gameName = 'himinsGameRelease_0_1',
   gameKey = { name: gameName },
   gameState = {},
@@ -44,7 +43,8 @@ var
     name: gameName,
     clientList: [],
     playerList: [],
-    tickCount: 0
+    tickCount: 0,
+    isRunning: false
   };
 
 /**
@@ -52,25 +52,21 @@ var
  * If the game is already started does nothing and return false.
  * If the game is not started tries to load game from persistence.
  * If a saved game doesn't exist, create a new game.
- * Either way returns true if the game successfully starts.
- * @returns {Boolean} game did start
+ * Either way check the gameState in the callback to see if the game started.
+ * @param {Function} callback to execute after game starts.
  */ 
 
-var start = function() {
+var start = function(callback) {
 
-  var didGameStart = false;
-
-  if (gameStarted) {
+  if (gameState.isRunning) {
     // sorry, you can only call this function once!
     log.error('game already started!');
 
   } else {
     log.info('starting game');
 
-    gameStarted = true;
-    didGameStart = true;
-
     gameState = gameInitialState;
+    gameState.isRunning = true;
 
     // create from scratch or load the game properties from persistence
 
@@ -87,11 +83,19 @@ var start = function() {
           });
         } else {
           gameState = results[0]; // this might need to move to a call back!
+
+          // TODO: Design Flaw!!
+          gameState.isRunning = true;
+          // Need to version the gameState object so that new properties of the game
+          // can be migrated on to prior versions of the game.
+          // Example: isRunning is a properties I didn't have when I initially
+          // created the game and stored it in MongoDB.
+
           log.info('loaded gameState from persistence');
-          db.close();            
+          db.close();
         }
       });
-
+      callback(gameState);
     });
 
     // start the world clock ticking
@@ -99,8 +103,6 @@ var start = function() {
     gameIntervalID = setInterval(run, 1000/gameFPS);
 
   } // end else
-
-  return didGameStart;
 };
 
 module.exports.start = start;
@@ -108,15 +110,13 @@ module.exports.start = start;
 /**
  * Stops the game.
  * Writes game state to persistence.
- * @returns {Boolean} game did stop
+ * @param {Function} callback to execute after game stops.
  */ 
 
-var stop = function() {
+var stop = function(callback) {
 
-  var result = false; // return false if game is not started
-
-  if (gameStarted) {
-    result = true;
+  if (gameState.isRunning) {
+    gameState.isRunning = false;
     clearInterval(gameIntervalID);
 
     MongoClient.connect(mongoServerURL, function (err, db) {
@@ -129,11 +129,10 @@ var stop = function() {
         log.info('saved game state into persistence');
         db.close();
       });
+      callback(gameState);
     });
 
   }
-
-  return result;
 };
 
 module.exports.stop = stop;
