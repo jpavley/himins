@@ -14,10 +14,15 @@ var addedFlag = false;
 
 var addStringRepeat = function() {
   String.prototype.repeat = function(count) {
-    var result = [];
-    result = result.join(this);
+    var input = '' + this, // force 'this' to be a string
+        result = '';
+
+    // over optimitized for loop
+    for (var i = count - 1; i >= 0; i--) {
+      result += input;
+    }
+
     return result;
-    //return new Array(count + 1).join(this);
   };
 };
 
@@ -25,10 +30,11 @@ var addStringRepeat = function() {
 // Calcs the length of a string without markdown
 var addStringUnformattedLength = function() {
   String.prototype.unformattedLength = function() {
-    var result = this;
-     // remove underscores, astericks, and seperators!
-    result = this.split('_').join('');
-    result = this.split('*').join('');
+    var input = '' + this, // force 'this' to be a string
+        result = '';
+     // remove underscores and astericks!
+    result = input.split('_').join('');
+    result = result.split('*').join('');
     return result.length;
   };
 };
@@ -37,8 +43,10 @@ var addStringUnformattedLength = function() {
 // Returns true if the chars of the string are within the printable ASCII character range
 var addIsPrintable = function() {
   String.prototype.isPrintable = function() {
+    var input = '' + this, // force 'this' to be a string
+    result = '';
     // test each char to see if it is between space (x20) and ~ (x7E)
-    var result = /^[\x20-\x7E]*$/.test(this);
+    result = /^[\x20-\x7E]*$/.test(input);
     return result;
   };
 };
