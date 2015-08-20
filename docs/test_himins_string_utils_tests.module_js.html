@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: himins_js/himins_client.js</title>
+    <title>JSDoc: Module: test/himins_string_utils_tests.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,110 +17,102 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: himins_js/himins_client.js</h1>
+    <h1 class="page-title">Module: test/himins_string_utils_tests.js</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Client management
- * Creates and maanges lists of clients for a game.
- * Reads from and writes to clients.
- * Broadcasts messages to all clients.
- * @module
- * @requires underscore
- * @requires bunyan
- * @requires himins_format
+</header>
 
- */
-
- var
-  // includes
-  _ = require('underscore'),
-  bunyan = require('bunyan'),
-  formatter = require('./himins_format');
-
-var
-  // log vars
-  logName = 'himins_client', // TODO: Single rotating log file for all of himins moved to game level 
-  log = bunyan.createLogger({
-      name: logName,
-      streams: [{
-          type: 'rotating-file',
-          path: 'logs/' + logName + '.log',
-          period: '1d',
-          count: 5
-      }],
-  });
-
-/**
- * Creates and returns a new empty client list
- * @returns {Array}
-*/
-
-var createNewEmptyClientList = function() {
-  var result = [];
-  return result;
-};
-
-module.exports.createNewEmptyClientList = createNewEmptyClientList;
-
-/**
- * Broadcasts messages to all clients
- * Kills any dead clients that can't be written to.
- * Returns updated client list.
- * @param {string} message
- * @param {Array} clientList 
- * @returns {Array}
-*/
-
-var broadcast = function(template, context, indent, clientList) {
-  var
-    deadList = [],
-    style = "info",
-    message = "";
-
-  _.each(clientList, function(client, index, list) {
-
-    if (client.writable) {
+<article>
+    <div class="container-overview">
+    
         
-        message = formatter.formatText(context, template, indent, client.width, style);
-        client.write(message + '\n');
+            <div class="description"><p>String Utilities module tests</p></div>
+        
 
-        log.info('client %s broadcast: %s', client.name, message);
-
-        console.log(message);
-
-    } else {
-
-      // TODO: Log fact of dead client
-      // client is not writable, kill it
-      log.info('client %s is not writable', client.name);
-      deadList.push(client);
-      client.destroy();
-
-    }
-  });
-
-  _.each(deadList, function(client, index, list) {
-
-    //console.log(clientList);
-    clientList.splice(clientList.indexOf(client), 1);
-  });
-
-  return clientList;
-};
-
-module.exports.broadcast = broadcast;
+        
 
 
-</code></pre>
-        </article>
-    </section>
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="test_himins_string_utils_tests.js.html">test/himins_string_utils_tests.js</a>, <a href="test_himins_string_utils_tests.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:assert</li>
+        
+            <li>module:../himins_js/himins_string_utils</li>
+        </ul>
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: himins_app.js</title>
+    <title>JSDoc: Source: test/himins_string_utils_tests.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: himins_app.js</h1>
+    <h1 class="page-title">Source: test/himins_string_utils_tests.js</h1>
 
     
 
@@ -27,104 +27,78 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Main entry point for himins app
- * Starts up the Telnet server.
- * Handles client connection events.
- * Starts up the game.
- * Associates a client with a player profile.
- * Runs forever.
+ * @fileOverview String Utilities module tests
  * @module
- * @requires net
- * @requires underscore
- * @requires telnet
- * @requires ./himins_js/himins_game
- * @requires ./himins_js/himins_client
+ * @requires assert
+ * @requires ../himins_js/himins_string_utils
  */
 
-var
-  // node/npm modules
-  net = require('net'),
-  _ = require('underscore'),
-  telnet = require('telnet'),
-  gameManager = require('./himins_js/himins_game'),
-  clientManager = require('./himins_js/himins_client'),
-  strTools = require('./himins_js/himins_string_utils');
+var 
+  assert = require('assert'),
+  strTools = require('../himins_js/himins_string_utils');
 
-var
+describe('string utilities unit tests', function() {
 
-  // server config vars
-  // TODO: Get from config file
-  ipAddress = "127.0.0.1",
-  portNumber = 23,
-  maxUsers = 10,
-
-  // TODO: Start new game or restart old game?
-  game = gameManager.start();
-
-/**
-  * Creates server and handles client communications
-  * @name telnet.createServer
-  */
-
-telnet.createServer(function (client) {
-  var
-    uuid = _.uniqueId();
+  var testString1 = 'cat ',
+      testString1a = 'cat cat cat ',
+      testString2 = 'the *black* _little_ cat',
+      testString2a = 'the black little cat',
+      testString3 = 'A printable string ~',
+      testString3a = 'An unprintable string ©';
 
   strTools.init();
 
-  client.name = 'client_' + uuid;
+  describe('#strTools.init()', function() {
 
-  client.do.transmit_binary();
-  client.do.window_size();
+    it('The String.repeat should exist', function() {
+      assert.equal(typeof('str'.repeat), typeof(Function));
+    });
 
-  /**
-  * Handle cleint window size events
-  * @name client.on(window size)
-  */
-
-  client.on('window size', function (e) {
-    if(e.command === 'sb') {
-      client.width = e.width;
-      client.height = e.height;
-      var windowMessage = 'client ' + client.name + ' resized window to ' + client.width + ' by ' + client.height;
-      gameManager.logInfo(windowMessage);
-    }
-
-    gameManager.addClient(game, client);
-    var clientMessage = 'client ' + client.name + ' connected!';
-    gameManager.logInfo(clientMessage);
-    client.player = gameManager.getPlayer(game, client);
+    it('The String.unformattedLength should exist', function() {
+      assert.equal(typeof('str'.unformattedLength), typeof(Function));
+    });
+    
+    it('The String.isPrintable should exist', function() {
+      assert.equal(typeof('str'.isPrintable), typeof(Function));
+    });
   });
 
-  /**
-  * Handle cleint data events
-  * @name client.on(data)
-  */
 
-  client.on('data', function (b) {
-    var inputStr = String(b).trim().toLowerCase();
+  describe('#String.repeat()', function() {
 
-    // if inputStr is not standard ascii block it
-    if (inputStr.isPrintable()) {
-      gameManager.logInfo(client.name, ' incoming data:', inputStr);
-      gameManager.processUserInput(game, client, inputStr);
-    }
+    it('the word cat should be repeated 3 times', function() {
+      var resultString = testString1.repeat(3);
+      assert.equal(resultString, "cat cat cat ");
+    });
+
+    it('the word cat should be repeated 1 times', function() {
+      var resultString = testString1.repeat(1);
+      assert.equal(resultString, "cat ");
+    });
   });
 
-  client.write('Welcome to the himins server... Login or sign up: ');
-}).listen(portNumber);
+  describe('#String.unformattedLength()', function() {
 
-/**
-  * Main entry point of the himins server app
-  * @name Main
-  */
-console.log('');
-console.log('**** **** **** himins is starting up **** **** ****');
-console.log('');
+    it('the length should the same as the unformated string', function() {
+      var resultLength = testString2.unformattedLength(),
+          compareLength = testString2a.length;
+      assert.equal(resultLength, compareLength);
+    });
+  });
 
-// give a hint to the webmaster
-console.log('// Use telnet client to access: telnet ' + ipAddress + ' ' + portNumber);
+  describe('#String.isPrintable()', function() {
 
+    it('the printable string should return true', function() {
+      var resultTest = testString3.isPrintable();
+      assert.equal(resultTest, true);
+    });
+
+    it('the unprintable string should return false', function() {
+      var resultTest = testString3a.isPrintable();
+      assert.equal(resultTest, false);
+    });
+  });
+});
 </code></pre>
         </article>
     </section>
