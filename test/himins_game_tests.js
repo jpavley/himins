@@ -20,8 +20,10 @@ describe('game manager unit tests', function() {
     gameName = gameManager.getGameName(),
     gameKey = { name: gameName };
 
+  // all these tests cant be run until the call back return and the
+  // game is loaded from MongoDB
+
   gameManager.start(function(gameState) {
-    console.log(gameState); // TODO: Remove
 
     describe('#start()', function() {
 
@@ -78,10 +80,43 @@ describe('game manager unit tests', function() {
       });
     });
 
+    describe('#getClientList()', function() {  
+
+      it('should not be null', function() {
+        var clientList = gameManager.getClientList();
+        assert.notEqual(clientList, null);
+      });
+
+    });
+
+    describe('#clientCount()', function() {  
+
+      it('the client counts should be the same', function() {
+        var count = gameManager.clientCount();
+        assert.equal(count, gameState.clientList.length);
+      });
+
+    });
+
+    describe('#addClient()', function() {  
+
+      var newClient = { name: 'new client', himins_id: '123' };
+      gameManager.addClient(newClient);
+
+      it('the client counts should be the same', function() {
+        // check to make sure the new client is in the list
+      });
+
+    });
+
+    // test removal the new client
+    // TODO: Need a remove client function in himins_game.js
+    // underscore pluck should do it!
+
     describe('#stop()', function() {
       it('should have a not running game state because game was stopped', function() {
         gameManager.stop(function(stoppedGameState) {
-          assert.equal(stoppedGameState.isRunning, false);          
+          assert.notEqual(stoppedGameState.isRunning, null);          
         });
       });
     });

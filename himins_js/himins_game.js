@@ -13,6 +13,7 @@
 
 var
   bunyan = require('bunyan'),
+  _ = require('underscore'),
   logName = 'himins_game', // TODO: Get filename from config file 
   log = bunyan.createLogger({
       name: logName,
@@ -203,15 +204,6 @@ var getGameState = function() {
 module.exports.getGameState = getGameState;
 
 /**
- * Add a client to the game
- */
-
-var addClient = function(game, client) {
-  // TODO: if client doesn't already exist add to clientList
-};
-module.exports.addClient = addClient;
-
-/**
  * Returns a current or new player for the client
  */
 
@@ -241,25 +233,46 @@ var logInfo = function(message) {
 module.exports.logInfo = logInfo;
 
 /**
+ * Add a client to the game
+ * @param {Object} client to add to the game
+ */
+
+var addClient = function(client) {
+  var preExistingClient = _.findWhere(gameState.clientList, { himins_id: client.himins_id});
+
+  if (!preExistingClient) {
+    gameState.clientList.push(client);
+  } else {
+    log.info('client himins_id ' + client.himins_id + ' already exists, not added to client list');
+  }
+
+};
+module.exports.addClient = addClient;
+
+/**
  * Returns the number of clients connected to the server
+ * @returns {Number} client count
  */
 
 var clientCount = function() {
-  return clientList.length;
+  return gameState.clientList.length;
 };
 module.exports.clientCount = clientCount;
 
 /**
  * Returns the list of clients connected to the server
+ * @returns {Object} list of clients
  */
 
 var getClientList = function() {
-  return clientList;
+  return gameState.clientList;
 };
 module.exports.getClientList = getClientList;
 
 /**
  * Returns a client connected to the server by ID
+ * @param {Number} ID of client to get
+ * @returns {Object} the requested client
  */
 
 var getClientByID = function(clientID) {

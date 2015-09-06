@@ -33,24 +33,35 @@ var
   // TODO: Start new game or restart old game?
   game = gameManager.start();
 
+  strTools.init();
+
 /**
   * Creates server and handles client communications
   * @name telnet.createServer
   */
 
 telnet.createServer(function (client) {
+
+  // all this code called everytime a client connects
+
   var
-    uuid = _.uniqueId();
+    uuid = _.uniqueId(),
+    clientMessage = '',
+    windowMessage = '',
+    inputStr = '';
 
-  strTools.init();
-
-  client.name = 'client_' + uuid;
+  client.himins_id = uuid;
 
   client.do.transmit_binary();
   client.do.window_size();
 
+  gameManager.addClient(client);
+  clientMessage = 'client ' + uuid + ' connected!';
+  gameManager.logInfo(clientMessage);
+  client.player = gameManager.getPlayer(game, client);
+
   /**
-  * Handle cleint window size events
+  * Handle client window size events
   * @name client.on(window size)
   */
 
@@ -58,28 +69,23 @@ telnet.createServer(function (client) {
     if(e.command === 'sb') {
       client.width = e.width;
       client.height = e.height;
-      var windowMessage = 'client ' + client.name + ' resized window to ' + client.width + ' by ' + client.height;
+      windowMessage = 'client ' + uuid + ' resized window to ' + client.width + ' by ' + client.height;
       gameManager.logInfo(windowMessage);
     }
-
-    gameManager.addClient(game, client);
-    var clientMessage = 'client ' + client.name + ' connected!';
-    gameManager.logInfo(clientMessage);
-    client.player = gameManager.getPlayer(game, client);
   });
 
   /**
-  * Handle cleint data events
+  * Handle client data events
   * @name client.on(data)
   */
 
   client.on('data', function (b) {
-    var inputStr = String(b).trim().toLowerCase();
+    inputStr = String(b).trim().toLowerCase();
 
     // if inputStr is not standard ascii block it
     if (inputStr.isPrintable()) {
-      gameManager.logInfo(client.name, ' incoming data:', inputStr);
-      gameManager.processUserInput(game, client, inputStr);
+      gameManager.logInfo('client ' + uuid + ' incoming data:' + inputStr);
+      gameManager.processUserInput(client, inputStr);
     }
   });
 
