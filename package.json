@@ -26,7 +26,7 @@
     "linewrap": "0.2.x",
     "mocha": "2.2.x",
     "mongodb": "2.0.x",
-    "mustache": "2.1.x",
+    "mustache": ">=2.2.1",
     "telnet": "0.0.1",
     "underscore": "1.5.x"
   },
